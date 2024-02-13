@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Stas Bekman">
+<meta name="author" content="Sam Foreman ">
+<meta name="dcterms.date" content="2024-02-13">
+
+<title>ML Engineering</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" rel="next">
+<link href="../../../qmd/orchestration/slurm/performance.html" rel="prev">
+<link href="../../.././favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XVM2Y822Y1"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
+</script>
+<link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../../css/default.css">
+<link rel="stylesheet" href="../../../css/callouts.css">
+<meta property="og:title" content="Sam Foreman">
+<meta property="og:description" content="My ramblings about science and computers">
+<meta property="og:image" content="https://github.com/saforem2/personal_site/blob/main/assets/thumbnail.png?raw=true">
+<meta property="og:site_name" content="ML Engineering">
+<meta name="twitter:title" content="Sam Foreman">
+<meta name="twitter:description" content="My ramblings about science and computers">
+<meta name="twitter:image" content="https://github.com/saforem2/personal_site/blob/main/assets/thumbnail.png?raw=true">
+<meta name="twitter:creator" content="@saforem2">
+<meta name="twitter:site" content="@saforem2">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="ML Engineering">
+<meta name="citation_author" content="Sam Foreman">
+<meta name="citation_author" content="Stas Bekman">
+<meta name="citation_publication_date" content="2024-02-13">
+<meta name="citation_cover_date" content="2024-02-13">
+<meta name="citation_year" content="2024">
+<meta name="citation_online_date" content="2024-02-13">
+<meta name="citation_fulltext_html_url" content="https://samforeman.me">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=The climate risk &amp;amp;amp; resilience portal (ClimRR) metadata and data dictionary;,citation_author=C. Burdi;,citation_author=Wall. T Branham;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://dub.sh/ClimRR-Metadata;">
+<meta name="citation_reference" content="citation_title=Progress on (g-2)_\mu from lattice QCD;,citation_author=Hartmut Wittig;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://arxiv.org/abs/2306.04165;">
+<meta name="citation_reference" content="citation_title=Hybrid Monte Carlo;,citation_author=S. Duane;,citation_author=A. D. Kennedy;,citation_author=B. J. Pendleton;,citation_author=D. Roweth;,citation_publication_date=1987;,citation_cover_date=1987;,citation_year=1987;,citation_doi=10.1016/0370-2693(87)91197-X;,citation_volume=195;,citation_journal_title=Phys. Lett. B;">
+<meta name="citation_reference" content="citation_title=Snowmass 2021 Computational Frontier CompF03 Topical Group Report: Machine Learning;,citation_author=Phiala Shanahan;,citation_author=others;,citation_publication_date=2022-09;,citation_cover_date=2022-09;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2209.07559;">
+<meta name="citation_reference" content="citation_title=Applications of Machine Learning to Lattice Quantum Field Theory;,citation_author=Denis Boyda;,citation_author=others;,citation_publication_date=2022-02;,citation_cover_date=2022-02;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2202.05838;,citation_conference_title=Snowmass 2021;">
+<meta name="citation_reference" content="citation_title=HMC with Normalizing Flows;,citation_author=Sam Foreman;,citation_author=Taku Izubuchi;,citation_author=Luchang Jin;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_author=Akio Tomiya;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01586;,citation_doi=10.22323/1.396.0073;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=LeapfrogLayers: A Trainable Framework for Effective Topological Sampling;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01582;,citation_doi=10.22323/1.396.0508;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=Deep Learning Hamiltonian Monte Carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021-05;,citation_cover_date=2021-05;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;,citation_conference_title=9th International Conference on Learning Representations;">
+<meta name="citation_reference" content="citation_title=Energy Justice Analysis of Climate Data with ClimRR;,citation_author=Sam Foreman;,citation_publication_date=2023-08-07;,citation_cover_date=2023-08-07;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/climate-analysis;,citation_language=en;">
+<meta name="citation_reference" content="citation_author=Sam Foreman;,citation_publication_date=2023-08-19;,citation_cover_date=2023-08-19;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/l2hmc-qcd;,citation_language=en;">
+<meta name="citation_reference" content="citation_title=Deep learning hamiltonian monte carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;">
+<meta name="citation_reference" content="citation_title=MLMC: Machine learning monte carlo for lattice gauge theory;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James Osborn;,citation_publication_date=00;,citation_cover_date=00;,citation_year=0;,citation_conference_title=40th international symposium on lattice field theory (lattice 2023) (batavia, IL, united states, 07/31/2023 - 08/04/2023);">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">ML Engineering</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/saforem2"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/saforem2/personal_site"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-gear"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/personal_site/blob/main/index.qmd">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/personal_site/issues/new/choose">
+            New Issue
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Qmd</li><li class="breadcrumb-item">Orchestration</li><li class="breadcrumb-item"><a href="../../../qmd/orchestration/slurm/admin.html">Slurm</a></li><li class="breadcrumb-item"><a href="../../../qmd/orchestration/slurm/users.html">SLURM for users</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Qmd</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Compute</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Accelerator</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Nvidia</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/accelerator/nvidia/debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting NVIDIA GPUs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Debug</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/make-tiny-models-tokenizers-datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Faster debug and development with tiny models, tokenizers and datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/nccl-performance-debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NCCL: Debug and Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/pytorch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debugging PyTorch programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debug Tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/torch-distributed-hanging-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diagnosing Hangings and Deadlocks in Multi-Node Multi-GPU Python Programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/underflow_overflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Underflow and Overflow Detection</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Insights</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The AI Battlefield Engineering - What You Need To Know</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text">Network</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Disabling NVLink Benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+ <span class="menu-text">Orchestration</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+ <span class="menu-text">Slurm</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Administration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">SLURM for users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+ <span class="menu-text">Storage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth4 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false">
+ <span class="menu-text">Training</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="false">
+ <span class="menu-text">Instabilities</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Training Loss Patterns</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#slurm-for-users" id="toc-slurm-for-users" class="nav-link active" data-scroll-target="#slurm-for-users">SLURM for users</a>
+  <ul class="collapse">
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick start</a></li>
+  <li><a href="#slurm-partitions" id="toc-slurm-partitions" class="nav-link" data-scroll-target="#slurm-partitions">SLURM partitions</a></li>
+  <li><a href="#wait-time-for-resource-granting" id="toc-wait-time-for-resource-granting" class="nav-link" data-scroll-target="#wait-time-for-resource-granting">Wait time for resource granting</a></li>
+  <li><a href="#request-allocation-via-dependency" id="toc-request-allocation-via-dependency" class="nav-link" data-scroll-target="#request-allocation-via-dependency">Request allocation via dependency</a></li>
+  <li><a href="#make-allocations-at-a-scheduled-time" id="toc-make-allocations-at-a-scheduled-time" class="nav-link" data-scroll-target="#make-allocations-at-a-scheduled-time">Make allocations at a scheduled time</a></li>
+  <li><a href="#preallocated-node-without-time-60min-limit" id="toc-preallocated-node-without-time-60min-limit" class="nav-link" data-scroll-target="#preallocated-node-without-time-60min-limit">Preallocated node without time 60min limit</a></li>
+  <li><a href="#hyper-threads" id="toc-hyper-threads" class="nav-link" data-scroll-target="#hyper-threads">Hyper-Threads</a></li>
+  <li><a href="#reuse-allocation" id="toc-reuse-allocation" class="nav-link" data-scroll-target="#reuse-allocation">Reuse allocation</a></li>
+  <li><a href="#specific-nodes-selection" id="toc-specific-nodes-selection" class="nav-link" data-scroll-target="#specific-nodes-selection">Specific nodes selection</a></li>
+  <li><a href="#signal-the-running-jobs-to-finish" id="toc-signal-the-running-jobs-to-finish" class="nav-link" data-scroll-target="#signal-the-running-jobs-to-finish">Signal the running jobs to finish</a></li>
+  <li><a href="#detailed-job-info" id="toc-detailed-job-info" class="nav-link" data-scroll-target="#detailed-job-info">Detailed job info</a></li>
+  <li><a href="#show-jobs" id="toc-show-jobs" class="nav-link" data-scroll-target="#show-jobs">show jobs</a></li>
+  <li><a href="#aliases" id="toc-aliases" class="nav-link" data-scroll-target="#aliases">Aliases</a></li>
+  <li><a href="#zombies" id="toc-zombies" class="nav-link" data-scroll-target="#zombies">Zombies</a></li>
+  <li><a href="#detailed-access-to-slurm-accounting" id="toc-detailed-access-to-slurm-accounting" class="nav-link" data-scroll-target="#detailed-access-to-slurm-accounting">Detailed Access to SLURM Accounting</a></li>
+  <li><a href="#queue" id="toc-queue" class="nav-link" data-scroll-target="#queue">Queue</a>
+  <ul class="collapse">
+  <li><a href="#cancel-job" id="toc-cancel-job" class="nav-link" data-scroll-target="#cancel-job">Cancel job</a></li>
+  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips">Tips</a></li>
+  </ul></li>
+  <li><a href="#logging" id="toc-logging" class="nav-link" data-scroll-target="#logging">Logging</a></li>
+  <li><a href="#show-the-state-of-nodes" id="toc-show-the-state-of-nodes" class="nav-link" data-scroll-target="#show-the-state-of-nodes">Show the state of nodes</a>
+  <ul class="collapse">
+  <li><a href="#sinfo-states" id="toc-sinfo-states" class="nav-link" data-scroll-target="#sinfo-states">sinfo states</a></li>
+  <li><a href="#drained-nodes" id="toc-drained-nodes" class="nav-link" data-scroll-target="#drained-nodes">drained nodes</a></li>
+  </ul></li>
+  <li><a href="#job-arrays" id="toc-job-arrays" class="nav-link" data-scroll-target="#job-arrays">Job arrays</a></li>
+  <li><a href="#job-array-trains-and-their-suspend-and-release" id="toc-job-array-trains-and-their-suspend-and-release" class="nav-link" data-scroll-target="#job-array-trains-and-their-suspend-and-release">Job Array Trains and their Suspend and Release</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#mismatching-nodes-number" id="toc-mismatching-nodes-number" class="nav-link" data-scroll-target="#mismatching-nodes-number">Mismatching nodes number</a></li>
+  <li><a href="#find-faulty-nodes-and-exclude-them" id="toc-find-faulty-nodes-and-exclude-them" class="nav-link" data-scroll-target="#find-faulty-nodes-and-exclude-them">Find faulty nodes and exclude them</a></li>
+  <li><a href="#broken-nccl" id="toc-broken-nccl" class="nav-link" data-scroll-target="#broken-nccl">Broken NCCL</a></li>
+  <li><a href="#gpu-memory-check" id="toc-gpu-memory-check" class="nav-link" data-scroll-target="#gpu-memory-check">GPU Memory Check</a></li>
+  <li><a href="#broken-network" id="toc-broken-network" class="nav-link" data-scroll-target="#broken-network">Broken Network</a></li>
+  <li><a href="#run-py-spy-or-any-other-monitor-program-across-all-nodes" id="toc-run-py-spy-or-any-other-monitor-program-across-all-nodes" class="nav-link" data-scroll-target="#run-py-spy-or-any-other-monitor-program-across-all-nodes">Run py-spy or any other monitor program across all nodes</a></li>
+  </ul></li>
+  <li><a href="#convert-slurm_job_nodelist-into-a-hostfile" id="toc-convert-slurm_job_nodelist-into-a-hostfile" class="nav-link" data-scroll-target="#convert-slurm_job_nodelist-into-a-hostfile">Convert SLURM_JOB_NODELIST into a hostfile</a></li>
+  <li><a href="#environment-variables" id="toc-environment-variables" class="nav-link" data-scroll-target="#environment-variables">Environment variables</a></li>
+  <li><a href="#crontab-emulation" id="toc-crontab-emulation" class="nav-link" data-scroll-target="#crontab-emulation">Crontab Emulation</a>
+  <ul class="collapse">
+  <li><a href="#a-self-perpetuating-scheduler-job" id="toc-a-self-perpetuating-scheduler-job" class="nav-link" data-scroll-target="#a-self-perpetuating-scheduler-job">1. A self-perpetuating scheduler job</a></li>
+  <li><a href="#daily-and-hourly-cronjobs" id="toc-daily-and-hourly-cronjobs" class="nav-link" data-scroll-target="#daily-and-hourly-cronjobs">2. Daily and Hourly Cronjobs</a></li>
+  <li><a href="#cleanup" id="toc-cleanup" class="nav-link" data-scroll-target="#cleanup">3. Cleanup</a></li>
+  <li><a href="#nuances" id="toc-nuances" class="nav-link" data-scroll-target="#nuances">Nuances</a></li>
+  </ul></li>
+  <li><a href="#self-perpetuating-slurm-jobs" id="toc-self-perpetuating-slurm-jobs" class="nav-link" data-scroll-target="#self-perpetuating-slurm-jobs">Self-perpetuating SLURM jobs</a></li>
+  <li><a href="#getting-information-about-the-job" id="toc-getting-information-about-the-job" class="nav-link" data-scroll-target="#getting-information-about-the-job">Getting information about the job</a></li>
+  <li><a href="#convert-compact-node-list-to-expanded-node-list" id="toc-convert-compact-node-list-to-expanded-node-list" class="nav-link" data-scroll-target="#convert-compact-node-list-to-expanded-node-list">Convert compact node list to expanded node list</a></li>
+  <li><a href="#overcoming-the-lack-of-group-slurm-job-ownership" id="toc-overcoming-the-lack-of-group-slurm-job-ownership" class="nav-link" data-scroll-target="#overcoming-the-lack-of-group-slurm-job-ownership">Overcoming the lack of group SLURM job ownership</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/personal_site/blob/main/qmd/orchestration/slurm/users.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/personal_site/edit/main/qmd/orchestration/slurm/users.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/personal_site/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Qmd</li><li class="breadcrumb-item">Orchestration</li><li class="breadcrumb-item"><a href="../../../qmd/orchestration/slurm/admin.html">Slurm</a></li><li class="breadcrumb-item"><a href="../../../qmd/orchestration/slurm/users.html">SLURM for users</a></li></ol></nav><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/personal_site/blob/main/qmd/orchestration/slurm/users.qmd"><i class="bi"></i></button></div></div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading"></div>
+    <div class="quarto-title-meta-contents">
+             <p><a href="https://stasosphere.com/machine-learning/">Stas Bekman</a> </p>
+             <p><a href="https://samforeman.me">Sam Foreman </a><a href="https://orcid.org/0000-0002-9981-0876"><span class="orcid-green"><i class="ai  ai-orcid"></i></span></a> <a href="mailto:foremans@anl.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading"></div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 13, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="slurm-for-users" class="level1">
+<h1>SLURM for users</h1>
+<section id="quick-start" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start">Quick start</h2>
+<p>Simply copy this <a href="./example.slurm">example.slurm</a> and adapt it to your needs.</p>
+</section>
+<section id="slurm-partitions" class="level2">
+<h2 class="anchored" data-anchor-id="slurm-partitions">SLURM partitions</h2>
+<p>In this doc we will use an example setup with these 2 cluster names:</p>
+<ul>
+<li><code>dev</code></li>
+<li><code>prod</code></li>
+</ul>
+<p>To find out the hostname of the nodes and their availability, use:</p>
+<pre><code>sinfo -p dev
+sinfo -p prod</code></pre>
+<p>Slurm configuration is at <code>/opt/slurm/etc/slurm.conf</code>.</p>
+</section>
+<section id="wait-time-for-resource-granting" class="level2">
+<h2 class="anchored" data-anchor-id="wait-time-for-resource-granting">Wait time for resource granting</h2>
+<pre><code>squeue -u `whoami` --start</code></pre>
+<p>will show when any pending jobs are scheduled to start.</p>
+<p>They may start sooner if others cancel their reservations before the end of the reservation.</p>
+</section>
+<section id="request-allocation-via-dependency" class="level2">
+<h2 class="anchored" data-anchor-id="request-allocation-via-dependency">Request allocation via dependency</h2>
+<p>To schedule a new job when one more of the currently scheduled job ends (regardless of whether it still running or not started yet), use the dependency mechanism, by telling <code>sbatch</code> to start the new job once the currently running job succeeds, using:</p>
+<pre><code>sbatch --dependency=CURRENTLY_RUNNING_JOB_ID tr1-13B-round1.slurm</code></pre>
+<p>Using <code>--dependency</code> may lead to shorter wait times that using <code>--begin</code>, since if the time passed to <code>--begin</code> allows even for a few minutes of delay since the stopping of the last job, the scheduler may already start some other jobs even if their priority is lower than our job. That’s because the scheduler ignores any jobs with <code>--begin</code> until the specified time arrives.</p>
+</section>
+<section id="make-allocations-at-a-scheduled-time" class="level2">
+<h2 class="anchored" data-anchor-id="make-allocations-at-a-scheduled-time">Make allocations at a scheduled time</h2>
+<p>To postpone making the allocation for a given time, use:</p>
+<pre><code>salloc --begin HH:MM MM/DD/YY</code></pre>
+<p>Same for <code>sbatch</code>.</p>
+<p>It will simply put the job into the queue at the requested time, as if you were to execute this command at this time. If resources are available at that time, the allocation will be given right away. Otherwise it’ll be queued up.</p>
+<p>Sometimes the relative begin time is useful. And other formats can be used. Examples:</p>
+<pre><code>--begin now+2hours
+--begin=16:00
+--begin=now+1hour
+--begin=now+60  # seconds by default
+--begin=2010-01-20T12:34:00</code></pre>
+<p>the time-units can be <code>seconds</code> (default), <code>minutes</code>, <code>hours</code>, <code>days</code>, or <code>weeks</code>:</p>
+</section>
+<section id="preallocated-node-without-time-60min-limit" class="level2">
+<h2 class="anchored" data-anchor-id="preallocated-node-without-time-60min-limit">Preallocated node without time 60min limit</h2>
+<p>This is very useful for running repetitive interactive experiments - so one doesn’t need to wait for an allocation to progress. so the strategy is to allocate the resources once for an extended period of time and then running interactive <code>srun</code> jobs using this allocation.</p>
+<p>set <code>--time</code> to the desired window (e.g.&nbsp;6h):</p>
+<pre><code>salloc --partition=dev --nodes=1 --ntasks-per-node=1 --cpus-per-task=96 --gres=gpu:8 --time=6:00:00 bash
+salloc: Pending job allocation 1732778
+salloc: job 1732778 queued and waiting for resources
+salloc: job 1732778 has been allocated resources
+salloc: Granted job allocation 1732778</code></pre>
+<p>now use this reserved node to run a job multiple times, by passing the job id of <code>salloc</code>:</p>
+<pre><code>srun --jobid $SLURM_JOBID --pty bash</code></pre>
+<p>if run from inside <code>bash</code> started via <code>salloc</code>. But it can be started from another shell, but then explicitly set <code>--jobid</code>.</p>
+<p>if this <code>srun</code> job timed out or manually exited, you can re-start it again in this same reserved node.</p>
+<p><code>srun</code> can, of course, call the real training command directly and not just <code>bash</code>.</p>
+<p>Important: when allocating a single node, the allocated shell is not on the node (it never is). You have to find out the hostname of the node (reports when giving the allocation or via <code>squeue</code> and <code>ssh</code> to it.</p>
+<p>When finished, to release the resources, either exit the shell started in <code>salloc</code> or <code>scancel JOBID</code>.</p>
+<p>This reserved node will be counted towards hours usage the whole time it’s allocated, so release as soon as done with it.</p>
+<p>Actually, if this is just one node, then it’s even easier to not use <code>salloc</code> but to use <code>srun</code> in the first place, which will both allocate and give you the shell to use:</p>
+<pre><code>srun --pty --partition=dev --nodes=1 --ntasks=1 --cpus-per-task=96 --gres=gpu:8 --time=60 bash</code></pre>
+</section>
+<section id="hyper-threads" class="level2">
+<h2 class="anchored" data-anchor-id="hyper-threads">Hyper-Threads</h2>
+<p>By default, if the cpu has hyper-threads (HT), SLURM will use it. If you don’t want to use HT you have to specify <code>--hint=nomultithread</code>.</p>
+<p>footnote: HT is Intel-specific naming, the general concept is simultaneous multithreading (SMT)</p>
+<p>For example for a cluster with with 2 cpus per node with 24 cores and 2 hyper-threads each, there is a total of 96 hyper-threads or 48 cpu-cores available. Therefore to utilize the node fully you’d need to configure either:</p>
+<pre><code>#SBATCH --cpus-per-task=96</code></pre>
+<p>or if you don’t want HT:</p>
+<pre><code>#SBATCH --cpus-per-task=48
+#SBATCH --hint=nomultithread</code></pre>
+<p>This last approach will allocate one thread per core and in this mode there are only 48 cpu cores to use.</p>
+<p>Note that depending on your application there can be quite a performance difference between these 2 modes. Therefore try both and see which one gives you a better outcome.</p>
+<p>On some setups like AWS the all-reduce throughput degrades dramatically when <code>--hint=nomultithread</code> is used! Whereas on some other setups the opposite is true - the throughput is worse without HT!</p>
+</section>
+<section id="reuse-allocation" class="level2">
+<h2 class="anchored" data-anchor-id="reuse-allocation">Reuse allocation</h2>
+<p>e.g.&nbsp;when wanting to run various jobs on identical node allocation.</p>
+<p>In one shell:</p>
+<pre><code>salloc --partition=prod --nodes=16 --ntasks=16 --cpus-per-task=96 --gres=gpu:8 --time=3:00:00 bash
+echo $SLURM_JOBID</code></pre>
+<p>In another shell:</p>
+<pre><code>export SLURM_JOBID=&lt;JOB ID FROM ABOVE&gt;
+srun --jobid=$SLURM_JOBID ...</code></pre>
+<p>You may need to set <code>--gres=gpu:0</code> to run some diagnostics job on the nodes. For example, let’s check shared memory of all the hosts:</p>
+<pre><code>srun --jobid 631078 --gres=gpu:0 bash -c 'echo $(hostname) $(df -h | grep shm)'</code></pre>
+</section>
+<section id="specific-nodes-selection" class="level2">
+<h2 class="anchored" data-anchor-id="specific-nodes-selection">Specific nodes selection</h2>
+<p>To exclude specific nodes (useful when you know some nodes are broken, but are still in IDLE state):</p>
+<pre><code>sbatch --exclude nodeA,nodeB</code></pre>
+<p>or via: <code>#SBATCH --exclude ...</code></p>
+<p>To use specific nodes:</p>
+<pre><code>sbatch --nodelist= nodeA,nodeB</code></pre>
+<p>can also use the short <code>-w</code> instead of <code>--nodelist</code></p>
+<p>The administrator could also define a <code>feature=example</code> in <code>slurm.conf</code> and then a user could ask for that subset of nodes via <code>--constraint=example</code></p>
+</section>
+<section id="signal-the-running-jobs-to-finish" class="level2">
+<h2 class="anchored" data-anchor-id="signal-the-running-jobs-to-finish">Signal the running jobs to finish</h2>
+<p>Since each SLURM run has a limited time span, it can be configured to send a signal of choice to the program a desired amount of time before the end of the allocated time.</p>
+<pre><code>--signal=[[R][B]:]&lt;sig_num&gt;[@&lt;sig_time&gt;]</code></pre>
+<p>TODO: need to experiment with this to help training finish gracefully and not start a new cycle after saving the last checkpoint.</p>
+</section>
+<section id="detailed-job-info" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-job-info">Detailed job info</h2>
+<p>While most useful information is preset in various <code>SLURM_*</code> env vars, sometimes the info is missing. In such cases use:</p>
+<pre><code>scontrol show -d job $SLURM_JOB_ID</code></pre>
+<p>and then parse out what’s needed.</p>
+<p>For a job that finished its run use:</p>
+<pre><code>sacct -j JOBID</code></pre>
+<p>e.g.&nbsp;with more details, depending on the partition:</p>
+<pre><code>sacct -u `whoami` --partition=dev  -ojobid,start,end,state,exitcode --format nodelist%300  -j JOBID
+sacct -u `whoami` --partition=prod -ojobid,start,end,state,exitcode --format nodelist%300  -j JOBID</code></pre>
+</section>
+<section id="show-jobs" class="level2">
+<h2 class="anchored" data-anchor-id="show-jobs">show jobs</h2>
+<p>Show only my jobs:</p>
+<pre><code>squeue -u `whoami`</code></pre>
+<p>Show jobs by job id:</p>
+<pre><code>squeue -j JOBID</code></pre>
+<p>Show jobs of a specific partition:</p>
+<pre><code>squeue --partition=dev</code></pre>
+</section>
+<section id="aliases" class="level2">
+<h2 class="anchored" data-anchor-id="aliases">Aliases</h2>
+<p>Handy aliases</p>
+<pre><code>alias myjobs='squeue -u `whoami` -o "%.16i %9P %26j %.8T %.10M %.8l %.6D %.20S %R"'
+alias groupjobs='squeue -u foo,bar,tar -o "%.16i %u %9P %26j %.8T %.10M %.8l %.6D %.20S %R"'
+alias myjobs-pending="squeue -u `whoami` --start"
+alias idle-nodes="sinfo -p prod -o '%A'"</code></pre>
+</section>
+<section id="zombies" class="level2">
+<h2 class="anchored" data-anchor-id="zombies">Zombies</h2>
+<p>If there are any zombies left behind across nodes, send one command to kill them all.</p>
+<pre><code>srun pkill python</code></pre>
+</section>
+<section id="detailed-access-to-slurm-accounting" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-access-to-slurm-accounting">Detailed Access to SLURM Accounting</h2>
+<p><code>sacct</code> displays accounting data for all jobs and job steps in the Slurm job accounting log or Slurm database.</p>
+<p>So this is a great tool for analysing past events.</p>
+<p>For example, to see which nodes were used to run recent gpu jobs:</p>
+<pre><code>sacct -u `whoami` --partition=dev -ojobid,start,end,state,exitcode --format nodelist%300</code></pre>
+<p><code>%300</code> here tells it to use a 300 char width for the output, so that it’s not truncated.</p>
+<p>See <code>man sacct</code> for more fields and info fields.</p>
+</section>
+<section id="queue" class="level2">
+<h2 class="anchored" data-anchor-id="queue">Queue</h2>
+<section id="cancel-job" class="level3">
+<h3 class="anchored" data-anchor-id="cancel-job">Cancel job</h3>
+<p>To cancel a job:</p>
+<pre><code>scancel [jobid]</code></pre>
+<p>To cancel all of your jobs:</p>
+<pre><code>scancel -u &lt;userid&gt;</code></pre>
+<p>To cancel all of your jobs on a specific partition:</p>
+<pre><code>scancel -u &lt;userid&gt; -p &lt;partition&gt;</code></pre>
+</section>
+<section id="tips" class="level3">
+<h3 class="anchored" data-anchor-id="tips">Tips</h3>
+<ul>
+<li>if you see that <code>salloc</code>’ed interactive job is scheduled to run much later than you need, try to cancel the job and ask for shorter period - often there might be a closer window for a shorter time allocation.</li>
+</ul>
+</section>
+</section>
+<section id="logging" class="level2">
+<h2 class="anchored" data-anchor-id="logging">Logging</h2>
+<p>If we need to separate logs to different log files per node add <code>%N</code> (for short hostname) so that we have:</p>
+<pre><code>#SBATCH --output=%x-%j-%N.out</code></pre>
+<p>That way we can tell if a specific node misbehaves - e.g.&nbsp;has a corrupt GPU. This is because currently pytorch doesn’t log which node / gpu rank triggered an exception.</p>
+<p>Hoping it’ll be a built-in feature of pytorch https://github.com/pytorch/pytorch/issues/63174 and then one won’t need to make things complicated on the logging side.</p>
+</section>
+<section id="show-the-state-of-nodes" class="level2">
+<h2 class="anchored" data-anchor-id="show-the-state-of-nodes">Show the state of nodes</h2>
+<pre><code>sinfo -p PARTITION</code></pre>
+<p>Very useful command is:</p>
+<pre><code>sinfo -s</code></pre>
+<p>and look for the main stat, e.g.:</p>
+<pre><code>NODES(A/I/O/T) "allocated/idle/other/total".
+597/0/15/612</code></pre>
+<p>So here 597 out of 612 nodes are allocated. 0 idle and 15 are not available for whatever other reasons.</p>
+<pre><code>sinfo -p gpu_p1 -o "%A"</code></pre>
+<p>gives:</p>
+<pre><code>NODES(A/I)
+236/24</code></pre>
+<p>so you can see if any nodes are available on the 4x v100-32g partition (<code>gpu_p1</code>)</p>
+<p>To check a specific partition:</p>
+<pre><code>sinfo -p gpu_p1 -o "%A"</code></pre>
+<p>See the table at the top of this document for which partition is which.</p>
+<section id="sinfo-states" class="level3">
+<h3 class="anchored" data-anchor-id="sinfo-states">sinfo states</h3>
+<ul>
+<li>idle: no jobs running</li>
+<li>alloc: nodes are allocated to jobs that are currently executing</li>
+<li>mix: the nodes have some of the CPUs allocated, while others are idle</li>
+<li>drain: the node is unavailable due to an administrative reason</li>
+<li>drng: the node is running a job, but will after completion not be available due to an administrative reason</li>
+</ul>
+</section>
+<section id="drained-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="drained-nodes">drained nodes</h3>
+<p>To see all drained nodes and the reason for drainage (edit <code>%50E</code> to make the reason field longer/shorter)</p>
+<pre><code>% sinfo -R -o "%50E %12U %19H %6t %N"</code></pre>
+<p>or just <code>-R</code> if you want it short:</p>
+<pre><code>% sinfo -R</code></pre>
+</section>
+</section>
+<section id="job-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="job-arrays">Job arrays</h2>
+<p>To run a sequence of jobs, so that the next slurm job is scheduled as soon as the currently running one is over in 20h we use a job array.</p>
+<p>Let’s start with just 10 such jobs:</p>
+<pre><code>sbatch --array=1-10%1 array-test.slurm</code></pre>
+<p><code>%1</code> limits the number of simultaneously running tasks from this job array to 1. Without it it will try to run all the jobs at once, which we may want sometimes (in which case remove %1), but when training we need one job at a time.</p>
+<p>Alternatively, as always this param can be part of the script:</p>
+<pre><code>#SBATCH --array=1-10%1</code></pre>
+<p>Here is toy slurm script, which can be used to see how it works:</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name=array-test
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=1            # number of cores per tasks
+#SBATCH --time 00:02:00              # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out           # output file name
+#SBATCH --error=%x-%j.out            # error file name (same to watch just one file)
+#SBATCH --partition=dev
+
+echo $SLURM_JOB_ID
+echo "I am job ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
+date
+sleep 10
+date</code></pre>
+<p>Note <code>$SLURM_ARRAY_JOB_ID</code> is the same as <code>$SLURM_JOB_ID</code>, and <code>$SLURM_ARRAY_TASK_ID</code> is the index of the job.</p>
+<p>To see the jobs running:</p>
+<pre><code>$ squeue -u `whoami` -o "%.10i %9P %26j %.8T %.10M %.6D %.20S %R"
+     JOBID PARTITION                       NAME    STATE       TIME  NODES           START_TIME NODELIST(REASON)
+591970_[2-   dev             array-test  PENDING       0:00      1  2021-07-28T20:01:06 (JobArrayTaskLimit)</code></pre>
+<p>now job 2 is running.</p>
+<p>To cancel the whole array, cancel the job id as normal (the number before <code>_</code>):</p>
+<pre><code>scancel 591970</code></pre>
+<p>To cancel a specific job:</p>
+<pre><code>scancel 591970_2</code></pre>
+<p>If it’s important to have the log-file contain the array id, add <code>%A_%a</code>:</p>
+<pre><code>#SBATCH --output=%x-%j.%A_%a.log</code></pre>
+<p>More details https://slurm.schedmd.com/job_array.html</p>
+</section>
+<section id="job-array-trains-and-their-suspend-and-release" class="level2">
+<h2 class="anchored" data-anchor-id="job-array-trains-and-their-suspend-and-release">Job Array Trains and their Suspend and Release</h2>
+<p>In this recipe we accomplish 2 things:</p>
+<ol type="1">
+<li>Allow modification to the next job’s slurm script</li>
+<li>Allow suspending and resuming job arrays w/o losing the place in the queue when not being ready to continue running a job</li>
+</ol>
+<p>SLURM is a very unforgiving environment where a small mistake can cost days of waiting time. But there are strategies to mitigate some of this harshness.</p>
+<p>SLURM jobs have a concept of “age” in the queue which besides project priority governs when a job gets scheduled to run. If your have just scheduled a new job it has no “age” and will normally be put to run last compared to jobs that have entered the queue earlier. Unless of course this new job comes from a high priority project in which case it’ll progress faster.</p>
+<p>So here is how one can keep the “age” and not lose it when needing to fix something in the running script or for example to switch over to another script.</p>
+<p>The idea is this:</p>
+<ol type="1">
+<li><code>sbatch</code> a long job array, e.g., <code>-array=1-50%1</code></li>
+<li>inside the slurm script don’t have any code other than <code>source another-script.slurm</code> - so now you can modify the target script or symlink to another script before the next job starts</li>
+<li>if you need to stop the job array train - don’t cancel it, but suspend it without losing your place in a queue</li>
+<li>when ready to continue - unsuspend the job array - only the time while it was suspended is not counted towards its age, but all the previous age is retained.</li>
+</ol>
+<p>The only limitation of this recipe is that you can’t change the number of nodes, time and hardware and partition constraints once the job array was launched.</p>
+<p>Here is an example:</p>
+<p>Create a job script:</p>
+<pre><code>$ cat train-64n.slurm
+#!/bin/bash
+#SBATCH --job-name=tr8-104B
+#SBATCH --nodes=64
+#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=96           # number of cores per tasks
+#SBATCH --gres=gpu:8                 # number of gpus
+#SBATCH --time 20:00:00              # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out           # output file name
+#SBATCH --partition=dev
+
+source tr8-104B-64.slurm</code></pre>
+<p>Start it as:</p>
+<pre><code>sbatch --array=1-50%1 train-64.slurm</code></pre>
+<p>Now you can easily edit <code>tr8-104B-64.slurm</code> before the next job run and either let the current job finish if it’s desired or if you need to abort it, just kill the currently running job, e.g.&nbsp;<code>1557903_5</code> (not job array <code>1557903</code>) and have the train pick up where it left, but with the edited script.</p>
+<p>The nice thing is that this requires no changes to the original script (<code>tr8-104B-64.slurm</code> in this example), and the latter can still be started on its own.</p>
+<p>Now, what if something is wrong and you need 10min or 10h to fix something. In this case we suspend the train using:</p>
+<pre><code>scontrol hold &lt;jobid&gt;</code></pre>
+<p>with <jobid> being either a “normal” job, the id of a job array or the id for a job array step</jobid></p>
+<p>and then when ready to continue release the job:</p>
+<pre><code>scontrol release &lt;jobid&gt;</code></pre>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<section id="mismatching-nodes-number" class="level3">
+<h3 class="anchored" data-anchor-id="mismatching-nodes-number">Mismatching nodes number</h3>
+<p>If the pytorch launcher fails it often means that the number of SLURM nodes and the launcher nodes are mismatching, e.g.:</p>
+<pre><code>grep -ir nodes= tr123-test.slurm
+#SBATCH --nodes=40
+NNODES=64</code></pre>
+<p>This won’t work. They have to match.</p>
+<p>You can add a sanity check to your script:</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name=test-mismatch
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=96           # number of cores per tasks
+#SBATCH --gres=gpu:8                 # number of gpus
+#SBATCH --time 0:05:00               # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out           # output file name
+#SBATCH --partition=prod
+
+[...]
+
+NNODES=2
+
+# sanity check for having NNODES and `#SBATCH --nodes` match, assuming you use NNODES variable
+if [ "$NNODES" != "$SLURM_NNODES" ]; then
+    echo "Misconfigured script: NNODES=$NNODES != SLURM_NNODES=$SLURM_NNODES"
+    exit 1
+fi
+
+[...]</code></pre>
+<p>or you could just do:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=2</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="va">NNODES</span><span class="op">=</span><span class="va">$SLURM_NNODES</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and then it will always be correct</p>
+</section>
+<section id="find-faulty-nodes-and-exclude-them" class="level3">
+<h3 class="anchored" data-anchor-id="find-faulty-nodes-and-exclude-them">Find faulty nodes and exclude them</h3>
+<p>Sometimes a node is broken, which prevents one from training, especially since restarting the job often hits the same set of nodes. So one needs to be able to isolate the bad node(s) and exclude it from <code>sbatch</code>.</p>
+<p>To find a faulty node, write a small script that reports back the status of the desired check.</p>
+<p>For example to test if cuda is available on all nodes:</p>
+<pre><code>python -c 'import torch, socket; print(f"{socket.gethostname()}: {torch.cuda.is_available()}")'</code></pre>
+<p>and to only report the nodes that fail:</p>
+<pre><code>python -c 'import torch, socket; torch.cuda.is_available() or print(f"Broken node: {socket.gethostname()}") '</code></pre>
+<p>Of course, the issue could be different - e.g.&nbsp;gpu can’t allocate memory, so change the test script to do a small allocation on cuda. Here is one way:</p>
+<pre><code>python -c "import torch; torch.ones(1000,1000).cuda()"</code></pre>
+<p>But since we need to run the test script on all nodes and not just the first node, the slurm script needs to run it via <code>srun</code>. So our first diagnostics script can be written as:</p>
+<pre><code>srun --jobid $SLURM_JOBID bash -c 'python -c "import torch, socket; print(socket.gethostname(), torch.cuda.is_available())"'</code></pre>
+<p>I slightly changed it, due to an issue with quotes.</p>
+<p>You can always convert the one liner into a real script and then there is no issue with quotes.</p>
+<pre><code>$ cat &lt;&lt; EOT &gt;&gt; test-nodes.py
+#!/usr/bin/env python
+import torch, socket
+print(socket.gethostname(), torch.cuda.is_available())
+EOT
+$ chmod a+x ./test-nodes.py</code></pre>
+<p>Now let’s create a driver slurm script. Use a few minutes time for this test so that SLURM yields it faster:</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name=test-nodes
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=96           # number of cores per tasks
+#SBATCH --gres=gpu:8                 # number of gpus
+#SBATCH --time 0:05:00               # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out           # output file name
+#SBATCH --partition=prod
+
+source $six_ALL_CCFRWORK/start-prod
+srun --jobid $SLURM_JOBID ./test-nodes.py</code></pre>
+<p>Once it runs check the logs to see if any reported <code>False</code>, those are the nodes you want to exclude.</p>
+<p>Now once the faulty node(s) is found, feed it to <code>sbatch</code>:</p>
+<pre><code>sbatch --exclude=hostname1,hostname2 ...</code></pre>
+<p>and <code>sbatch</code> will exclude the bad nodes from the allocation.</p>
+<p>Additionally please report the faulty nodes to <code>#science-support</code> so that they get replaced</p>
+<p>Here are a few more situations and how to find the bad nodes in those cases:</p>
+</section>
+<section id="broken-nccl" class="level3">
+<h3 class="anchored" data-anchor-id="broken-nccl">Broken NCCL</h3>
+<p>If you’re testing something that requires distributed setup, it’s a bit more complex. Here is a slurm script that tests that NCCL works. It sets up NCCL and checks that barrier works:</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name=test-nodes-nccl
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
+#SBATCH --cpus-per-task=96           # number of cores per tasks
+#SBATCH --gres=gpu:8                 # number of gpus
+#SBATCH --time 0:05:00               # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out           # output file name
+#SBATCH --partition=prod
+
+source $six_ALL_CCFRWORK/start-prod
+
+NNODES=2
+
+GPUS_PER_NODE=4
+MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
+MASTER_PORT=6000
+
+export LAUNCHER="python -u -m torch.distributed.launch \
+    --nproc_per_node $GPUS_PER_NODE \
+    --nnodes $NNODES \
+    --master_addr $MASTER_ADDR \
+    --master_port $MASTER_PORT \
+    "
+
+export SCRIPT=test-nodes-nccl.py
+
+cat &lt;&lt; EOT &gt; $SCRIPT
+#!/usr/bin/env python
+import torch.distributed as dist
+import torch
+import socket
+import os
+import fcntl
+
+def printflock(*msgs):
+    """ print """
+    with open(__file__, "r") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        try:
+            print(*msgs)
+        finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
+
+local_rank = int(os.environ["LOCAL_RANK"])
+torch.cuda.set_device(local_rank)
+dist.init_process_group("nccl")
+header = f"{socket.gethostname()}-{local_rank}"
+try:
+    dist.barrier()
+    printflock(f"{header}: NCCL {torch.cuda.nccl.version()} is OK")
+except:
+    printflock(f"{header}: NCCL {torch.cuda.nccl.version()} is broken")
+    raise
+EOT
+
+echo $LAUNCHER --node_rank $SLURM_PROCID $SCRIPT
+
+srun --jobid $SLURM_JOBID bash -c '$LAUNCHER --node_rank $SLURM_PROCID $SCRIPT'</code></pre>
+<p>The script uses <code>printflock</code> to solve the interleaved print outputs issue.</p>
+</section>
+<section id="gpu-memory-check" class="level3">
+<h3 class="anchored" data-anchor-id="gpu-memory-check">GPU Memory Check</h3>
+<p>This tests if each GPU on the allocated nodes can successfully allocate 77Gb (e.g.&nbsp;to test 80GB A100s) (have to subtract a few GBs for cuda kernels).</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch, os</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> socket</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>hostname <span class="op">=</span> socket.gethostname()</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>local_rank <span class="op">=</span> <span class="bu">int</span>(os.environ[<span class="st">"LOCAL_RANK"</span>])<span class="op">;</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>gbs <span class="op">=</span> <span class="dv">77</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>    torch.ones((gbs<span class="op">*</span><span class="dv">2</span><span class="op">**</span><span class="dv">28</span>)).cuda(local_rank).contiguous() <span class="co"># alloc on cpu, then move to gpu</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>local_rank<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>hostname<span class="sc">}</span><span class="ss"> is OK"</span>)</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span>:</span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>local_rank<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>hostname<span class="sc">}</span><span class="ss"> failed to allocate </span><span class="sc">{</span>gbs<span class="sc">}</span><span class="ss">GB DRAM"</span>)</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb60-15"><a href="#cb60-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-16"><a href="#cb60-16" aria-hidden="true" tabindex="-1"></a>time.sleep(<span class="dv">5</span>)</span>
+<span id="cb60-17"><a href="#cb60-17" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="broken-network" class="level3">
+<h3 class="anchored" data-anchor-id="broken-network">Broken Network</h3>
+<p>Yet another issue with a node is when its network is broken and other nodes fail to connect to it.</p>
+<p>You’re likely to experience it with an error similar to:</p>
+<pre><code>work = default_pg.barrier(opts=opts)
+RuntimeError: NCCL error in: /opt/conda/conda-bld/pytorch_1616554793803/work/torch/lib/c10d/ProcessGroupNCCL.cpp:825, unhandled system error, NCCL version 2.7.8
+ncclSystemError: System call (socket, malloc, munmap, etc) failed.</code></pre>
+<p>Here is how to debug this issue:</p>
+<ol type="1">
+<li>Add:</li>
+</ol>
+<pre><code>export NCCL_DEBUG=INFO</code></pre>
+<p>before the <code>srun</code> command and re-run your slurm script.</p>
+<ol start="2" type="1">
+<li>Now study the logs. If you find:</li>
+</ol>
+<pre><code>r11i6n2:486514:486651 [1] include/socket.h:403 NCCL WARN Connect to 10.148.3.247&lt;56821&gt; failed : Connection refused</code></pre>
+<p>Let’s see which node refuses to accept connections. We get the IP address from the error above and reverse resolve it to its name:</p>
+<pre><code>nslookup 10.148.3.247
+247.3.148.10.in-addr.arpa       name = r10i6n5.ib0.xa.idris.fr.</code></pre>
+<p>Add <code>--exclude=r10i6n5</code> to your <code>sbatch</code> command and report it to JZ admins.</p>
+</section>
+<section id="run-py-spy-or-any-other-monitor-program-across-all-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="run-py-spy-or-any-other-monitor-program-across-all-nodes">Run py-spy or any other monitor program across all nodes</h3>
+<p>When dealing with hanging, here is how to automatically log <code>py-spy</code> traces for each process.</p>
+<p>Of course, this same process can be used to run some command for all nodes of a given job. i.e.&nbsp;it can be used to run something during the normal run - e.g.&nbsp;dump all the memory usage in each process via <code>nvidia-smi</code> or whatever other program is needed to be run.</p>
+<pre><code>cd ~/prod/code/tr8b-104B/bigscience/train/tr11-200B-ml/
+
+salloc --partition=prod --nodes=40 --ntasks-per-node=1 --cpus-per-task=96 --gres=gpu:8 --time 20:00:00
+
+bash 200B-n40-bf16-mono.slurm</code></pre>
+<p>In another shell get the JOBID for the above <code>salloc</code>:</p>
+<pre><code>squeue -u `whoami` -o "%.16i %9P %26j %.8T %.10M %.8l %.6D %.20S %R"</code></pre>
+<p>adjust jobid per above and the nodes count (XXX: probably can remove <code>--nodes=40</code> altogether and rely on <code>salloc</code> config):</p>
+<pre><code>srun --jobid=2180718 --gres=gpu:0 --nodes=40 --tasks-per-node=1 --output=trace-%N.out sh -c 'ps aux | grep python | egrep -v "grep|srun" | grep `whoami` | awk "{print \$2}" | xargs -I {} py-spy dump --native --pid {}' || echo "failed"</code></pre>
+<p>now all <code>py-spy</code> traces go into the <code>trace-$nodename.out</code> files under <code>cwd</code>.</p>
+<p>The key is to use <code>--gres=gpu:0</code> or otherwise the 2nd <code>srun</code> will block waiting for the first one to release the gpus.</p>
+<p>Also the assumption is that some conda env that has <code>py-spy</code> installed got activated in <code>~/.bashrc</code>. If yours doesn’t already do that, add the instruction to load the env to the above command, before the <code>py-spy</code> command - it’ll fail to find it otherwise.</p>
+<p>Don’t forget to manually release the allocation when this process is done.</p>
+</section>
+</section>
+<section id="convert-slurm_job_nodelist-into-a-hostfile" class="level2">
+<h2 class="anchored" data-anchor-id="convert-slurm_job_nodelist-into-a-hostfile">Convert SLURM_JOB_NODELIST into a hostfile</h2>
+<p>Some multi-node launchers require a <code>hostfile</code> - here is how to generate one:</p>
+<pre><code># autogenerate the hostfile for deepspeed
+# 1. deals with: SLURM_JOB_NODELIST in either of 2 formats:
+# r10i1n8,r10i2n0
+# r10i1n[7-8]
+# 2. and relies on SLURM_STEP_GPUS=0,1,2... to get how many gpu slots per node
+#
+# usage:
+# makehostfile &gt; hostfile
+function makehostfile() {
+perl -le '$slots=split /,/, $ENV{"SLURM_STEP_GPUS"}; $_=$ENV{"SLURM_JOB_NODELIST"}; if (/^(.*?)\[(\d+)-(\d+)\]/) { print map { "$1$_ slots=$slots\n" } $2..$3} elsif (/,/) { print map { "$1$_ slots=$slots\n" } split /,/ } '
+}</code></pre>
+</section>
+<section id="environment-variables" class="level2">
+<h2 class="anchored" data-anchor-id="environment-variables">Environment variables</h2>
+<p>You can always do:</p>
+<pre><code>export SOMEKEY=value</code></pre>
+<p>from the slurm script to get a desired environment variable passed to the program launched from it.</p>
+<p>And you can also add to the top of the slurm script:</p>
+<pre><code>#SBATCH --export=ALL</code></pre>
+<p>The launched program will see all the environment variables visible in the shell where it was launched from.</p>
+</section>
+<section id="crontab-emulation" class="level2">
+<h2 class="anchored" data-anchor-id="crontab-emulation">Crontab Emulation</h2>
+<p>One of the most important Unix tools is the crontab, which is essential for being able to schedule various jobs. It however usually is absent from SLURM environment. Therefore one must emulate it. Here is how.</p>
+<p>For this presentation we are going to use <code>$WORK/cron/</code> as the base directory. And that you have an exported environment variable <code>WORK</code> pointing to some location on your filesystem - if you use Bash you can set it up in your <code>~/.bash_profile</code> or if a different shell is used use whatever startup equivalent file is.</p>
+<section id="a-self-perpetuating-scheduler-job" class="level3">
+<h3 class="anchored" data-anchor-id="a-self-perpetuating-scheduler-job">1. A self-perpetuating scheduler job</h3>
+<p>We will use <code>$WORK/cron/scheduler</code> dir for scheduler jobs, <code>$WORK/cron/cron.daily</code> for daily jobs and <code>$WORK/cron/cron.hourly</code> for hourly jobs:</p>
+<pre><code>$ mkdir -p $WORK/cron/scheduler
+$ mkdir -p $WORK/cron/cron.daily
+$ mkdir -p $WORK/cron/cron.hourly</code></pre>
+<p>Now copy these two slurm script in <code>$WORK/cron/scheduler</code>: - <a href="cron-daily.slurm">cron-daily.slurm</a> - <a href="cron-hourly.slurm">cron-hourly.slurm</a></p>
+<p>after editing those to fit your specific environment’s account and partition information.</p>
+<p>Now you can launch the crontab scheduler jobs:</p>
+<pre><code>$ cd $WORK/cron/scheduler
+$ sbatch cron-hourly.slurm
+$ sbatch cron-daily.slurm</code></pre>
+<p>This is it, these jobs will now self-perpetuate and usually you don’t need to think about it again unless there is an even that makes SLURM lose all its jobs.</p>
+</section>
+<section id="daily-and-hourly-cronjobs" class="level3">
+<h3 class="anchored" data-anchor-id="daily-and-hourly-cronjobs">2. Daily and Hourly Cronjobs</h3>
+<p>Now whenever you want some job to run once a day, you simply create a slurm job and put it into the <code>$WORK/cron/cron.daily</code> dir.</p>
+<p>Here is an example job that runs daily to update the <code>mlocate</code> file index:</p>
+<pre><code>$ cat $WORK/cron/cron.daily/mlocate-update.slurm
+#!/bin/bash
+#SBATCH --job-name=mlocate-update    # job name
+#SBATCH --ntasks=1                   # number of MP tasks
+#SBATCH --nodes=1
+#SBATCH --hint=nomultithread         # we get physical cores not logical
+#SBATCH --time=1:00:00               # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out           # output file name
+#SBATCH --partition=PARTITION     # edit me
+#SBATCH --account=GROUP@PARTITION # edit me
+
+set -e
+date
+echo "updating mlocate db"
+/usr/bin/updatedb -o $WORK/lib/mlocate/work.db -U $WORK --require-visibility 0</code></pre>
+<p>This builds an index of the files under <code>$WORK</code> which you can then quickly query with:</p>
+<pre><code>/usr/bin/locate -d $WORK/lib/mlocate/work.db pattern</code></pre>
+<p>To stop running this job, just move it out of the <code>$WORK/cron/cron.daily</code> dir.</p>
+<p>The same principle applies to jobs placed into the <code>$WORK/cron/cron.hourly</code> dir. These are useful for running something every hour.</p>
+<p>Please note that this crontab implementation is approximate timing-wise, due to various delays in SLURM scheduling they will run approximately every hour and every day. You can recode these to ask SLURM to start something at a more precise time if you have to, but most of the time the just presented method works fine.</p>
+<p>Additionally, you can code your own variations to meet specific needs of your project, e.g., every-30min or every-12h jobs.</p>
+</section>
+<section id="cleanup" class="level3">
+<h3 class="anchored" data-anchor-id="cleanup">3. Cleanup</h3>
+<p>Finally, since every cron launcher job will leave behind a log file (which is useful if for some reason things don’t work), you want to create a cronjob to clean up these logs. Otherwise you may run out of inodes - these logs files are tiny, but there could be tens of thousands of those.</p>
+<p>You could use something like this in a daily job.</p>
+<pre><code>find $WORK/cron -name "*.out" -mtime +7 -exec rm -f {} +</code></pre>
+<p>Please note that it’s set to only delete files that are older than 7 days, in case you need the latest logs for diagnostics.</p>
+</section>
+<section id="nuances" class="level3">
+<h3 class="anchored" data-anchor-id="nuances">Nuances</h3>
+<p>The scheduler runs with Unix permissions of the person who launched the SLRUM cron scheduler job and so all other SLURM scripts launched by that cron job.</p>
+</section>
+</section>
+<section id="self-perpetuating-slurm-jobs" class="level2">
+<h2 class="anchored" data-anchor-id="self-perpetuating-slurm-jobs">Self-perpetuating SLURM jobs</h2>
+<p>The same approach used in <a href="#1-a-self-perpetuating-scheduler-job">building a scheduler</a> can be used for creating stand-alone self-perpetuating jobs.</p>
+<p>For example:</p>
+<pre><code>#!/bin/bash
+#SBATCH --job-name=watchdog          # job name
+#SBATCH --ntasks=1                   # number of MP tasks
+#SBATCH --nodes=1
+#SBATCH --time=0:30:00               # maximum execution time (HH:MM:SS)
+#SBATCH --output=%x-%j.out           # output file name
+#SBATCH --partition=PARTITION        # edit me
+
+# ensure to restart self first 1h from now
+RUN_FREQUENCY_IN_HOURS=1
+sbatch --begin=now+${RUN_FREQUENCY_IN_HOURS}hour watchdog.slurm
+
+... do the watchdog work here ...</code></pre>
+<p>and you launch it once with:</p>
+<pre><code>sbatch watchdog.slurm</code></pre>
+<p>This then will immediately schedule itself to be run 1 hour from the launch time and then the normal job work will be done. Regardless of whether the rest of the job will succeed or fail, this job will continue relaunching itself approximately once an hour. This is imprecise due to scheduler job starting overhead and node availability issues. But if there is a least one spare node available and the job itself is quick to finish the requirement to run at an approximate frequency should be sufficient.</p>
+<p>As the majority of SLURM environment in addition to the expensive GPU nodes also provide much cheaper CPU-only nodes, you should choose a CPU-only SLURM partition for any jobs that don’t require GPUs to run.</p>
+</section>
+<section id="getting-information-about-the-job" class="level2">
+<h2 class="anchored" data-anchor-id="getting-information-about-the-job">Getting information about the job</h2>
+<p>From within the slurm file one can access information about the current job’s allocations.</p>
+<p>Getting allocated hostnames and useful derivations based on that:</p>
+<pre><code>export HOSTNAMES=$(scontrol show hostnames "$SLURM_JOB_NODELIST")
+export NUM_NODES=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | wc -l)
+export MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)</code></pre>
+</section>
+<section id="convert-compact-node-list-to-expanded-node-list" class="level2">
+<h2 class="anchored" data-anchor-id="convert-compact-node-list-to-expanded-node-list">Convert compact node list to expanded node list</h2>
+<p>Sometimes you get SLURM tools give you a string like: <code>node-[42,49-51]</code> which will require some coding to expand it into <code>node-42,node-49,node-50,node-51</code>, but there is a special tool to deal with that:</p>
+<pre><code>$ scontrol show hostnames node-[42,49-51]
+node-42
+node-49
+node-50
+node-51</code></pre>
+<p>Voila!</p>
+<p>case study: this is for example useful if you want get a list of nodes that were drained because the job was too slow to exit, but really there is no real problem with the nodes. So this one-liner will give you the list of such nodes in an expanded format which you can then script to loop over this list to undrain these nodes after perhaps checking that the processes have died by this time:</p>
+<pre><code>sinfo -R | grep "Kill task failed" | perl -lne '/(node-.*[\d\]]+)/ &amp;&amp; print $1' | xargs -n1 scontrol show hostnames</code></pre>
+</section>
+<section id="overcoming-the-lack-of-group-slurm-job-ownership" class="level2">
+<h2 class="anchored" data-anchor-id="overcoming-the-lack-of-group-slurm-job-ownership">Overcoming the lack of group SLURM job ownership</h2>
+<p>SLURM runs on Unix, but surprisingly its designers haven’t adopted the concept of group ownership with regards to SLURM jobs. So if a member of your team started an array of 10 jobs 20h each, and went on vacation - unless you have <code>sudo</code> access you now can’t do anything to stop those jobs if something is wrong.</p>
+<p>I’m yet to find why this is so, but so far we have been using a kill switch workaround. You have to code it in your framework. For example, see how it was implemented in <a href="https://github.com/bigscience-workshop/Megatron-DeepSpeed/blob/e52bdabbde3c6895aceb76c1bced295c2646121f/megatron/training.py#L104">Megatron-Deepspeed</a> (Meg-DS). The program polls for a pre-configured at start up path on the filesystem and if it finds a file there, it exits.</p>
+<p>So if we start Meg-DS with <code>--kill-switch-path $WORK/tmp/training17-kill-switch</code> and then at any point we need to kill the SLURM job, we simply do:</p>
+<pre><code>touch $WORK/tmp/training17-kill-switch</code></pre>
+<p>and the next time the program gets to check for this file it’ll detect the event and will exit voluntarily. If you have a job array, well, you will have to wait until each job starts, detects the kill switch and exits.</p>
+<p>Of course, don’t forget to remove it when you’re done stopping the jobs.</p>
+<pre><code>rm $WORK/tmp/training17-kill-switch</code></pre>
+<p>Now, this doesn’t always work. If the job is hanging, it’ll never come to the point of checking for kill-switch and the only solution here is to contact the sysadmins to kill the job for you. Sometimes if the hanging is a simple case pytorch’s distributed setup will typically auto-exit after 30min of preset timeout time, but it doesn’t always work.</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{foreman2024,
+  author = {Foreman, Sam and Bekman, Stas},
+  title = {ML {Engineering}},
+  date = {2024-02-13},
+  url = {https://samforeman.me},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-foreman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Foreman, Sam, and Stas Bekman. 2024. <span>“ML Engineering.”</span>
+February 13, 2024. <a href="https://samforeman.me">https://samforeman.me</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../../qmd/orchestration/slurm/performance.html" class="pagination-link  aria-label=" slurm="" performance"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SLURM Performance</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="pagination-link" aria-label="fio benchmark results for hope on 2023-12-20-14:37:02">
+        <span class="nav-page-text">fio benchmark results for hope on 2023-12-20-14:37:02</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2023, Sam Foreman</p>
+</div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://samforeman.me">
+<p><span style="font-size: 1.25em;"><i class="fa-solid fa-home" aria-label="home"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/saforem2">
+<p><span style="font-size: 1.25em;"><i class="fa-brands fa-github" aria-label="github"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/saforem2">
+<p><span style="font-size: 1.25em;"><i class="fa-brands fa-twitter" aria-label="twitter"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="mailto:///foremans@anl.gov">
+<p><span style="font-size: 1.25em;"><i class="fa-regular fa-paper-plane" aria-label="paper-plane"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=vV_1zDwAAAAJ&amp;hl=en">
+<p><span style="font-size: 1.25em;"><i class="ai  ai-google-scholar"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://orcid.org/0000-0002-9981-0876">
+<p><span style="font-size: 1.25em;"><i class="ai  ai-orcid"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.last.fm/user/saforem2">
+<p><span style="font-size: 1.25em;"><i class="fa-brands fa-lastfm" aria-label="lastfm"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://open.spotify.com/user/saforem2">
+<p><span style="font-size: 1.25em;"><i class="fa-brands fa-spotify" aria-label="spotify"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.instagram.com/saforem2">
+<p><span style="font-size: 1.25em;"><i class="fa-brands fa-instagram" aria-label="instagram"></i></span></p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://linkedin.com/in/saforem2">
+<p><span style="font-size: 1.25em;"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></span></p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/personal_site/blob/main/qmd/orchestration/slurm/users.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/personal_site/edit/main/qmd/orchestration/slurm/users.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/personal_site/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://samforeman.me">samforeman.me</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
