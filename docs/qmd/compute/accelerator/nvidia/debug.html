@@ -6,8 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Stas Bekman">
-<meta name="author" content="Sam Foreman ">
 <meta name="dcterms.date" content="2024-02-13">
 
 <title>ML Engineering - Troubleshooting NVIDIA GPUs</title>
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -49,8 +81,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
 <script src="../../../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -94,23 +124,23 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../../../css/default.css">
 <link rel="stylesheet" href="../../../../css/callouts.css">
 <meta property="og:title" content="Sam Foreman">
-<meta property="og:description" content="My ramblings about science and computers">
-<meta property="og:image" content="https://github.com/saforem2/personal_site/blob/main/assets/thumbnail.png?raw=true">
+<meta property="og:description" content="Machine Learning Engineering Open Book">
+<meta property="og:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
 <meta property="og:site_name" content="ML Engineering">
 <meta name="twitter:title" content="Sam Foreman">
-<meta name="twitter:description" content="My ramblings about science and computers">
-<meta name="twitter:image" content="https://github.com/saforem2/personal_site/blob/main/assets/thumbnail.png?raw=true">
+<meta name="twitter:description" content="Machine Learning Engineering Open Book">
+<meta name="twitter:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
 <meta name="twitter:creator" content="@saforem2">
 <meta name="twitter:site" content="@saforem2">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="citation_title" content="ML Engineering">
-<meta name="citation_author" content="Sam Foreman">
 <meta name="citation_author" content="Stas Bekman">
+<meta name="citation_author" content="Sam Foreman">
 <meta name="citation_publication_date" content="2024-02-13">
 <meta name="citation_cover_date" content="2024-02-13">
 <meta name="citation_year" content="2024">
 <meta name="citation_online_date" content="2024-02-13">
-<meta name="citation_fulltext_html_url" content="https://samforeman.me">
+<meta name="citation_fulltext_html_url" content="https://saforem2.github.io/ml-engineering">
 <meta name="citation_language" content="en">
 <meta name="citation_reference" content="citation_title=The climate risk &amp;amp;amp; resilience portal (ClimRR) metadata and data dictionary;,citation_author=C. Burdi;,citation_author=Wall. T Branham;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://dub.sh/ClimRR-Metadata;">
 <meta name="citation_reference" content="citation_title=Progress on (g-2)_\mu from lattice QCD;,citation_author=Hartmut Wittig;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://arxiv.org/abs/2306.04165;">
@@ -148,7 +178,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/saforem2/personal_site"> 
+    <a class="nav-link" href="https://github.com/saforem2/ml-engineering"> 
 <span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
   </li>  
 </ul>
@@ -158,12 +188,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-gear"></i></a>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/personal_site/blob/main/index.qmd">
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/blob/main/index.qmd">
             Source Code
             </a>
           </li>
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/personal_site/issues/new/choose">
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/issues/new/choose">
             New Issue
             </a>
           </li>
@@ -178,7 +208,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../qmd/compute/index.html">Compute</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/index.html">Accelerators</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Nvidia</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Troubleshooting NVIDIA GPUs</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../qmd/compute/index.html">💻 Compute</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/index.html">Accelerators</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Nvidia</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Troubleshooting NVIDIA GPUs</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -225,7 +255,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Compute</span></a>
+ <span class="menu-text">💻 Compute</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -276,7 +306,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Debugging and Troubleshooting</span></a>
+ <span class="menu-text">🐛  Debugging</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -328,31 +358,48 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inter-node and intra-node Networking Hardware</span></a>
+            <a href="../../../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠  Insights</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🪖 The AI Battlefield</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Networking Benchmarks</span></a>
+            <a href="../../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🛜 Network</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Network Benchmarks Results</span></a>
+            <a href="../../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Networking Benchmarks</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Benchmarks Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
@@ -367,31 +414,77 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Storage: File Systems and IO</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
- <span class="menu-text">Benchmarks</span></a>
+            <a href="../../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🎻  Orchestration</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
- <span class="menu-text">Results</span></a>
+            <a href="../../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in SLURM Environment</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Administration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Launchers with SLURM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM for users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦  Storage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
@@ -407,12 +500,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Training</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">🏋️  Training</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
@@ -471,51 +564,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Understanding Training Loss Patterns</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
- <span class="menu-text">Insights</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">The AI Battlefield Engineering - What You Need To Know</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false">
- <span class="menu-text">Orchestration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working in SLURM Environment</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -523,26 +571,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM Administration</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Launchers with SLURM</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM Performance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM for users</span></a>
+  <a href="../../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Training Loss Patterns</span></a>
   </div>
 </li>
       </ul>
@@ -564,12 +594,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#how-to-detect-if-a-node-is-missing-gpus" id="toc-how-to-detect-if-a-node-is-missing-gpus" class="nav-link" data-scroll-target="#how-to-detect-if-a-node-is-missing-gpus">How to detect if a node is missing GPUs</a></li>
   <li><a href="#how-to-detect-if-you-get-the-same-broken-node-again-and-again" id="toc-how-to-detect-if-you-get-the-same-broken-node-again-and-again" class="nav-link" data-scroll-target="#how-to-detect-if-you-get-the-same-broken-node-again-and-again">How to detect if you get the same broken node again and again</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="debug.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../qmd/compute/index.html">Compute</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/index.html">Accelerators</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Nvidia</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Troubleshooting NVIDIA GPUs</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../../qmd/compute/index.html">💻 Compute</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/index.html">Accelerators</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Nvidia</a></li><li class="breadcrumb-item"><a href="../../../../qmd/compute/accelerator/nvidia/debug.html">Troubleshooting NVIDIA GPUs</a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Troubleshooting NVIDIA GPUs</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/nvidia/debug.qmd"><i class="bi"></i></button></div></div>
 </div>
@@ -578,13 +608,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading"></div>
-    <div class="quarto-title-meta-contents">
-             <p><a href="https://stasosphere.com/machine-learning/">Stas Bekman</a> </p>
-             <p><a href="https://samforeman.me">Sam Foreman </a><a href="https://orcid.org/0000-0002-9981-0876"><span class="orcid-green"><i class="ai  ai-orcid"></i></span></a> <a href="mailto:foremans@anl.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading"></div>
@@ -606,60 +629,60 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>No hardware is perfect, sometimes due to the manufacturing problems or due to tear and wear (especially because of exposure to high heat), GPUs are likely to encounter various hardware issues. A lot of these issues get corrected automatically without needing to really understand what’s going on. If the application continues running usually there is nothing to worry about. If the application crashes due to a hardware issue it’s important to understand why this is so and how to act on it.</p>
 <p>A normal user who uses a handful of GPUs is likely to never need to understand GPU-related hardware issues, but if you come anywhere close to massive ML training where you are likely to use hundreds to thousands of GPUs it’s certain that you’d want to understand about different hardware issues.</p>
 <p>In your system logs you are likely to see occasionally Xid Errors like:</p>
-<pre><code>NVRM: Xid (PCI:0000:10:1c): 63, pid=1896, Row Remapper: New row marked for remapping, reset gpu to activate.</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">NVRM:</span> Xid <span class="er">(</span><span class="ex">PCI:0000:10:1c</span><span class="kw">)</span><span class="bu">:</span> 63, pid=1896, Row Remapper: New row marked for remapping, reset gpu to activate.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To get those logs one of the following ways should work:</p>
-<pre><code>sudo grep Xid /var/log/syslog
-sudo dmesg -T | grep Xid</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> grep Xid /var/log/syslog</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dmesg <span class="at">-T</span> <span class="kw">|</span> <span class="fu">grep</span> Xid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Typically, as long as the training doesn’t crash, these errors often indicate issues that automatically get corrected by the hardware.</p>
 <p>The full list of Xid Errors and their interpretation can be found <a href="https://docs.nvidia.com/deploy/xid-errors/index.html">here</a>.</p>
 <p>You can run <code>nvidia-smi -q</code> and see if there are any error counts reported. For example, in this case of Xid 63, you will see something like:</p>
-<pre><code>Timestamp                                 : Wed Jun  7 19:32:16 2023
-Driver Version                            : 510.73.08
-CUDA Version                              : 11.6
-
-Attached GPUs                             : 8
-GPU 00000000:10:1C.0
-    Product Name                          : NVIDIA A100-SXM4-80GB
-    [...]
-    ECC Errors
-        Volatile
-            SRAM Correctable              : 0
-            SRAM Uncorrectable            : 0
-            DRAM Correctable              : 177
-            DRAM Uncorrectable            : 0
-        Aggregate
-            SRAM Correctable              : 0
-            SRAM Uncorrectable            : 0
-            DRAM Correctable              : 177
-            DRAM Uncorrectable            : 0
-    Retired Pages
-        Single Bit ECC                    : N/A
-        Double Bit ECC                    : N/A
-        Pending Page Blacklist            : N/A
-    Remapped Rows
-        Correctable Error                 : 1
-        Uncorrectable Error               : 0
-        Pending                           : Yes
-        Remapping Failure Occurred        : No
-        Bank Remap Availability Histogram
-            Max                           : 639 bank(s)
-            High                          : 1 bank(s)
-            Partial                       : 0 bank(s)
-            Low                           : 0 bank(s)
-            None                          : 0 bank(s)
-[...]</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Timestamp</span>                                 : Wed Jun  7 19:32:16 2023</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Driver</span> Version                            : 510.73.08</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">CUDA</span> Version                              : 11.6</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Attached</span> GPUs                             : 8</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">GPU</span> 00000000:10:1C.0</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Product</span> Name                          : NVIDIA A100-SXM4-80GB</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">[...]</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ECC</span> Errors</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Volatile</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="ex">SRAM</span> Correctable              : 0</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="ex">SRAM</span> Uncorrectable            : 0</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="ex">DRAM</span> Correctable              : 177</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="ex">DRAM</span> Uncorrectable            : 0</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Aggregate</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="ex">SRAM</span> Correctable              : 0</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            <span class="ex">SRAM</span> Uncorrectable            : 0</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="ex">DRAM</span> Correctable              : 177</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            <span class="ex">DRAM</span> Uncorrectable            : 0</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Retired</span> Pages</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Single</span> Bit ECC                    : N/A</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Double</span> Bit ECC                    : N/A</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Pending</span> Page Blacklist            : N/A</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Remapped</span> Rows</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Correctable</span> Error                 : 1</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Uncorrectable</span> Error               : 0</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Pending</span>                           : Yes</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Remapping</span> Failure Occurred        : No</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Bank</span> Remap Availability Histogram</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>            <span class="ex">Max</span>                           : 639 bank<span class="er">(</span><span class="ex">s</span><span class="kw">)</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            <span class="ex">High</span>                          : 1 bank<span class="er">(</span><span class="ex">s</span><span class="kw">)</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>            <span class="ex">Partial</span>                       : 0 bank<span class="er">(</span><span class="ex">s</span><span class="kw">)</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>            <span class="ex">Low</span>                           : 0 bank<span class="er">(</span><span class="ex">s</span><span class="kw">)</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>            <span class="ex">None</span>                          : 0 bank<span class="er">(</span><span class="ex">s</span><span class="kw">)</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here we can see that Xid 63 corresponds to:</p>
-<pre><code>ECC page retirement or row remapping recording event</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ECC</span> page retirement or row remapping recording event</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which may have 3 causes: HW Error / Driver Error / FrameBuffer (FB) Corruption</p>
 <p>This error means that one of the memory rows is malfunctioning and that upon either reboot and/or a gpu reset one of the 640 spare memory rows (in A100) will be used to replace the bad row. Therefore we see in the report above that only 639 banks remain (out of 640).</p>
 <p>The Volatile section of the <code>ECC Errors</code> report above refers to the errors recorded since last reboot/GPU reset. The Aggregate section records the same error since the GPU was first used.</p>
 <p>Now, there are 2 types of errors - Correctable and Uncorrectable. The correctable one is a Single Bit ECC Error (SBE) where despite memory being faulty the driver can still recover the correct value. The uncorrectable one is where more than one bit is faulty and it’s called Double Bit ECC Error (DBE). Typically, the driver will retire whole memory pages if 1 DBE or 2 SBE errors occur at the same memory address. For full information see <a href="https://docs.nvidia.com/deploy/dynamic-page-retirement/index.html">this document</a></p>
 <p>A correctable error will not impact the application, a non-correctable one will crash the application. The memory page containing the uncorrectable ECC error will be blacklisted and not accessible until the GPU is reset.</p>
 <p>If there are page scheduled to be retired you will see something like this in the output of <code>nvidia-smi -q</code>:</p>
-<pre><code>    Retired pages
-        Single Bit ECC             : 2
-        Double Bit ECC             : 0
-        Pending Page Blacklist    : Yes</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Retired</span> pages</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Single</span> Bit ECC             : 2</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Double</span> Bit ECC             : 0</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">Pending</span> Page Blacklist    : Yes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Each retired page decreases the total memory available to applications. But each page is only 4MB large, so it doesn’t reduce the total available GPU memory by much.</p>
 <p>To dive even deeper into the GPU debugging, please refer to <a href="https://docs.nvidia.com/deploy/gpu-debug-guidelines/index.html">this document</a> - it includes a useful triage chart which helps to determine when to RMA GPUs. This document has additional information about Xid 63-like errors</p>
 <p>For example it suggests:</p>
@@ -669,7 +692,7 @@ GPU 00000000:10:1C.0
 <p>If after a reboot the same condition occur for the same memory address, it means that memory remapping has failed and Xid 64 will be emitted again. If this continues it means you have a hardware issue that can’t be auto-corrected and the GPU needs to RMA’ed.</p>
 <p>At other times you may get Xid 63 or 64 and the application will crash. Which usually will generate additional Xid errors, but most of the time it means that the error was uncorrectable (i.e.&nbsp;it was a DBE sort of an error and then it’ll be Xid 48).</p>
 <p>As mentioned earlier to reset a GPU you can either simply reboot the machine, or run:</p>
-<pre><code>nvidia-smi -r -i gpu_id</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvidia-smi</span> <span class="at">-r</span> <span class="at">-i</span> gpu_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where <code>gpu_id</code> is the sequential number of the gpu you want to reset. Without <code>-i</code> all GPUs will be reset.</p>
 </section>
 <section id="running-diagnostics" class="level2">
@@ -677,56 +700,56 @@ GPU 00000000:10:1C.0
 <p>If you suspect one or mode NVIDIA GPUs are broken on a given node, <code>dcgmi</code> is a great tool to quickly find any bad GPUs.</p>
 <p>NVIDIA® Data Center GPU Manager (DCGM) is documented <a href="https://docs.nvidia.com/datacenter/dcgm/latest/user-guide/index.html">here</a> and can be downloaded from <a href="https://github.com/NVIDIA/DCGM#quickstart">here</a>.</p>
 <p>Here is an example slurm script that will run very in-depth diagnostics (<code>-r 3</code>), which will take about 10 minutes to complete on an 8-GPU node:</p>
-<pre><code>$ cat dcgmi-1n.slurm
-#!/bin/bash
-#SBATCH --job-name=dcgmi-1n
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=96
-#SBATCH --gres=gpu:8
-#SBATCH --exclusive
-#SBATCH --output=%x-%j.out
-
-set -x -e
-echo "START TIME: $(date)"
-srun --output=%x-%j-%N.out dcgmi diag -r 3
-echo "END TIME: $(date)"</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat dcgmi-1n.slurm</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=dcgmi-1n</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=1</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=96</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --gres=gpu:8</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --exclusive</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=%x-%j.out</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-x</span> <span class="at">-e</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"START TIME: </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--output</span><span class="op">=</span>%x-%j-%N.out dcgmi diag <span class="at">-r</span> 3</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"END TIME: </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now to run it on specific nodes of choice:</p>
-<pre><code>sbatch --nodelist=node-115 dcgmi-1n.slurm
-sbatch --nodelist=node-151 dcgmi-1n.slurm
-sbatch --nodelist=node-170 dcgmi-1n.slurm</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--nodelist</span><span class="op">=</span>node-115 dcgmi-1n.slurm</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--nodelist</span><span class="op">=</span>node-151 dcgmi-1n.slurm</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--nodelist</span><span class="op">=</span>node-170 dcgmi-1n.slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>edit the nodelist argument to point to the node name to run.</p>
 <p>If the node is drained or downed and you can’t launch a slurm job using this node, just ssh into the node and run the command directly on the node:</p>
-<pre><code>dcgmi diag -r 3</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dcgmi</span> diag <span class="at">-r</span> 3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If the diagnostics didn’t find any issue, but the application still fails to work, re-run the diagnostics with level 4, which will now take more than 1 hour to complete:</p>
-<pre><code>dcgmi diag -r 4</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dcgmi</span> diag <span class="at">-r</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For example, if you run into a repeating Xid 64 error it’s likely that the diagnostics report will include:</p>
-<pre><code>+---------------------------+------------------------------------------------+
-| Diagnostic                | Result                                         |
-+===========================+================================================+
-|-----  Deployment  --------+------------------------------------------------|
-| Error                     | GPU 3 has uncorrectable memory errors and row  |
-|                           |  remappings are pending                        |</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">+---------------------------+------------------------------------------------+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Diagnostic</span>                <span class="kw">|</span> <span class="ex">Result</span>                                         <span class="kw">|</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">+===========================+================================================+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="ex">-----</span>  Deployment  <span class="at">--------+------------------------------------------------</span><span class="kw">|</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="ex">Error</span>                     <span class="kw">|</span> <span class="ex">GPU</span> 3 has uncorrectable memory errors and row  <span class="kw">|</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span>                           <span class="kw">|</span>  <span class="ex">remappings</span> are pending                        <span class="kw">|</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>so you now know to RMA that problematic GPU, if remapping fails.</p>
 <p>The <code>dcgmi</code> tool contains various other levels of diagnostics, some of which complete in a matter of a few minutes and can be run as a quick diagnostic in the epilogue of SLURM jobs to ensure that the node is ready to work for the next SLURM job, rather than discovering that after the user started their job and it crashed.</p>
 <p>When filing an RMA report you will be asked to run <code>nvidia-bug-report</code> script, the output of which you will need to submit with the RMA request.</p>
 <p>I usually save the log as well for posterity using one of:</p>
-<pre><code>dcgmi diag -r 3 | tee -a dcgmi-r3-`hostname`.txt
-dcgmi diag -r 4 | tee -a dcgmi-r4-`hostname`.txt</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dcgmi</span> diag <span class="at">-r</span> 3 <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> dcgmi-r3-<span class="kw">`</span><span class="fu">hostname</span><span class="kw">`</span>.txt</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dcgmi</span> diag <span class="at">-r</span> 4 <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> dcgmi-r4-<span class="kw">`</span><span class="fu">hostname</span><span class="kw">`</span>.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="how-to-detect-if-a-node-is-missing-gpus" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-detect-if-a-node-is-missing-gpus">How to detect if a node is missing GPUs</h2>
 <p>If you got a new VM, there are odd cases where there is less than expected number of GPUs. Here is how you can quickly test you have got 8 of them:</p>
-<pre><code>cat &lt;&lt; 'EOT' &gt;&gt; test-gpu-count.sh
-#!/bin/bash
-
-set -e
-
-# test the node has 8 gpus
-test $(nvidia-smi -q | grep UUID | wc -l) != 8 &amp;&amp; echo "broken node: less than 8 gpus" &amp;&amp; false
-EOT</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&lt; 'EOT'</span> <span class="op">&gt;&gt;</span> test-gpu-count.sh</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">#!/bin/bash</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">set -e</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="st"># test the node has 8 gpus</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="st">test $(nvidia-smi -q | grep UUID | wc -l) != 8 &amp;&amp; echo "broken node: less than 8 gpus" &amp;&amp; false</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="op">EOT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and then:</p>
-<pre><code>bash test-gpu-count.sh</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> test-gpu-count.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="how-to-detect-if-you-get-the-same-broken-node-again-and-again" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-detect-if-you-get-the-same-broken-node-again-and-again">How to detect if you get the same broken node again and again</h2>
@@ -734,15 +757,15 @@ EOT</code></pre>
 <p>So you launched a new virtual machine and discovered it has one or more broken NVIDIA GPUs. You discarded it and launched a new and the GPUs are broken again.</p>
 <p>Chances are that you’re getting the same node with the same broken GPUs. Here is how you can know that.</p>
 <p>Before discarding the current node, run and log:</p>
-<pre><code>$ nvidia-smi -q | grep UUID
-    GPU UUID                              : GPU-2b416d09-4537-ecc1-54fd-c6c83a764be9
-    GPU UUID                              : GPU-0309d0d1-8620-43a3-83d2-95074e75ec9e
-    GPU UUID                              : GPU-4fa60d47-b408-6119-cf63-a1f12c6f7673
-    GPU UUID                              : GPU-fc069a82-26d4-4b9b-d826-018bc040c5a2
-    GPU UUID                              : GPU-187e8e75-34d1-f8c7-1708-4feb35482ae0
-    GPU UUID                              : GPU-43bfd251-aad8-6e5e-ee31-308e4292bef3
-    GPU UUID                              : GPU-213fa750-652a-6cf6-5295-26b38cb139fb
-    GPU UUID                              : GPU-52c408aa-3982-baa3-f83d-27d047dd7653</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nvidia-smi <span class="at">-q</span> <span class="kw">|</span> <span class="fu">grep</span> UUID</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-2b416d09-4537-ecc1-54fd-c6c83a764be9</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-0309d0d1-8620-43a3-83d2-95074e75ec9e</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-4fa60d47-b408-6119-cf63-a1f12c6f7673</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-fc069a82-26d4-4b9b-d826-018bc040c5a2</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-187e8e75-34d1-f8c7-1708-4feb35482ae0</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-43bfd251-aad8-6e5e-ee31-308e4292bef3</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-213fa750-652a-6cf6-5295-26b38cb139fb</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">GPU</span> UUID                              : GPU-52c408aa-3982-baa3-f83d-27d047dd7653</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>These UUIDs are unique to each GPU.</p>
 <p>When you then re-created your VM, run this command again - if the UUIDs are the same - you know you have the same broken GPUs.</p>
 <p>Sometimes just rebooting the node will get new hardware. In some situations you get new hardware on almost every reboot, in other situations this doesn’t happen. And this behavior may change from one provider to another.</p>
@@ -753,16 +776,16 @@ EOT</code></pre>
 
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{foreman2024,
-  author = {Foreman, Sam and Bekman, Stas},
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bekman2024,
+  author = {Bekman, Stas and Foreman, Sam},
   title = {ML {Engineering}},
   date = {2024-02-13},
-  url = {https://samforeman.me},
+  url = {https://saforem2.github.io/ml-engineering},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-foreman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Foreman, Sam, and Stas Bekman. 2024. <span>“ML Engineering.”</span>
-February 13, 2024. <a href="https://samforeman.me">https://samforeman.me</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bekman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bekman, Stas, and Sam Foreman. 2024. <span>“ML Engineering.”</span>
+February 13, 2024. <a href="https://saforem2.github.io/ml-engineering">https://saforem2.github.io/ml-engineering</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1353,8 +1376,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../../qmd/debug/index.html" class="pagination-link" aria-label="Debugging and Troubleshooting">
-        <span class="nav-page-text">Debugging and Troubleshooting</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../../qmd/debug/index.html" class="pagination-link" aria-label="🐛  Debugging">
+        <span class="nav-page-text">🐛 Debugging</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1362,64 +1385,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, Sam Foreman</p>
+<p><a href="https://saforem2.github.io/ml-engineering">ML-Engineering</a></p>
 </div>   
     <div class="nav-footer-center">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item">
-    <a class="nav-link" href="https://samforeman.me">
-<p><span style="font-size: 1.25em;"><i class="fa-solid fa-home" aria-label="home"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://github.com/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-github" aria-label="github"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://twitter.com/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-twitter" aria-label="twitter"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="mailto:///foremans@anl.gov">
-<p><span style="font-size: 1.25em;"><i class="fa-regular fa-paper-plane" aria-label="paper-plane"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=vV_1zDwAAAAJ&amp;hl=en">
-<p><span style="font-size: 1.25em;"><i class="ai  ai-google-scholar"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://orcid.org/0000-0002-9981-0876">
-<p><span style="font-size: 1.25em;"><i class="ai  ai-orcid"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://www.last.fm/user/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-lastfm" aria-label="lastfm"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://open.spotify.com/user/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-spotify" aria-label="spotify"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://www.instagram.com/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-instagram" aria-label="instagram"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://linkedin.com/in/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></span></p>
-</a>
-  </li>  
-</ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<p>2024</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/compute/accelerator/nvidia/debug.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p><a href="https://samforeman.me">samforeman.me</a></p>
+<p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
 </div>
   </div>
 </footer>

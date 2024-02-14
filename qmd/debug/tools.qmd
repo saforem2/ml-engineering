@@ -6,22 +6,26 @@
 ### Useful aliases
 
 Show a diff of all files modified in the current branch against HEAD:
-```
+
+```bash
 alias brdiff="def_branch=\$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); git diff origin/\$def_branch..."
 ```
 
 Same, but ignore white-space differences, adding `--ignore-space-at-eol` or `-w`:
-```
+
+```bash
 alias brdiff-nows="def_branch=\$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); git diff -w origin/\$def_branch..."
 ```
 
 List all the files that were added or modified in the current branch compared to HEAD:
-```
+
+```bash
 alias brfiles="def_branch=\$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); git diff --name-only origin/\$def_branch..."
 ```
 
 Once we have the list, we can now automatically open an editor to load just added and modified files:
-```
+
+```bash
 alias bremacs="def_branch=\$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); emacs \$(git diff --name-only origin/\$def_branch...) &"
 ```
 
@@ -43,42 +47,46 @@ Solution: Bisecting all the commits between the known good and bad commits to fi
 We are going to use 2 shell terminals: A and B. Terminal A will be used for `git bisect` and terminal B for testing your software. There is no technical reason why you couldn't get away with a single terminal but it's easier with 2.
 
 1. In terminal A fetch the git repo and install it in devel mode (`pip install -e .`) into your Python environment.
-```
-git clone https://github.com/huggingface/transformers
-cd transformers
-pip install -e .
-```
+
+  ```bash
+  git clone https://github.com/huggingface/transformers
+  cd transformers
+  pip install -e .
+  ```
+
 Now the code of this clone will be used automatically when you run your application, instead of the version you previously installed from PyPi or Conda or elsewhere.
 
 Also for simplicity we assume that all the dependencies have already been installed.
 
 2. next we launch the bisecting - In terminal A, run:
 
-```
-git bisect start
-```
+  ```bash
+  git bisect start
+  ```
 
 3. Discover the last known good and the first known bad commits
 
-`git bisect` needs just 2 data points to do its work. It needs to know one earlier commit that is known to work (`good`) and one later commit that is know to break (`bad`). So if you look at the sequence of commits on a given branch it'd have 2 known points and many commits around these that are of an unknown quality:
+  `git bisect` needs just 2 data points to do its work. It needs to know one earlier commit that is known to work (`good`) and one later commit that is know to break (`bad`). So if you look at the sequence of commits on a given branch it'd have 2 known points and many commits around these that are of an unknown quality:
 
-```
-...... orig_good ..... .... .... .... ..... orig_bad ....
-------------->---------------->----------------> time
-```
+  ```bash
+  ...... orig_good ..... .... .... .... ..... orig_bad ....
+  ------------->---------------->----------------> time
+  ```
 
-So for example if you know that `transformers==4.33.0` was good and `transformers@main` (`HEAD`) is bad, find which commit is corresponding to the tag `4.33.0` by visiting [the releases page](https://github.com/huggingface/transformers/releases) and searching for `4.33.0`. We find that it was commit with SHA [`5a4f340d`](https://github.com/huggingface/transformers/commit/5a4f340df74b42b594aedf60199eea95cdb9bed0).
+  So for example if you know that `transformers==4.33.0` was good and `transformers@main` (`HEAD`) is bad, find which commit is corresponding to the tag `4.33.0` by visiting [the releases page](https://github.com/huggingface/transformers/releases) and searching for `4.33.0`. We find that it was commit with SHA [`5a4f340d`](https://github.com/huggingface/transformers/commit/5a4f340df74b42b594aedf60199eea95cdb9bed0).
 
-footnote: typically the first 8 hex characters are enough to have a unique identifier for a given repo, but you can use the full 40 character string.
+  footnote: typically the first 8 hex characters are enough to have a unique identifier for a given repo, but you can use the full 40 character string.
 
 
 So now we specify which is the first known good commit:
-```
+
+```bash
 git bisect good 5a4f340d
 ```
 
 and as we said we will use `HEAD` (latest commit) as the bad one, in which case we can use `HEAD` instead finding out the corresponding SHA string:
-```
+
+```bash
 git bisect bad HEAD
 ```
 
@@ -88,7 +96,7 @@ We are now all set at finding out the commit that broke things for you.
 
 And after you told `git bisect` the good and the bad commits it has already switched to a commit somewhere in the middle:
 
-```
+```bash
 ...... orig_good ..... .... current .... .... ..... orig_bad ........
 ------------->--------------->---------------->----------------> time
 ```
@@ -104,24 +112,30 @@ The next stage is telling `git bisect` if the current commit is `good` or `bad`:
 To do so in terminal B run your program once.
 
 Then in terminal A run:
-```
+
+```bash
 git bisect bad
 ```
+
 If it fails, or:
-```
+
+```bash
 git bisect good
 ```
+
 if it succeeds.
 
 
 If, for example, if the result was bad, `git bisect` will internally flag the last commit as new bad and will half the commits again, switching to a new current commit:
-```
+
+```bash
 ...... orig_good ..... current .... new_bad .... ..... orig_bad ....
 ------------->--------------->---------------->----------------> time
 ```
 
 And, vice versa, if the result was good, then you will have:
-```
+
+```bash
 ...... orig_good ..... .... new_good .... current ..... orig_bad ....
 ------------->--------------->---------------->----------------> time
 ```
@@ -132,10 +146,11 @@ Keep repeating step 4 step until the problematic commit is found.
 
 Once you finished bisecting, `git bisect` will tell you which commit was responsible for breaking things.
 
-```
+```bash
 ...... orig_good ..... .... last_good first_bad .... .. orig_bad ....
 ------------->--------------->---------------->----------------> time
 ```
+
 If you followed the little commit diagrams, it'd correspond for the`first_bad` commit.
 
 You can then go to `https://github.com/huggingface/transformers/commit/` and append the commit SHA to that url which will take you to the commit, (e.g. `https://github.com/huggingface/transformers/commit/57f44dc4288a3521bd700405ad41e90a4687abc0` and which will then link to the PR from which it originated. And then you can ask for help by following up in that PR.
@@ -145,14 +160,16 @@ If your program doesn't take too long to run even if there are thousands of comm
 If your program is very slow, try to reduce it to something small - ideally a small reproduction program that shows the problem really fast. Often, commenting out huge chunks of code that you deem irrelevant to the problem at hand, can be all it takes.
 
 If you want to see the progress, you can ask it to show the current range of remaining commits to check with:
-```
+
+```bash
 git bisect visualize --oneline
 ```
 
 6. Clean up
 
 So now restore the git repo clone to the same state you started from (most likely `HEAD) with:
-```
+
+```bash
 git bisect reset
 ```
 
@@ -166,7 +183,8 @@ Sometimes, the issue emerges from intentional backward compatibility breaking AP
 a. skipping
 
 If for some reason the current commit cannot be tested - it can be skipped with:
-```
+
+```bash
 git bisect skip
 ```
 and it `git bisect` will continue bisecting the remaining commits.
@@ -180,24 +198,28 @@ b. reversing the order
 Normally git expects `bad` to be after `good`.
 
 
-```
+```bash
 ...... orig_good ..... .... .... .... ..... orig_bad ....
 ------------->--------------->---------------->----------------> time
 ```
 
 Now, if `bad` happens before `good` revision order-wise and you want to find the first revision that fixed a previously existing problem - you can reverse the definitions of `good` and `bad` - it'd be confusing to work with overloaded logic states, so it's recommended to use a new set of states instead - for example, `fixed` and `broken` - here is how you do that.
 
-```
+```bash
 git bisect start --term-new=fixed --term-old=broken
 git bisect fixed
 git bisect broken 6c94774
 ```
+
 and then use:
-```
+
+```bash
 git fixed / git broken
 ```
+
 instead of:
-```
+
+```bash
 git good / git bad
 ```
 

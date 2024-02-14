@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -47,8 +81,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -92,12 +124,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <link rel="stylesheet" href="../../css/default.css">
 <link rel="stylesheet" href="../../css/callouts.css">
 <meta property="og:title" content="Sam Foreman">
-<meta property="og:description" content="My ramblings about science and computers">
-<meta property="og:image" content="https://github.com/saforem2/personal_site/blob/main/assets/thumbnail.png?raw=true">
+<meta property="og:description" content="Machine Learning Engineering Open Book">
+<meta property="og:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
 <meta property="og:site_name" content="ML Engineering">
 <meta name="twitter:title" content="Sam Foreman">
-<meta name="twitter:description" content="My ramblings about science and computers">
-<meta name="twitter:image" content="https://github.com/saforem2/personal_site/blob/main/assets/thumbnail.png?raw=true">
+<meta name="twitter:description" content="Machine Learning Engineering Open Book">
+<meta name="twitter:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
 <meta name="twitter:creator" content="@saforem2">
 <meta name="twitter:site" content="@saforem2">
 <meta name="twitter:card" content="summary_large_image">
@@ -146,7 +178,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://github.com/saforem2/personal_site"> 
+    <a class="nav-link" href="https://github.com/saforem2/ml-engineering"> 
 <span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
   </li>  
 </ul>
@@ -156,12 +188,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-gear"></i></a>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/personal_site/blob/main/index.qmd">
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/blob/main/index.qmd">
             Source Code
             </a>
           </li>
           <li>
-            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/personal_site/issues/new/choose">
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/issues/new/choose">
             New Issue
             </a>
           </li>
@@ -176,7 +208,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/debug/index.html">🤔 Debugging</a></li><li class="breadcrumb-item"><a href="../../qmd/debug/pytorch.html">Debugging PyTorch programs</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/debug/index.html">🐛 Debugging</a></li><li class="breadcrumb-item"><a href="../../qmd/debug/pytorch.html">Debugging PyTorch programs</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -274,7 +306,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🤔  Debugging</span></a>
+ <span class="menu-text">🐛  Debugging</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -572,10 +604,10 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#floating-point-math-discrepancies-on-different-devices" id="toc-floating-point-math-discrepancies-on-different-devices" class="nav-link" data-scroll-target="#floating-point-math-discrepancies-on-different-devices">Floating point math discrepancies on different devices</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="pytorch.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><div class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/debug/index.html">🤔 Debugging</a></li><li class="breadcrumb-item"><a href="../../qmd/debug/pytorch.html">Debugging PyTorch programs</a></li></ol></nav><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/debug/pytorch.qmd"><i class="bi"></i></button></div></div>
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/debug/index.html">🐛 Debugging</a></li><li class="breadcrumb-item"><a href="../../qmd/debug/pytorch.html">Debugging PyTorch programs</a></li></ol></nav><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/debug/pytorch.qmd"><i class="bi"></i></button></div></div>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -614,111 +646,111 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>Now we have: <code>10.0.0.1:6000</code> and <code>10.0.0.2:6000</code> that we want to be able to communicate with each other.</p>
 <p>The first thing to do is to open port <code>6000</code> for incoming and outgoing connections on both nodes. It might be open already or you might have to read up the instructions of your particular setup on how to open a given port.</p>
 <p>Here are multiple ways that you could use to test whether port 6000 is already open.</p>
-<pre><code>telnet localhost:6000
-nmap -p 6000 localhost
-nc -zv localhost 6000
-curl -v telnet://localhost:6000</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">telnet</span> localhost:6000</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 6000 localhost</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">nc</span> <span class="at">-zv</span> localhost 6000</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-v</span> telnet://localhost:6000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Most of these should be available via <code>apt install</code> or whatever your package manager uses.</p>
 <p>Let’s use <code>nmap</code> in this example. If I run:</p>
-<pre><code>$ nmap -p 22 localhost
-[...]
-PORT   STATE SERVICE
-22/tcp open  ssh</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nmap <span class="at">-p</span> 22 localhost</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">PORT</span>   STATE SERVICE</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">22/tcp</span> open  ssh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We can see the port is open and it tells us which protocol and service is allocated as a bonus.</p>
 <p>Now let’s run:</p>
-<pre><code>$ nmap -p 6000 localhost
-[...]
-
-PORT     STATE  SERVICE
-6000/tcp closed X11</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> nmap <span class="at">-p</span> 6000 localhost</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">PORT</span>     STATE  SERVICE</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">6000/tcp</span> closed X11</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here you can see port 6000 is closed.</p>
 <p>Now that you understand how to test, you can proceed to test the <code>10.0.0.1:6000</code> and <code>10.0.0.2:6000</code>.</p>
 <p>First ssh to the first node in terminal A and test if port 6000 is opened on the second node:</p>
-<pre><code>ssh 10.0.0.1
-nmap -p 6000 10.0.0.2</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> 10.0.0.1</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 6000 10.0.0.2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>if all is good, then in terminal B ssh to the second node and do the same check in reverse:</p>
-<pre><code>ssh 10.0.0.2
-nmap -p 6000 10.0.0.1</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> 10.0.0.2</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nmap</span> <span class="at">-p</span> 6000 10.0.0.1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If both ports are open you can now use this port. If either or both are closed you have to open these ports. Since most clouds use a proprietary solution, simply search the Internet for “open port” and the name of your cloud provider.</p>
 <p>The next important thing to understand is that compute nodes will typically have multiple network interface cards (NICs). You discover those interfaces by running:</p>
-<pre><code>$ sudo ifconfig</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sudo ifconfig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>One interface is typically used by users to connecting to nodes via ssh or for various other non-compute related services - e.g., sending an email or download some data. Often this interface is called <code>eth0</code>, with <code>eth</code> standing for Ethernet, but it can be called by other names.</p>
 <p>Then there is the inter-node interface which can be Infiniband, EFA, OPA, HPE Slingshot, etc. (<a href="../network#inter-node-networking">more information</a>). There could be one or dozens of those interfaces.</p>
 <p>Here are some examples of <code>ifconfig</code>’s output:</p>
-<pre><code>$ sudo ifconfig
-enp5s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
-        inet 10.0.0.23  netmask 255.255.255.0  broadcast 10.0.0.255
-        [...]</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sudo ifconfig</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">enp5s0:</span> flags=4163<span class="op">&lt;</span>UP,BROADCAST,RUNNING,MULTICAST<span class="op">&gt;</span>  mtu 1500</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="ex">inet</span> 10.0.0.23  netmask 255.255.255.0  broadcast 10.0.0.255</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">[...]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I removed most of the output showing only some of the info. Here the key information is the IP address that is listed after <code>inet</code>. In the example above it’s <code>10.0.0.23</code>. This is the IP address of interface <code>enp5s0</code>.</p>
 <p>If there is another node, it’ll probably be <code>10.0.0.24</code> or <code>10.0.0.21</code> or something of sorts - the last segment will be the one with a different number.</p>
 <p>Let’s look at another example:</p>
-<pre><code>$ sudo ifconfig
-ib0     Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
-        inet addr:172.0.0.50  Bcast: 172.0.0.255  Mask:255.255.255.0
-        [...]</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sudo ifconfig</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ib0</span>     Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="ex">inet</span> addr:172.0.0.50  Bcast: 172.0.0.255  Mask:255.255.255.0</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="ex">[...]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here <code>ib</code> typically tells us it’s an InfiniBand card, but really it can be any other vendor. I have seen <a href="../network#omnipath">OmniPath</a> using <code>ib</code> for example. Again <code>inet</code> tells us the IP of this interface is <code>172.0.0.50</code>.</p>
 <p>If you lost me, we want the IP addresses so that we could test if ip:port is open on each node in question.</p>
 <p>Finally, going back to our pair of <code>10.0.0.1:6000</code> and <code>10.0.0.2:6000</code> let’s do an <code>all_reduce</code> test using 2 terminals, where we choose <code>10.0.0.1</code> as the master host which will coordinate other nodes. For testing we will use this helper debug program <a href="./torch-distributed-gpu-test.py">torch-distributed-gpu-test.py</a>.</p>
 <p>In terminal A:</p>
-<pre><code>$ ssh 10.0.0.1
-$ python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 2 --nproc_per_node 8 \
- --master_addr 10.0.0.1 --master_port 6000 torch-distributed-gpu-test.py</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh 10.0.0.1</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> torch.distributed.run <span class="at">--role</span> <span class="va">$(</span><span class="fu">hostname</span> <span class="at">-s</span><span class="va">)</span>: <span class="at">--tee</span> 3 <span class="at">--nnodes</span> 2 <span class="at">--nproc_per_node</span> 8 <span class="dt">\</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> <span class="at">--master_addr</span> 10.0.0.1 <span class="at">--master_port</span> 6000 torch-distributed-gpu-test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In terminal B:</p>
-<pre><code>$ ssh 10.0.0.2
-$ python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 2 --nproc_per_node 8 \
- --master_addr 10.0.0.1 --master_port 6000 torch-distributed-gpu-test.py</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh 10.0.0.2</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> python <span class="at">-m</span> torch.distributed.run <span class="at">--role</span> <span class="va">$(</span><span class="fu">hostname</span> <span class="at">-s</span><span class="va">)</span>: <span class="at">--tee</span> 3 <span class="at">--nnodes</span> 2 <span class="at">--nproc_per_node</span> 8 <span class="dt">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a> <span class="at">--master_addr</span> 10.0.0.1 <span class="at">--master_port</span> 6000 torch-distributed-gpu-test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that I’m using the same <code>--master_addr 10.0.0.1 --master_port 6000</code> in both cases because we checked port 6000 is open and we use <code>10.0.0.1</code> as the coordinating host.</p>
 <p>This approach of running things manually from each node is painful and so there are tools that automatically launch the same command on multiple nodes</p>
 <p><strong>pdsh</strong></p>
 <p><code>pdsh</code> is one such solution - which is like <code>ssh</code> but will automatically run the same command on multiple nodes:</p>
-<pre><code>PDSH_RCMD_TYPE=ssh pdsh -w 10.0.0.1,10.0.0.2 \
-"python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 2 --nproc_per_node 8 \
- --master_addr 10.0.0.1 --master_port 6000 torch-distributed-gpu-test.py"</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="va">PDSH_RCMD_TYPE</span><span class="op">=</span>ssh <span class="ex">pdsh</span> <span class="at">-w</span> 10.0.0.1,10.0.0.2 <span class="dt">\</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">"python -m torch.distributed.run --role </span><span class="va">$(</span><span class="fu">hostname</span> <span class="at">-s</span><span class="va">)</span><span class="st">: --tee 3 --nnodes 2 --nproc_per_node 8 </span><span class="dt">\</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st"> --master_addr 10.0.0.1 --master_port 6000 torch-distributed-gpu-test.py"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can see how I folded the 2 sets of commands into 1. If you have more nodes, just add more nodes as <code>-w</code> argument.</p>
 <p><strong>SLURM</strong></p>
 <p>If you use SLURM, it’s almost certain that whoever set things up already have all the ports opened for you, so it should just work. But if it doesn’t the information in this section should help debug things.</p>
 <p>Here is how you’d use this with SLURM.</p>
-<pre><code>#!/bin/bash
-#SBATCH --job-name=test-nodes        # name
-#SBATCH --nodes=2                    # nodes
-#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
-#SBATCH --cpus-per-task=10           # number of cores per tasks
-#SBATCH --gres=gpu:8                 # number of gpus
-#SBATCH --time 0:05:00               # maximum execution time (HH:MM:SS)
-#SBATCH --output=%x-%j.out           # output file name
-#
-export GPUS_PER_NODE=8
-export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
-export MASTER_PORT=6000
-#
-srun --jobid $SLURM_JOBID bash -c 'python -m torch.distributed.run \
---nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT \
-torch-distributed-gpu-test.py'</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=test-nodes        # name</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=2                    # nodes</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=10           # number of cores per tasks</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --gres=gpu:8                 # number of gpus</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time 0:05:00               # maximum execution time (HH:MM:SS)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=%x-%j.out           # output file name</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">GPUS_PER_NODE</span><span class="op">=</span>8</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">MASTER_ADDR</span><span class="op">=</span><span class="va">$(</span><span class="ex">scontrol</span> show hostnames <span class="va">$SLURM_JOB_NODELIST</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1<span class="va">)</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">MASTER_PORT</span><span class="op">=</span>6000</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">'python -m torch.distributed.run \</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="st">--nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="st">--master_addr $MASTER_ADDR --master_port $MASTER_PORT \</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="st">torch-distributed-gpu-test.py'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you have more than 2 nodes you just need to change the number of nodes and the above script will automatically work for any number of them.</p>
 <p><strong>MPI</strong>:</p>
 <p>Another popular way is to use <a href="https://en.wikipedia.org/wiki/Message_Passing_Interface">Message Passing Interface (MPI)</a>. There are a few open source implementations of it available.</p>
 <p>To use this tool you first create a <code>hostfile</code> that contains your target nodes and the number of processes that should be run on each host. In the example of this section, with 2 nodes and 8 gpus each it’d be:</p>
-<pre><code>$ cat hostfile
-10.0.0.1:8
-10.0.0.2:8</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat hostfile</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">10.0.0.1:8</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">10.0.0.2:8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and to run, it’s just:</p>
-<pre><code>$ mpirun --hostfile  -np 16 -map-by ppr:8:node python my-program.py</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mpirun <span class="at">--hostfile</span>  <span class="at">-np</span> 16 <span class="at">-map-by</span> ppr:8:node python my-program.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that I used <code>my-program.py</code> here because <a href="./torch-distributed-gpu-test.py">torch-distributed-gpu-test.py</a> was written to work with <code>torch.distributed.run</code> (also known as <code>torchrun</code>). With <code>mpirun</code> you will have to check your specific implementation to see which environment variable it uses to pass the rank of the program and replace <code>LOCAL_RANK</code> with it, the rest should be mostly the same.</p>
 <p>Nuances: - You might have to explicitly tell it which interface to use by adding <code>--mca btl_tcp_if_include 10.0.0.0/24</code> to match our example. If you have many network interfaces it might use one that isn’t open or just the wrong interface. - You can also do the reverse and exclude some interfaces. e.g.&nbsp;say you have <code>docker0</code> and <code>lo</code> interfaces - to exclude those add <code>--mca btl_tcp_if_exclude docker0,lo</code>.</p>
 <p><code>mpirun</code> has a gazillion of flags and I will recommend reading its manpage for more information. My intention was only to show you how you could use it. Also different <code>mpirun</code> implementations may use different CLI options.</p>
 <section id="solving-the-infiniband-connection-between-multiple-nodes" class="level3">
 <h3 class="anchored" data-anchor-id="solving-the-infiniband-connection-between-multiple-nodes">Solving the Infiniband connection between multiple nodes</h3>
 <p>In one situation on Azure I got 2 nodes on a shared subnet and when I tried to run the 2 node NCCL test:</p>
-<pre><code>NCCL_DEBUG=INFO python -u -m torch.distributed.run --nproc_per_node=1 --nnodes 2 --rdzv_endpoint 10.2.0.4:6000  --rdzv_backend c10d torch-distributed-gpu-test.py</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="va">NCCL_DEBUG</span><span class="op">=</span>INFO <span class="ex">python</span> <span class="at">-u</span> <span class="at">-m</span> torch.distributed.run <span class="at">--nproc_per_node</span><span class="op">=</span>1 <span class="at">--nnodes</span> 2 <span class="at">--rdzv_endpoint</span> 10.2.0.4:6000  <span class="at">--rdzv_backend</span> c10d torch-distributed-gpu-test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I saw in the debug messages that Infiniband interfaces got detected:</p>
-<pre><code>node-2:5776:5898 [0] NCCL INFO NET/IB : Using [0]ibP111p0s0:1/IB [1]rdmaP1111p0s2:1/RoCE [RO]; OOB eth0:10.2.0.4&lt;0&gt;</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node-2:5776:5898</span> <span class="pp">[</span><span class="ss">0</span><span class="pp">]</span> NCCL INFO NET/IB : Using <span class="pp">[</span><span class="ss">0</span><span class="pp">]</span>ibP111p0s0:1/IB <span class="pp">[</span><span class="ss">1</span><span class="pp">]</span>rdmaP1111p0s2:1/RoCE <span class="pp">[</span><span class="ss">RO</span><span class="pp">]</span><span class="kw">;</span> <span class="ex">OOB</span> eth0:10.2.0.4<span class="op">&lt;</span>0<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>But the connection would then time out with the message:</p>
-<pre><code>node-2:5776:5902 [0] transport/net_ib.cc:1296 NCCL WARN NET/IB : Got completion from peer 10.2.0.5&lt;33092&gt; with error 12, opcode 0, len
-0, vendor err 129 (Recv)
-node-2:5776:5902 [0] NCCL INFO transport/net.cc:1134 -&gt; 6
-node-2:5776:5902 [0] NCCL INFO proxy.cc:679 -&gt; 6
-node-2:5776:5902 [0] NCCL INFO proxy.cc:858 -&gt; 6 [Proxy Thread]</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node-2:5776:5902</span> <span class="pp">[</span><span class="ss">0</span><span class="pp">]</span> transport/net_ib.cc:1296 NCCL WARN NET/IB : Got completion from peer 10.2.0.5<span class="op">&lt;</span>33092<span class="op">&gt;</span> with error 12, opcode 0, len</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">0,</span> vendor err 129 <span class="er">(</span><span class="ex">Recv</span><span class="kw">)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">node-2:5776:5902</span> <span class="pp">[</span><span class="ss">0</span><span class="pp">]</span> NCCL INFO transport/net.cc:1134 <span class="at">-</span><span class="op">&gt;</span> 6</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="ex">node-2:5776:5902</span> <span class="pp">[</span><span class="ss">0</span><span class="pp">]</span> NCCL INFO proxy.cc:679 <span class="at">-</span><span class="op">&gt;</span> 6</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="ex">node-2:5776:5902</span> <span class="pp">[</span><span class="ss">0</span><span class="pp">]</span> NCCL INFO proxy.cc:858 <span class="at">-</span><span class="op">&gt;</span> 6 [Proxy Thread]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and nothing works. So here the Ethernet connectivity between 2 nodes works but not the IB interface.</p>
 <p>There could be a variety of reason for this failing, but of the most likely one is when you’re on the cloud and the 2 nodes weren’t provisioned so that their IB is connected. So your Ethernet inter-node connectivity works, but it’s too slow. Chances are that you need to re-provision the nodes so that they are allocated together. For example, on Azure this means you have to allocate nodes within a special <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview?source=recommendations">availability set</a></p>
 <p>Going back to our case study, once the nodes were deleted and recreated within an availability set the test worked out of the box.</p>
@@ -729,66 +761,66 @@ node-2:5776:5902 [0] NCCL INFO proxy.cc:858 -&gt; 6 [Proxy Thread]</code></pre>
 <h2 class="anchored" data-anchor-id="prefixing-logs-with-noderank-interleaved-asserts">Prefixing logs with <code>node:rank</code>, interleaved asserts</h2>
 <p>In this section we will use <code>torchrun</code> (<code>torch.distributed.run</code>) during the demonstration and at the end of this section similar solutions for other launchers will be listed.</p>
 <p>When you have warnings and tracebacks (or debug prints), it helps a lot to prefix each log line with its <code>hostname:rank</code> prefix, which is done by adding <code>--role $(hostname -s): --tee 3</code> to <code>torchrun</code>:</p>
-<pre><code>python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 1 --nproc_per_node 2 \
-torch-distributed-gpu-test.py</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> torch.distributed.run <span class="at">--role</span> <span class="va">$(</span><span class="fu">hostname</span> <span class="at">-s</span><span class="va">)</span>: <span class="at">--tee</span> 3 <span class="at">--nnodes</span> 1 <span class="at">--nproc_per_node</span> 2 <span class="dt">\</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>torch-distributed-gpu-test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now each log line will be prefixed with <code>[hostname:rank]</code></p>
 <p>Note that the colon is important.</p>
 <p>If you’re in a SLURM environment the above command line becomes:</p>
-<pre><code>srun --jobid $SLURM_JOBID bash -c 'python -m torch.distributed.run \
---nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT \
---role $(hostname -s): --tee 3 \
-torch-distributed-gpu-test.py'</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">'python -m torch.distributed.run \</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="st">--nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">--master_addr $MASTER_ADDR --master_port $MASTER_PORT \</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="st">--role $(hostname -s): --tee 3 \</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="st">torch-distributed-gpu-test.py'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Of course adjust your environment variables to match, this was just an example.</p>
 <p>Important! Note, that I’m using a single quoted string of commands passed to <code>bash -c</code>. This way <code>hostname -s</code> command is delayed until it’s run on each of the nodes. If you’d use double quotes above, <code>hostname -s</code> will get executed on the starting node and then all nodes will get the same hostname as the prefix, which defeats the purpose of using these flags. So if you use double quotes you need to rewrite the above like so:</p>
-<pre><code>srun --jobid $SLURM_JOBID bash -c "python -m torch.distributed.run \
---nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank \$SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT \
---role \$(hostname -s): --tee 3 \
-torch-distributed-gpu-test.py"</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">"python -m torch.distributed.run </span><span class="dt">\</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">--nproc_per_node </span><span class="va">$GPUS_PER_NODE</span><span class="st"> --nnodes </span><span class="va">$SLURM_NNODES</span><span class="st"> --node_rank </span><span class="dt">\$</span><span class="st">SLURM_PROCID </span><span class="dt">\</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">--master_addr </span><span class="va">$MASTER_ADDR</span><span class="st"> --master_port </span><span class="va">$MASTER_PORT</span><span class="st"> </span><span class="dt">\</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">--role </span><span class="dt">\$</span><span class="st">(hostname -s): --tee 3 </span><span class="dt">\</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">torch-distributed-gpu-test.py"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>$SLURM_PROCID</code> is escaped too as it needs to be specific to each node and it’s unknown during the launch of the slurm job on the main node. So there are 2 <code>\$</code> escapes in this version of the command.</p>
 <p>This prefixing functionality is also super-helpful when one gets the distributed program fail and which often results in interleaved tracebacks that are very difficult to interpret. So by <code>grep</code>ing for one <code>node:rank</code> string of choice, it’s now possible to reconstruct the real error message.</p>
 <p>For example, if you get a traceback that looks like:</p>
-<pre><code>  File "/path/to/training/dataset.py", line 785, in __init__
-  File "/path/to/training/dataset.py", line 785, in __init__
-    if self.dataset_proba.sum() != 1:
-AttributeError: 'list' object has no attribute 'sum'
-    if self.dataset_proba.sum() != 1:
-  File "/path/to/training/dataset.py", line 785, in __init__
-  File "/path/to/training/dataset.py", line 785, in __init__
-    if self.dataset_proba.sum() != 1:
-    if self.dataset_proba.sum() != 1:
-AttributeError: 'list' object has no attribute 'sum'
-AttributeError: 'list' object has no attribute 'sum'
-AttributeError: 'list' object has no attribute 'sum'</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">File</span> <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">File</span> <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">self.dataset_proba.sum()</span> <span class="ex">!=</span> 1:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="ex">AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">self.dataset_proba.sum()</span> <span class="ex">!=</span> 1:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">File</span> <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">File</span> <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">self.dataset_proba.sum()</span> <span class="ex">!=</span> 1:</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">self.dataset_proba.sum()</span> <span class="ex">!=</span> 1:</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="ex">AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="ex">AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="ex">AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and when it’s dozens of frames over 8 nodes it can’t be made sense of, but the above <code>-tee</code> + <code>--role</code> addition will generate:</p>
-<pre><code>[host1:0]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:1]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:0]    if self.dataset_proba.sum() != 1:
-[host1:0]AttributeError: 'list' object has no attribute 'sum'
-[host1:1]    if self.dataset_proba.sum() != 1:
-[host1:2]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:3]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:3]    if self.dataset_proba.sum() != 1:
-[host1:2]    if self.dataset_proba.sum() != 1:
-[host1:1]AttributeError: 'list' object has no attribute 'sum'
-[host1:2]AttributeError: 'list' object has no attribute 'sum'
-[host1:3]AttributeError: 'list' object has no attribute 'sum'</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:0]</span>  File <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:1]</span>  File <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:0]</span>    if self.dataset_proba.sum<span class="er">(</span><span class="kw">)</span> <span class="ex">!=</span> 1:</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:0]AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:1]</span>    if self.dataset_proba.sum<span class="er">(</span><span class="kw">)</span> <span class="ex">!=</span> 1:</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:2]</span>  File <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:3]</span>  File <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:3]</span>    if self.dataset_proba.sum<span class="er">(</span><span class="kw">)</span> <span class="ex">!=</span> 1:</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:2]</span>    if self.dataset_proba.sum<span class="er">(</span><span class="kw">)</span> <span class="ex">!=</span> 1:</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:1]AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:2]AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:3]AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and you can <code>grep</code> this output for just one <code>host:rank</code> prefix, which gives us:</p>
-<pre><code>$ grep "[host1:0]" log.txt
-[host1:0]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:0]    if self.dataset_proba.sum() != 1:
-[host1:0]AttributeError: 'list' object has no attribute 'sum'</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> grep <span class="st">"[host1:0]"</span> log.txt</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:0]</span>  File <span class="st">"/path/to/training/dataset.py"</span>, line 785, in __init__</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:0]</span>    if self.dataset_proba.sum<span class="er">(</span><span class="kw">)</span> <span class="ex">!=</span> 1:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[host1:0]AttributeError:</span> <span class="st">'list'</span> object has no attribute <span class="st">'sum'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and voila, you can now tell what really happened. And as I mentioned earlier there can be easily a hundred to thousands of interleaved traceback lines there.</p>
 <p>Also, if you have just one node, you can just pass <code>-tee 3</code> and there is no need to pass <code>--role</code>.</p>
 <p>If <code>hostname -s</code> is too long, but you have each host with its own sequence number like:</p>
-<pre><code>[really-really-really-long-hostname-5:0]
-[really-really-really-long-hostname-5:1]
-[really-really-really-long-hostname-5:2]</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[really-really-really-long-hostname-5:0]</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[really-really-really-long-hostname-5:1]</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[really-really-really-long-hostname-5:2]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>you can of course make it shorter by replacing <code>hostname -s</code> with <code>hostname -s | tr -dc '0-9'</code>, which would lead to much shorter prefixes:</p>
-<pre><code>[5:0]
-[5:1]
-[5:2]</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[5:0]</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[5:1]</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[5:2]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And, of course, if you’re doing debug prints, then to solve this exact issue you can use <a href="./torch-distributed-hanging-solutions.md#good-old-print"><code>printflock</code></a>.</p>
 <p>Here is how you accomplish the same feat with other launchers:</p>
 <ul>
@@ -801,21 +833,21 @@ AttributeError: 'list' object has no attribute 'sum'</code></pre>
 <h2 class="anchored" data-anchor-id="dealing-with-async-cuda-bugs">Dealing with Async CUDA bugs</h2>
 <p>When using CUDA, failing pytorch programs very often produce a python traceback that makes no sense or can’t be acted upon. This is because due to CUDA’s async nature - when a CUDA kernel is executed, the program has already moved on and when the error happened the context of the program isn’t there. The async functionality is there to make things faster, so that while the GPU is churning some <code>matmul</code> the program on CPU could already start doing something else.</p>
 <p>At other times some parts of the system will actually tell you that they couldn’t generate the correct traceback, as in this error:</p>
-<pre><code>[E ProcessGroupNCCL.cpp:414] Some NCCL operations have failed or timed out. Due to the
-asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/
-incomplete data. To avoid this inconsistency, we are taking the entire process down.</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[E</span> ProcessGroupNCCL.cpp:414] Some NCCL operations have failed or timed out. Due to the</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">asynchronous</span> nature of CUDA kernels, subsequent GPU operations might run on corrupted/</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ex">incomplete</span> data. To avoid this inconsistency, we are taking the entire process down.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There are a few solutions.</p>
 <p>If the failure is instant and can be reproduced on CPU (not all programs work on CPU), simply re-rerun it after hiding your GPUs. This is how you do it:</p>
-<pre><code>CUDA_VISIBLE_DEVICES="" python my-pytorch-program.py</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="va">CUDA_VISIBLE_DEVICES</span><span class="op">=</span><span class="st">""</span> <span class="ex">python</span> my-pytorch-program.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The env var <code>CUDA_VISIBLE_DEVICES</code> is used to manually limit the visibility of GPUs to the executed program. So for example if you have 8 gpus and you want to run program1.py with first 4 gpus and program2.py with the remaining 2 gpus you can do:</p>
-<pre><code>CUDA_VISIBLE_DEVICES="0,1,2,3" python my-pytorch-program1.py
-CUDA_VISIBLE_DEVICES="4,5,6,7" python my-pytorch-program2.py</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="va">CUDA_VISIBLE_DEVICES</span><span class="op">=</span><span class="st">"0,1,2,3"</span> <span class="ex">python</span> my-pytorch-program1.py</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="va">CUDA_VISIBLE_DEVICES</span><span class="op">=</span><span class="st">"4,5,6,7"</span> <span class="ex">python</span> my-pytorch-program2.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and the second program won’t be the wiser that it’s not using GPUs 0-3.</p>
 <p>But in the case of debug we are hiding all GPUs, by setting <code>CUDA_VISIBLE_DEVICES=""</code>.</p>
 <p>Now the program runs on CPU and you will get a really nice traceback and will fix the problem in no time.</p>
 <p>But, of course, if you your program requires multiple GPUs this won’t work. And so here is another solution.</p>
 <p>Rerun your program after setting this environment variable:</p>
-<pre><code>CUDA_LAUNCH_BLOCKING=1 python my-pytorch-program.py</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="va">CUDA_LAUNCH_BLOCKING</span><span class="op">=</span>1 <span class="ex">python</span> my-pytorch-program.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This variable tells pytorch (or any other CUDA-based program) to turn its async nature off everywhere and now all operations will be synchronous. So when the program crashes you should now get a perfect traceback and you will know exactly what ails your program.</p>
 <p>In theory enabling this variable should make everything run really slow, but in reality it really depends on your software. We did the whole of BLOOM-176B training using <code>CUDA_LAUNCH_BLOCKING=1</code> with <code>Megatron-Deepspeed</code>](https://github.com/bigscience-workshop/Megatron-DeepSpeed) and had zero slowdown - we had to use it as pytorch was hanging without it and we had no time to figure the hanging out.</p>
 <p>So, yes, when you switch from async to sync nature, often it can hide some subtle race conditions, so there are times that a hanging disappears as in the example I shared above. So measure your throughput with and without this flag and sometimes it might actual not only help with getting an in-context traceback but actually solve your problem altogether.</p>
@@ -829,30 +861,30 @@ CUDA_VISIBLE_DEVICES="4,5,6,7" python my-pytorch-program2.py</code></pre>
 <p>In these situation one must go and analyse the libC-level calls that lead to the segfault, which is luckily saved in the core file.</p>
 <p>If your program crashed, you will often find a file that will look something like: <code>core-python-3097667-6</code></p>
 <p>Before we continue make sure you have <code>gdb</code> installed:</p>
-<pre><code>sudo apt-get install gdb</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install gdb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now make sure you know the path to the python executable that was used to run the program that crashed. If you have multiple python environment you have to activate the right environment first. If you don’t <code>gdb</code> may fail to unpack the core file.</p>
 <p>So typically I’d go:</p>
-<pre><code>conda activate my-env
-gdb python core-python-3097667-6</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate my-env</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gdb</span> python core-python-3097667-6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>adjust <code>my-env</code> to whatever env you use, or instead of conda use whatever way you use to activate your python environment - and perhaps you’re using the system-wise python and then you don’t need to activate anything.</li>
 <li>adjust the name of the core file to the file you have gotten - it’s possible that there are many - pick the latest then.</li>
 </ul>
 <p>Now <code>gdb</code> will churn for a bit and will give you a prompt where you type: <code>bt</code>. We will use an actual core file here:</p>
-<pre><code>(gdb) bt
-#0  0x0000147539887a9f in raise () from /lib64/libc.so.6
-#1  0x000014753985ae05 in abort () from /lib64/libc.so.6
-#2  0x000014751b85a09b in __gnu_cxx::__verbose_terminate_handler() [clone .cold.1] () from /lib64/libstdc++.so.6
-#3  0x000014751b86053c in __cxxabiv1::__terminate(void (*)()) () from /lib64/libstdc++.so.6
-#4  0x000014751b860597 in std::terminate() () from /lib64/libstdc++.so.6
-#5  0x000014751b86052e in std::rethrow_exception(std::__exception_ptr::exception_ptr) () from /lib64/libstdc++.so.6
-#6  0x000014750bb007ef in c10d::ProcessGroupNCCL::WorkNCCL::handleNCCLGuard() ()
-   from .../python3.8/site-packages/torch/lib/libtorch_cuda_cpp.so
-#7  0x000014750bb04c69 in c10d::ProcessGroupNCCL::workCleanupLoop() ()
-   from.../python3.8/site-packages/torch/lib/libtorch_cuda_cpp.so
-#8  0x000014751b88cba3 in execute_native_thread_routine () from /lib64/libstdc++.so.6
-#9  0x000014753a3901cf in start_thread () from /lib64/libpthread.so.0
-#10 0x0000147539872dd3 in clone () from /lib64/libc.so.6</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">gdb</span><span class="kw">)</span> <span class="ex">bt</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#0  0x0000147539887a9f in raise () from /lib64/libc.so.6</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1  0x000014753985ae05 in abort () from /lib64/libc.so.6</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#2  0x000014751b85a09b in __gnu_cxx::__verbose_terminate_handler() [clone .cold.1] () from /lib64/libstdc++.so.6</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">#3  0x000014751b86053c in __cxxabiv1::__terminate(void (*)()) () from /lib64/libstdc++.so.6</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">#4  0x000014751b860597 in std::terminate() () from /lib64/libstdc++.so.6</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#5  0x000014751b86052e in std::rethrow_exception(std::__exception_ptr::exception_ptr) () from /lib64/libstdc++.so.6</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co">#6  0x000014750bb007ef in c10d::ProcessGroupNCCL::WorkNCCL::handleNCCLGuard() ()</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>   <span class="ex">from</span> .../python3.8/site-packages/torch/lib/libtorch_cuda_cpp.so</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#7  0x000014750bb04c69 in c10d::ProcessGroupNCCL::workCleanupLoop() ()</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>   <span class="ex">from.../python3.8/site-packages/torch/lib/libtorch_cuda_cpp.so</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co">#8  0x000014751b88cba3 in execute_native_thread_routine () from /lib64/libstdc++.so.6</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co">#9  0x000014753a3901cf in start_thread () from /lib64/libpthread.so.0</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co">#10 0x0000147539872dd3 in clone () from /lib64/libc.so.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and there you go. How do you make sense of it?</p>
 <p>Well, you go from the bottom of the stack to the top. You can tell that a <code>clone</code> call was made in <code>libc</code> which then called <code>start_thread</code> in <code>libpthread</code> and then if you keep going there are a bunch of calls in the torch libraries and finally we can see that the program terminated itself, completing with <code>raise</code> from <code>libc</code> which told the Linux kernel to kill the program and create the core file.</p>
 <p>This wasn’t an easy to understand backtrace.</p>
@@ -867,8 +899,8 @@ gdb python core-python-3097667-6</code></pre>
 <p>But fear not - most of the time you won’t need to understand the traceback. Ideally you’d just attach the core file to your filed Issue. But it can easily be 5GB large. So the developers that will be trying to help you will ask you to generate a <code>gdb</code> backtrace and now you know how to do that.</p>
 <p>I didn’t promise it’ll be easy, I just showed you where to start.</p>
 <p>Now another useful details is that many programs these days run multiple threads. And <code>bt</code> only shows the main thread of the process. But, often, it can be helpful to see where other threads in the process were when segfault has happened. For that you simply type 2 commands at the <code>(gdb)</code> prompt:</p>
-<pre><code>(gdb) thread apply all bt
-(gdb) bt</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">gdb</span><span class="kw">)</span> <span class="ex">thread</span> apply all bt</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">gdb</span><span class="kw">)</span> <span class="ex">bt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and this time around you typically will get a massive report, one backtrace per thread.</p>
 </section>
 <section id="py-spy" class="level2">
@@ -880,81 +912,81 @@ gdb python core-python-3097667-6</code></pre>
 <h2 class="anchored" data-anchor-id="strace">strace</h2>
 <p>Similar to <a href="./torch-distributed-hanging-solutions.md#py-spy">py-spy</a>, <code>strace</code> is a super-useful tool which traces any running application at the low-level system calls - e.g.&nbsp;<code>libC</code> and alike.</p>
 <p>For example, run:</p>
-<pre><code>strace python -c "print('strace')"</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">strace</span> python <span class="at">-c</span> <span class="st">"print('strace')"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and you will see everything that is done at the system call level as the above program runs.</p>
 <p>But usually it’s more useful when you have a stuck program that spins all CPU cores at 100% but nothing happens and you want to see what’s it doing. In this situation you simply attached to the running program like so:</p>
-<pre><code>strace --pid PID</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">strace</span> <span class="at">--pid</span> PID</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where you get the PID for example from the output of <code>top</code> or <code>ps</code>. Typically I just copy-n-paste the PID of the program that consumes the most CPU - <code>top</code> usually shows it at the very top of its listing.</p>
 <p>Same as <code>py-spy</code> you may need <code>sudo</code> perms to attached to an already running process - it all depends on your system setup. But you can always start a program with <code>strace</code> as I have shown in the original example.</p>
 <p>Let’s look at a small sub-snippet of the output of <code>strace python -c "print('strace')"</code></p>
-<pre><code>write(1, "strace\n", 7strace
-)                 = 7</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span><span class="er">(</span><span class="ex">1,</span> <span class="st">"strace\n"</span>, 7strace</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span>                 <span class="ex">=</span> 7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here we can see that a write call was executed on filedescriptor <code>1</code>, which almost always is <code>stdout</code> (<code>stdin</code> being 0, and <code>stderr</code> being 2).</p>
 <p>If you’re not sure what a filedescriptor is pointing to, normally you can tell from <code>strace</code>’s output itself. But you can also do:</p>
-<pre><code>ls -l /proc/PID/fd</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> /proc/PID/fd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>where PID is the pid of the currently running program you’re trying to investigate.</p>
 <p>For example, when I run the above while running a pytest test with gpus, I got (partial output):</p>
-<pre><code>l-wx------ 1 stas stas 64 Mar  1 17:22 5 -&gt; /dev/null
-lr-x------ 1 stas stas 64 Mar  1 17:22 6 -&gt; /dev/urandom
-lrwx------ 1 stas stas 64 Mar  1 17:22 7 -&gt; /dev/nvidiactl
-lrwx------ 1 stas stas 64 Mar  1 17:22 8 -&gt; /dev/nvidia0
-lr-x------ 1 stas stas 64 Mar  1 17:22 9 -&gt; /dev/nvidia-caps/nvidia-cap2</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">l-wx------</span> 1 stas stas 64 Mar  1 17:22 5 <span class="at">-</span><span class="op">&gt;</span> /dev/null</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">lr-x------</span> 1 stas stas 64 Mar  1 17:22 6 <span class="at">-</span><span class="op">&gt;</span> /dev/urandom</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="ex">lrwx------</span> 1 stas stas 64 Mar  1 17:22 7 <span class="at">-</span><span class="op">&gt;</span> /dev/nvidiactl</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="ex">lrwx------</span> 1 stas stas 64 Mar  1 17:22 8 <span class="at">-</span><span class="op">&gt;</span> /dev/nvidia0</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ex">lr-x------</span> 1 stas stas 64 Mar  1 17:22 9 <span class="at">-</span><span class="op">&gt;</span> /dev/nvidia-caps/nvidia-cap2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>so you can see that a device <code>/dev/null</code> is open as FD (file descriptor) 5, <code>/dev/urandom</code> as FD 6, etc.</p>
 <p>Now let’s go look at another snippet from our <code>strace</code> run.</p>
-<pre><code>access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">access</span><span class="er">(</span><span class="st">"/etc/ld.so.preload"</span><span class="ex">,</span> R_OK<span class="kw">)</span>      <span class="ex">=</span> <span class="at">-1</span> ENOENT <span class="er">(</span><span class="ex">No</span> such file or directory<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here it tried to see if file <code>/etc/ld.so.preload</code> exists, but as we can see it doesn’t - this can be useful if some shared library is missing - you can see where it’s trying to load it from.</p>
 <p>Let’s try another one:</p>
-<pre><code>openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
-newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=21448, ...}, AT_EMPTY_PATH) = 0
-mmap(NULL, 16424, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f8028807000
-mmap(0x7f8028808000, 4096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7f8028808000
-mmap(0x7f8028809000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f8028809000
-mmap(0x7f802880a000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f802880a000
-close(3)</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">openat</span><span class="er">(</span><span class="ex">AT_FDCWD,</span> <span class="st">"/lib/x86_64-linux-gnu/libpthread.so.0"</span>, O_RDONLY<span class="kw">|</span><span class="ex">O_CLOEXEC</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> <span class="st">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\0\0\0\0\0\0\0\0"</span>..., 832<span class="kw">)</span> <span class="ex">=</span> 832</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">newfstatat</span><span class="er">(</span><span class="ex">3,</span> <span class="st">""</span>, {st_mode=S_IFREG<span class="kw">|</span><span class="ex">0644,</span> st_size=21448, ...}, AT_EMPTY_PATH<span class="kw">)</span> <span class="ex">=</span> 0</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mmap</span><span class="er">(</span><span class="ex">NULL,</span> 16424, PROT_READ, MAP_PRIVATE<span class="kw">|</span><span class="ex">MAP_DENYWRITE,</span> 3, 0<span class="kw">)</span> <span class="ex">=</span> 0x7f8028807000</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mmap</span><span class="er">(</span><span class="ex">0x7f8028808000,</span> 4096, PROT_READ<span class="kw">|</span><span class="ex">PROT_EXEC,</span> MAP_PRIVATE<span class="kw">|</span><span class="ex">MAP_FIXED</span><span class="kw">|</span><span class="ex">MAP_DENYWRITE,</span> 3, 0x1000<span class="kw">)</span> <span class="ex">=</span> 0x7f8028808000</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="ex">mmap</span><span class="er">(</span><span class="ex">0x7f8028809000,</span> 4096, PROT_READ, MAP_PRIVATE<span class="kw">|</span><span class="ex">MAP_FIXED</span><span class="kw">|</span><span class="ex">MAP_DENYWRITE,</span> 3, 0x2000<span class="kw">)</span> <span class="ex">=</span> 0x7f8028809000</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="ex">mmap</span><span class="er">(</span><span class="ex">0x7f802880a000,</span> 8192, PROT_READ<span class="kw">|</span><span class="ex">PROT_WRITE,</span> MAP_PRIVATE<span class="kw">|</span><span class="ex">MAP_FIXED</span><span class="kw">|</span><span class="ex">MAP_DENYWRITE,</span> 3, 0x2000<span class="kw">)</span> <span class="ex">=</span> 0x7f802880a000</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="ex">close</span><span class="er">(</span><span class="ex">3</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>here we can see that it opens <code>/lib/x86_64-linux-gnu/libpthread.so.0</code> and assigns it FD 3, it then reads 832 chars from FD 3, (we can also see that the first chars are ELF - which stands for a shared library format), then memory maps it and closes that file.</p>
 <p>In this following example, we see a python cached file is opened, its filepointer is moved to 0, and then it’s read and closed.</p>
-<pre><code>openat(AT_FDCWD, "/home/stas/anaconda3/envs/py38-pt113/lib/python3.8/__pycache__/abc.cpython-38.pyc", O_RDONLY|O_CLOEXEC) = 3
-fstat(3, {st_mode=S_IFREG|0664, st_size=5329, ...}) = 0
-lseek(3, 0, SEEK_CUR)                   = 0
-lseek(3, 0, SEEK_CUR)                   = 0
-fstat(3, {st_mode=S_IFREG|0664, st_size=5329, ...}) = 0
-brk(0x23bf000)                          = 0x23bf000
-read(3, "U\r\r\n\0\0\0\0\24\216\177c\211\21\0\0\343\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 5330) = 5329
-read(3, "", 1)                          = 0
-close(3)</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">openat</span><span class="er">(</span><span class="ex">AT_FDCWD,</span> <span class="st">"/home/stas/anaconda3/envs/py38-pt113/lib/python3.8/__pycache__/abc.cpython-38.pyc"</span>, O_RDONLY<span class="kw">|</span><span class="ex">O_CLOEXEC</span><span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="ex">fstat</span><span class="er">(</span><span class="ex">3,</span> {st_mode=S_IFREG<span class="kw">|</span><span class="ex">0664,</span> st_size=5329, ...}<span class="kw">)</span> <span class="ex">=</span> 0</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="ex">lseek</span><span class="er">(</span><span class="ex">3,</span> 0, SEEK_CUR<span class="kw">)</span>                   <span class="ex">=</span> 0</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="ex">lseek</span><span class="er">(</span><span class="ex">3,</span> 0, SEEK_CUR<span class="kw">)</span>                   <span class="ex">=</span> 0</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="ex">fstat</span><span class="er">(</span><span class="ex">3,</span> {st_mode=S_IFREG<span class="kw">|</span><span class="ex">0664,</span> st_size=5329, ...}<span class="kw">)</span> <span class="ex">=</span> 0</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="ex">brk</span><span class="er">(</span><span class="ex">0x23bf000</span><span class="kw">)</span>                          <span class="ex">=</span> 0x23bf000</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> <span class="st">"U\r\r\n\0\0\0\0\24\216\177c\211\21\0\0\343\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"</span>..., 5330<span class="kw">)</span> <span class="ex">=</span> 5329</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> <span class="st">""</span>, 1<span class="kw">)</span>                          <span class="ex">=</span> 0</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="ex">close</span><span class="er">(</span><span class="ex">3</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It’s important to notice that file descriptors are re-used, so we have seen the same FD 3 twice, but each time it was open to a different file.</p>
 <p>If your program is for example trying to reach to the Internet, you can also tell these calls from <code>strace</code> as the program would be reading from a socket file descriptor.</p>
 <p>So let’s run an example on a program that downloads files from the HF hub:</p>
-<pre><code>strace python -c 'import sys; from transformers import AutoConfig; AutoConfig.from_pretrained(sys.argv[1])' t5-small</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">strace</span> python <span class="at">-c</span> <span class="st">'import sys; from transformers import AutoConfig; AutoConfig.from_pretrained(sys.argv[1])'</span> t5-small</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>here is some relevant to this discussion snippet:</p>
-<pre><code>socket(AF_INET6, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_TCP) = 3
-setsockopt(3, SOL_TCP, TCP_NODELAY, [1], 4) = 0
-ioctl(3, FIONBIO, [1])                  = 0
-connect(3, {sa_family=AF_INET6, sin6_port=htons(443), sin6_flowinfo=htonl(0), inet_pton(AF_INET6, "2600:1f18:147f:e850:e203:c458:10cd:fc3c
-", &amp;sin6_addr), sin6_scope_id=0}, 28) = -1 EINPROGRESS (Operation now in progress)
-poll([{fd=3, events=POLLOUT|POLLERR}], 1, 10000) = 1 ([{fd=3, revents=POLLOUT}])
-getsockopt(3, SOL_SOCKET, SO_ERROR, [0], [4]) = 0
-[...]
-write(3, "\26\3\3\0F\20\0\0BA\4\373m\244\16\354/\334\205\361j\225\356\202m*\305\332\275\251\17J"..., 126) = 126
-read(3, 0x2f05c13, 5)                   = -1 EAGAIN (Resource temporarily unavailable)
-poll([{fd=3, events=POLLIN}], 1, 9903)  = 1 ([{fd=3, revents=POLLIN}])
-read(3, "\24\3\3\0\1", 5)               = 5
-read(3, "\1", 1)                        = 1
-read(3, "\26\3\3\0(", 5)                = 5
-read(3, "\0\0\0\0\0\0\0\0\344\v\273\225`\4\24m\234~\371\332%l\364\254\34\3472&lt;\0356s\313"..., 40) = 40
-ioctl(3, FIONBIO, [1])                  = 0
-poll([{fd=3, events=POLLOUT}], 1, 10000) = 1 ([{fd=3, revents=POLLOUT}])
-write(3, "\27\3\3\1.\0\374$\361\217\337\377\264g\215\364\345\256\260\211$\326pkR\345\276,\321\221`-"..., 307) = 307
-ioctl(3, FIONBIO, [1])                  = 0
-read(3, 0x2ef7283, 5)                   = -1 EAGAIN (Resource temporarily unavailable)
-poll([{fd=3, events=POLLIN}], 1, 10000) = 1 ([{fd=3, revents=POLLIN}])</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">socket</span><span class="er">(</span><span class="ex">AF_INET6,</span> SOCK_STREAM<span class="kw">|</span><span class="ex">SOCK_CLOEXEC,</span> IPPROTO_TCP<span class="kw">)</span> <span class="ex">=</span> 3</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="ex">setsockopt</span><span class="er">(</span><span class="ex">3,</span> SOL_TCP, TCP_NODELAY, <span class="pp">[</span><span class="ss">1</span><span class="pp">]</span>, 4<span class="kw">)</span> <span class="ex">=</span> 0</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ioctl</span><span class="er">(</span><span class="ex">3,</span> FIONBIO, <span class="pp">[</span><span class="ss">1</span><span class="pp">]</span><span class="kw">)</span>                  <span class="ex">=</span> 0</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="ex">connect</span><span class="er">(</span><span class="ex">3,</span> {sa_family=AF_INET6, sin6_port=htons<span class="er">(</span><span class="ex">443</span><span class="kw">)</span><span class="ex">,</span> sin6_flowinfo=htonl<span class="er">(</span><span class="ex">0</span><span class="kw">)</span><span class="ex">,</span> inet_pton<span class="er">(</span><span class="ex">AF_INET6,</span> <span class="st">"2600:1f18:147f:e850:e203:c458:10cd:fc3c</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>, <span class="kw">&amp;</span><span class="ex">sin6_addr</span><span class="kw">)</span><span class="ex">,</span> sin6_scope_id=0}, 28<span class="kw">)</span> <span class="ex">=</span> <span class="at">-1</span> EINPROGRESS <span class="er">(</span><span class="ex">Operation</span> now in progress<span class="kw">)</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="ex">poll</span><span class="er">(</span><span class="ex">[{fd=3,</span> events=POLLOUT<span class="kw">|</span><span class="ex">POLLERR}],</span> 1, 10000<span class="kw">)</span> <span class="ex">=</span> 1 <span class="er">(</span><span class="ex">[{fd=3,</span> revents=POLLOUT}]<span class="kw">)</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="ex">getsockopt</span><span class="er">(</span><span class="ex">3,</span> SOL_SOCKET, SO_ERROR, <span class="pp">[</span><span class="ss">0</span><span class="pp">]</span>, <span class="pp">[</span><span class="ss">4</span><span class="pp">]</span><span class="kw">)</span> <span class="ex">=</span> 0</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span><span class="er">(</span><span class="ex">3,</span> <span class="st">"\26\3\3\0F\20\0\0BA\4\373m\244\16\354/\334\205\361j\225\356\202m*\305\332\275\251\17J"</span>..., 126<span class="kw">)</span> <span class="ex">=</span> 126</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> 0x2f05c13, 5<span class="kw">)</span>                   <span class="ex">=</span> <span class="at">-1</span> EAGAIN <span class="er">(</span><span class="ex">Resource</span> temporarily unavailable<span class="kw">)</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="ex">poll</span><span class="er">(</span><span class="ex">[{fd=3,</span> events=POLLIN}], 1, 9903<span class="kw">)</span>  <span class="ex">=</span> 1 <span class="er">(</span><span class="ex">[{fd=3,</span> revents=POLLIN}]<span class="kw">)</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> <span class="st">"\24\3\3\0\1"</span>, 5<span class="kw">)</span>               <span class="ex">=</span> 5</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> <span class="st">"\1"</span>, 1<span class="kw">)</span>                        <span class="ex">=</span> 1</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> <span class="st">"\26\3\3\0("</span>, 5<span class="kw">)</span>                <span class="ex">=</span> 5</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> <span class="st">"\0\0\0\0\0\0\0\0\344\v\273\225</span><span class="kw">`</span><span class="ex">\4\24m\234~\371\332%l\364\254\34\3472</span><span class="op">&lt;</span><span class="dt">\0</span>356s\313<span class="st">"..., 40) = 40</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="st">ioctl(3, FIONBIO, [1])                  = 0</span></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="st">poll([{fd=3, events=POLLOUT}], 1, 10000) = 1 ([{fd=3, revents=POLLOUT}])</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="st">write(3, "</span><span class="dt">\2</span>7\3\3\1.\0\374$<span class="dt">\3</span>61\217\337\377\264g\215\364\345\256\260\211$<span class="dt">\3</span>26pkR\345\276,\321\221<span class="kw">`</span><span class="st">-"</span>..., 307<span class="kw">)</span> <span class="ex">=</span> 307</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="ex">ioctl</span><span class="er">(</span><span class="ex">3,</span> FIONBIO, <span class="pp">[</span><span class="ss">1</span><span class="pp">]</span><span class="kw">)</span>                  <span class="ex">=</span> 0</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span><span class="er">(</span><span class="ex">3,</span> 0x2ef7283, 5<span class="kw">)</span>                   <span class="ex">=</span> <span class="at">-1</span> EAGAIN <span class="er">(</span><span class="ex">Resource</span> temporarily unavailable<span class="kw">)</span></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="ex">poll</span><span class="er">(</span><span class="ex">[{fd=3,</span> events=POLLIN}], 1, 10000<span class="kw">)</span> <span class="ex">=</span> 1 <span class="er">(</span><span class="ex">[{fd=3,</span> revents=POLLIN}]<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can see where that again it uses FD 3 but this time it opens a INET6 socket instead of a file. You can see that it then connects to that socket, polls, reads and writes from it.</p>
 <p>There are many other super useful understandings one can derive from using this tool.</p>
 <p>BTW, if you don’t want to scroll up-down, you can also save the output to a file:</p>
-<pre><code>strace -o strace.txt python -c "print('strace')"</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">strace</span> <span class="at">-o</span> strace.txt python <span class="at">-c</span> <span class="st">"print('strace')"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now, since you’re might want to strace the program from the very beginning, for example to sort out some race condition on a distributed filesystem, you will want to tell it to follow any forked processes. This what the <code>-f</code> flag is for:</p>
-<pre><code>strace -o log.txt -f python -m torch.distributed.run --nproc_per_node=4 --nnodes=1 --tee 3 test.py</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">strace</span> <span class="at">-o</span> log.txt <span class="at">-f</span> python <span class="at">-m</span> torch.distributed.run <span class="at">--nproc_per_node</span><span class="op">=</span>4 <span class="at">--nnodes</span><span class="op">=</span>1 <span class="at">--tee</span> 3 test.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So here we launch 4 processes and will end up running <code>strace</code> on at least 5 of them - the launcher plus 4 processes (each of which may spawn further child processes).</p>
 <p>It will conveniently prefix each line with the pid of the program so it should be easy to tell which system was made by which process.</p>
 <p>But if you want separate logs per process, then use <code>-ff</code> instead of <code>-f</code>.</p>
@@ -963,38 +995,36 @@ poll([{fd=3, events=POLLIN}], 1, 10000) = 1 ([{fd=3, revents=POLLIN}])</code></p
 <section id="invoke-pdb-on-a-specific-rank-in-multi-node-training" class="level2">
 <h2 class="anchored" data-anchor-id="invoke-pdb-on-a-specific-rank-in-multi-node-training">Invoke pdb on a specific rank in multi-node training</h2>
 <p>Once pytorch 2.2 is released you will have a new handy debug feature:</p>
-<pre><code>import torch.distributed as dist
-[...]
-
-def mycode(...):
-
-   dist.breakpoint(0)
-</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.distributed <span class="im">as</span> dist</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>[...]</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mycode(...):</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>   dist.<span class="bu">breakpoint</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is the same as <code>ForkedPdb</code> (below) but will automatically break for you on the rank of your choice - rank0 in the example above. Just make sure to call <code>up;;n</code> right away when the breakpoint hits to get into your normal code.</p>
 <p>Here is what it does underneath:</p>
-<pre><code>import sys
-import pdb
-
-class ForkedPdb(pdb.Pdb):
-    """
-    PDB Subclass for debugging multi-processed code
-    Suggested in: https://stackoverflow.com/questions/4716533/how-to-attach-debugger-to-a-python-subproccess
-    """
-    def interaction(self, *args, **kwargs):
-        _stdin = sys.stdin
-        try:
-            sys.stdin = open('/dev/stdin')
-            pdb.Pdb.interaction(self, *args, **kwargs)
-        finally:
-            sys.stdin = _stdin
-
-
-def mycode():
-
-    if dist.get_rank() == 0:
-        ForkedPdb().set_trace()
-    dist.barrier()
-</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pdb</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ForkedPdb(pdb.Pdb):</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co">    PDB Subclass for debugging multi-processed code</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Suggested in: https://stackoverflow.com/questions/4716533/how-to-attach-debugger-to-a-python-subproccess</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> interaction(<span class="va">self</span>, <span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>        _stdin <span class="op">=</span> sys.stdin</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>            sys.stdin <span class="op">=</span> <span class="bu">open</span>(<span class="st">'/dev/stdin'</span>)</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>            pdb.Pdb.interaction(<span class="va">self</span>, <span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">finally</span>:</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>            sys.stdin <span class="op">=</span> _stdin</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mycode():</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dist.get_rank() <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>        ForkedPdb().set_trace()</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>    dist.barrier()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>so you can code it yourself as well.</p>
 <p>And you can use that <code>ForkedPdb</code> code for normal forked applications, minus the <code>dist</code> calls.</p>
 </section>
@@ -1002,26 +1032,26 @@ def mycode():
 <h2 class="anchored" data-anchor-id="floating-point-math-discrepancies-on-different-devices">Floating point math discrepancies on different devices</h2>
 <p>It’s important to understand that depending on which device the floating point math is performed on the outcomes can be different. For example doing the same floating point operation on a CPU and a GPU may lead to different outcomes, similarly when using 2 different GPU architectures, and even more so if these are 2 different types of accelerators (e.g.&nbsp;NVIDIA vs.&nbsp;AMD GPUs).</p>
 <p>Here is an example of discrepancies I was able to get doing the same simple floating point math on an 11 Gen Intel i7 CPU and an NVIDIA A100 80GB (PCIe) GPU:</p>
-<pre><code>import torch
-
-def do_math(device):
-    inv_freq = (10 ** (torch.arange(0, 10, device=device) / 10))
-    print(f"{inv_freq[9]:.20f}")
-    return inv_freq.cpu()
-
-a = do_math(torch.device("cpu"))
-b = do_math(torch.device("cuda"))
-
-torch.testing.assert_close(a, b, rtol=0.0, atol=0.0)</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> do_math(device):</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    inv_freq <span class="op">=</span> (<span class="dv">10</span> <span class="op">**</span> (torch.arange(<span class="dv">0</span>, <span class="dv">10</span>, device<span class="op">=</span>device) <span class="op">/</span> <span class="dv">10</span>))</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>inv_freq[<span class="dv">9</span>]<span class="sc">:.20f}</span><span class="ss">"</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> inv_freq.cpu()</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> do_math(torch.device(<span class="st">"cpu"</span>))</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> do_math(torch.device(<span class="st">"cuda"</span>))</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>torch.testing.assert_close(a, b, rtol<span class="op">=</span><span class="fl">0.0</span>, atol<span class="op">=</span><span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>when we run it we get 2 out of 10 elements mismatch:</p>
-<pre><code>7.94328212738037109375
-7.94328308105468750000
-[...]
-AssertionError: Tensor-likes are not equal!
-
-Mismatched elements: 2 / 10 (20.0%)
-Greatest absolute difference: 9.5367431640625e-07 at index (9,)
-Greatest relative difference: 1.200604771156577e-07 at index (9,)</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">7.94328212738037109375</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="ex">7.94328308105468750000</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="ex">AssertionError:</span> Tensor-likes are not equal!</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Mismatched</span> elements: 2 / 10 <span class="er">(</span><span class="ex">20.0%</span><span class="kw">)</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Greatest</span> absolute difference: 9.5367431640625e-07 at index <span class="er">(</span><span class="ex">9,</span><span class="kw">)</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Greatest</span> relative difference: 1.200604771156577e-07 at index <span class="er">(</span><span class="ex">9,</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This was a simple low-dimensional example, but in reality the tensors are much bigger and will typically end up having more mismatches.</p>
 <p>Now you might say that the <code>1e-6</code> discrepancy can be safely ignored. And it’s often so as long as this is a final result. If this tensor from the example above is now fed through a 100 layers of <code>matmul</code>s, this tiny discrepancy is going to compound and spread out to impact many other elements with the final outcome being quite different from the same action performed on another type of device.</p>
 <p>For example, see this <a href="https://github.com/microsoft/DeepSpeed/issues/4932">discussion</a> - the users reported that when doing Llama-2-7b inference they were getting quite different logits depending on how the model was initialized. To clarify the initial discussion was about Deepspeed potentially being the problem, but in later comments you can see that it was reduced to just which device the model’s buffers were initialized on. The trained weights aren’t an issue they are loaded from the checkpoint, but the buffers are recreated from scratch when the model is loaded, so that’s where the problem emerges.</p>
@@ -1029,15 +1059,15 @@ Greatest relative difference: 1.200604771156577e-07 at index (9,)</code></pre>
 <p><img src="images/math-fp-discrepancy-outcome-lizard.png" class="img-fluid"></p>
 <p>This snapshot and the commentary come from this <a href="https://github.com/pytorch/pytorch/issues/84936#issuecomment-1246084645">PyTorch Issue thread</a>.</p>
 <p>If you’re curious where I pulled this code from - this is a simplified reduction of this original code in <a href="https://github.com/huggingface/transformers/blob/3f69f415adcbdaedec154ba8eac220ef3276975d/src/transformers/models/llama/modeling_llama.py#L130">modeling_llama.py</a>:</p>
-<pre><code>class LlamaRotaryEmbedding(nn.Module):
-    def __init__(self, dim, max_position_embeddings=2048, base=10000, device=None):
-        super().__init__()
-
-        self.dim = dim
-        self.max_position_embeddings = max_position_embeddings
-        self.base = base
-        inv_freq = 1.0 / (self.base ** (torch.arange(0, self.dim, 2).float().to(device) / self.dim))
-        self.register_buffer("inv_freq", inv_freq, persistent=False)</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LlamaRotaryEmbedding(nn.Module):</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, dim, max_position_embeddings<span class="op">=</span><span class="dv">2048</span>, base<span class="op">=</span><span class="dv">10000</span>, device<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.dim <span class="op">=</span> dim</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.max_position_embeddings <span class="op">=</span> max_position_embeddings</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.base <span class="op">=</span> base</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>        inv_freq <span class="op">=</span> <span class="fl">1.0</span> <span class="op">/</span> (<span class="va">self</span>.base <span class="op">**</span> (torch.arange(<span class="dv">0</span>, <span class="va">self</span>.dim, <span class="dv">2</span>).<span class="bu">float</span>().to(device) <span class="op">/</span> <span class="va">self</span>.dim))</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.register_buffer(<span class="st">"inv_freq"</span>, inv_freq, persistent<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -1652,64 +1682,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, Sam Foreman</p>
+<p><a href="https://saforem2.github.io/ml-engineering">ML-Engineering</a></p>
 </div>   
     <div class="nav-footer-center">
-      <ul class="footer-items list-unstyled">
-    <li class="nav-item">
-    <a class="nav-link" href="https://samforeman.me">
-<p><span style="font-size: 1.25em;"><i class="fa-solid fa-home" aria-label="home"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://github.com/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-github" aria-label="github"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://twitter.com/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-twitter" aria-label="twitter"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="mailto:///foremans@anl.gov">
-<p><span style="font-size: 1.25em;"><i class="fa-regular fa-paper-plane" aria-label="paper-plane"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=vV_1zDwAAAAJ&amp;hl=en">
-<p><span style="font-size: 1.25em;"><i class="ai  ai-google-scholar"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://orcid.org/0000-0002-9981-0876">
-<p><span style="font-size: 1.25em;"><i class="ai  ai-orcid"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://www.last.fm/user/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-lastfm" aria-label="lastfm"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://open.spotify.com/user/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-spotify" aria-label="spotify"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://www.instagram.com/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-instagram" aria-label="instagram"></i></span></p>
-</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://linkedin.com/in/saforem2">
-<p><span style="font-size: 1.25em;"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></span></p>
-</a>
-  </li>  
-</ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<p>2024</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/debug/pytorch.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p><a href="https://samforeman.me">samforeman.me</a></p>
+<p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
 </div>
   </div>
 </footer>

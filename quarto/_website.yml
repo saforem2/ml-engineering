@@ -1,77 +1,9 @@
 website:
-#   - title: "Tutorials"
-#   style: "docked"
-#   background: light
-#   contents:
-#     - tutorials.qmd
-#     - tutorial-1.qmd
-#     - tutorial-2.qmd
-#
-# - title: "How-To"
-#   contents:
-#     - howto.qmd
-#     # navigation items
-#
-# - title: "Fundamentals"
-#   contents:
-#     - fundamentals.qmd
-#     # navigation items
-#
-  # sidebar:
-  #   - title: "Compute"
-  #     style: "docked"
-  #     contents: "qmd/compute/**/*.qmd"
-  #
-  #   - title: "Debug"
-  #     style: "docked"
-  #     contents: "qmd/debug/**/*.qmd"
-  #
-  #   - title: "Insights"
-  #     style: "docked"
-  #     contents: "qmd/insights/**/*.qmd"
-  #
-  #   - title: "Network"
-  #     style: "docked"
-  #     contents: "qmd/network/**/*.qmd"
-  #
-  #   - title: "Storage"
-  #     style: "docked"
-  #     contents: "qmd/storage/**/*.qmd"
-  #
-  #   - title: "Training"
-  #     style: "docked"
-  #     contents: "qmd/training/**/*.qmd"
-  #
-  #   - title: "Transformers"
-  #     style: "docked"
-  #     contents: "qmd/transformers/README.qmd"
   sidebar:
     search: true
     collapse-level: 1
     contents:
       - auto: "qmd/**/*.qmd"
-    # contents:
-    #   - section: "Compute"
-    #     contents:
-    #       - "qmd/compute/**/"*.qmd"
-    # - title: "Compute"
-    #   # style: "floating"
-    #   contents:
-    #     - "qmd/compute/README.qmd"
-    #     - "qmd/compute/accelerator/README.qmd"
-    #     - "qmd/compute/accelerator/nvidia/debug.qmd"
-    #     - "qmd/compute/cpu/README.qmd"
-    #     - "qmd/compute/cpu-memory/README.qmd"
-    #
-    # - title: "Debug"
-    #   # style: "floating"
-    # # collapse-level: 3
-    # # contents: "*.qmd"
-    #   contents:
-    #     - auto: "*.qmd"
-    #   # - "qmd/**/*.qmd"
-    # # contents: "auto"
-
   title: "ML Engineering"
   page-navigation: true
   favicon: "./favicon.svg"
@@ -83,13 +15,13 @@ website:
   description: "My ramblings about science and computers"
   open-graph:
     title: "Sam Foreman"
-    description: "My ramblings about science and computers"
+    description: "Machine Learning Engineering Open Book"
     image: "https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true"
   twitter-card:
     site: "@saforem2"
     creator: "@saforem2"
     title: "Sam Foreman"
-    description: "My ramblings about science and computers"
+    description: "Machine Learning Engineering Open Book"
     image: "https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true"
   navbar:
     # title: false
@@ -105,15 +37,6 @@ website:
             url: https://github.com/saforem2/ml-engineering/blob/main/index.qmd
           - text: New Issue
             url: https://github.com/saforem2/ml-engineering/issues/new/choose
-    # left:
-    #   - href: "../qmd/debug/README.qmd"
-    #     text: "[{{< iconify line-md pencil >}}]{.red-text style='font-size: 1.0em;'} Debug"
-    #   - href: "./qmd/slides.qmd"
-    #     text: "[{{< iconify line-md image >}}]{.green-text style='font-size: 1.0em;'} Talks"
-    #   - href: "./qmd/projects.qmd"
-    #     text: "[{{< iconify line-md computer >}}]{.blue-text style='font-size:1.0em;'} Projects"
-    #   - href: "./qmd/ezpz/ezpz.qmd"
-    #     text: "[{{< iconify ph sparkle >}}]{.yellow-text style='font-size:1.0em;'} Startup Times"
     right:
       - href: https://twitter.com/saforem2
         text: "[{{< iconify line-md twitter >}}]{style='font-size: 1.15em;'}"
@@ -128,40 +51,6 @@ website:
             url: https://github.com/saforem2/ml-engineering/issues/new/choose
 
   page-footer:
-    left: "Copyright 2023, Sam Foreman" 
-    right: "[samforeman.me](https://samforeman.me)"
-    center:
-      - href: https://samforeman.me
-        text: "[{{< fa solid home >}}]{style='font-size: 1.25em;'}"
-
-      # - icon: github
-      - href: https://github.com/saforem2
-        text: "[{{< fa brands github >}}]{style='font-size: 1.25em;'}"
-
-      # - icon: twitter
-      - href: https://twitter.com/saforem2
-        text: "[{{< fa brands twitter >}}]{style='font-size: 1.25em;'}"
-
-      - href: "mailto:///foremans@anl.gov"
-        text: "[{{< fa regular paper-plane >}}]{style='font-size: 1.25em;'}"
-
-      # - href: https://www.twitter.com/saforem2
-      #   text: "[{{< fa brands twitter >}}]{style='font-size: 1.25em;'}"
-
-      - href: https://scholar.google.com/citations?user=vV_1zDwAAAAJ&hl=en
-        text: "[{{< ai google-scholar >}}]{style='font-size: 1.25em;'}"
-
-      - href: https://orcid.org/0000-0002-9981-0876
-        text: "[{{< ai orcid >}}]{style='font-size: 1.25em;'}"
-
-      - href: https://www.last.fm/user/saforem2
-        text: "[{{< fa brands lastfm >}}]{style='font-size: 1.25em;'}"
-
-      - href: https://open.spotify.com/user/saforem2
-        text: "[{{< fa brands spotify >}}]{style='font-size: 1.25em;'}"
-
-      - href: https://www.instagram.com/saforem2
-        text: "[{{< fa brands instagram >}}]{style='font-size: 1.25em;'}"
-
-      - href: https://linkedin.com/in/saforem2
-        text: "[{{< fa brands linkedin >}}]{style='font-size: 1.25em;'}"
+    left: "[ML-Engineering](https://saforem2.github.io/ml-engineering)"
+    center: "2024"
+    right: "[{{< fa brands github >}}](https://github.com/saforem2/ml-engineering)"

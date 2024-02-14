@@ -1,24 +1,40 @@
 ---
 title: Machine Learning Engineering Open Book
-# citation:
-#    author: Sam Foreman
-#    type: webpage
-#    title: "ML Engineering"
-#    url: https://samforeman.me
-author: ""
-date: ""
+citation:
+ type: webpage
+ title: "ML Engineering"
+ url: https://saforem2.github.io/ml-engineering
+ author:
+    - name: Stas Bekman
+    - name: Sam Foreman
+      # url: "https://stasosphere.com/machine-learning/"
+    #   url: "https://samforeman.me"
+    #   email: foremans@anl.gov
+date: last-modified
 # title: "[Sam Foreman]{.invisible-text style='display: none;'}"
 author-title: ""
 affiliation-title: ""
 published-title: ""
 modified-title: ""
 site-url: https://saforem2.github.io/ml-engineering
+# format:
 format:
   html: default
+   # include-in-header:
+   #   - text: |
+   #       \usepackage{eplain}
+   #       \usepackage{easy-todo}
+   #   - file: packages.tex
+   #   - macros.tex
+  # pdf:
+  #  - output-file: "ml-engineering-book.pdf"
 editor:
    render-on-save: true
 execute:
    freeze: true
+author: 
+  - name: "Stas Bekman"
+    url: "https://stasosphere.com/machine-learning/"
 ---
 
 This is an open collection of methodologies, tools and step by step instructions to help with successful training of large language models and multi-modal models.
@@ -87,18 +103,14 @@ Thanks to HuggingFace for giving me permission to host my book's PDF at the [HF 
 
 Things that you are likely to need to find quickly and often.
 
-Tools:
-
-- [all_reduce_bench.py](./qmd/network/benchmarks/all_reduce_bench.py) - a much easier way to benchmark network throughput than nccl-tests.
-- [torch-distributed-gpu-test.py](./qmd/debug/torch-distributed-gpu-test.py) - a tool to quickly test your inter-node connectivity
-
-Guides:
-
-- [debugging pytorch applications](./qmd/debug/pytorch.qmd) - quick copy-n-paste solutions to resolve hanging or breaking pytorch applications
-- [slurm for users](./qmd/orchestration/slurm/users.qmd) - a slurm cheatsheet and tricks
-- [make tiny models/datasets/tokenizers](./qmd/debug/make-tiny-models-tokenizers-datasets.qmd)
-- [LLM/VLM chronicles collection](./qmd/resources/index.qmd#publicly-available-training-llmvlm-logbooks)
-
+- 🛠️ Tools:
+  - [all_reduce_bench.py](./qmd/network/benchmarks/all_reduce_bench.py) - a much easier way to benchmark network throughput than nccl-tests.
+  - [torch-distributed-gpu-test.py](./qmd/debug/torch-distributed-gpu-test.py) - a tool to quickly test your inter-node connectivity
+- 📜 Guides:
+  - [debugging pytorch applications](./qmd/debug/pytorch.qmd) - quick copy-n-paste solutions to resolve hanging or breaking pytorch applications
+  - [slurm for users](./qmd/orchestration/slurm/users.qmd) - a slurm cheatsheet and tricks
+  - [make tiny models/datasets/tokenizers](./qmd/debug/make-tiny-models-tokenizers-datasets.qmd)
+  - [LLM/VLM chronicles collection](./qmd/resources/index.qmd#publicly-available-training-llmvlm-logbooks)
 
 ## Gratitude
 

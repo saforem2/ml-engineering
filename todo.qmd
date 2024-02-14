@@ -1,0 +1,18 @@
+# TODO
+
+- Done:
+  - [x] 📂 `compute/`
+  - [x] 📂 `debug/`
+  - [x] 📂 `images/`
+  - [x] 📂 `insights/`
+  - [x] 📂 `network/`
+
+- To Do:
+  - [ ] 📂 `orchestration/`
+  - [ ] 📂 `performance/`
+  - [ ] 📂 `resources/`
+  - [ ] 📂 `storage/`
+  - [ ] 📂 `testing/`
+  - [ ] 📂 `training/`
+  - [ ] 📂 `transformers/`
+

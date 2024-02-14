@@ -18,31 +18,31 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/underflow_overflow.html</loc>
-    <lastmod>2024-02-13T20:40:36.514Z</lastmod>
+    <lastmod>2024-02-14T02:12:52.050Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/tools.html</loc>
-    <lastmod>2024-02-13T20:40:36.514Z</lastmod>
+    <lastmod>2024-02-14T02:09:00.123Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/nccl-performance-debug.html</loc>
-    <lastmod>2024-02-13T20:40:36.512Z</lastmod>
+    <lastmod>2024-02-14T02:05:27.012Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/compute/accelerator/nvidia/debug.html</loc>
-    <lastmod>2024-02-13T21:46:31.575Z</lastmod>
+    <lastmod>2024-02-14T02:03:52.211Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/make-tiny-models-tokenizers-datasets.html</loc>
-    <lastmod>2024-02-13T20:40:36.512Z</lastmod>
+    <lastmod>2024-02-14T02:12:54.171Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/pytorch.html</loc>
-    <lastmod>2024-02-13T20:40:36.512Z</lastmod>
+    <lastmod>2024-02-14T02:07:41.283Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/torch-distributed-hanging-solutions.html</loc>
-    <lastmod>2024-02-13T20:40:36.514Z</lastmod>
+    <lastmod>2024-02-14T02:12:24.480Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/insights/ai-battlefield.html</loc>
@@ -62,19 +62,19 @@
   </url>
   <url>
     <loc>https://samforeman.me/index.html</loc>
-    <lastmod>2024-02-13T22:24:23.048Z</lastmod>
+    <lastmod>2024-02-14T02:42:50.987Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/orchestration/slurm/users.html</loc>
-    <lastmod>2024-02-13T20:40:36.561Z</lastmod>
+    <lastmod>2024-02-14T02:58:40.934Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/orchestration/slurm/admin.html</loc>
-    <lastmod>2024-02-13T20:40:36.560Z</lastmod>
+    <lastmod>2024-02-14T02:51:50.203Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/orchestration/slurm/performance.html</loc>
-    <lastmod>2024-02-13T20:40:36.561Z</lastmod>
+    <lastmod>2024-02-14T02:53:50.132Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/transformers/index.html</loc>
@@ -106,15 +106,15 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/network/index.html</loc>
-    <lastmod>2024-02-13T22:08:03.749Z</lastmod>
+    <lastmod>2024-02-14T02:21:51.259Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/network/benchmarks/index.html</loc>
-    <lastmod>2024-02-13T20:40:36.533Z</lastmod>
+    <lastmod>2024-02-14T02:20:44.963Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/index.html</loc>
-    <lastmod>2024-02-13T22:06:50.385Z</lastmod>
+    <lastmod>2024-02-13T23:57:39.514Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/compute/cpu/index.html</loc>
@@ -175,5 +175,9 @@
   <url>
     <loc>https://samforeman.me/qmd/insights/index.html</loc>
     <lastmod>2024-02-13T22:10:38.795Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samforeman.me/todo.html</loc>
+    <lastmod>2024-02-14T02:26:31.579Z</lastmod>
   </url>
 </urlset>

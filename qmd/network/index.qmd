@@ -61,7 +61,7 @@ Let's start with a much smaller model of say 2B params, to train it you'd need a
 
 We then assume for the moment that the DataLoader is fast enough to be negligible in duration compared to the compute time. And thus we get a close to a perfect MFU (Model FLOPs Utilization):
 
-```
+```bash
 [DL][  compute  ][DL][  compute  ][DL][  compute  ]
 ---------------------------------------------------> time
 |<--iteration-->||<--iteration-->||<--iteration-->|
@@ -100,7 +100,7 @@ which is incredibly fast!
 
 And here is how our timeline will look like:
 
-```
+```bash
 [DL][  compute ][comms][DL][  compute ][comms][DL][  compute ][comms]|
 -----------------------------------------------------------------------> time
 |<---- iteration ---->||<---- iteration ---->||<---- iteration ----->|
@@ -113,7 +113,7 @@ oh and this whole synchronization protocol is called DDP ([DistributedDataParall
 Even with this really fast comms the network still creates a bottleneck and leads to a short idling of the gpus. To solve this issue the advanced algorithms implement an overlap of comms and compute. Until now we approached the problem as one single transmission, but in reality each model is made of many layers and each layer can transmit the gradients it has computed, while the next layer is computing its gradients. So if you look at the level of the model, what happens in the `backward` path is:
 
 
-```
+```bash
 [   compute   ][   compute   ][   compute   ]
                [comms]        [comms]        [comms]
 ---------------------------------------------> time
@@ -126,7 +126,7 @@ So now you understand how overlapping works, So we can now update our bigger pic
 
 Now our timing diagram becomes very similar to the diagram we had for a single gpu:
 
-```
+```bash
 [DL][  compute  ][DL][  compute  ][DL][  compute  ]
 [  comms ]       [  comms]        [  comms]
 ---------------------------------------------------> time
@@ -135,7 +135,7 @@ Now our timing diagram becomes very similar to the diagram we had for a single g
 
 and we hope that comms are faster than DL+compute, since if they aren't faster than we have the following gpu idling gaps:
 
-```
+```bash
 [DL][  compute  ][idle][DL][  compute  ][idle][DL][  compute  ][idle]
 [         comms       ][         comms       ][         comms       ]
 ----------------------------------------------------------------------> time
@@ -160,7 +160,8 @@ Also see the [wiki page](https://en.wikipedia.org/wiki/FLOPS) for more clarifica
 For GPT-family of decoder transformers models we can use the math described in this [BLOOM-176 docs](https://github.com/bigscience-workshop/bigscience/tree/master/math#calculate-tflops):
 
 Here is how many TFLOP are processed per second:
-```
+
+```bash
 tflops = model_size_in_B * 4 * 2 * seqlen * global_batch_size / (time_in_sec_per_interation * total_gpus * 1e3)
 ```
 
@@ -170,7 +171,7 @@ footnote: activation recomputation and gradient checkpointing both refer to the 
 
 so let's remove the time component, which will give us the total TFLOP
 
-```
+```bash
 tflop = model_size_in_B * 4 * 2 * seqlen * global_batch_size / (total_gpus * 1e3)
 ```
 
@@ -184,7 +185,7 @@ and we already defined:
 
 This gives us:
 
-```
+```bash
 tflops = 2 * 4 * 2 * 2048 * 16 / (8 * 1e3) = 65.536 TFLOP
 ```
 
@@ -317,7 +318,7 @@ Let's look at several examples of nodes and correlate the theory with reality.
 
 If you use multiple GPUs the way cards are inter-connected can have a huge impact on the total training time. If the GPUs are on the same physical node, you can run:
 
-```
+```bash
 nvidia-smi topo -m
 ```
 
@@ -325,14 +326,15 @@ and it will tell you how the GPUs are inter-connected.
 
 On a machine with dual-GPU and which are connected with NVLink, you will most likely see something like:
 
-```
+```bash
         GPU0    GPU1    CPU Affinity    NUMA Affinity
 GPU0     X      NV2     0-23            N/A
 GPU1    NV2      X      0-23            N/A
 ```
 
 on a different machine w/o NVLink you may see:
-```
+
+```bash
         GPU0    GPU1    CPU Affinity    NUMA Affinity
 GPU0     X      PHB     0-11            N/A
 GPU1    PHB      X      0-11            N/A
@@ -340,7 +342,7 @@ GPU1    PHB      X      0-11            N/A
 
 The report includes this legend:
 
-```
+```bash
   X    = Self
   SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
   NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
@@ -361,7 +363,7 @@ Now, let's look at the topology of the A100 and H100 nodes:
 
 - A100 topology:
 
-```
+```bash
 $ nvidia-smi topo -m
       GPU0  GPU1  GPU2  GPU3  GPU4  GPU5  GPU6  GPU7  CPU Affinity  NUMA Affinity
 GPU0   X    NV12  NV12  NV12  NV12  NV12  NV12  NV12   0-23         0
@@ -376,7 +378,8 @@ GPU7  NV12  NV12  NV12  NV12  NV12  NV12  NV12   X    24-47         1
 You can see there are 12 NVLinks and 2 NUMA Groups (2 CPUs w/ 24 cores each)
 
 - H100 topology:
-```
+
+```bash
 $ nvidia-smi topo -m
       GPU0  GPU1  GPU2  GPU3  GPU4  GPU5  GPU6  GPU7  CPU Affinity  NUMA Affinity
 GPU0   X    NV18  NV18  NV18  NV18  NV18  NV18  NV18   0-51         0
@@ -388,6 +391,7 @@ GPU5  NV18  NV18  NV18  NV18  NV18   X    NV18  NV18  52-103        1
 GPU6  NV18  NV18  NV18  NV18  NV18  NV18   X    NV18  52-103        1
 GPU7  NV18  NV18  NV18  NV18  NV18  NV18  NV18   X    52-103        1
 ```
+
 You can see there are 18 NVLinks and 2 NUMA Groups (2 CPUs w/ 52 cores each)
 
 Of course, other A100 and H100s node reports may vary, e.g. different number of cpu cores.
@@ -461,14 +465,16 @@ https://github.com/open-mpi/hwloc
 The Hardware Locality (hwloc) software project aims at easing the process of discovering hardware resources in parallel architectures. It offers command-line tools and a C API for consulting these resources, their locality, attributes, and interconnection. hwloc primarily aims at helping high-performance computing (HPC) applications, but is also applicable to any project seeking to exploit code and/or data locality on modern computing platforms.
 
 Diagnostics: to take a snapshot of the server NUMA topology and save it as an image (supports many other formats)
-```
+
+```bash
 lstopo a100.png
 ```
 
 NUMA node binding: `hwloc-bind` - binding processes, threads and memory
 
 Bind an existing process to a specific NUMA node:
-```
+
+```bash
 hwloc-bind --pid 1234 numa:0
 ```
 
@@ -559,7 +565,8 @@ The network throughput in the advertised spec and the actual throughput will nev
 Then the network throughput will depend on the size of payload being sent during each communication. The higher the payload the higher the throughput will be.
 
 Let's demonstrate this using [nccl-tests](https://github.com/NVIDIA/nccl-tests) on a single A100 node
-```
+
+```bash
 $ ./build/all_reduce_perf -b 32k -e 16G -f 2 -g 8 -n 50
 [...]
            size    time   algbw   busbw
@@ -594,7 +601,7 @@ As you can see for payloads smaller than 8MB the throughput is very low - and it
 
 Here is a benchmark that demonstrates that: [all_reduce_latency_comp.py](benchmarks/all_reduce_latency_comp.py). Let's run it on the same A100 node:
 
-```
+```bash
 $ python -u -m torch.distributed.run --nproc_per_node=8 all_reduce_latency_comp.py
 
 ----------- 1x 4.0GB ----------------
@@ -615,7 +622,7 @@ uni-directional 300GBs so we get about 78% of the theoretical speed with 17GB pa
 
 We can also run [p2pBandwidthLatencyTest](https://github.com/NVIDIA/cuda-samples/tree/master/Samples/5_Domain_Specific/p2pBandwidthLatencyTest) which performs a low-level p2p benchmark:
 
-```
+```bash
 ./p2pBandwidthLatencyTest
 [...]
 Unidirectional P2P=Enabled Bandwidth (P2P Writes) Matrix (GB/s)
@@ -635,7 +642,7 @@ As you can see in the Unidirectional section of the report we do get 274 GBps ou
 
 Please note that when I re-run this same test on H100s (NVLink 4.0) I got a much worse efficiency:
 
-```
+```bash
 Unidirectional P2P=Enabled Bandwidth (P2P Writes) Matrix (GB/s)
    D\D     0      1      2      3      4      5      6      7
      0 2494.51 364.13 375.99 378.03 376.77 376.71 374.85 375.66

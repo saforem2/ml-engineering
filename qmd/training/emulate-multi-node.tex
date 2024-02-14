@@ -1,0 +1,498 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{report}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{2024-02-13}
+
+\begin{document}
+
+\chapter{Emulate a multi-node setup using just a single
+node}\label{emulate-a-multi-node-setup-using-just-a-single-node}
+
+The goal is to emulate a 2-node environment using a single node with 2
+GPUs (for testing purposes). This, of course, can be further expanded to
+\hyperref[larger-set-ups]{larger set ups}.
+
+We use the \texttt{deepspeed} launcher here. There is no need to
+actually use any of the deepspeed code, it's just easier to use its more
+advanced capabilities. You will just need to install
+\texttt{pip\ install\ deepspeed}.
+
+The full setup instructions follow:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a \texttt{hostfile}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat hostfile}
+\ExtensionTok{worker{-}0}\NormalTok{ slots=1}
+\ExtensionTok{worker{-}1}\NormalTok{ slots=1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Add a matching config to your ssh client
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat \textasciitilde{}/.ssh/config}
+\ExtensionTok{[...]}
+
+\ExtensionTok{Host}\NormalTok{ worker{-}0}
+    \ExtensionTok{HostName}\NormalTok{ localhost}
+    \ExtensionTok{Port}\NormalTok{ 22}
+\ExtensionTok{Host}\NormalTok{ worker{-}1}
+    \ExtensionTok{HostName}\NormalTok{ localhost}
+    \ExtensionTok{Port}\NormalTok{ 22}
+\end{Highlighting}
+\end{Shaded}
+
+Adapt the port if it's not 22 and the hostname if \texttt{localhost}
+isn't it.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  As your local setup is probably password protected ensure to add your
+  public key to \texttt{\textasciitilde{}/.ssh/authorized\_keys}
+\end{enumerate}
+
+The \texttt{deepspeed} launcher explicitly uses no-password connection,
+e.g.~on worker0 it'd run:
+\texttt{ssh\ -o\ PasswordAuthentication=no\ worker-0\ hostname}, so you
+can always debug ssh setup using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ ssh }\AttributeTok{{-}vvv} \AttributeTok{{-}o}\NormalTok{ PasswordAuthentication=no worker{-}0 hostname}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Create a test script to check both GPUs are used.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat test1.py}
+\ExtensionTok{import}\NormalTok{ os}
+\ExtensionTok{import}\NormalTok{ time}
+\ExtensionTok{import}\NormalTok{ torch}
+\ExtensionTok{import}\NormalTok{ deepspeed}
+\ExtensionTok{import}\NormalTok{ torch.distributed as dist}
+
+\CommentTok{\# critical hack to use the 2nd gpu (otherwise both processes will use gpu0)}
+\ControlFlowTok{if} \ExtensionTok{os.environ[}\StringTok{"RANK"}\ExtensionTok{]}\NormalTok{ == }\StringTok{"1"}\NormalTok{:}
+    \ExtensionTok{os.environ[}\StringTok{"CUDA\_VISIBLE\_DEVICES"}\ExtensionTok{]}\NormalTok{ = }\StringTok{"1"}
+
+\ExtensionTok{dist.init\_process\_group}\ErrorTok{(}\StringTok{"nccl"}\KeywordTok{)}
+\ExtensionTok{local\_rank}\NormalTok{ = int}\ErrorTok{(}\ExtensionTok{os.environ.get}\ErrorTok{(}\StringTok{"LOCAL\_RANK"}\KeywordTok{))}
+\ExtensionTok{print}\ErrorTok{(}\ExtensionTok{f}\StringTok{\textquotesingle{}\{dist.get\_rank()=\}, \{local\_rank=\}\textquotesingle{}}\KeywordTok{)}
+
+\ExtensionTok{x}\NormalTok{ = torch.ones}\ErrorTok{(}\ExtensionTok{2**30,}\NormalTok{ device=f}\StringTok{"cuda:\{local\_rank\}"}\KeywordTok{)}
+\ExtensionTok{time.sleep}\ErrorTok{(}\ExtensionTok{100}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ deepspeed }\AttributeTok{{-}H}\NormalTok{ hostfile test1.py}
+\ExtensionTok{[2022{-}09{-}08}\NormalTok{ 12:02:15,192] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{runner.py:415:main}\PreprocessorTok{]}\NormalTok{ Using IP address of 192.168.0.17 for node worker{-}0}
+\ExtensionTok{[2022{-}09{-}08}\NormalTok{ 12:02:15,192] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{multinode\_runner.py:65:get\_cmd}\PreprocessorTok{]}\NormalTok{ Running on the following workers: worker{-}0,worker{-}1}
+\ExtensionTok{[2022{-}09{-}08}\NormalTok{ 12:02:15,192] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{runner.py:504:main}\PreprocessorTok{]}\NormalTok{ cmd = pdsh }\AttributeTok{{-}S} \AttributeTok{{-}f}\NormalTok{ 1024 }\AttributeTok{{-}w}\NormalTok{ worker{-}0,worker{-}1 export PYTHONPATH=/mnt/nvme0/code/huggingface/multi{-}node{-}emulate{-}ds}\KeywordTok{;}  \BuiltInTok{cd}\NormalTok{ /mnt/nvme0/code/huggingface/multi{-}node{-}emulate{-}ds}\KeywordTok{;} \ExtensionTok{/home/stas/anaconda3/envs/py38{-}pt112/bin/python} \AttributeTok{{-}u} \AttributeTok{{-}m}\NormalTok{ deepspeed.launcher.launch }\AttributeTok{{-}{-}world\_info}\OperatorTok{=}\NormalTok{eyJ3b3JrZXItMCI6IFswXSwgIndvcmtlci0xIjogWzBdfQ== }\AttributeTok{{-}{-}node\_rank}\OperatorTok{=}\NormalTok{\%n }\AttributeTok{{-}{-}master\_addr}\OperatorTok{=}\NormalTok{192.168.0.17 }\AttributeTok{{-}{-}master\_port}\OperatorTok{=}\NormalTok{29500 test1.py}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:02:16,517] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:136:main}\PreprocessorTok{]}\NormalTok{ WORLD INFO DICT: \{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{\}}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:02:16,517] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:142:main}\PreprocessorTok{]}\NormalTok{ nnodes=2, num\_local\_procs=1, node\_rank=0}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:02:16,517] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:155:main}\PreprocessorTok{]}\NormalTok{ global\_rank\_mapping=defaultdict}\ErrorTok{(}\OperatorTok{\textless{}}\NormalTok{class }\StringTok{\textquotesingle{}list\textquotesingle{}}\OperatorTok{\textgreater{}}\NormalTok{, }\ExtensionTok{\{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\ExtensionTok{:} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\NormalTok{\}}\KeywordTok{)}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:02:16,517] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:156:main}\PreprocessorTok{]}\NormalTok{ dist\_world\_size=2}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:02:16,517] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:158:main}\PreprocessorTok{]}\NormalTok{ Setting CUDA\_VISIBLE\_DEVICES=0}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:02:16,518] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:136:main}\PreprocessorTok{]}\NormalTok{ WORLD INFO DICT: \{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{\}}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:02:16,518] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:142:main}\PreprocessorTok{]}\NormalTok{ nnodes=2, num\_local\_procs=1, node\_rank=1}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:02:16,518] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:155:main}\PreprocessorTok{]}\NormalTok{ global\_rank\_mapping=defaultdict}\ErrorTok{(}\OperatorTok{\textless{}}\NormalTok{class }\StringTok{\textquotesingle{}list\textquotesingle{}}\OperatorTok{\textgreater{}}\NormalTok{, }\ExtensionTok{\{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\ExtensionTok{:} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\NormalTok{\}}\KeywordTok{)}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:02:16,518] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:156:main}\PreprocessorTok{]}\NormalTok{ dist\_world\_size=2}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:02:16,518] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:158:main}\PreprocessorTok{]}\NormalTok{ Setting CUDA\_VISIBLE\_DEVICES=0}
+\ExtensionTok{worker{-}1:}\NormalTok{ torch.distributed.get\_rank}\ErrorTok{(}\KeywordTok{)}\ExtensionTok{=1,}\NormalTok{ local\_rank=0}
+\ExtensionTok{worker{-}0:}\NormalTok{ torch.distributed.get\_rank}\ErrorTok{(}\KeywordTok{)}\ExtensionTok{=0,}\NormalTok{ local\_rank=0}
+\ExtensionTok{worker{-}1:}\NormalTok{ tensor}\ErrorTok{(}\ExtensionTok{[1.,}\NormalTok{ 1., 1.,  ..., 1., 1., 1.], device=}\StringTok{\textquotesingle{}cuda:0\textquotesingle{}}\KeywordTok{)}
+\ExtensionTok{worker{-}0:}\NormalTok{ tensor}\ErrorTok{(}\ExtensionTok{[1.,}\NormalTok{ 1., 1.,  ..., 1., 1., 1.], device=}\StringTok{\textquotesingle{}cuda:0\textquotesingle{}}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If the ssh set up works you can run \texttt{nvidia-smi} in parallel and
+observe that both GPUs allocated \textasciitilde4GB of memory from
+\texttt{torch.ones} call.
+
+Note that the script hacks in \texttt{CUDA\_VISIBLE\_DEVICES} to tell
+the 2nd process to use gpu1, but it'll be seen as
+\texttt{local\_rank==0} in both cases.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Finally, let's test that NCCL collectives work as well
+\end{enumerate}
+
+Script adapted from
+\href{../debug/torch-distributed-gpu-test.py}{torch-distributed-gpu-test.py}
+to just tweak \texttt{os.environ{[}"CUDA\_VISIBLE\_DEVICES"{]}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat test2.py}
+\ExtensionTok{import}\NormalTok{ deepspeed}
+\ExtensionTok{import}\NormalTok{ fcntl}
+\ExtensionTok{import}\NormalTok{ os}
+\ExtensionTok{import}\NormalTok{ socket}
+\ExtensionTok{import}\NormalTok{ time}
+\ExtensionTok{import}\NormalTok{ torch}
+\ExtensionTok{import}\NormalTok{ torch.distributed as dist}
+
+\CommentTok{\# a critical hack to use the 2nd GPU by the 2nd process (otherwise both processes will use gpu0)}
+\ControlFlowTok{if} \ExtensionTok{os.environ[}\StringTok{"RANK"}\ExtensionTok{]}\NormalTok{ == }\StringTok{"1"}\NormalTok{:}
+    \ExtensionTok{os.environ[}\StringTok{"CUDA\_VISIBLE\_DEVICES"}\ExtensionTok{]}\NormalTok{ = }\StringTok{"1"}
+
+\ExtensionTok{def}\NormalTok{ printflock}\ErrorTok{(}\ExtensionTok{*msgs}\KeywordTok{)}\BuiltInTok{:}
+    \StringTok{""" solves multi{-}process interleaved print problem """}
+    \ExtensionTok{with}\NormalTok{ open}\ErrorTok{(}\ExtensionTok{\_\_file\_\_,} \StringTok{"r"}\KeywordTok{)} \FunctionTok{as}\NormalTok{ fh:}
+        \ExtensionTok{fcntl.flock}\ErrorTok{(}\ExtensionTok{fh,}\NormalTok{ fcntl.LOCK\_EX}\KeywordTok{)}
+        \ExtensionTok{try:}
+            \ExtensionTok{print}\ErrorTok{(}\ExtensionTok{*msgs}\KeywordTok{)}
+        \ExtensionTok{finally:}
+            \ExtensionTok{fcntl.flock}\ErrorTok{(}\ExtensionTok{fh,}\NormalTok{ fcntl.LOCK\_UN}\KeywordTok{)}
+
+\ExtensionTok{local\_rank}\NormalTok{ = int}\ErrorTok{(}\ExtensionTok{os.environ[}\StringTok{"LOCAL\_RANK"}\ExtensionTok{]}\KeywordTok{)}
+\ExtensionTok{torch.cuda.set\_device}\ErrorTok{(}\ExtensionTok{local\_rank}\KeywordTok{)}
+\ExtensionTok{device}\NormalTok{ = torch.device}\ErrorTok{(}\StringTok{"cuda"}\ExtensionTok{,}\NormalTok{ local\_rank}\KeywordTok{)}
+\FunctionTok{hostname}\NormalTok{ = socket.gethostname}\ErrorTok{(}\KeywordTok{)}
+
+\ExtensionTok{gpu}\NormalTok{ = f}\StringTok{"[\{hostname\}{-}\{local\_rank\}]"}
+
+\ExtensionTok{try:}
+    \CommentTok{\# test distributed}
+    \ExtensionTok{dist.init\_process\_group}\ErrorTok{(}\StringTok{"nccl"}\KeywordTok{)}
+    \ExtensionTok{dist.all\_reduce}\ErrorTok{(}\ExtensionTok{torch.ones}\ErrorTok{(}\ExtensionTok{1}\KeywordTok{)}\ExtensionTok{.to}\ErrorTok{(}\ExtensionTok{device}\KeywordTok{)}\ExtensionTok{,}\NormalTok{ op=dist.ReduceOp.SUM}\KeywordTok{)}
+    \FunctionTok{dist.barrier()}
+    \ExtensionTok{print}\ErrorTok{(}\ExtensionTok{f}\StringTok{\textquotesingle{}\{dist.get\_rank()=\}, \{local\_rank=\}\textquotesingle{}}\KeywordTok{)}
+
+    \CommentTok{\# test cuda is available and can allocate memory}
+    \FunctionTok{torch.cuda.is\_available()}
+    \ExtensionTok{torch.ones}\ErrorTok{(}\ExtensionTok{1}\KeywordTok{)}\ExtensionTok{.cuda}\ErrorTok{(}\ExtensionTok{local\_rank}\KeywordTok{)}
+
+    \CommentTok{\# global rank}
+    \ExtensionTok{rank}\NormalTok{ = dist.get\_rank}\ErrorTok{(}\KeywordTok{)}
+    \ExtensionTok{world\_size}\NormalTok{ = dist.get\_world\_size}\ErrorTok{(}\KeywordTok{)}
+
+    \ExtensionTok{printflock}\ErrorTok{(}\ExtensionTok{f}\StringTok{"\{gpu\} is OK (global rank: \{rank\}/\{world\_size\})"}\KeywordTok{)}
+
+    \FunctionTok{dist.barrier()}
+    \ControlFlowTok{if} \ExtensionTok{rank}\NormalTok{ == 0:}
+        \ExtensionTok{printflock}\ErrorTok{(}\ExtensionTok{f}\StringTok{"pt=\{torch.\_\_version\_\_\}, cuda=\{torch.version.cuda\}, nccl=\{torch.cuda.nccl.version()\}"}\KeywordTok{)}
+        \ExtensionTok{printflock}\ErrorTok{(}\ExtensionTok{f}\StringTok{"device compute capabilities=\{torch.cuda.get\_device\_capability()\}"}\KeywordTok{)}
+        \ExtensionTok{printflock}\ErrorTok{(}\ExtensionTok{f}\StringTok{"pytorch compute capabilities=\{torch.cuda.get\_arch\_list()\}"}\KeywordTok{)}
+
+\ExtensionTok{except}\NormalTok{ Exception:}
+    \ExtensionTok{printflock}\ErrorTok{(}\ExtensionTok{f}\StringTok{"\{gpu\} is broken"}\KeywordTok{)}
+    \ExtensionTok{raise}
+\end{Highlighting}
+\end{Shaded}
+
+Run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ deepspeed }\AttributeTok{{-}H}\NormalTok{ hostfile test2.py}
+\ExtensionTok{[2022{-}09{-}08}\NormalTok{ 12:07:09,336] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{runner.py:415:main}\PreprocessorTok{]}\NormalTok{ Using IP address of 192.168.0.17 for node worker{-}0}
+\ExtensionTok{[2022{-}09{-}08}\NormalTok{ 12:07:09,337] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{multinode\_runner.py:65:get\_cmd}\PreprocessorTok{]}\NormalTok{ Running on the following workers: worker{-}0,worker{-}1}
+\ExtensionTok{[2022{-}09{-}08}\NormalTok{ 12:07:09,337] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{runner.py:504:main}\PreprocessorTok{]}\NormalTok{ cmd = pdsh }\AttributeTok{{-}S} \AttributeTok{{-}f}\NormalTok{ 1024 }\AttributeTok{{-}w}\NormalTok{ worker{-}0,worker{-}1 export PYTHONPATH=/mnt/nvme0/code/huggingface/multi{-}node{-}emulate{-}ds}\KeywordTok{;}  \BuiltInTok{cd}\NormalTok{ /mnt/nvme0/code/huggingface/multi{-}node{-}emulate{-}ds}\KeywordTok{;} \ExtensionTok{/home/stas/anaconda3/envs/py38{-}pt112/bin/python} \AttributeTok{{-}u} \AttributeTok{{-}m}\NormalTok{ deepspeed.launcher.launch }\AttributeTok{{-}{-}world\_info}\OperatorTok{=}\NormalTok{eyJ3b3JrZXItMCI6IFswXSwgIndvcmtlci0xIjogWzBdfQ== }\AttributeTok{{-}{-}node\_rank}\OperatorTok{=}\NormalTok{\%n }\AttributeTok{{-}{-}master\_addr}\OperatorTok{=}\NormalTok{192.168.0.17 }\AttributeTok{{-}{-}master\_port}\OperatorTok{=}\NormalTok{29500 test2.py}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:136:main}\PreprocessorTok{]}\NormalTok{ WORLD INFO DICT: \{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{\}}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:142:main}\PreprocessorTok{]}\NormalTok{ nnodes=2, num\_local\_procs=1, node\_rank=0}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:155:main}\PreprocessorTok{]}\NormalTok{ global\_rank\_mapping=defaultdict}\ErrorTok{(}\OperatorTok{\textless{}}\NormalTok{class }\StringTok{\textquotesingle{}list\textquotesingle{}}\OperatorTok{\textgreater{}}\NormalTok{, }\ExtensionTok{\{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\ExtensionTok{:} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\NormalTok{\}}\KeywordTok{)}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:156:main}\PreprocessorTok{]}\NormalTok{ dist\_world\_size=2}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:158:main}\PreprocessorTok{]}\NormalTok{ Setting CUDA\_VISIBLE\_DEVICES=0}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:136:main}\PreprocessorTok{]}\NormalTok{ WORLD INFO DICT: \{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{\}}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:142:main}\PreprocessorTok{]}\NormalTok{ nnodes=2, num\_local\_procs=1, node\_rank=1}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:155:main}\PreprocessorTok{]}\NormalTok{ global\_rank\_mapping=defaultdict}\ErrorTok{(}\OperatorTok{\textless{}}\NormalTok{class }\StringTok{\textquotesingle{}list\textquotesingle{}}\OperatorTok{\textgreater{}}\NormalTok{, }\ExtensionTok{\{}\StringTok{\textquotesingle{}worker{-}0\textquotesingle{}}\ExtensionTok{:} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\StringTok{\textquotesingle{}worker{-}1\textquotesingle{}}\NormalTok{: }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\NormalTok{\}}\KeywordTok{)}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:156:main}\PreprocessorTok{]}\NormalTok{ dist\_world\_size=2}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:07:10,635] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:158:main}\PreprocessorTok{]}\NormalTok{ Setting CUDA\_VISIBLE\_DEVICES=0}
+\ExtensionTok{worker{-}0:}\NormalTok{ dist.get\_rank}\ErrorTok{(}\KeywordTok{)}\ExtensionTok{=0,}\NormalTok{ local\_rank=0}
+\ExtensionTok{worker{-}1:}\NormalTok{ dist.get\_rank}\ErrorTok{(}\KeywordTok{)}\ExtensionTok{=1,}\NormalTok{ local\_rank=0}
+\ExtensionTok{worker{-}0:} \PreprocessorTok{[}\SpecialStringTok{hope}\PreprocessorTok{{-}}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ is OK }\ErrorTok{(}\ExtensionTok{global}\NormalTok{ rank: 0/2}\KeywordTok{)}
+\ExtensionTok{worker{-}1:} \PreprocessorTok{[}\SpecialStringTok{hope}\PreprocessorTok{{-}}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ is OK }\ErrorTok{(}\ExtensionTok{global}\NormalTok{ rank: 1/2}\KeywordTok{)}
+\ExtensionTok{worker{-}0:}\NormalTok{ pt=1.12.1+cu116, cuda=11.6, nccl=}\ErrorTok{(}\ExtensionTok{2,}\NormalTok{ 10, 3}\KeywordTok{)}
+\ExtensionTok{worker{-}0:}\NormalTok{ device compute capabilities=}\ErrorTok{(}\ExtensionTok{8,}\NormalTok{ 0}\KeywordTok{)}
+\ExtensionTok{worker{-}0:}\NormalTok{ pytorch compute capabilities=[}\StringTok{\textquotesingle{}sm\_37\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sm\_50\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sm\_60\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sm\_70\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sm\_75\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sm\_80\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sm\_86\textquotesingle{}}\NormalTok{]}
+\ExtensionTok{worker{-}1:}\NormalTok{ [2022{-}09{-}08 12:07:13,642] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:318:main}\PreprocessorTok{]}\NormalTok{ Process 576485 exits successfully.}
+\ExtensionTok{worker{-}0:}\NormalTok{ [2022{-}09{-}08 12:07:13,642] }\PreprocessorTok{[}\SpecialStringTok{INFO}\PreprocessorTok{]} \PreprocessorTok{[}\SpecialStringTok{launch.py:318:main}\PreprocessorTok{]}\NormalTok{ Process 576484 exits successfully.}
+\end{Highlighting}
+\end{Shaded}
+
+Voila, missing accomplished.
+
+We tested that the NCCL collectives work, but they use local NVLink/PCIe
+and not the IB/ETH connections like in real multi-node, so it may or may
+not be good enough for testing depending on what needs to be tested.
+
+\section{Larger set ups}\label{larger-set-ups}
+
+Now, let's say you have 4 GPUs and you want to emulate 2x2 nodes. Then
+simply change the \texttt{hostfile} to be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat hostfile}
+\ExtensionTok{worker{-}0}\NormalTok{ slots=2}
+\ExtensionTok{worker{-}1}\NormalTok{ slots=2}
+\end{Highlighting}
+\end{Shaded}
+
+and the \texttt{CUDA\_VISIBLE\_DEVICES} hack to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if} \ExtensionTok{os.environ[}\StringTok{"RANK"}\ExtensionTok{]}\NormalTok{ in [}\StringTok{"2"}\NormalTok{, }\StringTok{"3"}\NormalTok{]:}
+    \ExtensionTok{os.environ[}\StringTok{"CUDA\_VISIBLE\_DEVICES"}\ExtensionTok{]}\NormalTok{ = }\StringTok{"2,3"}
+\end{Highlighting}
+\end{Shaded}
+
+Everything else should be the same.
+
+\section{Automating the process}\label{automating-the-process}
+
+If you want an automatic approach to handle any shape of topology, you
+could use something like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ set\_cuda\_visible\_devices():}
+    \CommentTok{"""}
+\CommentTok{    automatically assign the correct groups of gpus for each emulated node by tweaking the}
+\CommentTok{    CUDA\_VISIBLE\_DEVICES env var}
+\CommentTok{    """}
+
+\NormalTok{    global\_rank }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(os.environ[}\StringTok{"RANK"}\NormalTok{])}
+\NormalTok{    world\_size }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(os.environ[}\StringTok{"WORLD\_SIZE"}\NormalTok{])}
+\NormalTok{    emulated\_node\_size }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(os.environ[}\StringTok{"LOCAL\_SIZE"}\NormalTok{])}
+\NormalTok{    emulated\_node\_rank }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(global\_rank }\OperatorTok{//}\NormalTok{ emulated\_node\_size)}
+\NormalTok{    gpus }\OperatorTok{=} \BuiltInTok{list}\NormalTok{(}\BuiltInTok{map}\NormalTok{(}\BuiltInTok{str}\NormalTok{, }\BuiltInTok{range}\NormalTok{(world\_size)))}
+\NormalTok{    emulated\_node\_gpus }\OperatorTok{=} \StringTok{","}\NormalTok{.join(gpus[emulated\_node\_rank}\OperatorTok{*}\NormalTok{emulated\_node\_size:(emulated\_node\_rank}\OperatorTok{+}\DecValTok{1}\NormalTok{)}\OperatorTok{*}\NormalTok{emulated\_node\_size])}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Setting CUDA\_VISIBLE\_DEVICES=}\SpecialCharTok{\{}\NormalTok{emulated\_node\_gpus}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\NormalTok{    os.environ[}\StringTok{"CUDA\_VISIBLE\_DEVICES"}\NormalTok{] }\OperatorTok{=}\NormalTok{ emulated\_node\_gpus}
+
+\NormalTok{set\_cuda\_visible\_devices()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Emulating multiple GPUs with a single
+GPU}\label{emulating-multiple-gpus-with-a-single-gpu}
+
+The following is an orthogonal need to the one discussed in this
+document, but it's related so I thought it'd be useful to share some
+insights here:
+
+With NVIDIA A100 you can use
+\href{https://www.nvidia.com/en-us/technologies/multi-instance-gpu/}{MIG}
+to emulate up to 7 instances of GPUs on just one real GPU, but alas you
+can't use those instances for anything but standalone use - e.g.~you
+can't do DDP or any NCCL comms over those GPUs. I hoped I could use my
+A100 to emulate 7 instances and add one more real GPU and to have 8x
+GPUs to do development with - but nope it doesn't work. Asking NVIDIA
+engineers about it, there are no plans to have this use-case supported.
+
+\section{Acknowledgements}\label{acknowledgements}
+
+Many thanks to \href{https://github.com/jeffra/}{Jeff Rasley} for
+helping me to set this up.
+
+
+
+\end{document}

@@ -10,12 +10,13 @@ A normal user who uses a handful of GPUs is likely to never need to understand G
 
 In your system logs you are likely to see occasionally Xid Errors like:
 
-```
+```bash
 NVRM: Xid (PCI:0000:10:1c): 63, pid=1896, Row Remapper: New row marked for remapping, reset gpu to activate.
 ```
 
 To get those logs one of the following ways should work:
-```
+
+```bash
 sudo grep Xid /var/log/syslog
 sudo dmesg -T | grep Xid
 ```
@@ -26,7 +27,7 @@ The full list of Xid Errors and their interpretation can be found [here](https:/
 
 You can run `nvidia-smi -q` and see if there are any error counts reported. For example, in this case of Xid 63, you will see something like:
 
-```
+```bash
 Timestamp                                 : Wed Jun  7 19:32:16 2023
 Driver Version                            : 510.73.08
 CUDA Version                              : 11.6
@@ -66,7 +67,7 @@ GPU 00000000:10:1C.0
 
 Here we can see that Xid 63 corresponds to:
 
-```
+```bash
 ECC page retirement or row remapping recording event
 ```
 
@@ -82,7 +83,7 @@ A correctable error will not impact the application, a non-correctable one will 
 
 If there are page scheduled to be retired you will see something like this in the output of `nvidia-smi -q`:
 
-```
+```bash
     Retired pages
         Single Bit ECC             : 2
         Double Bit ECC             : 0
@@ -104,7 +105,7 @@ At other times you may get Xid 63 or 64 and the application will crash. Which us
 
 As mentioned earlier to reset a GPU you can either simply reboot the machine, or run:
 
-```
+```bash
 nvidia-smi -r -i gpu_id
 ```
 
@@ -118,7 +119,7 @@ NVIDIA® Data Center GPU Manager (DCGM) is documented [here](https://docs.nvidia
 
 Here is an example slurm script that will run very in-depth diagnostics (`-r 3`), which will take about 10 minutes to complete on an 8-GPU node:
 
-```
+```bash
 $ cat dcgmi-1n.slurm
 #!/bin/bash
 #SBATCH --job-name=dcgmi-1n
@@ -136,26 +137,30 @@ echo "END TIME: $(date)"
 ```
 
 Now to run it on specific nodes of choice:
-```
+
+```bash
 sbatch --nodelist=node-115 dcgmi-1n.slurm
 sbatch --nodelist=node-151 dcgmi-1n.slurm
 sbatch --nodelist=node-170 dcgmi-1n.slurm
 ```
+
 edit the nodelist argument to point to the node name to run.
 
 If the node is drained or downed and you can't launch a slurm job using this node, just ssh into the node and run the command directly on the node:
-```
+
+```bash
 dcgmi diag -r 3
 ```
+
 If the diagnostics didn't find any issue, but the application still fails to work, re-run the diagnostics with level 4, which will now take more than 1 hour to complete:
-```
+
+```bash
 dcgmi diag -r 4
 ```
 
-
 For example, if you run into a repeating Xid 64 error it's likely that the diagnostics report will include:
 
-```
+```bash
 +---------------------------+------------------------------------------------+
 | Diagnostic                | Result                                         |
 +===========================+================================================+
@@ -171,15 +176,17 @@ The `dcgmi` tool contains various other levels of diagnostics, some of which com
 When filing an RMA report you will be asked to run `nvidia-bug-report` script, the output of which you will need to submit with the RMA request.
 
 I usually save the log as well for posterity using one of:
-```
+
+```bash
 dcgmi diag -r 3 | tee -a dcgmi-r3-`hostname`.txt
 dcgmi diag -r 4 | tee -a dcgmi-r4-`hostname`.txt
 ```
+
 ## How to detect if a node is missing GPUs
 
 If you got a new VM, there are odd cases where there is less than expected number of GPUs. Here is how you can quickly test you have got 8 of them:
 
-```
+```bash
 cat << 'EOT' >> test-gpu-count.sh
 #!/bin/bash
 
@@ -189,9 +196,10 @@ set -e
 test $(nvidia-smi -q | grep UUID | wc -l) != 8 && echo "broken node: less than 8 gpus" && false
 EOT
 ```
+
 and then:
 
-```
+```bash
 bash test-gpu-count.sh
 ```
 
@@ -206,7 +214,7 @@ Chances are that you're getting the same node with the same broken GPUs. Here is
 
 Before discarding the current node, run and log:
 
-```
+```bash
 $ nvidia-smi -q | grep UUID
     GPU UUID                              : GPU-2b416d09-4537-ecc1-54fd-c6c83a764be9
     GPU UUID                              : GPU-0309d0d1-8620-43a3-83d2-95074e75ec9e

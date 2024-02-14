@@ -21,7 +21,7 @@ forward call will test input and output variables and also the corresponding mod
 `nan` is detected in at least one element of the activations or weights, the program will assert and print a report
 like this (this was caught with `google/mt5-small` under fp16 mixed precision):
 
-```
+```bash
 Detected inf/nan during batch_number=0
 Last 21 forward frames:
 abs min  abs max  metadata
@@ -74,7 +74,7 @@ At the very start of the trace you can discover at which batch number the proble
 Each reported frame starts by declaring the fully qualified entry for the corresponding module this frame is reporting
 for. If we look just at this frame:
 
-```
+```bash
                   encoder.block.2.layer.1.layer_norm T5LayerNorm
 8.69e-02 4.18e-01 weight
 2.65e-04 3.42e+03 input[0]
@@ -86,7 +86,7 @@ block of the encoder. And the specific calls of the `forward` is `T5LayerNorm`.
 
 Let's look at the last few frames of that report:
 
-```
+```bash
 Detected inf/nan during batch_number=0
 Last 21 forward frames:
 abs min  abs max  metadata
@@ -227,7 +227,7 @@ Batches are 0-indexed.
 This is helpful if you know that the program starts misbehaving after a certain batch number, so you can fast-forward
 right to that area. Here is a sample truncated output for such configuration:
 
-```
+```bash
                   *** Starting batch number=1 ***
 abs min  abs max  metadata
                   shared Embedding

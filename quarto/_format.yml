@@ -1,4 +1,7 @@
 format:
+  pdf:
+    documentclass: report
+    keep-tex: true
   html:
     callout-appearance: simple
     code-link: true

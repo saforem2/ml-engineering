@@ -1,0 +1,1613 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{report}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={✏️ Testing},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{✏️ Testing}
+\author{}
+\date{2024-02-13}
+
+\begin{document}
+\maketitle
+
+\chapter{Writing and Running Tests}\label{writing-and-running-tests}
+
+Note: a part of this document refers to functionality provided by the
+included \url{testing_utils.py}, the bulk of which I have developed
+while I worked at HuggingFace.
+
+This document covers both \texttt{pytest} and \texttt{unittest}
+functionalities and shows how both can be used together.
+
+\section{Running tests}\label{running-tests}
+
+\subsection{Run all tests}\label{run-all-tests}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pytest}
+\end{Highlighting}
+\end{Shaded}
+
+I use the following alias:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{alias}\NormalTok{ pyt=}\StringTok{"pytest {-}{-}disable{-}warnings {-}{-}instafail {-}rA"}
+\end{Highlighting}
+\end{Shaded}
+
+which tells pytest to:
+
+\begin{itemize}
+\tightlist
+\item
+  disable warning
+\item
+  \texttt{-\/-instafail} shows failures as they happen, and not at the
+  end
+\item
+  \texttt{-rA} generates a short test summary info
+\end{itemize}
+
+it requires you to install:
+
+\begin{verbatim}
+pip install pytest-instafail
+\end{verbatim}
+
+\subsection{Getting the list of all
+tests}\label{getting-the-list-of-all-tests}
+
+Show all tests in the test suite:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}collect{-}only} \AttributeTok{{-}q}
+\end{Highlighting}
+\end{Shaded}
+
+Show all tests in a given test file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ tests/test\_optimization.py }\AttributeTok{{-}{-}collect{-}only} \AttributeTok{{-}q}
+\end{Highlighting}
+\end{Shaded}
+
+I use the following alias:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{alias}\NormalTok{ pytc=}\StringTok{"pytest {-}{-}disable{-}warnings {-}{-}collect{-}only {-}q"}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Run a specific test
+module}\label{run-a-specific-test-module}
+
+To run an individual test module:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ tests/utils/test\_logging.py}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Run specific tests}\label{run-specific-tests}
+
+If \texttt{unittest} is used, to run specific subtests you need to know
+the name of the \texttt{unittest} class containing those tests. For
+example, it could be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ tests/test\_optimization.py::OptimizationTest::test\_adam\_w}
+\end{Highlighting}
+\end{Shaded}
+
+Here:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{tests/test\_optimization.py} - the file with tests
+\item
+  \texttt{OptimizationTest} - the name of the test class
+\item
+  \texttt{test\_adam\_w} - the name of the specific test function
+\end{itemize}
+
+If the file contains multiple classes, you can choose to run only tests
+of a given class. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ tests/test\_optimization.py::OptimizationTest}
+\end{Highlighting}
+\end{Shaded}
+
+will run all the tests inside that class.
+
+As mentioned earlier you can see what tests are contained inside the
+\texttt{OptimizationTest} class by running:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ tests/test\_optimization.py::OptimizationTest }\AttributeTok{{-}{-}collect{-}only} \AttributeTok{{-}q}
+\end{Highlighting}
+\end{Shaded}
+
+You can run tests by keyword expressions.
+
+To run only tests whose name contains \texttt{adam}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}k}\NormalTok{ adam tests/test\_optimization.py}
+\end{Highlighting}
+\end{Shaded}
+
+Logical \texttt{and} and \texttt{or} can be used to indicate whether all
+keywords should match or either. \texttt{not} can be used to negate.
+
+To run all tests except those whose name contains \texttt{adam}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}k} \StringTok{"not adam"}\NormalTok{ tests/test\_optimization.py}
+\end{Highlighting}
+\end{Shaded}
+
+And you can combine the two patterns in one:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}k} \StringTok{"ada and not adam"}\NormalTok{ tests/test\_optimization.py}
+\end{Highlighting}
+\end{Shaded}
+
+For example to run both \texttt{test\_adafactor} and
+\texttt{test\_adam\_w} you can use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}k} \StringTok{"test\_adam\_w or test\_adam\_w"}\NormalTok{ tests/test\_optimization.py}
+\end{Highlighting}
+\end{Shaded}
+
+Note that we use \texttt{or} here, since we want either of the keywords
+to match to include both.
+
+If you want to include only tests that include both patterns,
+\texttt{and} is to be used:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}k} \StringTok{"test and ada"}\NormalTok{ tests/test\_optimization.py}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Run only modified tests}\label{run-only-modified-tests}
+
+You can run the tests related to the unstaged files or the current
+branch (according to Git) by using
+\href{https://github.com/anapaulagomes/pytest-picked}{pytest-picked}.
+This is a great way of quickly testing your changes didn't break
+anything, since it won't run the tests related to files you didn't
+touch.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install pytest{-}picked}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}picked}
+\end{Highlighting}
+\end{Shaded}
+
+All tests will be run from files and folders which are modified, but not
+yet committed.
+
+\subsection{Automatically rerun failed tests on source
+modification}\label{automatically-rerun-failed-tests-on-source-modification}
+
+\href{https://github.com/pytest-dev/pytest-xdist}{pytest-xdist} provides
+a very useful feature of detecting all failed tests, and then waiting
+for you to modify files and continuously re-rerun those failing tests
+until they pass while you fix them. So that you don't need to re start
+pytest after you made the fix. This is repeated until all tests pass
+after which again a full run is performed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install pytest{-}xdist}
+\end{Highlighting}
+\end{Shaded}
+
+To enter the mode: \texttt{pytest\ -f} or
+\texttt{pytest\ -\/-looponfail}
+
+File changes are detected by looking at \texttt{looponfailroots} root
+directories and all of their contents (recursively). If the default for
+this value does not work for you, you can change it in your project by
+setting a configuration option in \texttt{setup.cfg}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{[tool:pytest]}
+\DataTypeTok{looponfailroots }\OtherTok{=}\StringTok{ transformers tests}
+\end{Highlighting}
+\end{Shaded}
+
+or \texttt{pytest.ini}/\texttt{tox.ini} files:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{[pytest]}
+\DataTypeTok{looponfailroots }\OtherTok{=}\StringTok{ transformers tests}
+\end{Highlighting}
+\end{Shaded}
+
+This would lead to only looking for file changes in the respective
+directories, specified relatively to the ini-file's directory.
+
+\href{https://github.com/joeyespo/pytest-watch}{pytest-watch} is an
+alternative implementation of this functionality.
+
+\subsection{Skip a test module}\label{skip-a-test-module}
+
+If you want to run all test modules, except a few you can exclude them
+by giving an explicit list of tests to run. For example, to run all
+except \texttt{test\_modeling\_*.py} tests:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \VariableTok{$(}\FunctionTok{ls} \AttributeTok{{-}1}\NormalTok{ tests/}\PreprocessorTok{*}\NormalTok{py }\KeywordTok{|} \FunctionTok{grep} \AttributeTok{{-}v}\NormalTok{ test\_modeling}\VariableTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Clearing state}\label{clearing-state}
+
+CI builds and when isolation is important (against speed), cache should
+be cleared:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}cache{-}clear}\NormalTok{ tests}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Running tests in parallel}\label{running-tests-in-parallel}
+
+As mentioned earlier \texttt{make\ test} runs tests in parallel via
+\texttt{pytest-xdist} plugin (\texttt{-n\ X} argument,
+e.g.~\texttt{-n\ 2} to run 2 parallel jobs).
+
+\texttt{pytest-xdist}'s \texttt{-\/-dist=} option allows one to control
+how the tests are grouped. \texttt{-\/-dist=loadfile} puts the tests
+located in one file onto the same process.
+
+Since the order of executed tests is different and unpredictable, if
+running the test suite with \texttt{pytest-xdist} produces failures
+(meaning we have some undetected coupled tests), use
+\href{https://github.com/ESSS/pytest-replay}{pytest-replay} to replay
+the tests in the same order, which should help with then somehow
+reducing that failing sequence to a minimum.
+
+\subsection{Test order and repetition}\label{test-order-and-repetition}
+
+It's good to repeat the tests several times, in sequence, randomly, or
+in sets, to detect any potential inter-dependency and state-related bugs
+(tear down). And the straightforward multiple repetition is just good to
+detect some problems that get uncovered by randomness of DL.
+
+\subsubsection{Repeat tests}\label{repeat-tests}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://github.com/dropbox/pytest-flakefinder}{pytest-flakefinder}:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install pytest{-}flakefinder}
+\end{Highlighting}
+\end{Shaded}
+
+And then run every test multiple times (50 by default):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}flake{-}finder} \AttributeTok{{-}{-}flake{-}runs}\OperatorTok{=}\NormalTok{5 tests/test\_failing\_test.py}
+\end{Highlighting}
+\end{Shaded}
+
+footnote: This plugin doesn't work with \texttt{-n} flag from
+\texttt{pytest-xdist}.
+
+footnote: There is another plugin \texttt{pytest-repeat}, but it doesn't
+work with \texttt{unittest}.
+
+\subsubsection{Run tests in a random
+order}\label{run-tests-in-a-random-order}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install pytest{-}random{-}order}
+\end{Highlighting}
+\end{Shaded}
+
+Important: the presence of \texttt{pytest-random-order} will
+automatically randomize tests, no configuration change or command line
+options is required.
+
+As explained earlier this allows detection of coupled tests - where one
+test's state affects the state of another. When
+\texttt{pytest-random-order} is installed it will print the random seed
+it used for that session, e.g:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ tests}
+\ExtensionTok{[...]}
+\ExtensionTok{Using} \AttributeTok{{-}{-}random{-}order{-}bucket}\OperatorTok{=}\NormalTok{module}
+\ExtensionTok{Using} \AttributeTok{{-}{-}random{-}order{-}seed}\OperatorTok{=}\NormalTok{573663}
+\end{Highlighting}
+\end{Shaded}
+
+So that if the given particular sequence fails, you can reproduce it by
+adding that exact seed, e.g.:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}random{-}order{-}seed}\OperatorTok{=}\NormalTok{573663}
+\ExtensionTok{[...]}
+\ExtensionTok{Using} \AttributeTok{{-}{-}random{-}order{-}bucket}\OperatorTok{=}\NormalTok{module}
+\ExtensionTok{Using} \AttributeTok{{-}{-}random{-}order{-}seed}\OperatorTok{=}\NormalTok{573663}
+\end{Highlighting}
+\end{Shaded}
+
+It will only reproduce the exact order if you use the exact same list of
+tests (or no list at all). Once you start to manually narrowing down the
+list you can no longer rely on the seed, but have to list them manually
+in the exact order they failed and tell pytest to not randomize them
+instead using \texttt{-\/-random-order-bucket=none}, e.g.:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}random{-}order{-}bucket}\OperatorTok{=}\NormalTok{none tests/test\_a.py tests/test\_c.py tests/test\_b.py}
+\end{Highlighting}
+\end{Shaded}
+
+To disable the shuffling for all tests:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}random{-}order{-}bucket}\OperatorTok{=}\NormalTok{none}
+\end{Highlighting}
+\end{Shaded}
+
+By default \texttt{-\/-random-order-bucket=module} is implied, which
+will shuffle the files on the module levels. It can also shuffle on
+\texttt{class}, \texttt{package}, \texttt{global} and \texttt{none}
+levels. For the complete details please see its
+\href{https://github.com/jbasko/pytest-random-order}{documentation}.
+
+Another randomization alternative is:
+\href{https://github.com/pytest-dev/pytest-randomly}{\texttt{pytest-randomly}}.
+This module has a very similar functionality/interface, but it doesn't
+have the bucket modes available in \texttt{pytest-random-order}. It has
+the same problem of imposing itself once installed.
+
+\subsection{Look and feel variations}\label{look-and-feel-variations}
+
+\subsubsection{pytest-sugar}\label{pytest-sugar}
+
+\href{https://github.com/Frozenball/pytest-sugar}{pytest-sugar} is a
+plugin that improves the look-n-feel, adds a progressbar, and show tests
+that fail and the assert instantly. It gets activated automatically upon
+installation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install pytest{-}sugar}
+\end{Highlighting}
+\end{Shaded}
+
+To run tests without it, run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}p}\NormalTok{ no:sugar}
+\end{Highlighting}
+\end{Shaded}
+
+or uninstall it.
+
+\subsubsection{Report each sub-test name and its
+progress}\label{report-each-sub-test-name-and-its-progress}
+
+For a single or a group of tests via \texttt{pytest} (after
+\texttt{pip\ install\ pytest-pspec}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}pspec}\NormalTok{ tests/test\_optimization.py}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Instantly shows failed
+tests}\label{instantly-shows-failed-tests}
+
+\href{https://github.com/pytest-dev/pytest-instafail}{pytest-instafail}
+shows failures and errors instantly instead of waiting until the end of
+test session.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install pytest{-}instafail}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}instafail}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{To GPU or not to GPU}\label{to-gpu-or-not-to-gpu}
+
+On a GPU-enabled setup, to test in CPU-only mode add
+\texttt{CUDA\_VISIBLE\_DEVICES=""}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{CUDA\_VISIBLE\_DEVICES}\OperatorTok{=}\StringTok{""} \ExtensionTok{pytest}\NormalTok{ tests/utils/test\_logging.py}
+\end{Highlighting}
+\end{Shaded}
+
+or if you have multiple gpus, you can specify which one is to be used by
+\texttt{pytest}. For example, to use only the second gpu if you have
+gpus \texttt{0} and \texttt{1}, you can run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{CUDA\_VISIBLE\_DEVICES}\OperatorTok{=}\StringTok{"1"} \ExtensionTok{pytest}\NormalTok{ tests/utils/test\_logging.py}
+\end{Highlighting}
+\end{Shaded}
+
+This is handy when you want to run different tasks on different GPUs.
+
+Some tests must be run on CPU-only, others on either CPU or GPU or TPU,
+yet others on multiple-GPUs. The following skip decorators are used to
+set the requirements of tests CPU/GPU/TPU-wise:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{require\_torch} - this test will run only under torch
+\item
+  \texttt{require\_torch\_gpu} - as \texttt{require\_torch} plus
+  requires at least 1 GPU
+\item
+  \texttt{require\_torch\_multi\_gpu} - as \texttt{require\_torch} plus
+  requires at least 2 GPUs
+\item
+  \texttt{require\_torch\_non\_multi\_gpu} - as \texttt{require\_torch}
+  plus requires 0 or 1 GPUs
+\item
+  \texttt{require\_torch\_up\_to\_2\_gpus} - as \texttt{require\_torch}
+  plus requires 0 or 1 or 2 GPUs
+\item
+  \texttt{require\_torch\_tpu} - as \texttt{require\_torch} plus
+  requires at least 1 TPU
+\end{itemize}
+
+Let's depict the GPU requirements in the following table:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+n gpus & decorator \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{\textgreater{}=\ 0} & \texttt{@require\_torch} \\
+\texttt{\textgreater{}=\ 1} & \texttt{@require\_torch\_gpu} \\
+\texttt{\textgreater{}=\ 2} & \texttt{@require\_torch\_multi\_gpu} \\
+\texttt{\textless{}\ 2} & \texttt{@require\_torch\_non\_multi\_gpu} \\
+\texttt{\textless{}\ 3} & \texttt{@require\_torch\_up\_to\_2\_gpus} \\
+\end{longtable}
+
+For example, here is a test that must be run only when there are 2 or
+more GPUs available and pytorch is installed:
+
+```python no-style from testing\_utils import require\_torch\_multi\_gpu
+
+(\textbf{require\_torch\_multi\_gpu?}) def
+test\_example\_with\_multi\_gpu():
+
+\begin{verbatim}
+
+These decorators can be stacked:
+
+```python no-style
+from testing_utils import require_torch_gpu
+
+@require_torch_gpu
+@some_other_decorator
+def test_example_slow_on_gpu():
+\end{verbatim}
+
+Some decorators like \texttt{@parametrized} rewrite test names,
+therefore \texttt{@require\_*} skip decorators have to be listed last
+for them to work correctly. Here is an example of the correct usage:
+
+```python no-style from testing\_utils import require\_torch\_multi\_gpu
+from parameterized import parameterized
+
+(\textbf{parameterized.expand?})(\ldots)
+(\textbf{require\_torch\_multi\_gpu?}) def test\_integration\_foo():
+
+\begin{verbatim}
+
+This order problem doesn't exist with `@pytest.mark.parametrize`, you can put it first or last and it will still work. But it only works with non-unittests.
+
+Inside tests:
+
+- How many GPUs are available:
+
+```python
+from testing_utils import get_gpu_count
+
+n_gpu = get_gpu_count()
+\end{verbatim}
+
+\subsection{Distributed training}\label{distributed-training}
+
+\texttt{pytest} can't deal with distributed training directly. If this
+is attempted - the sub-processes don't do the right thing and end up
+thinking they are \texttt{pytest} and start running the test suite in
+loops. It works, however, if one spawns a normal process that then
+spawns off multiple workers and manages the IO pipes.
+
+Here are some tests that use it:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://github.com/huggingface/transformers/blob/58e3d23e97078f361a533b9ec4a6a2de674ea52a/tests/trainer/test_trainer_distributed.py}{test\_trainer\_distributed.py}
+\item
+  \href{https://github.com/huggingface/transformers/blob/58e3d23e97078f361a533b9ec4a6a2de674ea52a/tests/deepspeed/test_deepspeed.py}{test\_deepspeed.py}
+\end{itemize}
+
+To jump right into the execution point, search for the
+\texttt{execute\_subprocess\_async} call in those tests, which you will
+find inside \url{testing_utils.py}.
+
+You will need at least 2 GPUs to see these tests in action:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{CUDA\_VISIBLE\_DEVICES}\OperatorTok{=}\NormalTok{0,1 }\VariableTok{RUN\_SLOW}\OperatorTok{=}\NormalTok{1 }\ExtensionTok{pytest} \AttributeTok{{-}sv}\NormalTok{ tests/test\_trainer\_distributed.py}
+\end{Highlighting}
+\end{Shaded}
+
+(\texttt{RUN\_SLOW} is a special decorator used by HF Transformers to
+normally skip heavy tests)
+
+\subsection{Output capture}\label{output-capture}
+
+During test execution any output sent to \texttt{stdout} and
+\texttt{stderr} is captured. If a test or a setup method fails, its
+according captured output will usually be shown along with the failure
+traceback.
+
+To disable output capturing and to get the \texttt{stdout} and
+\texttt{stderr} normally, use \texttt{-s} or \texttt{-\/-capture=no}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}s}\NormalTok{ tests/utils/test\_logging.py}
+\end{Highlighting}
+\end{Shaded}
+
+To send test results to JUnit format output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{py.test}\NormalTok{ tests }\AttributeTok{{-}{-}junitxml}\OperatorTok{=}\NormalTok{result.xml}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Color control}\label{color-control}
+
+To have no color (e.g., yellow on white background is not readable):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}color}\OperatorTok{=}\NormalTok{no tests/utils/test\_logging.py}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Sending test report to online pastebin
+service}\label{sending-test-report-to-online-pastebin-service}
+
+Creating a URL for each test failure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}pastebin}\OperatorTok{=}\NormalTok{failed tests/utils/test\_logging.py}
+\end{Highlighting}
+\end{Shaded}
+
+This will submit test run information to a remote Paste service and
+provide a URL for each failure. You may select tests as usual or add for
+example -x if you only want to send one particular failure.
+
+Creating a URL for a whole test session log:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}pastebin}\OperatorTok{=}\NormalTok{all tests/utils/test\_logging.py}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Writing tests}\label{writing-tests}
+
+Most of the time if combining \texttt{pytest} and \texttt{unittest} in
+the same test suite works just fine. You can read
+\href{https://docs.pytest.org/en/stable/unittest.html}{here} which
+features are supported when doing that , but the important thing to
+remember is that most \texttt{pytest} fixtures don't work. Neither
+parametrization, but we use the module \texttt{parameterized} that works
+in a similar way.
+
+\subsection{Parametrization}\label{parametrization}
+
+Often, there is a need to run the same test multiple times, but with
+different arguments. It could be done from within the test, but then
+there is no way of running that test for just one set of arguments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# test\_this1.py}
+\ImportTok{import}\NormalTok{ unittest}
+\ImportTok{from}\NormalTok{ parameterized }\ImportTok{import}\NormalTok{ parameterized}
+
+
+\KeywordTok{class}\NormalTok{ TestMathUnitTest(unittest.TestCase):}
+    \AttributeTok{@parameterized.expand}\NormalTok{(}
+\NormalTok{        [}
+\NormalTok{            (}\StringTok{"negative"}\NormalTok{, }\OperatorTok{{-}}\FloatTok{1.5}\NormalTok{, }\OperatorTok{{-}}\FloatTok{2.0}\NormalTok{),}
+\NormalTok{            (}\StringTok{"integer"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{1.0}\NormalTok{),}
+\NormalTok{            (}\StringTok{"large fraction"}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+\NormalTok{        ]}
+\NormalTok{    )}
+    \KeywordTok{def}\NormalTok{ test\_floor(}\VariableTok{self}\NormalTok{, name, }\BuiltInTok{input}\NormalTok{, expected):}
+\NormalTok{        assert\_equal(math.floor(}\BuiltInTok{input}\NormalTok{), expected)}
+\end{Highlighting}
+\end{Shaded}
+
+Now, by default this test will be run 3 times, each time with the last 3
+arguments of \texttt{test\_floor} being assigned the corresponding
+arguments in the parameter list.
+
+And you could run just the \texttt{negative} and \texttt{integer} sets
+of params with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}k} \StringTok{"negative and integer"}\NormalTok{ tests/test\_mytest.py}
+\end{Highlighting}
+\end{Shaded}
+
+or all but \texttt{negative} sub-tests, with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}k} \StringTok{"not negative"}\NormalTok{ tests/test\_mytest.py}
+\end{Highlighting}
+\end{Shaded}
+
+Besides using the \texttt{-k} filter that was just mentioned, you can
+find out the exact name of each sub-test and run any or all of them
+using their exact names.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ test\_this1.py }\AttributeTok{{-}{-}collect{-}only} \AttributeTok{{-}q}
+\end{Highlighting}
+\end{Shaded}
+
+and it will list:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{test\_this1.py::TestMathUnitTest::test\_floor\_0\_negative}
+\ExtensionTok{test\_this1.py::TestMathUnitTest::test\_floor\_1\_integer}
+\ExtensionTok{test\_this1.py::TestMathUnitTest::test\_floor\_2\_large\_fraction}
+\end{Highlighting}
+\end{Shaded}
+
+So now you can run just 2 specific sub-tests:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ test\_this1.py::TestMathUnitTest::test\_floor\_0\_negative  test\_this1.py::TestMathUnitTest::test\_floor\_1\_integer}
+\end{Highlighting}
+\end{Shaded}
+
+The module \href{https://pypi.org/project/parameterized/}{parameterized}
+works for both: \texttt{unittests} and \texttt{pytest} tests.
+
+If, however, the test is not a \texttt{unittest}, you may use
+\texttt{pytest.mark.parametrize}.
+
+Here is the same example, this time using \texttt{pytest}'s
+\texttt{parametrize} marker:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# test\_this2.py}
+\ImportTok{import}\NormalTok{ pytest}
+
+
+\AttributeTok{@pytest.mark.parametrize}\NormalTok{(}
+    \StringTok{"name, input, expected"}\NormalTok{,}
+\NormalTok{    [}
+\NormalTok{        (}\StringTok{"negative"}\NormalTok{, }\OperatorTok{{-}}\FloatTok{1.5}\NormalTok{, }\OperatorTok{{-}}\FloatTok{2.0}\NormalTok{),}
+\NormalTok{        (}\StringTok{"integer"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{1.0}\NormalTok{),}
+\NormalTok{        (}\StringTok{"large fraction"}\NormalTok{, }\FloatTok{1.6}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+\NormalTok{    ],}
+\NormalTok{)}
+\KeywordTok{def}\NormalTok{ test\_floor(name, }\BuiltInTok{input}\NormalTok{, expected):}
+\NormalTok{    assert\_equal(math.floor(}\BuiltInTok{input}\NormalTok{), expected)}
+\end{Highlighting}
+\end{Shaded}
+
+Same as with \texttt{parameterized}, with
+\texttt{pytest.mark.parametrize} you can have a fine control over which
+sub-tests are run, if the \texttt{-k} filter doesn't do the job. Except,
+this parametrization function creates a slightly different set of names
+for the sub-tests. Here is what they look like:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ test\_this2.py }\AttributeTok{{-}{-}collect{-}only} \AttributeTok{{-}q}
+\end{Highlighting}
+\end{Shaded}
+
+and it will list:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{test\_this2.py::test\_floor[integer{-}1{-}1.0]}
+\ExtensionTok{test\_this2.py::test\_floor[negative{-}{-}1.5{-}{-}2.0]}
+\ExtensionTok{test\_this2.py::test\_floor[large}\NormalTok{ fraction{-}1.6{-}1]}
+\end{Highlighting}
+\end{Shaded}
+
+So now you can run just the specific test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ test\_this2.py::test\_floor}\PreprocessorTok{[}\SpecialStringTok{negative}\PreprocessorTok{{-}{-}}\SpecialStringTok{1.5}\PreprocessorTok{{-}{-}}\SpecialStringTok{2.0}\PreprocessorTok{]}\NormalTok{ test\_this2.py::test\_floor}\PreprocessorTok{[}\SpecialStringTok{integer}\PreprocessorTok{{-}}\SpecialStringTok{1}\PreprocessorTok{{-}}\SpecialStringTok{1.0}\PreprocessorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+as in the previous example.
+
+\subsection{Files and directories}\label{files-and-directories}
+
+In tests often we need to know where things are relative to the current
+test file, and it's not trivial since the test could be invoked from
+more than one directory or could reside in sub-directories with
+different depths. A helper class \texttt{testing\_utils.TestCasePlus}
+solves this problem by sorting out all the basic paths and provides easy
+accessors to them:
+
+\begin{itemize}
+\item
+  \texttt{pathlib} objects (all fully resolved):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{test\_file\_path} - the current test file path,
+    i.e.~\texttt{\_\_file\_\_}
+  \item
+    \texttt{test\_file\_dir} - the directory containing the current test
+    file
+  \item
+    \texttt{tests\_dir} - the directory of the \texttt{tests} test suite
+  \item
+    \texttt{examples\_dir} - the directory of the \texttt{examples} test
+    suite
+  \item
+    \texttt{repo\_root\_dir} - the directory of the repository
+  \item
+    \texttt{src\_dir} - the directory of \texttt{src} (i.e.~where the
+    \texttt{transformers} sub-dir resides)
+  \end{itemize}
+\item
+  stringified paths -- same as above but these return paths as strings,
+  rather than \texttt{pathlib} objects:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{test\_file\_path\_str}
+  \item
+    \texttt{test\_file\_dir\_str}
+  \item
+    \texttt{tests\_dir\_str}
+  \item
+    \texttt{examples\_dir\_str}
+  \item
+    \texttt{repo\_root\_dir\_str}
+  \item
+    \texttt{src\_dir\_str}
+  \end{itemize}
+\end{itemize}
+
+To start using those all you need is to make sure that the test resides
+in a subclass of \texttt{testing\_utils.TestCasePlus}. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ TestCasePlus}
+
+
+\KeywordTok{class}\NormalTok{ PathExampleTest(TestCasePlus):}
+    \KeywordTok{def}\NormalTok{ test\_something\_involving\_local\_locations(}\VariableTok{self}\NormalTok{):}
+\NormalTok{        data\_dir }\OperatorTok{=} \VariableTok{self}\NormalTok{.tests\_dir }\OperatorTok{/} \StringTok{"fixtures/tests\_samples/wmt\_en\_ro"}
+\end{Highlighting}
+\end{Shaded}
+
+If you don't need to manipulate paths via \texttt{pathlib} or you just
+need a path as a string, you can always invoked \texttt{str()} on the
+\texttt{pathlib} object or use the accessors ending with \texttt{\_str}.
+For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ TestCasePlus}
+
+
+\KeywordTok{class}\NormalTok{ PathExampleTest(TestCasePlus):}
+    \KeywordTok{def}\NormalTok{ test\_something\_involving\_stringified\_locations(}\VariableTok{self}\NormalTok{):}
+\NormalTok{        examples\_dir }\OperatorTok{=} \VariableTok{self}\NormalTok{.examples\_dir\_str}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Temporary files and
+directories}\label{temporary-files-and-directories}
+
+Using unique temporary files and directories are essential for parallel
+test running, so that the tests won't overwrite each other's data. Also
+we want to get the temporary files and directories removed at the end of
+each test that created them. Therefore, using packages like
+\texttt{tempfile}, which address these needs is essential.
+
+However, when debugging tests, you need to be able to see what goes into
+the temporary file or directory and you want to know it's exact path and
+not having it randomized on every test re-run.
+
+A helper class \texttt{testing\_utils.TestCasePlus} is best used for
+such purposes. It's a sub-class of \texttt{unittest.TestCase}, so we can
+easily inherit from it in the test modules.
+
+Here is an example of its usage:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ TestCasePlus}
+
+
+\KeywordTok{class}\NormalTok{ ExamplesTests(TestCasePlus):}
+    \KeywordTok{def}\NormalTok{ test\_whatever(}\VariableTok{self}\NormalTok{):}
+\NormalTok{        tmp\_dir }\OperatorTok{=} \VariableTok{self}\NormalTok{.get\_auto\_remove\_tmp\_dir()}
+\end{Highlighting}
+\end{Shaded}
+
+This code creates a unique temporary directory, and sets
+\texttt{tmp\_dir} to its location.
+
+\begin{itemize}
+\tightlist
+\item
+  Create a unique temporary dir:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ test\_whatever(}\VariableTok{self}\NormalTok{):}
+\NormalTok{    tmp\_dir }\OperatorTok{=} \VariableTok{self}\NormalTok{.get\_auto\_remove\_tmp\_dir()}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{tmp\_dir} will contain the path to the created temporary dir. It
+will be automatically removed at the end of the test.
+
+\begin{itemize}
+\tightlist
+\item
+  Create a temporary dir of my choice, ensure it's empty before the test
+  starts and don't empty it after the test.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ test\_whatever(}\VariableTok{self}\NormalTok{):}
+\NormalTok{    tmp\_dir }\OperatorTok{=} \VariableTok{self}\NormalTok{.get\_auto\_remove\_tmp\_dir(}\StringTok{"./xxx"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This is useful for debug when you want to monitor a specific directory
+and want to make sure the previous tests didn't leave any data in there.
+
+\begin{itemize}
+\item
+  You can override the default behavior by directly overriding the
+  \texttt{before} and \texttt{after} args, leading to one of the
+  following behaviors:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{before=True}: the temporary dir will always be cleared at
+    the beginning of the test.
+  \item
+    \texttt{before=False}: if the temporary dir already existed, any
+    existing files will remain there.
+  \item
+    \texttt{after=True}: the temporary dir will always be deleted at the
+    end of the test.
+  \item
+    \texttt{after=False}: the temporary dir will always be left intact
+    at the end of the test.
+  \end{itemize}
+\end{itemize}
+
+footnote: In order to run the equivalent of \texttt{rm\ -r} safely, only
+subdirs of the project repository checkout are allowed if an explicit
+\texttt{tmp\_dir} is used, so that by mistake no \texttt{/tmp} or
+similar important part of the filesystem will get nuked. i.e.~please
+always pass paths that start with \texttt{./}.
+
+footnote: Each test can register multiple temporary directories and they
+all will get auto-removed, unless requested otherwise.
+
+\subsubsection{Temporary sys.path
+override}\label{temporary-sys.path-override}
+
+If you need to temporary override \texttt{sys.path} to import from
+another test for example, you can use the \texttt{ExtendSysPath} context
+manager. Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ os}
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ ExtendSysPath}
+
+\NormalTok{bindir }\OperatorTok{=}\NormalTok{ os.path.abspath(os.path.dirname(}\VariableTok{\_\_file\_\_}\NormalTok{))}
+\ControlFlowTok{with}\NormalTok{ ExtendSysPath(}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{bindir}\SpecialCharTok{\}}\SpecialStringTok{/.."}\NormalTok{):}
+    \ImportTok{from}\NormalTok{ test\_trainer }\ImportTok{import}\NormalTok{ TrainerIntegrationCommon  }\CommentTok{\# noqa}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Skipping tests}\label{skipping-tests}
+
+This is useful when a bug is found and a new test is written, yet the
+bug is not fixed yet. In order to be able to commit it to the main
+repository we need make sure it's skipped during \texttt{make\ test}.
+
+Methods:
+
+\begin{itemize}
+\item
+  A \textbf{skip} means that you expect your test to pass only if some
+  conditions are met, otherwise pytest should skip running the test
+  altogether. Common examples are skipping windows-only tests on
+  non-windows platforms, or skipping tests that depend on an external
+  resource which is not available at the moment (for example a
+  database).
+\item
+  A \textbf{xfail} means that you expect a test to fail for some reason.
+  A common example is a test for a feature not yet implemented, or a bug
+  not yet fixed. When a test passes despite being expected to fail
+  (marked with \texttt{pytest.mark.xfail}), it's an xpass and will be
+  reported in the test summary.
+\end{itemize}
+
+One of the important differences between the two is that \texttt{skip}
+doesn't run the test, and \texttt{xfail} does. So if the code that's
+buggy causes some bad state that will affect other tests, do not use
+\texttt{xfail}.
+
+\subsubsection{Implementation}\label{implementation}
+
+\begin{itemize}
+\tightlist
+\item
+  Here is how to skip whole test unconditionally:
+\end{itemize}
+
+\texttt{python\ no-style\ @unittest.skip("this\ bug\ needs\ to\ be\ fixed")\ def\ test\_feature\_x():}
+
+or via pytest:
+
+\texttt{python\ no-style\ @pytest.mark.skip(reason="this\ bug\ needs\ to\ be\ fixed")}
+
+or the \texttt{xfail} way:
+
+\texttt{python\ no-style\ @pytest.mark.xfail\ def\ test\_feature\_x():}
+
+Here's how to skip a test based on internal checks within the test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ test\_feature\_x():}
+    \ControlFlowTok{if} \KeywordTok{not}\NormalTok{ has\_something():}
+\NormalTok{        pytest.skip(}\StringTok{"unsupported configuration"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+or the whole module:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pytest}
+
+\ControlFlowTok{if} \KeywordTok{not}\NormalTok{ pytest.config.getoption(}\StringTok{"{-}{-}custom{-}flag"}\NormalTok{):}
+\NormalTok{    pytest.skip(}\StringTok{"{-}{-}custom{-}flag is missing, skipping tests"}\NormalTok{, allow\_module\_level}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+or the \texttt{xfail} way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ test\_feature\_x():}
+\NormalTok{    pytest.xfail(}\StringTok{"expected to fail until bug XYZ is fixed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Here is how to skip all tests in a module if some import is missing:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{docutils }\OperatorTok{=}\NormalTok{ pytest.importorskip(}\StringTok{"docutils"}\NormalTok{, minversion}\OperatorTok{=}\StringTok{"0.3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Skip a test based on a condition:
+\end{itemize}
+
+\texttt{python\ no-style\ @pytest.mark.skipif(sys.version\_info\ \textless{}\ (3,6),\ reason="requires\ python3.6\ or\ higher")\ def\ test\_feature\_x():}
+
+or:
+
+\texttt{python\ no-style\ @unittest.skipIf(torch\_device\ ==\ "cpu",\ "Can\textquotesingle{}t\ do\ half\ precision")\ def\ test\_feature\_x():}
+
+or skip the whole module:
+
+\texttt{python\ no-style\ @pytest.mark.skipif(sys.platform\ ==\ \textquotesingle{}win32\textquotesingle{},\ reason="does\ not\ run\ on\ windows")\ class\ TestClass():\ \ \ \ \ def\ test\_feature\_x(self):}
+
+More details, example and ways are
+\href{https://docs.pytest.org/en/latest/skipping.html}{here}.
+
+\subsection{Capturing outputs}\label{capturing-outputs}
+
+\subsubsection{Capturing the stdout/stderr
+output}\label{capturing-the-stdoutstderr-output}
+
+In order to test functions that write to \texttt{stdout} and/or
+\texttt{stderr}, the test can access those streams using the
+\texttt{pytest}'s
+\href{https://docs.pytest.org/en/latest/capture.html}{capsys system}.
+Here is how this is accomplished:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ sys}
+
+
+\KeywordTok{def}\NormalTok{ print\_to\_stdout(s):}
+    \BuiltInTok{print}\NormalTok{(s)}
+
+
+\KeywordTok{def}\NormalTok{ print\_to\_stderr(s):}
+\NormalTok{    sys.stderr.write(s)}
+
+
+\KeywordTok{def}\NormalTok{ test\_result\_and\_stdout(capsys):}
+\NormalTok{    msg }\OperatorTok{=} \StringTok{"Hello"}
+\NormalTok{    print\_to\_stdout(msg)}
+\NormalTok{    print\_to\_stderr(msg)}
+\NormalTok{    out, err }\OperatorTok{=}\NormalTok{ capsys.readouterr()  }\CommentTok{\# consume the captured output streams}
+    \CommentTok{\# optional: if you want to replay the consumed streams:}
+\NormalTok{    sys.stdout.write(out)}
+\NormalTok{    sys.stderr.write(err)}
+    \CommentTok{\# test:}
+    \ControlFlowTok{assert}\NormalTok{ msg }\KeywordTok{in}\NormalTok{ out}
+    \ControlFlowTok{assert}\NormalTok{ msg }\KeywordTok{in}\NormalTok{ err}
+\end{Highlighting}
+\end{Shaded}
+
+And, of course, most of the time, \texttt{stderr} will come as a part of
+an exception, so try/except has to be used in such a case:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ raise\_exception(msg):}
+    \ControlFlowTok{raise} \PreprocessorTok{ValueError}\NormalTok{(msg)}
+
+
+\KeywordTok{def}\NormalTok{ test\_something\_exception():}
+\NormalTok{    msg }\OperatorTok{=} \StringTok{"Not a good value"}
+\NormalTok{    error }\OperatorTok{=} \StringTok{""}
+    \ControlFlowTok{try}\NormalTok{:}
+\NormalTok{        raise\_exception(msg)}
+    \ControlFlowTok{except} \PreprocessorTok{Exception} \ImportTok{as}\NormalTok{ e:}
+\NormalTok{        error }\OperatorTok{=} \BuiltInTok{str}\NormalTok{(e)}
+        \ControlFlowTok{assert}\NormalTok{ msg }\KeywordTok{in}\NormalTok{ error, }\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{msg}\SpecialCharTok{\}}\SpecialStringTok{ is in the exception:}\CharTok{\textbackslash{}n}\SpecialCharTok{\{}\NormalTok{error}\SpecialCharTok{\}}\SpecialStringTok{"}
+\end{Highlighting}
+\end{Shaded}
+
+Another approach to capturing stdout is via
+\texttt{contextlib.redirect\_stdout}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ io }\ImportTok{import}\NormalTok{ StringIO}
+\ImportTok{from}\NormalTok{ contextlib }\ImportTok{import}\NormalTok{ redirect\_stdout}
+
+
+\KeywordTok{def}\NormalTok{ print\_to\_stdout(s):}
+    \BuiltInTok{print}\NormalTok{(s)}
+
+
+\KeywordTok{def}\NormalTok{ test\_result\_and\_stdout():}
+\NormalTok{    msg }\OperatorTok{=} \StringTok{"Hello"}
+    \BuiltInTok{buffer} \OperatorTok{=}\NormalTok{ StringIO()}
+    \ControlFlowTok{with}\NormalTok{ redirect\_stdout(}\BuiltInTok{buffer}\NormalTok{):}
+\NormalTok{        print\_to\_stdout(msg)}
+\NormalTok{    out }\OperatorTok{=} \BuiltInTok{buffer}\NormalTok{.getvalue()}
+    \CommentTok{\# optional: if you want to replay the consumed streams:}
+\NormalTok{    sys.stdout.write(out)}
+    \CommentTok{\# test:}
+    \ControlFlowTok{assert}\NormalTok{ msg }\KeywordTok{in}\NormalTok{ out}
+\end{Highlighting}
+\end{Shaded}
+
+An important potential issue with capturing stdout is that it may
+contain \texttt{\textbackslash{}r} characters that in normal
+\texttt{print} reset everything that has been printed so far. There is
+no problem with \texttt{pytest}, but with \texttt{pytest\ -s} these
+characters get included in the buffer, so to be able to have the test
+run with and without \texttt{-s}, you have to make an extra cleanup to
+the captured output, using
+\texttt{re.sub(r\textquotesingle{}\textasciitilde{}.*\textbackslash{}r\textquotesingle{},\ \textquotesingle{}\textquotesingle{},\ buf,\ 0,\ re.M)}.
+
+But, then we have a helper context manager wrapper to automatically take
+care of it all, regardless of whether it has some
+\texttt{\textbackslash{}r}'s in it or not, so it's a simple:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ CaptureStdout}
+
+\ControlFlowTok{with}\NormalTok{ CaptureStdout() }\ImportTok{as}\NormalTok{ cs:}
+\NormalTok{    function\_that\_writes\_to\_stdout()}
+\BuiltInTok{print}\NormalTok{(cs.out)}
+\end{Highlighting}
+\end{Shaded}
+
+Here is a full test example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ CaptureStdout}
+
+\NormalTok{msg }\OperatorTok{=} \StringTok{"Secret message}\CharTok{\textbackslash{}r}\StringTok{"}
+\NormalTok{final }\OperatorTok{=} \StringTok{"Hello World"}
+\ControlFlowTok{with}\NormalTok{ CaptureStdout() }\ImportTok{as}\NormalTok{ cs:}
+    \BuiltInTok{print}\NormalTok{(msg }\OperatorTok{+}\NormalTok{ final)}
+\ControlFlowTok{assert}\NormalTok{ cs.out }\OperatorTok{==}\NormalTok{ final }\OperatorTok{+} \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\SpecialStringTok{f"captured: }\SpecialCharTok{\{}\NormalTok{cs}\SpecialCharTok{.}\NormalTok{out}\SpecialCharTok{\}}\SpecialStringTok{, expecting }\SpecialCharTok{\{}\NormalTok{final}\SpecialCharTok{\}}\SpecialStringTok{"}
+\end{Highlighting}
+\end{Shaded}
+
+If you'd like to capture \texttt{stderr} use the \texttt{CaptureStderr}
+class instead:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ CaptureStderr}
+
+\ControlFlowTok{with}\NormalTok{ CaptureStderr() }\ImportTok{as}\NormalTok{ cs:}
+\NormalTok{    function\_that\_writes\_to\_stderr()}
+\BuiltInTok{print}\NormalTok{(cs.err)}
+\end{Highlighting}
+\end{Shaded}
+
+If you need to capture both streams at once, use the parent
+\texttt{CaptureStd} class:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ CaptureStd}
+
+\ControlFlowTok{with}\NormalTok{ CaptureStd() }\ImportTok{as}\NormalTok{ cs:}
+\NormalTok{    function\_that\_writes\_to\_stdout\_and\_stderr()}
+\BuiltInTok{print}\NormalTok{(cs.err, cs.out)}
+\end{Highlighting}
+\end{Shaded}
+
+Also, to aid debugging test issues, by default these context managers
+automatically replay the captured streams on exit from the context.
+
+\subsubsection{Capturing logger stream}\label{capturing-logger-stream}
+
+If you need to validate the output of a logger, you can use
+\texttt{CaptureLogger}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ transformers }\ImportTok{import}\NormalTok{ logging}
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ CaptureLogger}
+
+\NormalTok{msg }\OperatorTok{=} \StringTok{"Testing 1, 2, 3"}
+\NormalTok{logging.set\_verbosity\_info()}
+\NormalTok{logger }\OperatorTok{=}\NormalTok{ logging.get\_logger(}\StringTok{"transformers.models.bart.tokenization\_bart"}\NormalTok{)}
+\ControlFlowTok{with}\NormalTok{ CaptureLogger(logger) }\ImportTok{as}\NormalTok{ cl:}
+\NormalTok{    logger.info(msg)}
+\ControlFlowTok{assert}\NormalTok{ cl.out, msg }\OperatorTok{+} \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Testing with environment
+variables}\label{testing-with-environment-variables}
+
+If you want to test the impact of environment variables for a specific
+test you can use a helper decorator
+\texttt{transformers.testing\_utils.mockenv}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ mockenv}
+
+
+\KeywordTok{class}\NormalTok{ HfArgumentParserTest(unittest.TestCase):}
+    \AttributeTok{@mockenv}\NormalTok{(TRANSFORMERS\_VERBOSITY}\OperatorTok{=}\StringTok{"error"}\NormalTok{)}
+    \KeywordTok{def}\NormalTok{ test\_env\_override(}\VariableTok{self}\NormalTok{):}
+\NormalTok{        env\_level\_str }\OperatorTok{=}\NormalTok{ os.getenv(}\StringTok{"TRANSFORMERS\_VERBOSITY"}\NormalTok{, }\VariableTok{None}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+At times an external program needs to be called, which requires setting
+\texttt{PYTHONPATH} in \texttt{os.environ} to include multiple local
+paths. A helper class \texttt{testing\_utils.TestCasePlus} comes to
+help:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ TestCasePlus}
+
+
+\KeywordTok{class}\NormalTok{ EnvExampleTest(TestCasePlus):}
+    \KeywordTok{def}\NormalTok{ test\_external\_prog(}\VariableTok{self}\NormalTok{):}
+\NormalTok{        env }\OperatorTok{=} \VariableTok{self}\NormalTok{.get\_env()}
+        \CommentTok{\# now call the external program, passing \textasciigrave{}env\textasciigrave{} to it}
+\end{Highlighting}
+\end{Shaded}
+
+Depending on whether the test file was under the \texttt{tests} test
+suite or \texttt{examples} it'll correctly set up
+\texttt{env{[}PYTHONPATH{]}} to include one of these two directories,
+and also the \texttt{src} directory to ensure the testing is done
+against the current repo, and finally with whatever
+\texttt{env{[}PYTHONPATH{]}} was already set to before the test was
+called if anything.
+
+This helper method creates a copy of the \texttt{os.environ} object, so
+the original remains intact.
+
+\subsection{Getting reproducible
+results}\label{getting-reproducible-results}
+
+In some situations you may want to remove randomness for your tests. To
+get identical reproducible results set, you will need to fix the seed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seed }\OperatorTok{=} \DecValTok{42}
+
+\CommentTok{\# python RNG}
+\ImportTok{import}\NormalTok{ random}
+
+\NormalTok{random.seed(seed)}
+
+\CommentTok{\# pytorch RNGs}
+\ImportTok{import}\NormalTok{ torch}
+
+\NormalTok{torch.manual\_seed(seed)}
+\NormalTok{torch.backends.cudnn.deterministic }\OperatorTok{=} \VariableTok{True}
+\ControlFlowTok{if}\NormalTok{ torch.cuda.is\_available():}
+\NormalTok{    torch.cuda.manual\_seed\_all(seed)}
+
+\CommentTok{\# numpy RNG}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{np.random.seed(seed)}
+
+\CommentTok{\# tf RNG}
+\NormalTok{tf.random.set\_seed(seed)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Debugging tests}\label{debugging-tests}
+
+To start a debugger at the point of the warning, do this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest}\NormalTok{ tests/utils/test\_logging.py }\AttributeTok{{-}W}\NormalTok{ error::UserWarning }\AttributeTok{{-}{-}pdb}
+\end{Highlighting}
+\end{Shaded}
+
+\section{A massive hack to create multiple pytest
+reports}\label{a-massive-hack-to-create-multiple-pytest-reports}
+
+Here is a massive \texttt{pytest} patching that I have done many years
+ago to aid with understanding CI reports better.
+
+To activate it add to \texttt{tests/conftest.py} (or create it if you
+haven't already):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pytest}
+
+\KeywordTok{def}\NormalTok{ pytest\_addoption(parser):}
+    \ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ pytest\_addoption\_shared}
+
+\NormalTok{    pytest\_addoption\_shared(parser)}
+
+
+\KeywordTok{def}\NormalTok{ pytest\_terminal\_summary(terminalreporter):}
+    \ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ pytest\_terminal\_summary\_main}
+
+\NormalTok{    make\_reports }\OperatorTok{=}\NormalTok{ terminalreporter.config.getoption(}\StringTok{"{-}{-}make{-}reports"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{ make\_reports:}
+\NormalTok{        pytest\_terminal\_summary\_main(terminalreporter, }\BuiltInTok{id}\OperatorTok{=}\NormalTok{make\_reports)}
+\end{Highlighting}
+\end{Shaded}
+
+and then when you run the test suite, add
+\texttt{-\/-make-reports=mytests} like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pytest} \AttributeTok{{-}{-}make{-}reports}\OperatorTok{=}\NormalTok{mytests tests}
+\end{Highlighting}
+\end{Shaded}
+
+and it'll create 8 separate reports:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ ls }\AttributeTok{{-}1}\NormalTok{ reports/mytests/}
+\ExtensionTok{durations.txt}
+\ExtensionTok{errors.txt}
+\ExtensionTok{failures\_line.txt}
+\ExtensionTok{failures\_long.txt}
+\ExtensionTok{failures\_short.txt}
+\ExtensionTok{stats.txt}
+\ExtensionTok{summary\_short.txt}
+\ExtensionTok{warnings.txt}
+\end{Highlighting}
+\end{Shaded}
+
+so now instead of having only a single output from \texttt{pytest} with
+everything together, you can now have each type of report saved into
+each own file.
+
+This feature is most useful on CI, which makes it much easier to both
+introspect problems and also view and download individual reports.
+
+Using a different value to \texttt{-\/-make-reports=} for different
+groups of tests can have each group saved separately rather than
+clobbering each other.
+
+All this functionality was already inside \texttt{pytest} but there was
+no way to extract it easily so I added the monkey-patching overrides
+\url{testing_utils.py}. Well, I did ask if I can contribute this as a
+feature to \texttt{pytest} but my proposal wasn't welcome.
+
+
+
+\end{document}

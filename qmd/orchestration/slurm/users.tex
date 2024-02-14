@@ -1,0 +1,1590 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{report}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{2024-02-13}
+
+\begin{document}
+
+\chapter{SLURM for users}\label{slurm-for-users}
+
+\section{Quick start}\label{quick-start}
+
+Simply copy this \href{./example.slurm}{example.slurm} and adapt it to
+your needs.
+
+\section{SLURM partitions}\label{slurm-partitions}
+
+In this doc we will use an example setup with these 2 cluster names:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{dev}
+\item
+  \texttt{prod}
+\end{itemize}
+
+To find out the hostname of the nodes and their availability, use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sinfo} \AttributeTok{{-}p}\NormalTok{ dev}
+\ExtensionTok{sinfo} \AttributeTok{{-}p}\NormalTok{ prod}
+\end{Highlighting}
+\end{Shaded}
+
+Slurm configuration is at \texttt{/opt/slurm/etc/slurm.conf}.
+
+\section{Wait time for resource
+granting}\label{wait-time-for-resource-granting}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{squeue} \AttributeTok{{-}u} \KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}} \AttributeTok{{-}{-}start}
+\end{Highlighting}
+\end{Shaded}
+
+will show when any pending jobs are scheduled to start.
+
+They may start sooner if others cancel their reservations before the end
+of the reservation.
+
+\section{Request allocation via
+dependency}\label{request-allocation-via-dependency}
+
+To schedule a new job when one more of the currently scheduled job ends
+(regardless of whether it still running or not started yet), use the
+dependency mechanism, by telling \texttt{sbatch} to start the new job
+once the currently running job succeeds, using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sbatch} \AttributeTok{{-}{-}dependency}\OperatorTok{=}\NormalTok{CURRENTLY\_RUNNING\_JOB\_ID tr1{-}13B{-}round1.slurm}
+\end{Highlighting}
+\end{Shaded}
+
+Using \texttt{-\/-dependency} may lead to shorter wait times that using
+\texttt{-\/-begin}, since if the time passed to \texttt{-\/-begin}
+allows even for a few minutes of delay since the stopping of the last
+job, the scheduler may already start some other jobs even if their
+priority is lower than our job. That's because the scheduler ignores any
+jobs with \texttt{-\/-begin} until the specified time arrives.
+
+\section{Make allocations at a scheduled
+time}\label{make-allocations-at-a-scheduled-time}
+
+To postpone making the allocation for a given time, use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{salloc} \AttributeTok{{-}{-}begin}\NormalTok{ HH:MM MM/DD/YY}
+\end{Highlighting}
+\end{Shaded}
+
+Same for \texttt{sbatch}.
+
+It will simply put the job into the queue at the requested time, as if
+you were to execute this command at this time. If resources are
+available at that time, the allocation will be given right away.
+Otherwise it'll be queued up.
+
+Sometimes the relative begin time is useful. And other formats can be
+used. Examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{{-}{-}begin}\NormalTok{ now+2hours}
+\ExtensionTok{{-}{-}begin=16:00}
+\ExtensionTok{{-}{-}begin=now+1hour}
+\ExtensionTok{{-}{-}begin=now+60}  \CommentTok{\# seconds by default}
+\ExtensionTok{{-}{-}begin=2010{-}01{-}20T12:34:00}
+\end{Highlighting}
+\end{Shaded}
+
+the time-units can be \texttt{seconds} (default), \texttt{minutes},
+\texttt{hours}, \texttt{days}, or \texttt{weeks}:
+
+\section{Preallocated node without time 60min
+limit}\label{preallocated-node-without-time-60min-limit}
+
+This is very useful for running repetitive interactive experiments - so
+one doesn't need to wait for an allocation to progress. so the strategy
+is to allocate the resources once for an extended period of time and
+then running interactive \texttt{srun} jobs using this allocation.
+
+set \texttt{-\/-time} to the desired window (e.g.~6h):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{salloc} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{dev }\AttributeTok{{-}{-}nodes}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}ntasks{-}per{-}node}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{96 }\AttributeTok{{-}{-}gres}\OperatorTok{=}\NormalTok{gpu:8 }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{6:00:00 bash}
+\ExtensionTok{salloc:}\NormalTok{ Pending job allocation 1732778}
+\ExtensionTok{salloc:}\NormalTok{ job 1732778 queued and waiting for resources}
+\ExtensionTok{salloc:}\NormalTok{ job 1732778 has been allocated resources}
+\ExtensionTok{salloc:}\NormalTok{ Granted job allocation 1732778}
+\end{Highlighting}
+\end{Shaded}
+
+now use this reserved node to run a job multiple times, by passing the
+job id of \texttt{salloc}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid} \VariableTok{$SLURM\_JOBID} \AttributeTok{{-}{-}pty}\NormalTok{ bash}
+\end{Highlighting}
+\end{Shaded}
+
+if run from inside \texttt{bash} started via \texttt{salloc}. But it can
+be started from another shell, but then explicitly set
+\texttt{-\/-jobid}.
+
+if this \texttt{srun} job timed out or manually exited, you can re-start
+it again in this same reserved node.
+
+\texttt{srun} can, of course, call the real training command directly
+and not just \texttt{bash}.
+
+Important: when allocating a single node, the allocated shell is not on
+the node (it never is). You have to find out the hostname of the node
+(reports when giving the allocation or via \texttt{squeue} and
+\texttt{ssh} to it.
+
+When finished, to release the resources, either exit the shell started
+in \texttt{salloc} or \texttt{scancel\ JOBID}.
+
+This reserved node will be counted towards hours usage the whole time
+it's allocated, so release as soon as done with it.
+
+Actually, if this is just one node, then it's even easier to not use
+\texttt{salloc} but to use \texttt{srun} in the first place, which will
+both allocate and give you the shell to use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun} \AttributeTok{{-}{-}pty} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{dev }\AttributeTok{{-}{-}nodes}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{96 }\AttributeTok{{-}{-}gres}\OperatorTok{=}\NormalTok{gpu:8 }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{60 bash}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Hyper-Threads}\label{hyper-threads}
+
+By default, if the cpu has hyper-threads (HT), SLURM will use it. If you
+don't want to use HT you have to specify
+\texttt{-\/-hint=nomultithread}.
+
+footnote: HT is Intel-specific naming, the general concept is
+simultaneous multithreading (SMT)
+
+For example for a cluster with with 2 cpus per node with 24 cores and 2
+hyper-threads each, there is a total of 96 hyper-threads or 48 cpu-cores
+available. Therefore to utilize the node fully you'd need to configure
+either:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=96}
+\end{Highlighting}
+\end{Shaded}
+
+or if you don't want HT:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=48}
+\CommentTok{\#SBATCH {-}{-}hint=nomultithread}
+\end{Highlighting}
+\end{Shaded}
+
+This last approach will allocate one thread per core and in this mode
+there are only 48 cpu cores to use.
+
+Note that depending on your application there can be quite a performance
+difference between these 2 modes. Therefore try both and see which one
+gives you a better outcome.
+
+On some setups like AWS the all-reduce throughput degrades dramatically
+when \texttt{-\/-hint=nomultithread} is used! Whereas on some other
+setups the opposite is true - the throughput is worse without HT!
+
+\section{Reuse allocation}\label{reuse-allocation}
+
+e.g.~when wanting to run various jobs on identical node allocation.
+
+In one shell:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{salloc} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{prod }\AttributeTok{{-}{-}nodes}\OperatorTok{=}\NormalTok{16 }\AttributeTok{{-}{-}ntasks}\OperatorTok{=}\NormalTok{16 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{96 }\AttributeTok{{-}{-}gres}\OperatorTok{=}\NormalTok{gpu:8 }\AttributeTok{{-}{-}time}\OperatorTok{=}\NormalTok{3:00:00 bash}
+\BuiltInTok{echo} \VariableTok{$SLURM\_JOBID}
+\end{Highlighting}
+\end{Shaded}
+
+In another shell:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{export} \VariableTok{SLURM\_JOBID}\OperatorTok{=\textless{}}\NormalTok{JOB ID FROM ABOVE}\OperatorTok{\textgreater{}}
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid}\OperatorTok{=}\VariableTok{$SLURM\_JOBID}\NormalTok{ ...}
+\end{Highlighting}
+\end{Shaded}
+
+You may need to set \texttt{-\/-gres=gpu:0} to run some diagnostics job
+on the nodes. For example, let's check shared memory of all the hosts:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid}\NormalTok{ 631078 }\AttributeTok{{-}{-}gres}\OperatorTok{=}\NormalTok{gpu:0 bash }\AttributeTok{{-}c} \StringTok{\textquotesingle{}echo $(hostname) $(df {-}h | grep shm)\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Specific nodes selection}\label{specific-nodes-selection}
+
+To exclude specific nodes (useful when you know some nodes are broken,
+but are still in IDLE state):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sbatch} \AttributeTok{{-}{-}exclude}\NormalTok{ nodeA,nodeB}
+\end{Highlighting}
+\end{Shaded}
+
+or via: \texttt{\#SBATCH\ -\/-exclude\ ...}
+
+To use specific nodes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sbatch} \AttributeTok{{-}{-}nodelist}\OperatorTok{=}\NormalTok{ nodeA,nodeB}
+\end{Highlighting}
+\end{Shaded}
+
+can also use the short \texttt{-w} instead of \texttt{-\/-nodelist}
+
+The administrator could also define a \texttt{feature=example} in
+\texttt{slurm.conf} and then a user could ask for that subset of nodes
+via \texttt{-\/-constraint=example}
+
+\section{Signal the running jobs to
+finish}\label{signal-the-running-jobs-to-finish}
+
+Since each SLURM run has a limited time span, it can be configured to
+send a signal of choice to the program a desired amount of time before
+the end of the allocated time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{{-}{-}signal=[[R][B]:]}\OperatorTok{\textless{}}\NormalTok{sig\_num}\OperatorTok{\textgreater{}}\NormalTok{[@}\OperatorTok{\textless{}}\NormalTok{sig\_time}\OperatorTok{\textgreater{}}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+TODO: need to experiment with this to help training finish gracefully
+and not start a new cycle after saving the last checkpoint.
+
+\section{Detailed job info}\label{detailed-job-info}
+
+While most useful information is preset in various \texttt{SLURM\_*} env
+vars, sometimes the info is missing. In such cases use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scontrol}\NormalTok{ show }\AttributeTok{{-}d}\NormalTok{ job }\VariableTok{$SLURM\_JOB\_ID}
+\end{Highlighting}
+\end{Shaded}
+
+and then parse out what's needed.
+
+For a job that finished its run use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sacct} \AttributeTok{{-}j}\NormalTok{ JOBID}
+\end{Highlighting}
+\end{Shaded}
+
+e.g.~with more details, depending on the partition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sacct} \AttributeTok{{-}u} \KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{dev  }\AttributeTok{{-}ojobid,start,end,state,exitcode} \AttributeTok{{-}{-}format}\NormalTok{ nodelist\%300  }\AttributeTok{{-}j}\NormalTok{ JOBID}
+\ExtensionTok{sacct} \AttributeTok{{-}u} \KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{prod }\AttributeTok{{-}ojobid,start,end,state,exitcode} \AttributeTok{{-}{-}format}\NormalTok{ nodelist\%300  }\AttributeTok{{-}j}\NormalTok{ JOBID}
+\end{Highlighting}
+\end{Shaded}
+
+\section{show jobs}\label{show-jobs}
+
+Show only my jobs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{squeue} \AttributeTok{{-}u} \KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}}
+\end{Highlighting}
+\end{Shaded}
+
+Show jobs by job id:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{squeue} \AttributeTok{{-}j}\NormalTok{ JOBID}
+\end{Highlighting}
+\end{Shaded}
+
+Show jobs of a specific partition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{squeue} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{dev}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Aliases}\label{aliases}
+
+Handy aliases
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{alias}\NormalTok{ myjobs=}\StringTok{\textquotesingle{}squeue {-}u \textasciigrave{}whoami\textasciigrave{} {-}o "\%.16i \%9P \%26j \%.8T \%.10M \%.8l \%.6D \%.20S \%R"\textquotesingle{}}
+\BuiltInTok{alias}\NormalTok{ groupjobs=}\StringTok{\textquotesingle{}squeue {-}u foo,bar,tar {-}o "\%.16i \%u \%9P \%26j \%.8T \%.10M \%.8l \%.6D \%.20S \%R"\textquotesingle{}}
+\BuiltInTok{alias}\NormalTok{ myjobs{-}pending=}\StringTok{"squeue {-}u }\KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}}\StringTok{ {-}{-}start"}
+\BuiltInTok{alias}\NormalTok{ idle{-}nodes=}\StringTok{"sinfo {-}p prod {-}o \textquotesingle{}\%A\textquotesingle{}"}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Zombies}\label{zombies}
+
+If there are any zombies left behind across nodes, send one command to
+kill them all.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun}\NormalTok{ pkill python}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Detailed Access to SLURM
+Accounting}\label{detailed-access-to-slurm-accounting}
+
+\texttt{sacct} displays accounting data for all jobs and job steps in
+the Slurm job accounting log or Slurm database.
+
+So this is a great tool for analysing past events.
+
+For example, to see which nodes were used to run recent gpu jobs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sacct} \AttributeTok{{-}u} \KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{dev }\AttributeTok{{-}ojobid,start,end,state,exitcode} \AttributeTok{{-}{-}format}\NormalTok{ nodelist\%300}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\%300} here tells it to use a 300 char width for the output, so
+that it's not truncated.
+
+See \texttt{man\ sacct} for more fields and info fields.
+
+\section{Queue}\label{queue}
+
+\subsection{Cancel job}\label{cancel-job}
+
+To cancel a job:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scancel} \PreprocessorTok{[}\SpecialStringTok{jobid}\PreprocessorTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+To cancel all of your jobs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scancel} \AttributeTok{{-}u} \OperatorTok{\textless{}}\NormalTok{userid}\OperatorTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+To cancel all of your jobs on a specific partition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scancel} \AttributeTok{{-}u} \OperatorTok{\textless{}}\NormalTok{userid}\OperatorTok{\textgreater{}}\NormalTok{ {-}p }\OperatorTok{\textless{}}\NormalTok{partition}\OperatorTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Tips}\label{tips}
+
+\begin{itemize}
+\tightlist
+\item
+  if you see that \texttt{salloc}'ed interactive job is scheduled to run
+  much later than you need, try to cancel the job and ask for shorter
+  period - often there might be a closer window for a shorter time
+  allocation.
+\end{itemize}
+
+\section{Logging}\label{logging}
+
+If we need to separate logs to different log files per node add
+\texttt{\%N} (for short hostname) so that we have:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j{-}\%N.out}
+\end{Highlighting}
+\end{Shaded}
+
+That way we can tell if a specific node misbehaves - e.g.~has a corrupt
+GPU. This is because currently pytorch doesn't log which node / gpu rank
+triggered an exception.
+
+Hoping it'll be a built-in feature of pytorch
+https://github.com/pytorch/pytorch/issues/63174 and then one won't need
+to make things complicated on the logging side.
+
+\section{Show the state of nodes}\label{show-the-state-of-nodes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sinfo} \AttributeTok{{-}p}\NormalTok{ PARTITION}
+\end{Highlighting}
+\end{Shaded}
+
+Very useful command is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sinfo} \AttributeTok{{-}s}
+\end{Highlighting}
+\end{Shaded}
+
+and look for the main stat, e.g.:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{NODES}\ErrorTok{(}\ExtensionTok{A/I/O/T}\KeywordTok{)} \StringTok{"allocated/idle/other/total"}\ExtensionTok{.}
+\ExtensionTok{597/0/15/612}
+\end{Highlighting}
+\end{Shaded}
+
+So here 597 out of 612 nodes are allocated. 0 idle and 15 are not
+available for whatever other reasons.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sinfo} \AttributeTok{{-}p}\NormalTok{ gpu\_p1 }\AttributeTok{{-}o} \StringTok{"\%A"}
+\end{Highlighting}
+\end{Shaded}
+
+gives:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{NODES}\ErrorTok{(}\ExtensionTok{A/I}\KeywordTok{)}
+\ExtensionTok{236/24}
+\end{Highlighting}
+\end{Shaded}
+
+so you can see if any nodes are available on the 4x v100-32g partition
+(\texttt{gpu\_p1})
+
+To check a specific partition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sinfo} \AttributeTok{{-}p}\NormalTok{ gpu\_p1 }\AttributeTok{{-}o} \StringTok{"\%A"}
+\end{Highlighting}
+\end{Shaded}
+
+See the table at the top of this document for which partition is which.
+
+\subsection{sinfo states}\label{sinfo-states}
+
+\begin{itemize}
+\tightlist
+\item
+  idle: no jobs running
+\item
+  alloc: nodes are allocated to jobs that are currently executing
+\item
+  mix: the nodes have some of the CPUs allocated, while others are idle
+\item
+  drain: the node is unavailable due to an administrative reason
+\item
+  drng: the node is running a job, but will after completion not be
+  available due to an administrative reason
+\end{itemize}
+
+\subsection{drained nodes}\label{drained-nodes}
+
+To see all drained nodes and the reason for drainage (edit
+\texttt{\%50E} to make the reason field longer/shorter)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{\%}\NormalTok{ sinfo }\AttributeTok{{-}R} \AttributeTok{{-}o} \StringTok{"\%50E \%12U \%19H \%6t \%N"}
+\end{Highlighting}
+\end{Shaded}
+
+or just \texttt{-R} if you want it short:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{\%}\NormalTok{ sinfo }\AttributeTok{{-}R}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Job arrays}\label{job-arrays}
+
+To run a sequence of jobs, so that the next slurm job is scheduled as
+soon as the currently running one is over in 20h we use a job array.
+
+Let's start with just 10 such jobs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sbatch} \AttributeTok{{-}{-}array}\OperatorTok{=}\NormalTok{1{-}10\%1 array{-}test.slurm}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\%1} limits the number of simultaneously running tasks from this
+job array to 1. Without it it will try to run all the jobs at once,
+which we may want sometimes (in which case remove \%1), but when
+training we need one job at a time.
+
+Alternatively, as always this param can be part of the script:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SBATCH {-}{-}array=1{-}10\%1}
+\end{Highlighting}
+\end{Shaded}
+
+Here is toy slurm script, which can be used to see how it works:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=array{-}test}
+\CommentTok{\#SBATCH {-}{-}nodes=1}
+\CommentTok{\#SBATCH {-}{-}ntasks{-}per{-}node=1          \# crucial {-} only 1 task per dist per node!}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=1            \# number of cores per tasks}
+\CommentTok{\#SBATCH {-}{-}time 00:02:00              \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#SBATCH {-}{-}error=\%x{-}\%j.out            \# error file name (same to watch just one file)}
+\CommentTok{\#SBATCH {-}{-}partition=dev}
+
+\BuiltInTok{echo} \VariableTok{$SLURM\_JOB\_ID}
+\BuiltInTok{echo} \StringTok{"I am job }\VariableTok{$\{SLURM\_ARRAY\_JOB\_ID\}}\StringTok{\_}\VariableTok{$\{SLURM\_ARRAY\_TASK\_ID\}}\StringTok{"}
+\FunctionTok{date}
+\FunctionTok{sleep}\NormalTok{ 10}
+\FunctionTok{date}
+\end{Highlighting}
+\end{Shaded}
+
+Note \texttt{\$SLURM\_ARRAY\_JOB\_ID} is the same as
+\texttt{\$SLURM\_JOB\_ID}, and \texttt{\$SLURM\_ARRAY\_TASK\_ID} is the
+index of the job.
+
+To see the jobs running:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ squeue }\AttributeTok{{-}u} \KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}} \AttributeTok{{-}o} \StringTok{"\%.10i \%9P \%26j \%.8T \%.10M \%.6D \%.20S \%R"}
+     \ExtensionTok{JOBID}\NormalTok{ PARTITION                       NAME    STATE       TIME  NODES           START\_TIME NODELIST}\ErrorTok{(}\ExtensionTok{REASON}\KeywordTok{)}
+\ExtensionTok{591970\_[2{-}}\NormalTok{   dev             array{-}test  PENDING       0:00      1  2021{-}07{-}28T20:01:06 }\ErrorTok{(}\ExtensionTok{JobArrayTaskLimit}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+now job 2 is running.
+
+To cancel the whole array, cancel the job id as normal (the number
+before \texttt{\_}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scancel}\NormalTok{ 591970}
+\end{Highlighting}
+\end{Shaded}
+
+To cancel a specific job:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scancel}\NormalTok{ 591970\_2}
+\end{Highlighting}
+\end{Shaded}
+
+If it's important to have the log-file contain the array id, add
+\texttt{\%A\_\%a}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.\%A\_\%a.log}
+\end{Highlighting}
+\end{Shaded}
+
+More details https://slurm.schedmd.com/job\_array.html
+
+\section{Job Array Trains and their Suspend and
+Release}\label{job-array-trains-and-their-suspend-and-release}
+
+In this recipe we accomplish 2 things:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Allow modification to the next job's slurm script
+\item
+  Allow suspending and resuming job arrays w/o losing the place in the
+  queue when not being ready to continue running a job
+\end{enumerate}
+
+SLURM is a very unforgiving environment where a small mistake can cost
+days of waiting time. But there are strategies to mitigate some of this
+harshness.
+
+SLURM jobs have a concept of ``age'' in the queue which besides project
+priority governs when a job gets scheduled to run. If your have just
+scheduled a new job it has no ``age'' and will normally be put to run
+last compared to jobs that have entered the queue earlier. Unless of
+course this new job comes from a high priority project in which case
+it'll progress faster.
+
+So here is how one can keep the ``age'' and not lose it when needing to
+fix something in the running script or for example to switch over to
+another script.
+
+The idea is this:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{sbatch} a long job array, e.g., \texttt{-array=1-50\%1}
+\item
+  inside the slurm script don't have any code other than
+  \texttt{source\ another-script.slurm} - so now you can modify the
+  target script or symlink to another script before the next job starts
+\item
+  if you need to stop the job array train - don't cancel it, but suspend
+  it without losing your place in a queue
+\item
+  when ready to continue - unsuspend the job array - only the time while
+  it was suspended is not counted towards its age, but all the previous
+  age is retained.
+\end{enumerate}
+
+The only limitation of this recipe is that you can't change the number
+of nodes, time and hardware and partition constraints once the job array
+was launched.
+
+Here is an example:
+
+Create a job script:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat train{-}64n.slurm}
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=tr8{-}104B}
+\CommentTok{\#SBATCH {-}{-}nodes=64}
+\CommentTok{\#SBATCH {-}{-}ntasks{-}per{-}node=1          \# crucial {-} only 1 task per dist per node!}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=96           \# number of cores per tasks}
+\CommentTok{\#SBATCH {-}{-}gres=gpu:8                 \# number of gpus}
+\CommentTok{\#SBATCH {-}{-}time 20:00:00              \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#SBATCH {-}{-}partition=dev}
+
+\BuiltInTok{source}\NormalTok{ tr8{-}104B{-}64.slurm}
+\end{Highlighting}
+\end{Shaded}
+
+Start it as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sbatch} \AttributeTok{{-}{-}array}\OperatorTok{=}\NormalTok{1{-}50\%1 train{-}64.slurm}
+\end{Highlighting}
+\end{Shaded}
+
+Now you can easily edit \texttt{tr8-104B-64.slurm} before the next job
+run and either let the current job finish if it's desired or if you need
+to abort it, just kill the currently running job,
+e.g.~\texttt{1557903\_5} (not job array \texttt{1557903}) and have the
+train pick up where it left, but with the edited script.
+
+The nice thing is that this requires no changes to the original script
+(\texttt{tr8-104B-64.slurm} in this example), and the latter can still
+be started on its own.
+
+Now, what if something is wrong and you need 10min or 10h to fix
+something. In this case we suspend the train using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scontrol}\NormalTok{ hold }\OperatorTok{\textless{}}\NormalTok{jobid}\OperatorTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+with being either a ``normal'' job, the id of a job array or the id for
+a job array step
+
+and then when ready to continue release the job:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{scontrol}\NormalTok{ release }\OperatorTok{\textless{}}\NormalTok{jobid}\OperatorTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Troubleshooting}\label{troubleshooting}
+
+\subsection{Mismatching nodes number}\label{mismatching-nodes-number}
+
+If the pytorch launcher fails it often means that the number of SLURM
+nodes and the launcher nodes are mismatching, e.g.:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grep} \AttributeTok{{-}ir}\NormalTok{ nodes= tr123{-}test.slurm}
+\CommentTok{\#SBATCH {-}{-}nodes=40}
+\VariableTok{NNODES}\OperatorTok{=}\NormalTok{64}
+\end{Highlighting}
+\end{Shaded}
+
+This won't work. They have to match.
+
+You can add a sanity check to your script:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=test{-}mismatch}
+\CommentTok{\#SBATCH {-}{-}nodes=2}
+\CommentTok{\#SBATCH {-}{-}ntasks{-}per{-}node=1          \# crucial {-} only 1 task per dist per node!}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=96           \# number of cores per tasks}
+\CommentTok{\#SBATCH {-}{-}gres=gpu:8                 \# number of gpus}
+\CommentTok{\#SBATCH {-}{-}time 0:05:00               \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#SBATCH {-}{-}partition=prod}
+
+\ExtensionTok{[...]}
+
+\VariableTok{NNODES}\OperatorTok{=}\NormalTok{2}
+
+\CommentTok{\# sanity check for having NNODES and \textasciigrave{}\#SBATCH {-}{-}nodes\textasciigrave{} match, assuming you use NNODES variable}
+\ControlFlowTok{if} \BuiltInTok{[} \StringTok{"}\VariableTok{$NNODES}\StringTok{"} \OtherTok{!=} \StringTok{"}\VariableTok{$SLURM\_NNODES}\StringTok{"} \BuiltInTok{]}\KeywordTok{;} \ControlFlowTok{then}
+    \BuiltInTok{echo} \StringTok{"Misconfigured script: NNODES=}\VariableTok{$NNODES}\StringTok{ != SLURM\_NNODES=}\VariableTok{$SLURM\_NNODES}\StringTok{"}
+    \BuiltInTok{exit}\NormalTok{ 1}
+\ControlFlowTok{fi}
+
+\ExtensionTok{[...]}
+\end{Highlighting}
+\end{Shaded}
+
+or you could just do:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SBATCH {-}{-}nodes=2}
+\ExtensionTok{[...]}
+\VariableTok{NNODES}\OperatorTok{=}\VariableTok{$SLURM\_NNODES}
+\end{Highlighting}
+\end{Shaded}
+
+and then it will always be correct
+
+\subsection{Find faulty nodes and exclude
+them}\label{find-faulty-nodes-and-exclude-them}
+
+Sometimes a node is broken, which prevents one from training, especially
+since restarting the job often hits the same set of nodes. So one needs
+to be able to isolate the bad node(s) and exclude it from
+\texttt{sbatch}.
+
+To find a faulty node, write a small script that reports back the status
+of the desired check.
+
+For example to test if cuda is available on all nodes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python} \AttributeTok{{-}c} \StringTok{\textquotesingle{}import torch, socket; print(f"\{socket.gethostname()\}: \{torch.cuda.is\_available()\}")\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+and to only report the nodes that fail:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python} \AttributeTok{{-}c} \StringTok{\textquotesingle{}import torch, socket; torch.cuda.is\_available() or print(f"Broken node: \{socket.gethostname()\}") \textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+Of course, the issue could be different - e.g.~gpu can't allocate
+memory, so change the test script to do a small allocation on cuda. Here
+is one way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python} \AttributeTok{{-}c} \StringTok{"import torch; torch.ones(1000,1000).cuda()"}
+\end{Highlighting}
+\end{Shaded}
+
+But since we need to run the test script on all nodes and not just the
+first node, the slurm script needs to run it via \texttt{srun}. So our
+first diagnostics script can be written as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid} \VariableTok{$SLURM\_JOBID}\NormalTok{ bash }\AttributeTok{{-}c} \StringTok{\textquotesingle{}python {-}c "import torch, socket; print(socket.gethostname(), torch.cuda.is\_available())"\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+I slightly changed it, due to an issue with quotes.
+
+You can always convert the one liner into a real script and then there
+is no issue with quotes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat }\OperatorTok{\textless{}\textless{} EOT} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ test{-}nodes.py}
+\StringTok{\#!/usr/bin/env python}
+\StringTok{import torch, socket}
+\StringTok{print(socket.gethostname(), torch.cuda.is\_available())}
+\OperatorTok{EOT}
+\ExtensionTok{$}\NormalTok{ chmod a+x ./test{-}nodes.py}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's create a driver slurm script. Use a few minutes time for this
+test so that SLURM yields it faster:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=test{-}nodes}
+\CommentTok{\#SBATCH {-}{-}nodes=4}
+\CommentTok{\#SBATCH {-}{-}ntasks{-}per{-}node=1          \# crucial {-} only 1 task per dist per node!}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=96           \# number of cores per tasks}
+\CommentTok{\#SBATCH {-}{-}gres=gpu:8                 \# number of gpus}
+\CommentTok{\#SBATCH {-}{-}time 0:05:00               \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#SBATCH {-}{-}partition=prod}
+
+\BuiltInTok{source} \VariableTok{$six\_ALL\_CCFRWORK}\NormalTok{/start{-}prod}
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid} \VariableTok{$SLURM\_JOBID}\NormalTok{ ./test{-}nodes.py}
+\end{Highlighting}
+\end{Shaded}
+
+Once it runs check the logs to see if any reported \texttt{False}, those
+are the nodes you want to exclude.
+
+Now once the faulty node(s) is found, feed it to \texttt{sbatch}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sbatch} \AttributeTok{{-}{-}exclude}\OperatorTok{=}\NormalTok{hostname1,hostname2 ...}
+\end{Highlighting}
+\end{Shaded}
+
+and \texttt{sbatch} will exclude the bad nodes from the allocation.
+
+Additionally please report the faulty nodes to
+\texttt{\#science-support} so that they get replaced
+
+Here are a few more situations and how to find the bad nodes in those
+cases:
+
+\subsection{Broken NCCL}\label{broken-nccl}
+
+If you're testing something that requires distributed setup, it's a bit
+more complex. Here is a slurm script that tests that NCCL works. It sets
+up NCCL and checks that barrier works:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=test{-}nodes{-}nccl}
+\CommentTok{\#SBATCH {-}{-}nodes=2}
+\CommentTok{\#SBATCH {-}{-}ntasks{-}per{-}node=1          \# crucial {-} only 1 task per dist per node!}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=96           \# number of cores per tasks}
+\CommentTok{\#SBATCH {-}{-}gres=gpu:8                 \# number of gpus}
+\CommentTok{\#SBATCH {-}{-}time 0:05:00               \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#SBATCH {-}{-}partition=prod}
+
+\BuiltInTok{source} \VariableTok{$six\_ALL\_CCFRWORK}\NormalTok{/start{-}prod}
+
+\VariableTok{NNODES}\OperatorTok{=}\NormalTok{2}
+
+\VariableTok{GPUS\_PER\_NODE}\OperatorTok{=}\NormalTok{4}
+\VariableTok{MASTER\_ADDR}\OperatorTok{=}\VariableTok{$(}\ExtensionTok{scontrol}\NormalTok{ show hostnames }\VariableTok{$SLURM\_JOB\_NODELIST} \KeywordTok{|} \FunctionTok{head} \AttributeTok{{-}n}\NormalTok{ 1}\VariableTok{)}
+\VariableTok{MASTER\_PORT}\OperatorTok{=}\NormalTok{6000}
+
+\BuiltInTok{export} \VariableTok{LAUNCHER}\OperatorTok{=}\StringTok{"python {-}u {-}m torch.distributed.launch }\DataTypeTok{\textbackslash{}}
+\StringTok{    {-}{-}nproc\_per\_node }\VariableTok{$GPUS\_PER\_NODE}\StringTok{ }\DataTypeTok{\textbackslash{}}
+\StringTok{    {-}{-}nnodes }\VariableTok{$NNODES}\StringTok{ }\DataTypeTok{\textbackslash{}}
+\StringTok{    {-}{-}master\_addr }\VariableTok{$MASTER\_ADDR}\StringTok{ }\DataTypeTok{\textbackslash{}}
+\StringTok{    {-}{-}master\_port }\VariableTok{$MASTER\_PORT}\StringTok{ }\DataTypeTok{\textbackslash{}}
+\StringTok{    "}
+
+\BuiltInTok{export} \VariableTok{SCRIPT}\OperatorTok{=}\NormalTok{test{-}nodes{-}nccl.py}
+
+\FunctionTok{cat} \OperatorTok{\textless{}\textless{} EOT} \OperatorTok{\textgreater{}} \VariableTok{$SCRIPT}
+\StringTok{\#!/usr/bin/env python}
+\StringTok{import torch.distributed as dist}
+\StringTok{import torch}
+\StringTok{import socket}
+\StringTok{import os}
+\StringTok{import fcntl}
+
+\StringTok{def printflock(*msgs):}
+\StringTok{    """ print """}
+\StringTok{    with open(\_\_file\_\_, "r") as fh:}
+\StringTok{        fcntl.flock(fh, fcntl.LOCK\_EX)}
+\StringTok{        try:}
+\StringTok{            print(*msgs)}
+\StringTok{        finally:}
+\StringTok{            fcntl.flock(fh, fcntl.LOCK\_UN)}
+
+\StringTok{local\_rank = int(os.environ["LOCAL\_RANK"])}
+\StringTok{torch.cuda.set\_device(local\_rank)}
+\StringTok{dist.init\_process\_group("nccl")}
+\StringTok{header = f"\{socket.gethostname()\}{-}\{local\_rank\}"}
+\StringTok{try:}
+\StringTok{    dist.barrier()}
+\StringTok{    printflock(f"\{header\}: NCCL \{torch.cuda.nccl.version()\} is OK")}
+\StringTok{except:}
+\StringTok{    printflock(f"\{header\}: NCCL \{torch.cuda.nccl.version()\} is broken")}
+\StringTok{    raise}
+\OperatorTok{EOT}
+
+\BuiltInTok{echo} \VariableTok{$LAUNCHER} \AttributeTok{{-}{-}node\_rank} \VariableTok{$SLURM\_PROCID} \VariableTok{$SCRIPT}
+
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid} \VariableTok{$SLURM\_JOBID}\NormalTok{ bash }\AttributeTok{{-}c} \StringTok{\textquotesingle{}$LAUNCHER {-}{-}node\_rank $SLURM\_PROCID $SCRIPT\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+The script uses \texttt{printflock} to solve the interleaved print
+outputs issue.
+
+\subsection{GPU Memory Check}\label{gpu-memory-check}
+
+This tests if each GPU on the allocated nodes can successfully allocate
+77Gb (e.g.~to test 80GB A100s) (have to subtract a few GBs for cuda
+kernels).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ torch, os}
+\ImportTok{import}\NormalTok{ time}
+\ImportTok{import}\NormalTok{ socket}
+\NormalTok{hostname }\OperatorTok{=}\NormalTok{ socket.gethostname()}
+
+\NormalTok{local\_rank }\OperatorTok{=} \BuiltInTok{int}\NormalTok{(os.environ[}\StringTok{"LOCAL\_RANK"}\NormalTok{])}\OperatorTok{;}
+
+\NormalTok{gbs }\OperatorTok{=} \DecValTok{77}
+\ControlFlowTok{try}\NormalTok{:}
+\NormalTok{    torch.ones((gbs}\OperatorTok{*}\DecValTok{2}\OperatorTok{**}\DecValTok{28}\NormalTok{)).cuda(local\_rank).contiguous() }\CommentTok{\# alloc on cpu, then move to gpu}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{local\_rank}\SpecialCharTok{\}}\SpecialStringTok{ }\SpecialCharTok{\{}\NormalTok{hostname}\SpecialCharTok{\}}\SpecialStringTok{ is OK"}\NormalTok{)}
+\ControlFlowTok{except}\NormalTok{:}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{local\_rank}\SpecialCharTok{\}}\SpecialStringTok{ }\SpecialCharTok{\{}\NormalTok{hostname}\SpecialCharTok{\}}\SpecialStringTok{ failed to allocate }\SpecialCharTok{\{}\NormalTok{gbs}\SpecialCharTok{\}}\SpecialStringTok{GB DRAM"}\NormalTok{)}
+    \ControlFlowTok{pass}
+
+\NormalTok{time.sleep(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Broken Network}\label{broken-network}
+
+Yet another issue with a node is when its network is broken and other
+nodes fail to connect to it.
+
+You're likely to experience it with an error similar to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{work}\NormalTok{ = default\_pg.barrier}\ErrorTok{(}\VariableTok{opts}\OperatorTok{=}\NormalTok{opts}\KeywordTok{)}
+\ExtensionTok{RuntimeError:}\NormalTok{ NCCL error in: /opt/conda/conda{-}bld/pytorch\_1616554793803/work/torch/lib/c10d/ProcessGroupNCCL.cpp:825, unhandled system error, NCCL version 2.7.8}
+\ExtensionTok{ncclSystemError:}\NormalTok{ System call }\ErrorTok{(}\ExtensionTok{socket,}\NormalTok{ malloc, munmap, etc}\KeywordTok{)} \ExtensionTok{failed.}
+\end{Highlighting}
+\end{Shaded}
+
+Here is how to debug this issue:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Add:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{export} \VariableTok{NCCL\_DEBUG}\OperatorTok{=}\NormalTok{INFO}
+\end{Highlighting}
+\end{Shaded}
+
+  before the \texttt{srun} command and re-run your slurm script.
+\item
+  Now study the logs. If you find:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{r11i6n2:486514:486651} \PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\NormalTok{ include/socket.h:403 NCCL WARN Connect to 10.148.3.247}\OperatorTok{\textless{}}\NormalTok{56821}\OperatorTok{\textgreater{}}\NormalTok{ failed : Connection refused}
+\end{Highlighting}
+\end{Shaded}
+
+  Let's see which node refuses to accept connections. We get the IP
+  address from the error above and reverse resolve it to its name:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{nslookup}\NormalTok{ 10.148.3.247}
+\ExtensionTok{247.3.148.10.in{-}addr.arpa}\NormalTok{       name = r10i6n5.ib0.xa.idris.fr.}
+\end{Highlighting}
+\end{Shaded}
+
+  Add \texttt{-\/-exclude=r10i6n5} to your \texttt{sbatch} command and
+  report it to JZ admins.
+\end{enumerate}
+
+\subsection{Run py-spy or any other monitor program across all
+nodes}\label{run-py-spy-or-any-other-monitor-program-across-all-nodes}
+
+When dealing with hanging, here is how to automatically log
+\texttt{py-spy} traces for each process.
+
+Of course, this same process can be used to run some command for all
+nodes of a given job. i.e.~it can be used to run something during the
+normal run - e.g.~dump all the memory usage in each process via
+\texttt{nvidia-smi} or whatever other program is needed to be run.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}/prod/code/tr8b{-}104B/bigscience/train/tr11{-}200B{-}ml/}
+
+\ExtensionTok{salloc} \AttributeTok{{-}{-}partition}\OperatorTok{=}\NormalTok{prod }\AttributeTok{{-}{-}nodes}\OperatorTok{=}\NormalTok{40 }\AttributeTok{{-}{-}ntasks{-}per{-}node}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}cpus{-}per{-}task}\OperatorTok{=}\NormalTok{96 }\AttributeTok{{-}{-}gres}\OperatorTok{=}\NormalTok{gpu:8 }\AttributeTok{{-}{-}time}\NormalTok{ 20:00:00}
+
+\FunctionTok{bash}\NormalTok{ 200B{-}n40{-}bf16{-}mono.slurm}
+\end{Highlighting}
+\end{Shaded}
+
+In another shell get the JOBID for the above \texttt{salloc}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{squeue} \AttributeTok{{-}u} \KeywordTok{\textasciigrave{}}\FunctionTok{whoami}\KeywordTok{\textasciigrave{}} \AttributeTok{{-}o} \StringTok{"\%.16i \%9P \%26j \%.8T \%.10M \%.8l \%.6D \%.20S \%R"}
+\end{Highlighting}
+\end{Shaded}
+
+adjust jobid per above and the nodes count (XXX: probably can remove
+\texttt{-\/-nodes=40} altogether and rely on \texttt{salloc} config):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid}\OperatorTok{=}\NormalTok{2180718 }\AttributeTok{{-}{-}gres}\OperatorTok{=}\NormalTok{gpu:0 }\AttributeTok{{-}{-}nodes}\OperatorTok{=}\NormalTok{40 }\AttributeTok{{-}{-}tasks{-}per{-}node}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}output}\OperatorTok{=}\NormalTok{trace{-}\%N.out sh }\AttributeTok{{-}c} \StringTok{\textquotesingle{}ps aux | grep python | egrep {-}v "grep|srun" | grep \textasciigrave{}whoami\textasciigrave{} | awk "\{print \textbackslash{}$2\}" | xargs {-}I \{\} py{-}spy dump {-}{-}native {-}{-}pid \{\}\textquotesingle{}} \KeywordTok{||} \BuiltInTok{echo} \StringTok{"failed"}
+\end{Highlighting}
+\end{Shaded}
+
+now all \texttt{py-spy} traces go into the \texttt{trace-\$nodename.out}
+files under \texttt{cwd}.
+
+The key is to use \texttt{-\/-gres=gpu:0} or otherwise the 2nd
+\texttt{srun} will block waiting for the first one to release the gpus.
+
+Also the assumption is that some conda env that has \texttt{py-spy}
+installed got activated in \texttt{\textasciitilde{}/.bashrc}. If yours
+doesn't already do that, add the instruction to load the env to the
+above command, before the \texttt{py-spy} command - it'll fail to find
+it otherwise.
+
+Don't forget to manually release the allocation when this process is
+done.
+
+\section{Convert SLURM\_JOB\_NODELIST into a
+hostfile}\label{convert-slurm_job_nodelist-into-a-hostfile}
+
+Some multi-node launchers require a \texttt{hostfile} - here is how to
+generate one:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# autogenerate the hostfile for deepspeed}
+\CommentTok{\# 1. deals with: SLURM\_JOB\_NODELIST in either of 2 formats:}
+\CommentTok{\# r10i1n8,r10i2n0}
+\CommentTok{\# r10i1n[7{-}8]}
+\CommentTok{\# 2. and relies on SLURM\_STEP\_GPUS=0,1,2... to get how many gpu slots per node}
+\CommentTok{\#}
+\CommentTok{\# usage:}
+\CommentTok{\# makehostfile \textgreater{} hostfile}
+\KeywordTok{function}\FunctionTok{ makehostfile()} \KeywordTok{\{}
+\FunctionTok{perl} \AttributeTok{{-}le} \StringTok{\textquotesingle{}$slots=split /,/, $ENV\{"SLURM\_STEP\_GPUS"\}; $\_=$ENV\{"SLURM\_JOB\_NODELIST"\}; if (/\^{}(.*?)\textbackslash{}[(\textbackslash{}d+){-}(\textbackslash{}d+)\textbackslash{}]/) \{ print map \{ "$1$\_ slots=$slots\textbackslash{}n" \} $2..$3\} elsif (/,/) \{ print map \{ "$1$\_ slots=$slots\textbackslash{}n" \} split /,/ \} \textquotesingle{}}
+\KeywordTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Environment variables}\label{environment-variables}
+
+You can always do:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{export} \VariableTok{SOMEKEY}\OperatorTok{=}\NormalTok{value}
+\end{Highlighting}
+\end{Shaded}
+
+from the slurm script to get a desired environment variable passed to
+the program launched from it.
+
+And you can also add to the top of the slurm script:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#SBATCH {-}{-}export=ALL}
+\end{Highlighting}
+\end{Shaded}
+
+The launched program will see all the environment variables visible in
+the shell where it was launched from.
+
+\section{Crontab Emulation}\label{crontab-emulation}
+
+One of the most important Unix tools is the crontab, which is essential
+for being able to schedule various jobs. It however usually is absent
+from SLURM environment. Therefore one must emulate it. Here is how.
+
+For this presentation we are going to use \texttt{\$WORK/cron/} as the
+base directory. And that you have an exported environment variable
+\texttt{WORK} pointing to some location on your filesystem - if you use
+Bash you can set it up in your \texttt{\textasciitilde{}/.bash\_profile}
+or if a different shell is used use whatever startup equivalent file is.
+
+\subsection{1. A self-perpetuating scheduler
+job}\label{a-self-perpetuating-scheduler-job}
+
+We will use \texttt{\$WORK/cron/scheduler} dir for scheduler jobs,
+\texttt{\$WORK/cron/cron.daily} for daily jobs and
+\texttt{\$WORK/cron/cron.hourly} for hourly jobs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ mkdir }\AttributeTok{{-}p} \VariableTok{$WORK}\NormalTok{/cron/scheduler}
+\ExtensionTok{$}\NormalTok{ mkdir }\AttributeTok{{-}p} \VariableTok{$WORK}\NormalTok{/cron/cron.daily}
+\ExtensionTok{$}\NormalTok{ mkdir }\AttributeTok{{-}p} \VariableTok{$WORK}\NormalTok{/cron/cron.hourly}
+\end{Highlighting}
+\end{Shaded}
+
+Now copy these two slurm script in \texttt{\$WORK/cron/scheduler}: -
+\url{cron-daily.slurm} - \url{cron-hourly.slurm}
+
+after editing those to fit your specific environment's account and
+partition information.
+
+Now you can launch the crontab scheduler jobs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cd }\VariableTok{$WORK}\NormalTok{/cron/scheduler}
+\ExtensionTok{$}\NormalTok{ sbatch cron{-}hourly.slurm}
+\ExtensionTok{$}\NormalTok{ sbatch cron{-}daily.slurm}
+\end{Highlighting}
+\end{Shaded}
+
+This is it, these jobs will now self-perpetuate and usually you don't
+need to think about it again unless there is an even that makes SLURM
+lose all its jobs.
+
+\subsection{2. Daily and Hourly
+Cronjobs}\label{daily-and-hourly-cronjobs}
+
+Now whenever you want some job to run once a day, you simply create a
+slurm job and put it into the \texttt{\$WORK/cron/cron.daily} dir.
+
+Here is an example job that runs daily to update the \texttt{mlocate}
+file index:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat }\VariableTok{$WORK}\NormalTok{/cron/cron.daily/mlocate{-}update.slurm}
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=mlocate{-}update    \# job name}
+\CommentTok{\#SBATCH {-}{-}ntasks=1                   \# number of MP tasks}
+\CommentTok{\#SBATCH {-}{-}nodes=1}
+\CommentTok{\#SBATCH {-}{-}hint=nomultithread         \# we get physical cores not logical}
+\CommentTok{\#SBATCH {-}{-}time=1:00:00               \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#SBATCH {-}{-}partition=PARTITION     \# edit me}
+\CommentTok{\#SBATCH {-}{-}account=GROUP@PARTITION \# edit me}
+
+\BuiltInTok{set} \AttributeTok{{-}e}
+\FunctionTok{date}
+\BuiltInTok{echo} \StringTok{"updating mlocate db"}
+\ExtensionTok{/usr/bin/updatedb} \AttributeTok{{-}o} \VariableTok{$WORK}\NormalTok{/lib/mlocate/work.db }\AttributeTok{{-}U} \VariableTok{$WORK} \AttributeTok{{-}{-}require{-}visibility}\NormalTok{ 0}
+\end{Highlighting}
+\end{Shaded}
+
+This builds an index of the files under \texttt{\$WORK} which you can
+then quickly query with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/usr/bin/locate} \AttributeTok{{-}d} \VariableTok{$WORK}\NormalTok{/lib/mlocate/work.db pattern}
+\end{Highlighting}
+\end{Shaded}
+
+To stop running this job, just move it out of the
+\texttt{\$WORK/cron/cron.daily} dir.
+
+The same principle applies to jobs placed into the
+\texttt{\$WORK/cron/cron.hourly} dir. These are useful for running
+something every hour.
+
+Please note that this crontab implementation is approximate timing-wise,
+due to various delays in SLURM scheduling they will run approximately
+every hour and every day. You can recode these to ask SLURM to start
+something at a more precise time if you have to, but most of the time
+the just presented method works fine.
+
+Additionally, you can code your own variations to meet specific needs of
+your project, e.g., every-30min or every-12h jobs.
+
+\subsection{3. Cleanup}\label{cleanup}
+
+Finally, since every cron launcher job will leave behind a log file
+(which is useful if for some reason things don't work), you want to
+create a cronjob to clean up these logs. Otherwise you may run out of
+inodes - these logs files are tiny, but there could be tens of thousands
+of those.
+
+You could use something like this in a daily job.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{find} \VariableTok{$WORK}\NormalTok{/cron }\AttributeTok{{-}name} \StringTok{"*.out"} \AttributeTok{{-}mtime}\NormalTok{ +7 }\AttributeTok{{-}exec}\NormalTok{ rm }\AttributeTok{{-}f}\NormalTok{ \{\} +}
+\end{Highlighting}
+\end{Shaded}
+
+Please note that it's set to only delete files that are older than 7
+days, in case you need the latest logs for diagnostics.
+
+\subsection{Nuances}\label{nuances}
+
+The scheduler runs with Unix permissions of the person who launched the
+SLRUM cron scheduler job and so all other SLURM scripts launched by that
+cron job.
+
+\section{Self-perpetuating SLURM
+jobs}\label{self-perpetuating-slurm-jobs}
+
+The same approach used in
+\hyperref[1-a-self-perpetuating-scheduler-job]{building a scheduler} can
+be used for creating stand-alone self-perpetuating jobs.
+
+For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=watchdog          \# job name}
+\CommentTok{\#SBATCH {-}{-}ntasks=1                   \# number of MP tasks}
+\CommentTok{\#SBATCH {-}{-}nodes=1}
+\CommentTok{\#SBATCH {-}{-}time=0:30:00               \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#SBATCH {-}{-}partition=PARTITION        \# edit me}
+
+\CommentTok{\# ensure to restart self first 1h from now}
+\VariableTok{RUN\_FREQUENCY\_IN\_HOURS}\OperatorTok{=}\NormalTok{1}
+\ExtensionTok{sbatch} \AttributeTok{{-}{-}begin}\OperatorTok{=}\NormalTok{now+}\VariableTok{$\{RUN\_FREQUENCY\_IN\_HOURS\}}\NormalTok{hour watchdog.slurm}
+
+\ExtensionTok{...}\NormalTok{ do the watchdog work here ...}
+\end{Highlighting}
+\end{Shaded}
+
+and you launch it once with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sbatch}\NormalTok{ watchdog.slurm}
+\end{Highlighting}
+\end{Shaded}
+
+This then will immediately schedule itself to be run 1 hour from the
+launch time and then the normal job work will be done. Regardless of
+whether the rest of the job will succeed or fail, this job will continue
+relaunching itself approximately once an hour. This is imprecise due to
+scheduler job starting overhead and node availability issues. But if
+there is a least one spare node available and the job itself is quick to
+finish the requirement to run at an approximate frequency should be
+sufficient.
+
+As the majority of SLURM environment in addition to the expensive GPU
+nodes also provide much cheaper CPU-only nodes, you should choose a
+CPU-only SLURM partition for any jobs that don't require GPUs to run.
+
+\section{Getting information about the
+job}\label{getting-information-about-the-job}
+
+From within the slurm file one can access information about the current
+job's allocations.
+
+Getting allocated hostnames and useful derivations based on that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{export} \VariableTok{HOSTNAMES}\OperatorTok{=}\VariableTok{$(}\ExtensionTok{scontrol}\NormalTok{ show hostnames }\StringTok{"}\VariableTok{$SLURM\_JOB\_NODELIST}\StringTok{"}\VariableTok{)}
+\BuiltInTok{export} \VariableTok{NUM\_NODES}\OperatorTok{=}\VariableTok{$(}\ExtensionTok{scontrol}\NormalTok{ show hostnames }\StringTok{"}\VariableTok{$SLURM\_JOB\_NODELIST}\StringTok{"} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)}
+\BuiltInTok{export} \VariableTok{MASTER\_ADDR}\OperatorTok{=}\VariableTok{$(}\ExtensionTok{scontrol}\NormalTok{ show hostnames }\StringTok{"}\VariableTok{$SLURM\_JOB\_NODELIST}\StringTok{"} \KeywordTok{|} \FunctionTok{head} \AttributeTok{{-}n}\NormalTok{ 1}\VariableTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Convert compact node list to expanded node
+list}\label{convert-compact-node-list-to-expanded-node-list}
+
+Sometimes you get SLURM tools give you a string like:
+\texttt{node-{[}42,49-51{]}} which will require some coding to expand it
+into \texttt{node-42,node-49,node-50,node-51}, but there is a special
+tool to deal with that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ scontrol show hostnames node{-}}\PreprocessorTok{[}\SpecialStringTok{42,49}\PreprocessorTok{{-}}\SpecialStringTok{51}\PreprocessorTok{]}
+\ExtensionTok{node{-}42}
+\ExtensionTok{node{-}49}
+\ExtensionTok{node{-}50}
+\ExtensionTok{node{-}51}
+\end{Highlighting}
+\end{Shaded}
+
+Voila!
+
+case study: this is for example useful if you want get a list of nodes
+that were drained because the job was too slow to exit, but really there
+is no real problem with the nodes. So this one-liner will give you the
+list of such nodes in an expanded format which you can then script to
+loop over this list to undrain these nodes after perhaps checking that
+the processes have died by this time:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{sinfo} \AttributeTok{{-}R} \KeywordTok{|} \FunctionTok{grep} \StringTok{"Kill task failed"} \KeywordTok{|} \FunctionTok{perl} \AttributeTok{{-}lne} \StringTok{\textquotesingle{}/(node{-}.*[\textbackslash{}d\textbackslash{}]]+)/ \&\& print $1\textquotesingle{}} \KeywordTok{|} \FunctionTok{xargs} \AttributeTok{{-}n1}\NormalTok{ scontrol show hostnames}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Overcoming the lack of group SLURM job
+ownership}\label{overcoming-the-lack-of-group-slurm-job-ownership}
+
+SLURM runs on Unix, but surprisingly its designers haven't adopted the
+concept of group ownership with regards to SLURM jobs. So if a member of
+your team started an array of 10 jobs 20h each, and went on vacation -
+unless you have \texttt{sudo} access you now can't do anything to stop
+those jobs if something is wrong.
+
+I'm yet to find why this is so, but so far we have been using a kill
+switch workaround. You have to code it in your framework. For example,
+see how it was implemented in
+\href{https://github.com/bigscience-workshop/Megatron-DeepSpeed/blob/e52bdabbde3c6895aceb76c1bced295c2646121f/megatron/training.py\#L104}{Megatron-Deepspeed}
+(Meg-DS). The program polls for a pre-configured at start up path on the
+filesystem and if it finds a file there, it exits.
+
+So if we start Meg-DS with
+\texttt{-\/-kill-switch-path\ \$WORK/tmp/training17-kill-switch} and
+then at any point we need to kill the SLURM job, we simply do:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{touch} \VariableTok{$WORK}\NormalTok{/tmp/training17{-}kill{-}switch}
+\end{Highlighting}
+\end{Shaded}
+
+and the next time the program gets to check for this file it'll detect
+the event and will exit voluntarily. If you have a job array, well, you
+will have to wait until each job starts, detects the kill switch and
+exits.
+
+Of course, don't forget to remove it when you're done stopping the jobs.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm} \VariableTok{$WORK}\NormalTok{/tmp/training17{-}kill{-}switch}
+\end{Highlighting}
+\end{Shaded}
+
+Now, this doesn't always work. If the job is hanging, it'll never come
+to the point of checking for kill-switch and the only solution here is
+to contact the sysadmins to kill the job for you. Sometimes if the
+hanging is a simple case pytorch's distributed setup will typically
+auto-exit after 30min of preset timeout time, but it doesn't always
+work.
+
+
+
+\end{document}
