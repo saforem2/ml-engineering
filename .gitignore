@@ -1,7 +1,5 @@
+*.tex
 *.DS_Store
-
-# HTML build
-*.html
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

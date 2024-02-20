@@ -2,7 +2,7 @@
 title: Machine Learning Engineering Open Book
 citation:
  type: webpage
- title: "ML Engineering"
+ title: "🧑‍💻 ML Engineering"
  url: https://saforem2.github.io/ml-engineering
  author:
     - name: Stas Bekman

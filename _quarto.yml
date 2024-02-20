@@ -11,14 +11,11 @@ site-url: "https://saforem2.github.io/ml-engineering"
 google-scholar: true
 citeproc: true
 project:
-  render:
-    - "*.qmd"
-    - index.qmd
-    - qmd/**/*.qmd
+  # render: "auto"
   type: website
   output-dir: "docs"
   preview:
-    port: 4599
+    port: 4596
 citation:
    author:
       - name: Stas Bekman
