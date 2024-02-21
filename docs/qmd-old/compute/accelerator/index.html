@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-02-20">
+
+<title>ML Engineering</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../.././favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XVM2Y822Y1"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
+</script>
+<link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../../css/default.css">
+<link rel="stylesheet" href="../../../css/callouts.css">
+<meta property="og:title" content="Sam Foreman">
+<meta property="og:description" content="Machine Learning Engineering Open Book">
+<meta property="og:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
+<meta property="og:site_name" content="ML Engineering">
+<meta name="twitter:title" content="Sam Foreman">
+<meta name="twitter:description" content="Machine Learning Engineering Open Book">
+<meta name="twitter:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
+<meta name="twitter:creator" content="@saforem2">
+<meta name="twitter:site" content="@saforem2">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="ML Engineering">
+<meta name="citation_author" content="Stas Bekman">
+<meta name="citation_author" content="Sam Foreman">
+<meta name="citation_publication_date" content="2024-02-20">
+<meta name="citation_cover_date" content="2024-02-20">
+<meta name="citation_year" content="2024">
+<meta name="citation_online_date" content="2024-02-20">
+<meta name="citation_fulltext_html_url" content="https://saforem2.github.io/ml-engineering">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=The climate risk &amp;amp;amp; resilience portal (ClimRR) metadata and data dictionary;,citation_author=C. Burdi;,citation_author=Wall. T Branham;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://dub.sh/ClimRR-Metadata;">
+<meta name="citation_reference" content="citation_title=Progress on (g-2)_\mu from lattice QCD;,citation_author=Hartmut Wittig;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://arxiv.org/abs/2306.04165;">
+<meta name="citation_reference" content="citation_title=Hybrid Monte Carlo;,citation_author=S. Duane;,citation_author=A. D. Kennedy;,citation_author=B. J. Pendleton;,citation_author=D. Roweth;,citation_publication_date=1987;,citation_cover_date=1987;,citation_year=1987;,citation_doi=10.1016/0370-2693(87)91197-X;,citation_volume=195;,citation_journal_title=Phys. Lett. B;">
+<meta name="citation_reference" content="citation_title=Snowmass 2021 Computational Frontier CompF03 Topical Group Report: Machine Learning;,citation_author=Phiala Shanahan;,citation_author=others;,citation_publication_date=2022-09;,citation_cover_date=2022-09;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2209.07559;">
+<meta name="citation_reference" content="citation_title=Applications of Machine Learning to Lattice Quantum Field Theory;,citation_author=Denis Boyda;,citation_author=others;,citation_publication_date=2022-02;,citation_cover_date=2022-02;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2202.05838;,citation_conference_title=Snowmass 2021;">
+<meta name="citation_reference" content="citation_title=HMC with Normalizing Flows;,citation_author=Sam Foreman;,citation_author=Taku Izubuchi;,citation_author=Luchang Jin;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_author=Akio Tomiya;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01586;,citation_doi=10.22323/1.396.0073;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=LeapfrogLayers: A Trainable Framework for Effective Topological Sampling;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01582;,citation_doi=10.22323/1.396.0508;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=Deep Learning Hamiltonian Monte Carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021-05;,citation_cover_date=2021-05;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;,citation_conference_title=9th International Conference on Learning Representations;">
+<meta name="citation_reference" content="citation_title=Energy Justice Analysis of Climate Data with ClimRR;,citation_author=Sam Foreman;,citation_publication_date=2023-08-07;,citation_cover_date=2023-08-07;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/climate-analysis;,citation_language=en;">
+<meta name="citation_reference" content="citation_author=Sam Foreman;,citation_publication_date=2023-08-19;,citation_cover_date=2023-08-19;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/l2hmc-qcd;,citation_language=en;">
+<meta name="citation_reference" content="citation_title=Deep learning hamiltonian monte carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;">
+<meta name="citation_reference" content="citation_title=MLMC: Machine learning monte carlo for lattice gauge theory;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James Osborn;,citation_publication_date=00;,citation_cover_date=00;,citation_year=0;,citation_conference_title=40th international symposium on lattice field theory (lattice 2023) (batavia, IL, united states, 07/31/2023 - 08/04/2023);">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">ML Engineering</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/saforem2"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/saforem2/ml-engineering"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-gear"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/blob/main/index.qmd">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/issues/new/choose">
+            New Issue
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏎️ Performance</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📓 Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/testing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">✏️ Testing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/transformers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🤗 Transformers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠  Insights</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🪖 The AI Battlefield</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏋️  Training</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/model-parallelism/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Parallelism</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/checkpoints/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checkpoints</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/performance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Tune Up For The Best Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Training Loss Patterns</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/fault-tolerance/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🛜 Network</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Networking Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Benchmarks Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Disabling NVLink Benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦  Storage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">💻 Compute</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/cpu/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/cpu-memory/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU memory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/compute/accelerator/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/accelerator/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
+ <span class="menu-text">Nvidia</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/accelerator/nvidia/debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting NVIDIA GPUs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🎻  Orchestration</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in SLURM Environment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Administration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Launchers with SLURM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM for users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🐛  Debugging</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/tiny-scripts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Back up of scripts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/make-tiny-models-tokenizers-datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Faster debug and development with tiny models, tokenizers and datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/nccl-performance-debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NCCL: Debug and Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/pytorch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debugging PyTorch programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debug Tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/torch-distributed-hanging-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diagnosing Hangings and Deadlocks in Multi-Node Multi-GPU Python Programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/underflow_overflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Underflow and Overflow Detection</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#accelerators" id="toc-accelerators" class="nav-link active" data-scroll-target="#accelerators">Accelerators</a>
+  <ul class="collapse">
+  <li><a href="#subsections" id="toc-subsections" class="nav-link" data-scroll-target="#subsections">Subsections</a></li>
+  <li><a href="#birds-eye-view-on-the-high-end-accelerator-reality" id="toc-birds-eye-view-on-the-high-end-accelerator-reality" class="nav-link" data-scroll-target="#birds-eye-view-on-the-high-end-accelerator-reality">Bird’s eye view on the high end accelerator reality</a></li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary">Glossary</a></li>
+  <li><a href="#the-most-important-thing-to-understand" id="toc-the-most-important-thing-to-understand" class="nav-link" data-scroll-target="#the-most-important-thing-to-understand">The most important thing to understand</a></li>
+  <li><a href="#what-accelerator-characteristics-do-we-care-for" id="toc-what-accelerator-characteristics-do-we-care-for" class="nav-link" data-scroll-target="#what-accelerator-characteristics-do-we-care-for">What Accelerator characteristics do we care for</a>
+  <ul class="collapse">
+  <li><a href="#tflops" id="toc-tflops" class="nav-link" data-scroll-target="#tflops">TFLOPS</a></li>
+  <li><a href="#accelerator-memory-size-and-speed" id="toc-accelerator-memory-size-and-speed" class="nav-link" data-scroll-target="#accelerator-memory-size-and-speed">Accelerator memory size and speed</a></li>
+  <li><a href="#heat" id="toc-heat" class="nav-link" data-scroll-target="#heat">Heat</a></li>
+  </ul></li>
+  <li><a href="#high-end-accelerators-for-llmvlm-workloads" id="toc-high-end-accelerators-for-llmvlm-workloads" class="nav-link" data-scroll-target="#high-end-accelerators-for-llmvlm-workloads">High end accelerators for LLM/VLM workloads</a>
+  <ul class="collapse">
+  <li><a href="#cloud-and-in-house-accelerators" id="toc-cloud-and-in-house-accelerators" class="nav-link" data-scroll-target="#cloud-and-in-house-accelerators">Cloud and in-house accelerators</a></li>
+  <li><a href="#in-house-accelerator-clusters" id="toc-in-house-accelerator-clusters" class="nav-link" data-scroll-target="#in-house-accelerator-clusters">In-house accelerator clusters</a></li>
+  <li><a href="#cloud-only-solutions" id="toc-cloud-only-solutions" class="nav-link" data-scroll-target="#cloud-only-solutions">Cloud-only solutions</a></li>
+  <li><a href="#how-to-get-the-best-price" id="toc-how-to-get-the-best-price" class="nav-link" data-scroll-target="#how-to-get-the-best-price">How to get the best price</a></li>
+  </ul></li>
+  <li><a href="#accelerators-in-detail" id="toc-accelerators-in-detail" class="nav-link" data-scroll-target="#accelerators-in-detail">Accelerators in detail</a>
+  <ul class="collapse">
+  <li><a href="#nvidia" id="toc-nvidia" class="nav-link" data-scroll-target="#nvidia">NVIDIA</a></li>
+  <li><a href="#amd" id="toc-amd" class="nav-link" data-scroll-target="#amd">AMD</a></li>
+  <li><a href="#intel-gaudi2" id="toc-intel-gaudi2" class="nav-link" data-scroll-target="#intel-gaudi2">Intel Gaudi2</a></li>
+  </ul></li>
+  <li><a href="#api" id="toc-api" class="nav-link" data-scroll-target="#api">API</a>
+  <ul class="collapse">
+  <li><a href="#nvidia-1" id="toc-nvidia-1" class="nav-link" data-scroll-target="#nvidia-1">NVIDIA</a></li>
+  <li><a href="#amd-1" id="toc-amd-1" class="nav-link" data-scroll-target="#amd-1">AMD</a></li>
+  <li><a href="#intel-gaudi" id="toc-intel-gaudi" class="nav-link" data-scroll-target="#intel-gaudi">Intel Gaudi</a></li>
+  </ul></li>
+  <li><a href="#apples-to-apples-comparison" id="toc-apples-to-apples-comparison" class="nav-link" data-scroll-target="#apples-to-apples-comparison">Apples-to-apples Comparison</a></li>
+  <li><a href="#power-and-cooling" id="toc-power-and-cooling" class="nav-link" data-scroll-target="#power-and-cooling">Power and Cooling</a>
+  <ul class="collapse">
+  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
+  <li><a href="#cooling" id="toc-cooling" class="nav-link" data-scroll-target="#cooling">Cooling</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/compute/accelerator/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd-old/compute/accelerator/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/compute/accelerator/index.qmd"><i class="bi"></i></button></div></div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading"></div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 20, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="accelerators" class="level1">
+<h1>Accelerators</h1>
+<p>Compute accelerators are the workhorses of the ML training. At the beginning there were just GPUs. But now there are also TPUs, IPUs, FPGAs, HPUs, QPUs, RDUs and more are being invented.</p>
+<p>There exist two main ML workloads - training and inference. There is also the finetuning workload which is usually the same as training, unless a much lighter <a href="https://arxiv.org/abs/2106.09685">LORA-style</a> finetuning is performed. The latter requires significantly fewer resources and time than normal finetuning.</p>
+<p>In language models during inference the generation is performed in a sequence - one token at a time. So it has to repeat the same <code>forward</code> call thousands of times one smallish <code>matmul</code> (matrix multiplication or GEMM) at a time. And this can be done on either an accelerator, like GPU, or some of the most recent CPUs, that can handle inference quite efficiently.</p>
+<p>During training the whole sequence length is processed in one huge <code>matmul</code> operation. So if the sequence length is 4k long, the training of the same model will require a compute unit that can handle 4k times more operations than inference and do it fast. Accelerators excel at this task. In fact the larger the matrices they have to multiply, the more efficient the compute.</p>
+<p>The other computational difference is that while both training and inference have to perform the same total amount of <code>matmul</code>s in the <code>forward</code> pass, in the <code>backward</code> pass, which is only done for training, an additional 2x times of <code>matmul</code>s is done to calculate the gradients with regards to inputs and weights. And an additional <code>forward</code> is performed if activations recomputation is used. Therefore the training process requires at 3-4x more <code>matmul</code>s than inference.</p>
+<section id="subsections" class="level2">
+<h2 class="anchored" data-anchor-id="subsections">Subsections</h2>
+<ul>
+<li><a href="nvidia/debug.md">Troubleshooting NVIDIA GPUs</a></li>
+</ul>
+</section>
+<section id="birds-eye-view-on-the-high-end-accelerator-reality" class="level2">
+<h2 class="anchored" data-anchor-id="birds-eye-view-on-the-high-end-accelerator-reality">Bird’s eye view on the high end accelerator reality</h2>
+<p>While this might be changing in the future, unlike the consumer GPU market, as of this writing there aren’t that many high end accelerators, and if you rent on the cloud, most providers will have more or less the same few accelerators to offer.</p>
+<p>GPUs: - As of today, ML clouds/HPCs started transitioning from NVIDIA A100s to H100s and this is going to take some months due to the usual shortage of NVIDIA GPUs. - AMD’s MI250 started popping up here and there, but it’s unclear when it’ll be easy to access those. MI300X is promised to start being available already in March 2024 at some Tier 2 cloud providers.</p>
+<p>HPU: - Intel’s Gaudi2 are starting to slowly emerge on Intel’s cloud - there is a huge lineup. It’s also available on-premise simplementations via Supermicro, WiWynn, and soon others.</p>
+<p>IPU: - And there is Graphcore with their IPU offering. You can try these out in <a href="https://www.paperspace.com/graphcore">Paperspace</a> through their cloud notebooks.</p>
+<p>TPU: - Google’s TPUs are, of course, available but they aren’t the most desirable accelerators because you can only rent them, and the software isn’t quite easily convertible between GPUs and TPUs, and so many (most?) developers remain in the GPU land, since they don’t want to be locked into a hardware which is a Google monopoly.</p>
+<p>On Pods and racks: - Cerebras’ WaferScale Engine (WSE) - SambaNova’s DataScale - dozens of different pod and rack configs that compose the aforementioned GPUs with super-fast interconnects.</p>
+<p>That’s about it as Q1-2024.</p>
+</section>
+<section id="glossary" class="level2">
+<h2 class="anchored" data-anchor-id="glossary">Glossary</h2>
+<ul>
+<li>CPU: Central Processing Unit</li>
+<li>FPGA: Field Programmable Gate Arrays</li>
+<li>GPU: Graphics Processing Unit</li>
+<li>HBM: High Bandwidth Memory</li>
+<li>HPC: High-performance Computing</li>
+<li>HPU: Habana Gaudi AI Processor Unit</li>
+<li>IPU: Intelligence Processing Unit</li>
+<li>MME: Matrix Multiplication Engine</li>
+<li>QPU: Quantum Processing Unit</li>
+<li>RDU: Reconfigurable Dataflow Unit</li>
+<li>TPU: Tensor Processing Unit</li>
+</ul>
+</section>
+<section id="the-most-important-thing-to-understand" class="level2">
+<h2 class="anchored" data-anchor-id="the-most-important-thing-to-understand">The most important thing to understand</h2>
+<p>I will make the following statement multiple times in this book - and that it’s not enough to buy/rent the most expensive accelerators and expect a high return on investment (ROI).</p>
+<p>The two metrics for a high ROI for ML training are: 1. the speed at which the training will finish, because if the training takes 2-3x longer than planned, your model could become irrelevant before it was released - time is everything in the current super-competitive ML market. 2. the total $$ spent to train the model, because if the training takes 2-3x longer than planned, you will end up spending 2-3x times more.</p>
+<p>Unless the rest of the purchased/rented hardware isn’t chosen carefully to match the required workload chances are very high that the accelerators will idle a lot and both time and $$ will be lost. The most critical component is <a href="../../network">network</a>, then <a href="../../storage/">storage</a>, and the least critical ones are (<a href="../cpu">CPU</a> and <a href="../cpu-memory">CPU memory</a>).</p>
+<p>If the compute is rented one usually doesn’t have the freedom to choose - the hardware is either set in stone or some components might be replaceable but with not too many choices. Thus there are times when the chosen cloud provider doesn’t provide a sufficiently well matched hardware, in which case it’s best to seek out a different provider.</p>
+<p>If you purchase your servers then I recommend to perform a very indepth due diligence before buying.</p>
+<p>Besides hardware, you, of course, need software that can efficiently deploy the hardware.</p>
+<p>We will discuss both the hardware and the software aspects in various chapters of this book. You may want to start <a href="../../training/performance">here</a> and <a href="../../training/model-parallelism">here</a>.</p>
+</section>
+<section id="what-accelerator-characteristics-do-we-care-for" class="level2">
+<h2 class="anchored" data-anchor-id="what-accelerator-characteristics-do-we-care-for">What Accelerator characteristics do we care for</h2>
+<p>Let’s use the NVIDIA A100 spec as a reference point in the following sections.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/nvidia-a100-spec.png" class="img-fluid figure-img"></p>
+<figcaption>nvidia-a100-spec</figcaption>
+</figure>
+</div>
+<p><a href="https://www.nvidia.com/en-us/data-center/a100/">source</a></p>
+<section id="tflops" class="level3">
+<h3 class="anchored" data-anchor-id="tflops">TFLOPS</h3>
+<p>As mentioned earlier most of the work that ML training and inference do is matrix multiplication. If you remember your algebra matrix multiplication is made of many multiplications followed by summation. Each of these computations can be counted and define how many of these operations can be performed by the chip in a single seconds.</p>
+<p>This is one of the key characteristics that the accelerators are judged by. The term TFLOPS defines how many trillions of FloatingPointOperations the chip can perform in a second. The more the better. There is a different definition for different data types. For example, here are a few entries for A100:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Data type &nbsp;TFLOPS</th>
+<th style="text-align: right;">w/o Sparsity</th>
+<th style="text-align: right;">w/ Sparsity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">FP32</td>
+<td style="text-align: right;">19.5</td>
+<td style="text-align: right;">n/a</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Tensor Float 32 (TF32)</td>
+<td style="text-align: right;">156</td>
+<td style="text-align: right;">312</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BFLOAT16 Tensor Core</td>
+<td style="text-align: right;">312</td>
+<td style="text-align: right;">624</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FP16 Tensor Core</td>
+<td style="text-align: right;">312</td>
+<td style="text-align: right;">624</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FP8 Tensor Core</td>
+<td style="text-align: right;">624</td>
+<td style="text-align: right;">1248</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INT8 Tensor Core</td>
+<td style="text-align: right;">624</td>
+<td style="text-align: right;">1248</td>
+</tr>
+</tbody>
+</table>
+<p>footnote: INT8 is measured in TeraOperations as it’s not a floating operation.</p>
+<p>footnote: the term FLOPS could mean either the total number of FloatingPointOperations, e.g.&nbsp;when counting how many FLOPS a single Transformer iteration takes, and it could also mean FloatingPointOperations per second - so watch out for the context. When you read an accelerator spec it’s almost always a per second definition. When model architectures are discussed it’s usually just the total number of FloatingPointOperations.</p>
+<p>So you can see that int8 is 2x faster than bf16 which in turn is 2x faster than tf32.</p>
+<p>Moreover, the TFLOPs depend on the matrices size as can be seen from this table:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/nvidia-a100-matmul-tflops.png" class="img-fluid figure-img"></p>
+<figcaption>nvidia-a100-matmul-tflops</figcaption>
+</figure>
+</div>
+<p><a href="https://developer.nvidia.com/blog/cuda-11-features-revealed/">source</a></p>
+<p>As you can see the difference in performance is non-linear due to <a href="../../training/performance#tile-and-wave-quantization">the tile and wave quantization effects</a>.</p>
+<p>Let’s look at the supported <a href="../../training/dtype.md">dtypes</a> and the corresponding theoretical peak TFLOPS specs across the high end accelerators (w/o sparsity):</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Accelerator &nbsp;TFLOPS</th>
+<th style="text-align: right;">fp32</th>
+<th style="text-align: right;">tf32</th>
+<th style="text-align: right;">fp16/bf16</th>
+<th style="text-align: right;">fp8</th>
+<th style="text-align: right;">int8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA A100 SXM</td>
+<td style="text-align: right;">19.5</td>
+<td style="text-align: right;">156.0</td>
+<td style="text-align: right;">312</td>
+<td style="text-align: right;">624</td>
+<td style="text-align: right;">624</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AMD MI250</td>
+<td style="text-align: right;">45.3</td>
+<td style="text-align: right;">X</td>
+<td style="text-align: right;">362</td>
+<td style="text-align: right;">X</td>
+<td style="text-align: right;">362</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AMD MI250X</td>
+<td style="text-align: right;">47.9</td>
+<td style="text-align: right;">X</td>
+<td style="text-align: right;">383</td>
+<td style="text-align: right;">X</td>
+<td style="text-align: right;">383</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA H100 SXM</td>
+<td style="text-align: right;">67.0</td>
+<td style="text-align: right;">494.5</td>
+<td style="text-align: right;">989</td>
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">1979</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NVIDIA H200 SXM</td>
+<td style="text-align: right;">67.0</td>
+<td style="text-align: right;">494.5</td>
+<td style="text-align: right;">989</td>
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">1979</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA H100 PCIe</td>
+<td style="text-align: right;">51.0</td>
+<td style="text-align: right;">378.0</td>
+<td style="text-align: right;">756</td>
+<td style="text-align: right;">1513</td>
+<td style="text-align: right;">1513</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NVIDIA H100 dual NVL</td>
+<td style="text-align: right;">134.0</td>
+<td style="text-align: right;">989.5</td>
+<td style="text-align: right;">989</td>
+<td style="text-align: right;">3958</td>
+<td style="text-align: right;">3958</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AMD MI300X</td>
+<td style="text-align: right;">163.4</td>
+<td style="text-align: right;">653.7</td>
+<td style="text-align: right;">1300</td>
+<td style="text-align: right;">5220</td>
+<td style="text-align: right;">2600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Intel Gaudi2</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
+</tr>
+</tbody>
+</table>
+<p>footnote: Intel Gaudi2 doesn’t plan to publish TFLOPS specs as of this writing, but it does support FP32, TF32, BF16, FP16 &amp; FP8, INT8 and INT16. This <a href="https://www.databricks.com/blog/llm-training-and-inference-intel-gaudi2-ai-accelerators">blog posts</a> reports measuring ~400TFLOPS for fp16/bf16.</p>
+<p>footnote: when looking at specs be very careful at which numbers you’re reading - many vendors often publish TFLOPS with sparsity, as they are ~2x bigger, but if they even indicate this they often do it in small print. I had to ask NVIDIA to add a note to their H100 spec that those numbers were w/ sparsity as they originally didn’t mention this important technical fact. And 99% of the time as of this writing you will be not using sparsity and thus the actual theoretical TFLOPs that you care for most of the time are w/o sparsity (i.e.&nbsp;the table above).</p>
+<p>footnote: also beware that if accelerator A publishes a higher TFLOPS than accelerator B, it doesn’t mean A is faster. These are theoretical numbers which not only can never be achieved in practice - the actual TFLOPS efficiency (HFU) can vary a lot from vendor to vendor or even for the same vendor’s different accelerator architectures.</p>
+<section id="maximum-achievable-flops" class="level4">
+<h4 class="anchored" data-anchor-id="maximum-achievable-flops">Maximum Achievable FLOPS</h4>
+<p>Theoretical peak FLOPS is what gets published on the accelerator’s spec. And it’s calculated as:</p>
+<p><code>Theoretical FLOPS = compute_unit_clock_speed * flops_per_clock_cycle_per_compute_unit * num_compute_units</code></p>
+<p>where: - <code>compute_unit_clock_speed</code> - how many times the compute unit clock ticks per second in Hz - <code>flops_per_clock_cycle_per_compute_unit</code> - the number of operations the compute unit can execute per clock cycle. - <code>num_compute_units</code> - how many units there is in the device</p>
+<p>The problem with the advertised theoretical peak FLOPS is that they are <strong>very</strong> theoretical and can’t be achieved in practice even if all the perfect conditions have been provided. Each accelerator has its own realistic FLOPS which is not advertised and there are anecdotal community reports that do their best to find the actual best value, but I’m yet to find any official reports.</p>
+<p>If you find solid reports (papers?) showing the actual TFLOPS one can expect from one or more of the high end accelerators discussed in this chapter please kindly submit a PR with this information. The key is to have a reference to a source that the reader can validate the proposed information with.</p>
+<p>To provide a numerical sense to what I’m talking about is let’s take A100 with its 312 TFLOPS bf16 peak performance in the specs of this card. Until the invent of FlashAttention it was known that 150TFLOPS was close to the highest one could get for fp16/bf16 mixed precision regime. And with FlashAttention it’s around 180TFLOPS. This is, of course, measured for training LLMs where the network and IO are involved which create additional overheads. So here the maximum achievable peak performance probably lays somewhere between 200 and 300 TFLOPS.</p>
+<p>It should be possible to calculate the actual peak TFLOPS by doing a perfectly aligned max-size matrices <code>matmul</code> measured on a single accelerator.</p>
+<p>XXX: write a small program to do exactly dynamically figuring out the perfect shapes based on <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#dim-quantization">the tile and wave quantization effects</a> and max sizes (how?) so that the benchmark isn’t hardcoded to a particular accelerator.</p>
+</section>
+</section>
+<section id="accelerator-memory-size-and-speed" class="level3">
+<h3 class="anchored" data-anchor-id="accelerator-memory-size-and-speed">Accelerator memory size and speed</h3>
+<p>The accelerators use <a href="https://en.wikipedia.org/wiki/High_Bandwidth_Memory">High Bandwidth Memory</a> (HBM) which is a 3D version of SDRAM memory. For example, A100-SXM comes with HBM2 at 1.6TBps, and H100-SXM comes with HBM3 at 3.35TBps.</p>
+<p>Here are the specs:</p>
+<table class="table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Gen</th>
+<th style="text-align: right;">Data Rate<br> (Gbps)</th>
+<th style="text-align: right;">Bandwidth per<br> Device (GBps)</th>
+<th style="text-align: right;">Stack<br> Height</th>
+<th style="text-align: right;">Max. DRAM<br> Capacity (GB)</th>
+<th style="text-align: right;">Max. Device<br> Capacity (GB)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HBM</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HBM2</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">256</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HBM2e</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">461</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HBM3e</td>
+<td style="text-align: right;">9.6</td>
+<td style="text-align: right;">1229</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">64</td>
+</tr>
+</tbody>
+</table>
+<p>Since HBM is a stack of multiple DRAM chips, the <em>Stack Height</em> specifies how many chips are per device.</p>
+<p>Typically the more on-device memory the accelerator has the better. At any given time usually most of the model weights aren’t being used as they wait for their turn to be processed and thus large memory allows more of the model to be on the accelerator memory and immediately available for access and update. When there is not enough memory, sometimes the model has to be split across multiple accelerators, or offloaded to CPU and/or disk.</p>
+<p>Here are the memory specs for the recent high end accelerators (some aren’t GA yet):</p>
+<table class="table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 27%">
+<col style="width: 8%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Accelerator</th>
+<th style="text-align: right;">Memory<br> (GBs)</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: right;">Bandwidth<br> (TBps)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA A100 SXM</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: left;">HBM2e</td>
+<td style="text-align: right;">2.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NVIDIA H100 SXM</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">3.35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA H100 PCIe</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">2.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NVIDIA H100 dual NVL</td>
+<td style="text-align: right;">188</td>
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">7.80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA GH200 SXM (1)</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">4.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NVIDIA GH200 SXM (2)</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: left;">HBM3e</td>
+<td style="text-align: right;">4.80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA H200 SXM</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: left;">HBM3e</td>
+<td style="text-align: right;">4.80</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AMD MI250</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: left;">HBM2e</td>
+<td style="text-align: right;">3.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AMD MI250X</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: left;">HBM2e</td>
+<td style="text-align: right;">3.28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AMD MI300X</td>
+<td style="text-align: right;">192</td>
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">5.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Intel Gaudi2</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: left;">HBM2e</td>
+<td style="text-align: right;">2.45</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>Memory speed (bandwidth) is, of course, very important since if it’s not fast enough than the compute ends up idling waiting for the data to be moved to and from the memory.</p>
+</section>
+<section id="heat" class="level3">
+<h3 class="anchored" data-anchor-id="heat">Heat</h3>
+<p>This is of interest when you buy your own hardware, when you rent on the cloud the provider hopefully takes care of adequate cooling.</p>
+<p>The only important practical understanding for heat is that if the accelerators aren’t kept cool they will throttle their compute clock and slow everything down (and could even crash sometimes, albeit throttling is supposed to prevent that).</p>
+</section>
+</section>
+<section id="high-end-accelerators-for-llmvlm-workloads" class="level2">
+<h2 class="anchored" data-anchor-id="high-end-accelerators-for-llmvlm-workloads">High end accelerators for LLM/VLM workloads</h2>
+<section id="cloud-and-in-house-accelerators" class="level3">
+<h3 class="anchored" data-anchor-id="cloud-and-in-house-accelerators">Cloud and in-house accelerators</h3>
+<p>Most common accelerators that can be either rented on compute clouds or purchased:</p>
+<p>NVIDIA: - <a href="https://www.nvidia.com/en-us/data-center/a100/#specifications">A100</a> - huge availability but already getting outdated. - <a href="https://www.nvidia.com/en-us/data-center/h100">H100</a> - 2-3x faster than A100 (half precision), 6x faster for fp8, becoming available on all Tier-1 compute clouds. - <a href="https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/">GH200</a> - 2 chips on one card - (1) H100 w/ 96GB HBM3 or 144GB HBM3e + (2) Grace CPU w/ 624GB RAM - first units have been reported to become available.</p>
+<p>AMD: - <a href="https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html">MI250</a> ~= A100 - very few clouds have them - <a href="https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html">MI300</a> ~= H100 - just starting to emerge - and mainly on Tier-2 clouds (lots of new startups).</p>
+<p>Intel: - <a href="https://habana.ai/products/gaudi2/">Gaudi2</a> ~= H100 - <a href="https://docs.habana.ai/en/latest/Gaudi_Overview/Gaudi_Architecture.html">spec</a> - <a href="https://cloud.google.com">Currently there is a very low availability on cloud.google.com</a> with a long waiting list which supposedly should be reduced in Q1-2024. AWS has the older Gaudi1 via <a href="https://aws.amazon.com/ec2/instance-types/dl1/">DL1 instances</a>.</p>
+<p>Graphcore: - <a href="https://www.graphcore.ai/products/ipu">IPU</a> - available via <a href="https://www.paperspace.com/graphcore">Paperspace</a></p>
+<p>SambaNova: - <a href="https://sambanova.ai/products/datascale/">DataScale SN30</a></p>
+</section>
+<section id="in-house-accelerator-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="in-house-accelerator-clusters">In-house accelerator clusters</h3>
+<p>Cerebras: - <a href="https://www.cerebras.net/product-cluster/">clusters</a> - <a href="https://www.cerebras.net/product-system/">systems</a> based on WaferScale Engine (WSE).</p>
+</section>
+<section id="cloud-only-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="cloud-only-solutions">Cloud-only solutions</h3>
+<p>These can be only used via clouds:</p>
+<p>Google - <a href="https://cloud.google.com/tpu">TPUs</a> - lock-in, can’t switch to another vendor like NVIDIA -&gt; AMD</p>
+<p>Cerebras: - <a href="https://www.cerebras.net/product-cloud/">Cloud</a></p>
+</section>
+<section id="how-to-get-the-best-price" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-get-the-best-price">How to get the best price</h3>
+<p>Remember that the advertised prices are almost always open to negotiations as long as you’re willing to buy/rent in bulk or if renting for a 1-3 years. What you will discover is that the actual price that you end up paying could be many times less than the advertised “public” price. Some cloud providers already include the discount as you choose a longer commitment on their website, but it’s always the best to negotiate directly with their sales team. In addition or instead of a $$-discount you could be offered some useful features/upgrades for free.</p>
+<p>If your company has venture capital investors - it could help a lot to mention that, as then the cloud provider knows you are likely to buy more compute down the road and more likely to discount more.</p>
+<p>Tier 2 clouds are likely to give better prices than Tier 1. Tier 1 as of this writing is AWS, OCI, Azure and GCP.</p>
+<p>For the baseline prices it should be easy to find a few good sites that provide an up-to-date public price comparisons across clouds - just search for something like <a href="https://www.google.com/search?q=cloud+gpu+pricing+comparison">cloud gpu pricing comparison</a>.</p>
+<p>When shopping for a solution please remember that it’s not enough to rent the most powerful accelerator. You also need fast <a href="../../network#intra-node-networking">intra-node</a> and <a href="../../network#inter-node-networking">inter-node</a> connectivity and sufficiently fast <a href="../../storage">storage</a> - without which the expensive accelerators will idle waiting for data to arrive and you could be wasting a lot money and losing time.</p>
+</section>
+</section>
+<section id="accelerators-in-detail" class="level2">
+<h2 class="anchored" data-anchor-id="accelerators-in-detail">Accelerators in detail</h2>
+<section id="nvidia" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia">NVIDIA</h3>
+<p>Abbreviations:</p>
+<ul>
+<li>CUDA: Compute Unified Device Architecture (proprietary to NVIDIA)</li>
+</ul>
+<p>NVIDIA-specific key GPU characteristics: - CUDA Cores - similar to CPU cores, but unlike CPUs that typically have 10-100 powerful cores, CUDA Cores are weaker and come in thousands and allow to perform massive general purpose computations (parallelization). Like CPU cores CUDA Cores perform a single operation in each clock cycle. - Tensor Cores - special compute units that are designed specifically to perform fast multiplication and addition operations like matrix multiplication. These perform multiple operations in each clock cycle. They can execute extremely fast computations on low or mixed precision data types with some loss (fp16, bf16, tf32, fp8, etc.). These cores are specifically designed for ML workloads. - Streaming Multiprocessors (SM) are clusters of CUDA Cores, Tensor Cores and other components.</p>
+<p>For example, A100-80GB has:</p>
+<ul>
+<li>6912 CUDA Cores</li>
+<li>432 Tensor Cores (Gen 3)</li>
+<li>108 Streaming Multiprocessors (SM)</li>
+</ul>
+</section>
+<section id="amd" class="level3">
+<h3 class="anchored" data-anchor-id="amd">AMD</h3>
+<p>AMD-specific key GPU characteristics: - Stream Processors - are similar in functionality to CUDA Cores - that is these are the parallel computation units. But they aren’t the same, so one can’t compare 2 gpus by just comparing the number of CUDA Cores vs the number of Stream Processors. - Compute Units - are clusters of Stream Processors and other components</p>
+<p>for example, AMD MI250 has: - 13,312 Stream Processors - 208 Compute Units</p>
+</section>
+<section id="intel-gaudi2" class="level3">
+<h3 class="anchored" data-anchor-id="intel-gaudi2">Intel Gaudi2</h3>
+<p><a href="https://docs.habana.ai/en/latest/Gaudi_Overview/Gaudi_Architecture.html">Architecture</a></p>
+<ul>
+<li>24x 100 Gigabit Ethernet (RoCEv2) integrated on chip - 21 of which are used for intra-node and 3 for inter-node (so <code>21*8=168</code> cards for intra-node (262.5GBps per GPU), and <code>3*8=24</code> cards for inter-node (2.4Tbps between nodes)</li>
+<li>96GB HBM2E memory on board w/2.45 TBps bandwidth per chip, for a total of 768GB per node</li>
+</ul>
+<p>A server/node is built from 8 GPUs, which can then be expanded with racks of those servers.</p>
+<p>There are no official TFLOPS information published (and from talking to an Intel representative they have no intention to publish any.) They publish the [following benchmarks](https://developer.habana.ai/resources/habana-models-performance/ but I’m not sure how these can be used to compare this compute to other providers.</p>
+<p>Comparison: supposedly Gaudi2 competes with NVIDIA H100</p>
+</section>
+</section>
+<section id="api" class="level2">
+<h2 class="anchored" data-anchor-id="api">API</h2>
+<p>Which software is needed to deploy the high end GPUs?</p>
+<section id="nvidia-1" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-1">NVIDIA</h3>
+<p>NVIDIA GPUs run on <a href="https://developer.nvidia.com/cuda-toolkit">CUDA</a></p>
+</section>
+<section id="amd-1" class="level3">
+<h3 class="anchored" data-anchor-id="amd-1">AMD</h3>
+<p>AMD GPUs run on <a href="https://www.amd.com/en/products/software/rocm.html">ROCm</a> - note that PyTorch you can use CUDA-based software on ROCm-based GPUs! So it should be trivial to switch to the recent AMD MI250, MI300X, and other emerging ones.</p>
+</section>
+<section id="intel-gaudi" class="level3">
+<h3 class="anchored" data-anchor-id="intel-gaudi">Intel Gaudi</h3>
+<p>The API is via <a href="https://habana.ai/training-software/">Habana SynapseAI® SDK</a> which supports PyTorch and TensorFlow.</p>
+<p>Useful integrations: - <a href="https://github.com/huggingface/optimum-habana">HF Optimum Habana</a> which also includes - <a href="https://github.com/microsoft/DeepSpeed">DeepSpeed</a> integration.</p>
+</section>
+</section>
+<section id="apples-to-apples-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="apples-to-apples-comparison">Apples-to-apples Comparison</h2>
+<p>It’s very difficult to compare specs of different offerings since marketing tricks get deployed pretty much by all competitors so that one can’t compare 2 sets of specs and know the actual difference.</p>
+<ul>
+<li><p><a href="https://mlcommons.org/en/">MLPerf via MLCommons</a> publishes various hardware benchmarks that measure training, inference, storage and other tasks’ performance. For example, here is the most recent as of this writing <a href="https://mlcommons.org/en/training-normal-30/">training v3.0</a> and <a href="https://mlcommons.org/en/inference-datacenter-31/">inference v3.1</a> results.</p>
+<p>Except I have no idea how to make use of it - it’s close to impossible to make sense of or control the view. This is a great intention lost in over-engineering and not thinking about how the user will benefit from it, IMHO. For example, I don’t care about CV data, I only want to quickly see the LLM rows, but I can’t do it. And then the comparisons are still not apples to apples so how can you possibly make sense of which hardware is better I don’t know.</p></li>
+</ul>
+</section>
+<section id="power-and-cooling" class="level2">
+<h2 class="anchored" data-anchor-id="power-and-cooling">Power and Cooling</h2>
+<p>It is most likely that you’re renting your accelerator nodes and someone else is responsible for ensuring they function properly, but if you own the accelerators you do need to know how to supply a sufficient power and adequate cooling.</p>
+<section id="power" class="level3">
+<h3 class="anchored" data-anchor-id="power">Power</h3>
+<p>Some high end consumer GPU cards have 2 and sometimes 3 PCI-E 8-Pin power sockets. Make sure you have as many independent 12V PCI-E 8-Pin cables plugged into the card as there are sockets. Do not use the 2 splits at one end of the same cable (also known as pigtail cable). That is if you have 2 sockets on the GPU, you want 2 PCI-E 8-Pin cables going from your PSU to the card and not one that has 2 PCI-E 8-Pin connectors at the end! You won’t get the full performance out of your card otherwise.</p>
+<p>Each PCI-E 8-Pin power cable needs to be plugged into a 12V rail on the PSU side and can supply up to 150W of power.</p>
+<p>Some other cards may use a PCI-E 12-Pin connectors, and these can deliver up to 500-600W of power.</p>
+<p>Low end cards may use 6-Pin connectors, which supply up to 75W of power.</p>
+<p>Additionally you want the high-end PSU that has stable voltage. Some lower quality ones may not give the card the stable voltage it needs to function at its peak.</p>
+<p>And of course the PSU needs to have enough unused Watts to power the card.</p>
+</section>
+<section id="cooling" class="level3">
+<h3 class="anchored" data-anchor-id="cooling">Cooling</h3>
+<p>When a GPU gets overheated it will start throttling down and will not deliver full performance and it can even shutdown if it gets too hot.</p>
+<p>It’s hard to tell the exact best temperature to strive for when a GPU is heavily loaded, but probably anything under +80C is good, but lower is better - perhaps 70-75C is an excellent range to be in. The throttling down is likely to start at around 84-90C. But other than throttling performance a prolonged very high temperature is likely to reduce the lifespan of a GPU.</p>
+
+
+</section>
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bekman2024,
+  author = {Bekman, Stas and Foreman, Sam},
+  title = {ML {Engineering}},
+  date = {2024-02-20},
+  url = {https://saforem2.github.io/ml-engineering},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bekman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bekman, Stas, and Sam Foreman. 2024. <span>“ML Engineering.”</span>
+February 20, 2024. <a href="https://saforem2.github.io/ml-engineering">https://saforem2.github.io/ml-engineering</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://saforem2.github.io/ml-engineering">ML-Engineering</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>2024</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/compute/accelerator/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd-old/compute/accelerator/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

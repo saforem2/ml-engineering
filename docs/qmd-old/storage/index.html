@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-02-20">
+
+<title>ML Engineering - 📦 Storage</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../.././favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XVM2Y822Y1"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
+</script>
+<link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../css/default.css">
+<link rel="stylesheet" href="../../css/callouts.css">
+<meta property="og:title" content="Sam Foreman">
+<meta property="og:description" content="Machine Learning Engineering Open Book">
+<meta property="og:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
+<meta property="og:site_name" content="ML Engineering">
+<meta name="twitter:title" content="Sam Foreman">
+<meta name="twitter:description" content="Machine Learning Engineering Open Book">
+<meta name="twitter:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
+<meta name="twitter:creator" content="@saforem2">
+<meta name="twitter:site" content="@saforem2">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="ML Engineering">
+<meta name="citation_author" content="Stas Bekman">
+<meta name="citation_author" content="Sam Foreman">
+<meta name="citation_publication_date" content="2024-02-20">
+<meta name="citation_cover_date" content="2024-02-20">
+<meta name="citation_year" content="2024">
+<meta name="citation_online_date" content="2024-02-20">
+<meta name="citation_fulltext_html_url" content="https://saforem2.github.io/ml-engineering">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=The climate risk &amp;amp;amp; resilience portal (ClimRR) metadata and data dictionary;,citation_author=C. Burdi;,citation_author=Wall. T Branham;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://dub.sh/ClimRR-Metadata;">
+<meta name="citation_reference" content="citation_title=Progress on (g-2)_\mu from lattice QCD;,citation_author=Hartmut Wittig;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://arxiv.org/abs/2306.04165;">
+<meta name="citation_reference" content="citation_title=Hybrid Monte Carlo;,citation_author=S. Duane;,citation_author=A. D. Kennedy;,citation_author=B. J. Pendleton;,citation_author=D. Roweth;,citation_publication_date=1987;,citation_cover_date=1987;,citation_year=1987;,citation_doi=10.1016/0370-2693(87)91197-X;,citation_volume=195;,citation_journal_title=Phys. Lett. B;">
+<meta name="citation_reference" content="citation_title=Snowmass 2021 Computational Frontier CompF03 Topical Group Report: Machine Learning;,citation_author=Phiala Shanahan;,citation_author=others;,citation_publication_date=2022-09;,citation_cover_date=2022-09;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2209.07559;">
+<meta name="citation_reference" content="citation_title=Applications of Machine Learning to Lattice Quantum Field Theory;,citation_author=Denis Boyda;,citation_author=others;,citation_publication_date=2022-02;,citation_cover_date=2022-02;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2202.05838;,citation_conference_title=Snowmass 2021;">
+<meta name="citation_reference" content="citation_title=HMC with Normalizing Flows;,citation_author=Sam Foreman;,citation_author=Taku Izubuchi;,citation_author=Luchang Jin;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_author=Akio Tomiya;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01586;,citation_doi=10.22323/1.396.0073;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=LeapfrogLayers: A Trainable Framework for Effective Topological Sampling;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01582;,citation_doi=10.22323/1.396.0508;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=Deep Learning Hamiltonian Monte Carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021-05;,citation_cover_date=2021-05;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;,citation_conference_title=9th International Conference on Learning Representations;">
+<meta name="citation_reference" content="citation_title=Energy Justice Analysis of Climate Data with ClimRR;,citation_author=Sam Foreman;,citation_publication_date=2023-08-07;,citation_cover_date=2023-08-07;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/climate-analysis;,citation_language=en;">
+<meta name="citation_reference" content="citation_author=Sam Foreman;,citation_publication_date=2023-08-19;,citation_cover_date=2023-08-19;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/l2hmc-qcd;,citation_language=en;">
+<meta name="citation_reference" content="citation_title=Deep learning hamiltonian monte carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;">
+<meta name="citation_reference" content="citation_title=MLMC: Machine learning monte carlo for lattice gauge theory;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James Osborn;,citation_publication_date=00;,citation_cover_date=00;,citation_year=0;,citation_conference_title=40th international symposium on lattice field theory (lattice 2023) (batavia, IL, united states, 07/31/2023 - 08/04/2023);">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ML Engineering</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/saforem2"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/saforem2/ml-engineering"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-gear"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/blob/main/index.qmd">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/issues/new/choose">
+            New Issue
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">📦 Storage</li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏎️ Performance</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📓 Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/testing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">✏️ Testing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/transformers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🤗 Transformers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠  Insights</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🪖 The AI Battlefield</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏋️  Training</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/dtype-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/model-parallelism/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Parallelism</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/checkpoints/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checkpoints</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/performance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Tune Up For The Best Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Training Loss Patterns</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/training/fault-tolerance/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/network/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🛜 Network</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Networking Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Benchmarks Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Disabling NVLink Benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦  Storage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">💻 Compute</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/compute/cpu/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/compute/cpu-memory/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU memory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/compute/accelerator/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/compute/accelerator/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
+ <span class="menu-text">Nvidia</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/compute/accelerator/nvidia/debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting NVIDIA GPUs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🎻  Orchestration</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in SLURM Environment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Administration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Launchers with SLURM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM for users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🐛  Debugging</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/debug/tiny-scripts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Back up of scripts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/debug/make-tiny-models-tokenizers-datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Faster debug and development with tiny models, tokenizers and datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/debug/nccl-performance-debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NCCL: Debug and Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/debug/pytorch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debugging PyTorch programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/debug/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debug Tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/debug/torch-distributed-hanging-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diagnosing Hangings and Deadlocks in Multi-Node Multi-GPU Python Programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../qmd/debug/underflow_overflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Underflow and Overflow Detection</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#storage-file-systems-and-io" id="toc-storage-file-systems-and-io" class="nav-link active" data-scroll-target="#storage-file-systems-and-io">Storage: File Systems and IO</a>
+  <ul class="collapse">
+  <li><a href="#machine-learning-io-needs" id="toc-machine-learning-io-needs" class="nav-link" data-scroll-target="#machine-learning-io-needs">3 Machine Learning IO needs</a></li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary">Glossary</a></li>
+  <li><a href="#which-file-system-to-choose" id="toc-which-file-system-to-choose" class="nav-link" data-scroll-target="#which-file-system-to-choose">Which file system to choose</a></li>
+  <li><a href="#remote-file-system-clients" id="toc-remote-file-system-clients" class="nav-link" data-scroll-target="#remote-file-system-clients">Remote File System Clients</a></li>
+  <li><a href="#file-block-size" id="toc-file-block-size" class="nav-link" data-scroll-target="#file-block-size">File Block size</a></li>
+  <li><a href="#cloud-shared-storage-solutions" id="toc-cloud-shared-storage-solutions" class="nav-link" data-scroll-target="#cloud-shared-storage-solutions">Cloud shared storage solutions</a></li>
+  <li><a href="#local-storage-beats-cloud-storage" id="toc-local-storage-beats-cloud-storage" class="nav-link" data-scroll-target="#local-storage-beats-cloud-storage">Local storage beats cloud storage</a></li>
+  <li><a href="#beware-that-youre-often-being-sold-only-80-of-the-storage-you-pay-for" id="toc-beware-that-youre-often-being-sold-only-80-of-the-storage-you-pay-for" class="nav-link" data-scroll-target="#beware-that-youre-often-being-sold-only-80-of-the-storage-you-pay-for">Beware that you’re often being sold only 80% of the storage you pay for</a></li>
+  <li><a href="#beware-that-on-some-cloud-providers-backups-use-the-same-partition-they-backup" id="toc-beware-that-on-some-cloud-providers-backups-use-the-same-partition-they-backup" class="nav-link" data-scroll-target="#beware-that-on-some-cloud-providers-backups-use-the-same-partition-they-backup">Beware that on some cloud providers backups use the same partition they backup</a></li>
+  <li><a href="#dont-forget-the-checksums" id="toc-dont-forget-the-checksums" class="nav-link" data-scroll-target="#dont-forget-the-checksums">Don’t forget the checksums</a></li>
+  <li><a href="#concepts" id="toc-concepts" class="nav-link" data-scroll-target="#concepts">Concepts</a>
+  <ul class="collapse">
+  <li><a href="#queue-depth" id="toc-queue-depth" class="nav-link" data-scroll-target="#queue-depth">Queue Depth</a></li>
+  <li><a href="#direct-vs-buffered-io" id="toc-direct-vs-buffered-io" class="nav-link" data-scroll-target="#direct-vs-buffered-io">Direct vs Buffered IO</a></li>
+  <li><a href="#synchronous-vs-asynchronous-io" id="toc-synchronous-vs-asynchronous-io" class="nav-link" data-scroll-target="#synchronous-vs-asynchronous-io">Synchronous vs asynchronous IO</a></li>
+  <li><a href="#sequential-vs-random-access-io" id="toc-sequential-vs-random-access-io" class="nav-link" data-scroll-target="#sequential-vs-random-access-io">Sequential vs Random access IO</a></li>
+  </ul></li>
+  <li><a href="#benchmarks" id="toc-benchmarks" class="nav-link" data-scroll-target="#benchmarks">Benchmarks</a>
+  <ul class="collapse">
+  <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a></li>
+  <li><a href="#fio" id="toc-fio" class="nav-link" data-scroll-target="#fio">fio</a></li>
+  <li><a href="#poor-mans-storage-io-benchmark" id="toc-poor-mans-storage-io-benchmark" class="nav-link" data-scroll-target="#poor-mans-storage-io-benchmark">Poor man’s storage IO benchmark</a></li>
+  <li><a href="#other-tools" id="toc-other-tools" class="nav-link" data-scroll-target="#other-tools">other tools</a></li>
+  <li><a href="#published-benchmarks" id="toc-published-benchmarks" class="nav-link" data-scroll-target="#published-benchmarks">Published benchmarks</a></li>
+  </ul></li>
+  <li><a href="#why-pay-for-more-storage-when-you-can-easily-clean-it-up-instead" id="toc-why-pay-for-more-storage-when-you-can-easily-clean-it-up-instead" class="nav-link" data-scroll-target="#why-pay-for-more-storage-when-you-can-easily-clean-it-up-instead">Why pay for more storage when you can easily clean it up instead</a>
+  <ul class="collapse">
+  <li><a href="#huggingface-hub-caches" id="toc-huggingface-hub-caches" class="nav-link" data-scroll-target="#huggingface-hub-caches">HuggingFace Hub caches</a></li>
+  <li><a href="#python-package-manager-cleanups" id="toc-python-package-manager-cleanups" class="nav-link" data-scroll-target="#python-package-manager-cleanups">Python package manager cleanups</a></li>
+  <li><a href="#share-caches-in-group-environments" id="toc-share-caches-in-group-environments" class="nav-link" data-scroll-target="#share-caches-in-group-environments">Share caches in group environments</a></li>
+  <li><a href="#general-disk-usage" id="toc-general-disk-usage" class="nav-link" data-scroll-target="#general-disk-usage">General disk usage</a></li>
+  <li><a href="#partition-inodes-limit" id="toc-partition-inodes-limit" class="nav-link" data-scroll-target="#partition-inodes-limit">Partition inodes limit</a></li>
+  <li><a href="#tmp-on-compute-nodes" id="toc-tmp-on-compute-nodes" class="nav-link" data-scroll-target="#tmp-on-compute-nodes"><code>/tmp</code> on compute nodes</a></li>
+  <li><a href="#how-to-find-users-who-consume-a-lot-of-disk-space" id="toc-how-to-find-users-who-consume-a-lot-of-disk-space" class="nav-link" data-scroll-target="#how-to-find-users-who-consume-a-lot-of-disk-space">How to find users who consume a lot of disk space</a></li>
+  <li><a href="#how-to-automatically-delete-old-checkpoints" id="toc-how-to-automatically-delete-old-checkpoints" class="nav-link" data-scroll-target="#how-to-automatically-delete-old-checkpoints">How to automatically delete old checkpoints</a></li>
+  </ul></li>
+  <li><a href="#contributors" id="toc-contributors" class="nav-link" data-scroll-target="#contributors">Contributors</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/storage/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd-old/storage/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">📦 Storage</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/storage/index.qmd"><i class="bi"></i></button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading"></div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 20, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="storage-file-systems-and-io" class="level1">
+<h1>Storage: File Systems and IO</h1>
+<section id="machine-learning-io-needs" class="level2">
+<h2 class="anchored" data-anchor-id="machine-learning-io-needs">3 Machine Learning IO needs</h2>
+<p>There are 3 distinct IO needs in the ML workload:</p>
+<ol type="1">
+<li>You need to be able to feed the DataLoader fast - (super fast read, don’t care about fast write) - requires sustainable load for hours and days</li>
+<li>You need to be able to write checkpoints fast - (super fast write, fastish read as you will be resuming a few times) - requires burst writing - you want super fast to not block the training for long (unless you use some sort of cpu offloading to quickly unblock the training)</li>
+<li>You need to be able to load and maintain your codebase - (medium speed for both reading and writing) - this also needs to be shared since you want all nodes to see the same codebase - as it happens only during the start or resume it’ll happen infrequently</li>
+</ol>
+<p>As you can see these 3 have very different requirements both on speed and sustainable load, and thus ideally you’d have 3 different filesystems, each optimized for the required use case.</p>
+<p>If you have infinite funds, of course, get a single super-fast read, super-fast write, that can do that for days non-stop. But for most of us, this is not possible so getting 2 or 3 different types of partitions where you end up paying much less is a wiser choice.</p>
+<p>Incoming suggestions from Ross Wightman to integrate:</p>
+<ul>
+<li><p>I’d try to separate volumes by workload, so keep the ‘lots of small files’, high churn like environments, code separate from bulk storage like datasets, checkpoints. Possibly even split those too since datasets are largely static and checkpoints are being rotated all the time</p></li>
+<li><p>When datasets are on network storage, just like bucket storage, they should consist of large files AND be read as large files (sequentially in large chunks, not mmapped!). Avoid seeking within datasets</p></li>
+<li><p>Setups like HF datasets can be deceiving, might look like one big file, but often being mmap’d and the IO read pattern is nuts, like 3-4x more iops than if you’d read them as individual files. Mmap loading can be turned off, but if that’s the case, for a lot of datasets you move a problem into the DataLoader processes, requiring reading too much data into memory at once. Better awareness of tradeoffs for different use cases, and especially using Iterable streaming when appropriate.</p></li>
+<li><p>Note that once your datasets are optimally friendly for a large, distributed network filesystem, they can usually just be streamed from bucket storage in cloud systems that have that option. So better to move them off the network filesystem in that case.</p></li>
+<li><p>In a way, bucket storage like s3, via the interface limitations, enforces patterns that are reasonable for storage backends like this. It’s ooh, it’s mounted as a folder, I can do whatever I want (mmap files, write loads of little ones, delete them all, etc) that’s the prob.</p></li>
+<li><p>One also cannot expect to treat a distributed filesystem like their local disk. If you separated volumes by workload you’d probably be able to utilize much higher % of the total storage. Don’t mix high churn, small files with low churn large files.</p></li>
+<li><p>Also, note that once your datasets are optimally friendly for a large, distributed network filesystem, they can usually just be streamed from bucket storage in cloud systems that have that option. So better to move them off the network filesystem in that case.</p></li>
+</ul>
+</section>
+<section id="glossary" class="level2">
+<h2 class="anchored" data-anchor-id="glossary">Glossary</h2>
+<ul>
+<li>NAS: Network Attached Storage</li>
+<li>SAN: Storage Area Network</li>
+<li>DAS: Direct-Attached storage</li>
+<li>NSD: Network Shared Disk</li>
+<li>OSS: Object storage server</li>
+<li>MDS: Metadata server</li>
+<li>MGS: Management server</li>
+</ul>
+</section>
+<section id="which-file-system-to-choose" class="level2">
+<h2 class="anchored" data-anchor-id="which-file-system-to-choose">Which file system to choose</h2>
+<p><strong>Distributed Parallel File Systems are the fastest solutions</strong></p>
+<p>Distributed parallel file systems dramatically improve performance where hundreds to thousands of clients can access the shared storage simultaneously. They also help a lot with reducing hotspots (where some data pockets are accessed much more often than others).</p>
+<p>The 2 excellent performing parallel file systems that I had experience with are:</p>
+<ul>
+<li><a href="https://www.lustre.org/">Lustre FS</a> (Open Source) (<a href="https://wiki.lustre.org/Main_Page">Wiki</a>)</li>
+<li><a href="https://en.wikipedia.org/wiki/GPFS">GPFS</a> (IBM), recently renamed to IBM Storage Scale, and before that it was called IBM Spectrum Scale.</li>
+</ul>
+<p>Both solutions have been around for 2+ decades. Both are POSIX-compliant. These are also not trivial to create - you have to setup a whole other cluster with multiple cpu-only VMs dedicated exclusively for those filesystems - only then you can mount those. As compared to weaker cloud-provided “built-in” solutions which take only a few screens of questions to answer in order to activate. And when creating the storage cluster there is a whole science to which VMs to choose for which functionality. For example, here is a <a href="https://cloud.google.com/architecture/lustre-architecture">Lustre guide on GCP</a>.</p>
+<p>case study: At JeanZay HPC (France) we were saving 2.3TB checkpoint in parallel on 384 processes in 40 secs! This is insanely fast - and it was GPFS over NVME drives.</p>
+<p>NASA’s cluster has <a href="https://www.nas.nasa.gov/hecc/support/kb/lustre-best-practices_226.html">a long long list of gotchas around using Lustre</a>.</p>
+<p>Some very useful pros of GFPS: - If you have a lot of small files, you can easily run out of inodes (<code>df -i</code> to check). GFPS 5.x never runs out of inodes, it dynamically creates more as needed - GPFS doesn’t have the issue Lustre has where you can run out of disk space at 80% if one of the sub-disks got full and wasn’t re-balanced in time - you can reliably use all 100% of the allocated storage. - GPFS doesn’t use a central metadata server (or a cluster of those) which often becomes a bottleneck when dealing with small files. Just like data, metatada is handled by each node in the storage cluster. - GPFS comes with a native NSD client which is superior to the generic NFS client, but either can be used with it.</p>
+<p>Other parallel file systems I don’t yet have direct experience with:</p>
+<ul>
+<li><a href="https://www.beegfs.io/">BeeGFS</a></li>
+<li><a href="https://www.weka.io/">WekaIO</a></li>
+<li><a href="https://docs.daos.io/">DAOS</a> (Distributed Asynchronous Object Storage) (Intel)</li>
+<li><a href="https://www.netapp.com">NetApp</a></li>
+</ul>
+<p>Most clouds provide at least one implementation of these, but not all. If your cloud provider doesn’t provide at least one of these and they don’t have a fast enough alternative to meet your needs you should reconsider.</p>
+<p><strong>OK’ish solutions</strong></p>
+<p>There are many OK’ish solutions offered by <a href="#cloud-shared-storage-solutions">various cloud providers</a>. Benchmark those seriously before you commit to any. Those are usually quite decent for handling large files and not so much for small files.</p>
+<p>case study: As of this writing with GCP’s Zonal FileStore over NFS solution <code>python -c "import torch"</code> takes 20 secs to execute, which is extremely slow! Once the files are cached it then takes ~2 secs. Installing a conda environment with a handful of prebuilt python packages can easily take 20-30 min! This solution we started with had been very painful and counter-productive to our work. This would impact anybody who has a lot of python packages and conda environments. But, of course, GCP provides much faster solutions as well.</p>
+</section>
+<section id="remote-file-system-clients" class="level2">
+<h2 class="anchored" data-anchor-id="remote-file-system-clients">Remote File System Clients</h2>
+<p>You will need to choose which client to use to connect the file system to your VM with.</p>
+<p>The most common choice is: <a href="https://en.wikipedia.org/wiki/Network_File_System">NFS</a> - which has been around for 4 decades. It introduces an additional overhead and slows things down. So if there is a native client supported by your VM, you’d have an overall faster performance using it over NFS. For example, GPFS comes with an <a href="https://www.ibm.com/docs/en/linux-on-systems?topic=configurations-network-shared-disk-nsd">NSD</a> client which is superior to NFS.</p>
+</section>
+<section id="file-block-size" class="level2">
+<h2 class="anchored" data-anchor-id="file-block-size">File Block size</h2>
+<p>If the file system you use uses a block size of 16mb, but the average size of your files is 16k, you will be using 1,000 times more disk space than the actual use. For example, you will see 100TB of disk space used when the actual disk space will be just 100MB.</p>
+<p>footnote: On Linux the native file systems typically use a block size of 4k.</p>
+<p>So often you might have 2 very different needs and require 2 different partitions optimized for different needs.</p>
+<ol type="1">
+<li>thousands to millions of tiny files - 4-8k block size</li>
+<li>few large files - 2-16mb block size</li>
+</ol>
+<p>case study: Python is so bad at having tens of thousand of tiny files that if you have many conda environments you are likely to run of inodes in some situations. At JeanZay HPC we had to ask for a special dedicated partition where we would install all conda environments because we kept running out of inodes on normal GPFS partitions. I think the problem is that those GPFS partitions were configured with 16MB block sizes, so this was not a suitable partition for 4KB-large files.</p>
+<p>The good news is that modern solutions are starting to introduce a dynamic block size. For example, the most recent GPFS supports sub-blocks. So, for example, it’s possible to configure GPFS with a block size of 2mb, with a sub-block of 8k, and then the tiny files get packed together as sub-blocks, thus not wasting too much disk space.</p>
+</section>
+<section id="cloud-shared-storage-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="cloud-shared-storage-solutions">Cloud shared storage solutions</h2>
+<p>Here are shared file system storage solutions made available by various cloud providers:</p>
+<ul>
+<li><a href="https://cloud.google.com/architecture/filers-on-compute-engine">GCP</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/virtual-machines/disks-shared">Azure</a></li>
+<li><a href="https://aws.amazon.com/what-is/nas/#seo-faq-pairs#how-can-aws-help-with-storage-solutions">AWS</a></li>
+</ul>
+</section>
+<section id="local-storage-beats-cloud-storage" class="level2">
+<h2 class="anchored" data-anchor-id="local-storage-beats-cloud-storage">Local storage beats cloud storage</h2>
+<p>While cloud storage is cheaper the whole idea of fetching and processing your training data stream dynamically at training time is very problematic with a huge number of issues around it.</p>
+<p>Same goes for dynamic offloading of checkpoints to the cloud.</p>
+<p>It’s so much better to have enough disk space locally for data loading.</p>
+<p>For checkpointing there should be enough local disk space for saving a checkpoint in a fast and reliable way and then having a crontab job or a slurm job to offload it to the cloud. Always keep the last few checkpoints locally for a quick resume, should your job crash, as it’d be very expensive to wait to fetch the checkpoint from the cloud for a resume.</p>
+<p>case study: we didn’t have a choice and had to use cloud storage for dataloading during IDEFICS-80B training as we had barely any local storage and since it was multimodal data it was many TBs of data. We spent many weeks trying to make this solution robust and it sucked at the end. The biggest issue was that it was very difficult at the time to keep track of RNG state for the DataSampler because the solution we used, well, didn’t bother to take care of it. So a lot of data that took a lot of time to create was wasted (not used) and a lot of data was repeated, so we didn’t have a single epoch of unique data.</p>
+</section>
+<section id="beware-that-youre-often-being-sold-only-80-of-the-storage-you-pay-for" class="level2">
+<h2 class="anchored" data-anchor-id="beware-that-youre-often-being-sold-only-80-of-the-storage-you-pay-for">Beware that you’re often being sold only 80% of the storage you pay for</h2>
+<p>There is a subtle problem with distributed shared storage used on compute nodes. Since most physical disks used to build the large file systems are only 0.3-2TB large, any of these physical disks can get full before the combined storage gets full. And thus they require constant rebalancing so that there will be no situation where one disk is 99% full and others are only 50% full. Since rebalancing is a costly operation, like most programming languages’ garbage collection, it happens infrequently. And so if you run <code>df</code> and it reports 90% full, it’s very likely that any of the programs can fail at any given time.</p>
+<p>From talking to IO engineers, the accepted reality (that for some reason is not being communicated to customers) is that only about 80% of distributed large storage is reliable.</p>
+<p>Which means that if you want to have 100TB of reliable cloud storage you actually need to buy 125TB of storage, since 80% of that will be 100TB. So you need to plan to pay 25% more than what you provisioned for your actual needs. I’m not sure why the customer should pay for the technology deficiency but that’s how it is.</p>
+<p>For example, GCP states that only <a href="https://cloud.google.com/filestore/docs/known-issues#capacity_errors_before_reaching_full_provisioned_capacity">89%</a> can be used reliably, albeit more than once the storage failed already at 83% for me there. Kudos to Google to even disclosing this as a known issue, albeit not at the point of where a person buys the storage. As in - we recommend you buy 12% more storage than you actually plan to use, since we can only reliably deliver 89% of it.</p>
+<p>I also talked to <a href="https://sycomp.com/">Sycomp</a> engineers who provide managed IBM Storage Scale (GPFS) solutions, and according to them GPFS doesn’t have this issue and the whole 100% can be reliably used.</p>
+<p>Also on some setups if you do backups via the cloud provider API (not directly on the filesystem), they might end up using the same partition, and, of course, consume the disk space, but when you run <code>df</code> it will not show the real disk usage - it may show usage not including the backups. So if your backups consume 50% of the partition.</p>
+<p>Whatever storage solution you pick, ask the provider how much of the storage can be reliably used, so that there will be no surprises later.</p>
+</section>
+<section id="beware-that-on-some-cloud-providers-backups-use-the-same-partition-they-backup" class="level2">
+<h2 class="anchored" data-anchor-id="beware-that-on-some-cloud-providers-backups-use-the-same-partition-they-backup">Beware that on some cloud providers backups use the same partition they backup</h2>
+<p>This makes no sense to me but with some providers when you make a back up of a partition using their tools, the back up will use space on that same partition. And on some of those providers you won’t even know this happened until you run out of disk space when you really used 30% of the partition you allocated. On those providers running <code>df</code> is pointless because it’ll tell you the free disk space, but it won’t include any back ups in it. So you have no idea what’s going on.</p>
+<p>If you start making a backup and suddenly everything fails because all processes fail to write but <code>df</code> reports 30% usage, you will now know why this happened. Snapshots too use the same partition.</p>
+<p>So say you paid for a 100TB partition and you used up 95TB and now you want to back it up - well, you can’t - where would it put 95TB of data if it has 5TB of data left even if it compresses it.</p>
+<p>As I discover specific solution that have this unintuitive behavior I will add pointers to how you can see the actual disk usage: - <a href="https://cloud.google.com/filestore/docs/monitoring-instances#free-raw-capacity-percent">GCP FileStore</a> (but it doesn’t work for Basic Tier)</p>
+</section>
+<section id="dont-forget-the-checksums" class="level2">
+<h2 class="anchored" data-anchor-id="dont-forget-the-checksums">Don’t forget the checksums</h2>
+<p>When you sync data to and from the cloud make sure to research whether the tool you use checks the checksums, otherwise you may end up with corrupt during transmission data. Some tools do it automatically, others you have to enable this feature (since it usually comes at additional compute cost and transmission slowdown). Better slow, but safe.</p>
+<p>These are typically MD5 and SHA256 checksums. Usually MD5 is sufficient if your environment is safe, but if you want the additional security do SHA256 checksums.</p>
+</section>
+<section id="concepts" class="level2">
+<h2 class="anchored" data-anchor-id="concepts">Concepts</h2>
+<p>Here are a few key storage-related concepts that you likely need to be familiar with:</p>
+<section id="queue-depth" class="level3">
+<h3 class="anchored" data-anchor-id="queue-depth">Queue Depth</h3>
+<p><strong>Queue depth</strong> (or <strong>IO depth</strong>) is the number of IO requests that can be queued at one time on a storage device controller. If more IO requests than the controller can queue are being sent the OS will usually put those into its own queue.</p>
+<p>On Linux the local block devices’ queue depth is usually pre-configured by the kernel. For example, if you want to check the max queue depth set for <code>/dev/sda</code> you can <code>cat /sys/block/sda/queue/nr_requests</code>. To see the current queue depth of a local device run <code>iostat -x</code> and watch for <code>aqu-sz</code> column. (<code>apt install sysstat</code> to get <code>iostat</code>.)</p>
+<p>Typically the more IO requests get buffered the bigger the latency will be, and the better the throughput will be. This is because if a request can’t be acted upon immediately it’ll prolong the response time as it has to wait before being served. But having multiple requests awaiting to be served in a device’s queue would typically speed up the total throughput as there is less waiting time between issuing individual requests.</p>
+</section>
+<section id="direct-vs-buffered-io" class="level3">
+<h3 class="anchored" data-anchor-id="direct-vs-buffered-io">Direct vs Buffered IO</h3>
+<p><strong>Direct</strong> IO refers to IO that bypasses the operating system’s caching buffers. This corresponds to <code>O_DIRECT</code> flag in <code>open(2)</code> system call.</p>
+<p>The opposite is the <strong>buffered</strong> IO, which is usually the default way most applications do IO since caching typically makes things faster.</p>
+<p>When we run an IO benchmark it’s critical to turn the caching/buffering off, because otherwise the benchmark’s results will most likely be invalid. You normally won’t be reading or writing the same file hundreds of times in a row. Hence most likely you’d want to turn the direct mode on in the benchmark’s flags if it provides such.</p>
+<p>In certain situation opening files with <code>O_DIRECT</code> may actually help to overcome delays. For example, if the training program logs to a log file (especially on a slow shared file system), you might not be able to see the logs for many seconds if both the application and the file system buffering are in the way. Opening the log file with <code>O_DIRECT</code> by the writer typically helps to get the reader see the logged lines much sooner.</p>
+</section>
+<section id="synchronous-vs-asynchronous-io" class="level3">
+<h3 class="anchored" data-anchor-id="synchronous-vs-asynchronous-io">Synchronous vs asynchronous IO</h3>
+<p>In synchronous IO the client submits an IO request and wait for it to be finished before submitting the next IO request to the same target device.</p>
+<p>In asynchronous IO the client may submit multiple IO requests one after another without waiting for any to finish first. This requires that the target device can <a href="#queue-depth">queue up multiple IO requests</a>.</p>
+</section>
+<section id="sequential-vs-random-access-io" class="level3">
+<h3 class="anchored" data-anchor-id="sequential-vs-random-access-io">Sequential vs Random access IO</h3>
+<p><strong>Sequential access</strong> IO is when you read blocks of data one by one sequentially (think a movie). Here are some examples: - reading or writing a model’s checkpoint file all at once - loading a python program - installing a package</p>
+<p><strong>Random access</strong> IO is when you’re accessing part of a file at random. Here are some examples: - database querying - reading samples from a pre-processed dataset in a random fashion - moving around a file using <code>seek</code></p>
+</section>
+</section>
+<section id="benchmarks" class="level2">
+<h2 class="anchored" data-anchor-id="benchmarks">Benchmarks</h2>
+<p>Time is money both in terms of a developer’s time and model’s training time, so it’s crucial that storage IO isn’t a bottleneck in your human and compute workflows.</p>
+<p>In the following sections we will discuss various approaches to figuring out whether the proposed storage solution satisfies your work needs.</p>
+<section id="metrics" class="level3">
+<h3 class="anchored" data-anchor-id="metrics">Metrics</h3>
+<p>The three main storage IO metrics one typically cares for are:</p>
+<ol type="1">
+<li><a href="https://en.wikipedia.org/wiki/Network_throughput">Throughput</a> or Bandwidth (bytes per second - can be MBps, GBps, etc.)</li>
+<li><a href="https://en.wikipedia.org/wiki/IOPS">IOPS</a> (Input/output operations per second that a system can perform</li>
+<li><a href="https://en.wikipedia.org/wiki/Latency_(engineering)">Latency</a> (msecs or usecs)</li>
+</ol>
+<ul>
+<li><em>IOPS</em> measures how many input and/or output operations a given storage device or a cluster can perform per second. Typically read and write IOPS won’t be the same. And for many systems it’ll also depend on whether the operation is sequential or random. So a storage system will have 4 different IOPS rates:</li>
+</ul>
+<ol type="1">
+<li>IOPS of random reads</li>
+<li>IOPS of random writes</li>
+<li>IOPS of sequential reads</li>
+<li>IOPS of sequential writes</li>
+</ol>
+<ul>
+<li><em>Throughput</em> refers to how much data can be processed per second.</li>
+</ul>
+<p>IOPS vs.&nbsp;Throughput</p>
+<ul>
+<li>when you deal with small files high IOPS is important.</li>
+<li>when you deal with large files high throughput is important.</li>
+</ul>
+<p>IOPS correlates to Throughput via block size: <code>Throughput = IOPS * block_size</code></p>
+<p>Thus given a fixed IOPS - the larger the block size that the system can read or write the bigger the throughput will be.</p>
+<p>And since there are 4 IOPS categories, correspondingly there are 4 throughput values to match.</p>
+<p><em>Latency</em>: is the delay between the moment the instruction to transfer data is issued and when the response to that instruction arrives.</p>
+<p>Typically the more distance (switches, relays, actual distance) the packet has to travel the bigger the latency will be.</p>
+<p>So if you have a local NVME drive your read or write latency will be much shorter as compared to reading or writing to a storage device that is located on another continent.</p>
+</section>
+<section id="fio" class="level3">
+<h3 class="anchored" data-anchor-id="fio">fio</h3>
+<p><a href="https://fio.readthedocs.io/en/latest/">fio - Flexible I/O tester</a> is a commonly used IO benchmarking tool, which is relatively easy to operate. It has many options which allow you to emulate pretty much any type of a load and it provides a very detailed performance report.</p>
+<p>First install <code>fio</code> with <code>apt install fio</code> or however your package manager does it.</p>
+<p>Here is an example of a read benchmark:</p>
+<pre><code>base_path=/path/to/partition/
+fio --ioengine=libaio --filesize=16k --ramp_time=2s --time_based --runtime=3m --numjobs=16 \
+--direct=1 --verify=0 --randrepeat=0 --group_reporting --unlink=1 --directory=$base_path  \
+--name=read-test --blocksize=4k --iodepth=64 --readwrite=read</code></pre>
+<p>Here 16 concurrent read threads will run for 3 minutes. The benchmark uses a block size of 4k (typical for most OSes) with the file size of 16k (a common size of most Python files) in a sequential reading style using <a href="#direct-vs-buffered-io">non-buffered IO</a>. So this particular set of flags will create a good benchmark to show how fast you can import Python modules on 16 concurrent processes.</p>
+<p>case study: on one NFS setup we had <code>python -c "import torch"</code> taking 20 seconds the first time it was run, which is about 20x slower than the same test on a normal NVME drive. Granted once the files were cached the loading was much faster but it made for a very painful development process since everything was slow.</p>
+<p>good read: <a href="https://tobert.github.io/post/2014-04-17-fio-output-explained.html">Fio Output Explained</a> - it’s an oldie but is still a goodie - if you have a more up-to-date write up please send me a link or a PR.</p>
+<p>Important: if you don’t use the <code>--unlink=1</code> flag make sure to delete <code>fio</code>’s work files between different benchmarks - not doing so can lead to seriously wrong reports as <code>fio</code> will reuse files it prepared for a different benchmark which must not be re-used if the benchmark parameters have changed. Apparently this reuse is an <code>fio</code> feature, but to me it’s a bug since I didn’t know this nuance and got a whole lot of invalid reports because of it and it took awhile to realize they were wrong.</p>
+<p>Going back to the benchmark - the parameters will need to change to fit the type of the IO operation you care to be fast - is it doing a lot of pip installs or writing a checkpoint on 512 processes, or doing a random read from a parquet file - each benchmark will have to be adapted to measure the right thing.</p>
+<p>At the beginning I was manually fishing out the bits I was after, so I automated it resulting in <a href="./fio-scan">fio-scan</a> benchmark that will run a pair of read/write benchmarks on 16KB, 1MB and 1GB file sizes each using a fixed 4k block size (6 benchmarks in total). It uses a helper <a href="./fio-json-extract.py">fio-json-extract.py</a> to parse the log files and pull out the average latency, bandwidth and iops and report them in a nicely formatted markdown table.</p>
+<p>Here is how to run it:</p>
+<pre><code>git clone https://github.com/stas00/ml-engineering/
+cd ml-engineering
+cd storage
+
+path_to_test=/path/to/partition/to/test
+./fio-scan $path_to_test</code></pre>
+<p>Adapt <code>path_to_test</code> to point to the partition path you want to benchmark.</p>
+<p>note: the log parser uses python3. if <code>fio-scan</code> fails it’s most likely because you run it on a system with python2 installed by default. It expects <code>python --version</code> to be some python 3.x version. You can edit <code>fio-scan</code> to point to the right <code>python</code>.</p>
+<p>Here is an example of this IO scan on my Samsung SSD 980 PRO 2TB NVME drive (<a href="benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.md">summary</a>):</p>
+<ul>
+<li>filesize=16k read</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">lat msec</th>
+<th style="text-align: right;">bw MBps</th>
+<th style="text-align: right;">IOPS</th>
+<th style="text-align: right;">jobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">1006.3</td>
+<td style="text-align: right;">257614</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>filesize=16k write</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">lat msec</th>
+<th style="text-align: right;">bw MBps</th>
+<th style="text-align: right;">IOPS</th>
+<th style="text-align: right;">jobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">1239.1</td>
+<td style="text-align: right;">317200</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>filesize=1m read</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">lat msec</th>
+<th style="text-align: right;">bw MBps</th>
+<th style="text-align: right;">IOPS</th>
+<th style="text-align: right;">jobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.7</td>
+<td style="text-align: right;">2400.1</td>
+<td style="text-align: right;">614419</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>filesize=1m write</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">lat msec</th>
+<th style="text-align: right;">bw MBps</th>
+<th style="text-align: right;">IOPS</th>
+<th style="text-align: right;">jobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">1940.5</td>
+<td style="text-align: right;">496765</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>filesize=1g read</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">lat msec</th>
+<th style="text-align: right;">bw MBps</th>
+<th style="text-align: right;">IOPS</th>
+<th style="text-align: right;">jobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.4</td>
+<td style="text-align: right;">2762.0</td>
+<td style="text-align: right;">707062</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>filesize=1g write</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">lat msec</th>
+<th style="text-align: right;">bw MBps</th>
+<th style="text-align: right;">IOPS</th>
+<th style="text-align: right;">jobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2.1</td>
+<td style="text-align: right;">1943.9</td>
+<td style="text-align: right;">497638</td>
+<td style="text-align: right;">16</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see as of this writing this is a pretty fast NVMe drive if you want to use it as a base-line against, say, a network shared file system.</p>
+</section>
+<section id="poor-mans-storage-io-benchmark" class="level3">
+<h3 class="anchored" data-anchor-id="poor-mans-storage-io-benchmark">Poor man’s storage IO benchmark</h3>
+<p>Besides properly designed performance benchmarks which give you some numbers that you may or may not be able to appreciate there is a perception benchmark, and that is how does a certain functionality or a service feel. For example, when going to a website, does it feel like it’s taking too long to load a webpage? or when going to a video service, does it take too long for the video to start playing and does it stop every few seconds to buffer the stream?</p>
+<p>So with file system the questions are very simple - does it feel that it takes too long to install or launch a program? Since a lot of us live in the Python world, python is known to have thousands of tiny files which are usually installed into a virtual environment, with <a href="https://www.anaconda.com/download">conda</a> being the choice of many as of this writing.</p>
+<p>In one of the environments we have noticed that our developers’ productivity was really bad on a shared filesystem because it was taking up to 30min to install a conda environment with various packages needed for using a certain ML-training framework, and we also noticed that <code>python -c "import torch'</code> could take more than 20 seconds. This is about 5-10x slower than a fast local NVME-based filesystem would deliver. Obviously, this is bad. So I devised a perception test using <code>time</code> to measure the common activities. That way we could quickly tell if the proposed shared file system solution that we contemplated to switch to were significantly better. We didn’t want a solution that was 2x faster, we wanted a solution that was 10x better, because having an expensive developer wait for proverbial paint to dry is not a good thing for a business.</p>
+<p>So here is the poor man’s benchmark that we used, so this is just an example. Surely if you think about the workflow of your developers you would quickly identify where things are slow and devise yours best fitting your needs.</p>
+<p>note: To have a baseline to compare to do these timing tests on a recently manufactured local NVME. This way you know what the ceiling is, but with beware that many shared file systems won’t be able to match that.</p>
+<p>Step 1. Install conda onto the shared file system you want to test if it’s not there already.</p>
+<pre><code>export target_partition_path=/mnt/weka  # edit me!!!
+mkdir -p $target_partition_path/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $target_partition_path/miniconda3/miniconda.sh
+bash $target_partition_path/miniconda3/miniconda.sh -b -u -p $target_partition_path/miniconda3
+rm -rf $target_partition_path/miniconda3/miniconda.sh
+$target_partition_path/miniconda3/bin/conda init bash
+bash</code></pre>
+<p>notes: - adapt <code>target_partition_path</code> and the miniconda download link if you aren’t on the x86 platform. - at the end we launch a new <code>bash</code> shell for conda setup to take an effect, you might need to tweak things further if you’re not a <code>bash</code> user - I trust you will know what to do.</p>
+<p>Step 2. Measure conda install time (write test)</p>
+<p>Time the creation of a new conda environment:</p>
+<pre><code>time conda create -y -n install-test python=3.9</code></pre>
+<pre><code>real    0m29.657s
+user    0m9.141s
+sys     0m2.861s</code></pre>
+<p>Time the installation of some heavy pip packages:</p>
+<pre><code>conda deactivate
+conda activate install-test
+time pip install torch torchvision torchaudio</code></pre>
+<pre><code>real    2m10.355s
+user    0m50.547s
+sys     0m12.144s</code></pre>
+<p>Please note that this test is somewhat skewed since it also includes the packages download in it and depending on your incoming network speed it could be super fast or super slow and could impact the outcome. But once the downloaded packages are cached, in the case of conda they are also untarred, so if you try to install the packages the 2nd time the benchmark will no longer be fair as on a slow shared file system the untarring could be very slow and we want to catch that.</p>
+<p>I don’t worry about it because usually when the file system is very slow usually you can tell it’s very slow even if the downloads are slow, you just watch the progress and you can just tell.</p>
+<p>If you do want to make this benchmark precise, you probably could keep the pre-downloaded conda packages and just deleting their untar’ed dirs:</p>
+<pre><code>find $target_partition_path/miniconda3/pkgs -mindepth 1 -type d -exec rm -rf {} +</code></pre>
+<p>in the case of <code>pip</code> it doesn’t untar anything, but just caches the wheels it downloaded, so the <code>time pip install</code> benchmark can definitely be more precise if you run it the 2nd time (the first time it’s downloaded, cached and installed, the second time it’s installed from cache. So you could do:</p>
+<pre><code>conda create -y -n install-test python=3.9
+conda activate install-test
+pip install torch torchvision torchaudio
+conda create -y -n install-test2 python=3.9
+conda activate install-test2
+time pip install torch torchvision torchaudio</code></pre>
+<p>As you can see here we time only the 2nd time we install the pip packages.</p>
+<p>Step 3. Measure loading time after flushing the memory and file system caches (read test)</p>
+<pre><code>sudo sync
+echo 3 | sudo tee /proc/sys/vm/drop_caches
+time python -c "import torch"</code></pre>
+<p>As you can see before we do the measurement we have to tell the OS to flush its memory and file system caches.</p>
+<p>If you don’t have <code>sudo</code> access you can skip the command involving <code>sudo</code>, also sometimes the system is setup to work w/o <code>sudo</code>. If you can’t run the syncing and flushing of the file system caches you will just get incorrect results as the benchmark will be measuring the time to load already cached file system objects. To overcome this either ask your sysadmin to do it for you or simply come back in the morning while hopefully your file system caches other things and evicts the python packages, and then repeat the python one liner then with the hope those files are no longer in the cache.</p>
+<p>Here is how to see the caching effect:</p>
+<pre><code>$ time python -c "import torch"
+
+real    0m5.404s
+user    0m1.761s
+sys     0m0.751s
+
+$ time python -c "import torch"
+
+real    0m1.977s
+user    0m1.623s
+sys     0m0.519s
+
+$ sudo sync
+$ echo 3 | sudo tee /proc/sys/vm/drop_caches
+$ time python -c "import torch"
+
+real    0m5.698s
+user    0m1.712s
+sys     0m0.734s</code></pre>
+<p>You can see that the first time it wasn’t cached and took ~3x longer, then when I run it the second time. And then I told the system to flush memory and file system caches and you can see it was 3x longer again.</p>
+<p>I think it might be a good idea to do the memory and file system caching in the write tests again, since even there caching will make the benchmark appear faster than what it would be like in the real world where a new package is installed for the first time.</p>
+</section>
+<section id="other-tools" class="level3">
+<h3 class="anchored" data-anchor-id="other-tools">other tools</h3>
+<ul>
+<li></li>
+<li><a href="https://github.com/hpc/ior">HPC IO Benchmark Repository</a> (<code>mdtest</code> has been merged into <code>ior</code> in 2017)</li>
+<li><a href="https://github.com/argonne-lcf/dlio_benchmark">DLIO</a></li>
+</ul>
+<p>XXX: expand on how these are used when I get a chance to try those</p>
+</section>
+<section id="published-benchmarks" class="level3">
+<h3 class="anchored" data-anchor-id="published-benchmarks">Published benchmarks</h3>
+<p>Here are some published IO benchmarks:</p>
+<ul>
+<li><a href="https://mlcommons.org/">MLPerf via MLCommons</a> publishes various hardware benchmarks that measure training, inference, storage and other tasks’ performance. For example, here is the most recent as of this writing <a href="https://mlcommons.org/benchmarks/storage/">storage v0.5</a> results. Though I find the results are very difficult to make sense of - too many columns and no control whatsoever by the user, and each test uses different parameters - so how do you compare things.</li>
+</ul>
+<p>Then various benchmarks that you can run yourself:</p>
+</section>
+</section>
+<section id="why-pay-for-more-storage-when-you-can-easily-clean-it-up-instead" class="level2">
+<h2 class="anchored" data-anchor-id="why-pay-for-more-storage-when-you-can-easily-clean-it-up-instead">Why pay for more storage when you can easily clean it up instead</h2>
+<p>Talking to a few storage providers I understood that many companies don’t bother cleaning up and just keep on buying more and more storage. If you’re not that company and want to keep things tidy in the following sections I will share how to easily prune various caches that many of us in the Python/Pytorch ecosphere use (and a lot of those will apply to other ecospheres).</p>
+<section id="huggingface-hub-caches" class="level3">
+<h3 class="anchored" data-anchor-id="huggingface-hub-caches">HuggingFace Hub caches</h3>
+<p>The very popular HuggingFace Hub makes it super easy to download models and datasets and cache them locally. What you might not be aware of is that whenever a new revision of the model or a dataset is released, the old revisions remain on your disk - so over time you are likely to have a lot of dead weight.</p>
+<p>The cached files are usually found at <code>~/.cache/huggingface</code> but it’s possible to override those with <code>HF_HOME</code> environment variable and place them elsewhere if your <code>/home/</code> doesn’t have space for huge files. (and in the past those were <code>HUGGINGFACE_HUB_CACHE</code> and <code>TRANSFORMERS_CACHE</code> and some others).</p>
+<p>The other solution that requires no mucking with environment variables, which requires you to remember to set them, is to symlink your cache to another partition. You could do it for all of your caches:</p>
+<pre><code>mkdir -p ~/.cache
+mv ~/.cache /some/path/
+ln -s /some/path/.cache ~/.cache</code></pre>
+<p>or just for HF hub caches:</p>
+<pre><code>mkdir -p ~/.cache/huggingface
+mv ~/.cache/huggingface /some/path/
+ln -s /some/path/cache/huggingface ~/.cache/cache/huggingface</code></pre>
+<p>The <code>mkdir</code> calls are there in case you have haven’t used the caches yet, so they weren’t there and they ensure the above code won’t fail.</p>
+<p>Now that you know where the caches are, you could, of course, nuke the whole cache every so often, but if these are huge models and datasets, and especially if there was some preprocessing done for the latter - you really won’t want to repeat those time consuming tasks again and again. So I will teach you how to use special tools provided by HuggingFace to do the cleanup.</p>
+<p>The way revisions work on the HF hub is by pointing <code>main</code> to the latest revision of the files while keeping the old revisions around should anyone want to use the older revision for some reason. Chance are very high you always want the latest revision, and so here is how to delete all old revisions and only keeping <code>main</code> in a few quick steps without tedious manual editing.</p>
+<p>In terminal A:</p>
+<pre><code>$ pip install huggingface_hub["cli"] -U
+$ huggingface-cli delete-cache --disable-tui
+File to edit: /tmp/tmpundr7lky.txt
+0 revisions selected counting for 0.0. Continue ? (y/N)</code></pre>
+<p>Do not answer the prompt and proceed with my instructions.</p>
+<p>(note your tmp file will have a different path, so adjust it below)</p>
+<p>In terminal B:</p>
+<pre><code>$ cp /tmp/tmpedbz00ox.txt cache.txt
+$ perl -pi -e 's|^#(.*\(detached\).*)|$1|' cache.txt
+$ cat cache.txt &gt;&gt;  /tmp/tmpundr7lky.txt</code></pre>
+<p>The perl one-liner uncommented out all lines that had <code>(detached)</code> in it - so can be wiped out. And then we pasted it back into the tmp file <code>huggingface-cli</code> expects to be edited.</p>
+<p>Now go back to terminal A and hit: N, Y, Y, so it looks like:</p>
+<pre><code>0 revisions selected counting for 0.0. Continue ? (y/N) n
+89 revisions selected counting for 211.7G. Continue ? (y/N) y
+89 revisions selected counting for 211.7G. Confirm deletion ? (Y/n) y</code></pre>
+<p>Done.</p>
+<p>If you messed up with the prompt answering you still have <code>cache.txt</code> file which you can feed again to the new tmp file it’ll create when you run <code>huggingface-cli delete-cache --disable-tui</code> again.</p>
+<p>attached as a snapshot as well as it’s easier to read on twitter, but use the message to copy-n-paste from.</p>
+<p>Please note that you can also use this tool to choose which models or datasets to delete completely. You just need to open <code>cache.txt</code> in your editor and remove the <code>#</code> in front of lines that contain <code>main</code> in it for models/datasets you want to be deleted for you. and then repeat the process explained above minus the <code>perl</code> one liner which you’d replace with manual editing.</p>
+<p>Additionally you will find that HF <code>datasets</code> have a <code>~/.cache/huggingface/datasets/downloads</code> dir which often will contain a ton of leftovers from datasets downloads and their preprocessing, including various lock files. On one setup I found literally a few millions of files there. So here is how I clean those up:</p>
+<pre><code>sudo find ~/.cache/huggingface/datasets/downloads -type f -mtime +3 -exec rm {} \+
+sudo find ~/.cache/huggingface/datasets/downloads -type d -empty -delete</code></pre>
+<p>The first command leaves files that are younger than 3 days in place, in case someone is in the process of download/processing things and we don’t want to swipe the carpet from under their feet.</p>
+<p>As usual you may need to adjust the paths if you placed your caches elsewhere.</p>
+</section>
+<section id="python-package-manager-cleanups" class="level3">
+<h3 class="anchored" data-anchor-id="python-package-manager-cleanups">Python package manager cleanups</h3>
+<p>conda and pip will pile up more and more files on your system over time. conda is the worst because it keeps the untarred files which consume an insane amount of inodes and make backups and scans slow. pip at least caches just the wheels (tarred files).</p>
+<p>So you can safely nuke these dirs:</p>
+<pre><code>rm -rf ~/.cache/pip
+rm -rf ~/anaconda3/pkgs/</code></pre>
+<p>Make sure edit the last command if your conda is installed elsewhere.</p>
+</section>
+<section id="share-caches-in-group-environments" class="level3">
+<h3 class="anchored" data-anchor-id="share-caches-in-group-environments">Share caches in group environments</h3>
+<p>If you have more than 2 people working on the same system, you really want to avoid each person having their own cache of <code>pip</code>, <code>conda</code>, HF models, datasets and possibly other things. It is very easy to get each user’s setup to point to a shared cache.</p>
+<p>For example, let’s say you make <code>pip</code> and <code>conda</code> caches under <code>/data/cache</code> like so:</p>
+<pre><code>mkdir /data/cache/conda
+mkdir /data/cache/pip
+chmod a+rwx /data/cache/conda
+chmod a+rwx /data/cache/pip</code></pre>
+<p>now you just need to symlink from each user’s local cache to this shared cache:</p>
+<pre><code>mkdir -p ~/.cache
+
+rm -rf ~/.cache/pip
+ln -s /data/cache/pip ~/.cache/pip
+
+rm -rf ~/.conda/pkgs
+ln -s /data/cache/conda/pkgs ~/.conda/pkgs</code></pre>
+<p>note that we wiped out the existing caches, but you could also move them to the shared cache instead - whatever works, you will want to periodically nuke those anyway.</p>
+<p>So now when <code>pip</code> or <code>conda</code> will try to reach the user caches they will get redirected to the shared cache. If you have 20 people in the group that’s 20x less files - and this is very important because conda pkg files are untarred and take up a huge amount of inodes on the disk.</p>
+<p>So the only issue with this approach is file permissions. If user A installs some packages, user B might not be able to read or write them.</p>
+<p>If this is an isolated cluster where there are no malicious users you can simply ask everybody to use <code>umask 000</code> in their <code>~/.bashrc</code> or even configuring this setting system-wide via <code>/etc/profile</code> or <code>/etc/bash.bashrc</code> and different other shell config files if <code>bash</code> isn’t your shell of choice.</p>
+<p>Once <code>umask 000</code> is run, most files will be created with read/write perms so that all users can read/write each others files.</p>
+<p>Of course, if you are using a sort of HPC, where many unrelated groups use the same cluster this won’t work and then you would either use groups instead of making files read/write by all, with possibly <code>setgid</code> bit preset or using ACL . In any such environments there are always sysadmins so you can ask them how to setup a shared cache for your team and they will know what to do.</p>
+<p>Additionally, recently some of these applications added tools to do the cleanup, e.g.&nbsp;for <code>conda</code> and <code>pip</code>:</p>
+<pre><code>conda clean --all -f -y
+pip cache purge</code></pre>
+</section>
+<section id="general-disk-usage" class="level3">
+<h3 class="anchored" data-anchor-id="general-disk-usage">General disk usage</h3>
+<p>Of course, sooner or later, your partition will get bigger and bigger, and you will probably want to understand where data is leaking. Typically you will need to find the users who contribute to the most of data consumption and ask them to do some cleanups.</p>
+<p>So for example to find which users consume the most disk run:</p>
+<pre><code>sudo du -ahd1 /home/* | sort -rh</code></pre>
+<p>it will sort the data by the worst offenders. If you want to help them out you could go into their dirs and analyse the data a level deeper:</p>
+<pre><code>sudo du -ahd1 /home/*/* | sort -rh</code></pre>
+<p>or for a specific user <code>foo</code>:</p>
+<pre><code>sudo du -ahd1 /home/foo/* | sort -rh</code></pre>
+<p>You could also set disk usage quotas but usually this doesn’t work too well, because depending on the workflows of your company some users need to generate a lot more data then others, so they shouldn’t be punished for that with inability to do their work and have their job crash - which could have been run for many hours and all that work will be lost - so at the end of the day the company will be paying for the lost time.</p>
+<p>Getting users to be aware of them using too much disk space can be a very difficult task.</p>
+</section>
+<section id="partition-inodes-limit" class="level3">
+<h3 class="anchored" data-anchor-id="partition-inodes-limit">Partition inodes limit</h3>
+<p>Also beware of inode usage, on some shared partitions on HPCs I have seen more than once cases where a job crashed not because there was no disk space left, but because the job used up the last inodes and the whole thing crashed.</p>
+<p>To see inode usage, use <code>df -i</code>:</p>
+<pre><code>$ /bin/df -hi
+Filesystem     Inodes IUsed IFree IUse% Mounted on
+tmpfs             16M  1.9K   16M    1% /run
+/dev/sda1         59M  4.1M   55M    7% /</code></pre>
+<p><code>-h</code> formats huge numbers into human-readable strings.</p>
+<p>So here you can see the the <code>/</code> partition is using 7% of the total possible inodes.</p>
+<p>Depending on the type of filesystem in some cases it’s possible to add more inodes whereas in other cases it’s not possible.</p>
+<p>So as part of your monitoring of disk space you also need to monitor inode usage as a critical resource.</p>
+</section>
+<section id="tmp-on-compute-nodes" class="level3">
+<h3 class="anchored" data-anchor-id="tmp-on-compute-nodes"><code>/tmp</code> on compute nodes</h3>
+<p>Normally compute nodes will use <code>/tmp/</code> for temp files. The problem is on most set ups <code>/tmp</code> resides on the tiny <code>/</code> filesystem of each node (often &lt;100GB) and since <code>/tmp/</code> only gets reset on reboot, this doesn’t get cleaned up between SLURM jobs and this leads to <code>/tmp</code> running out of space and so when you try to run something that let’s say untars a file you’re likely to run into:</p>
+<pre><code>OSError: [Errno 28] No space left on device</code></pre>
+<p>The solution is to set in your SLURM launcher script.</p>
+<pre><code>export TMPDIR=/scratch</code></pre>
+<p>Now, the slurm job will use a much larger <code>/scratch</code> instead of <code>/tmp</code>, so plenty of temp space to write too.</p>
+<p>footnote: while <code>/scratch</code> is quite common - the mounted local SSD disk mount point could be named anything, e.g.&nbsp;<code>/localssd</code> - it should be easy to see the right path by running <code>df</code> on one of the compute nodes.</p>
+<p>You can also arrange for the SLURM setup to automatically clean up such folders on job’s termination.</p>
+</section>
+<section id="how-to-find-users-who-consume-a-lot-of-disk-space" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-find-users-who-consume-a-lot-of-disk-space">How to find users who consume a lot of disk space</h3>
+<p>Do you have a problem when your team trains models and you constantly have to buy more storage because huge model checkpoints aren’t being offloaded to bucket storage fast enough?</p>
+<p>Here is a one-liner that will recursively analyze a path of your choice, find all the checkpoints, sum up their sizes and print the totals sorted by the biggest user, so that you could tell them to clean up their act :) Just edit <code>/mypath</code> to the actual path</p>
+<pre><code>find /mypath/ -regextype posix-egrep -regex ".*\.(pt|pth|ckpt|safetensors)$" | \
+perl -nle 'chomp; ($uid,$size)=(stat($_))[4,7]; $x{$uid}+=$size;
+END { map { printf qq[%-10s: %7.1fTB\n], (getpwuid($_))[0], $x{$_}/2**40 }
+sort { $x{$b} &lt;=&gt; $x{$a} } keys %x }'</code></pre>
+<p>gives:</p>
+<pre><code>user_a    :     2.5TB
+user_c    :     1.6TB
+user_b   :      1.2TB</code></pre>
+<p>Of course, you can change the regex to match other patterns or you can remove it altogether to measure all files:</p>
+<pre><code>find /mypath/ | \
+perl -nle 'chomp; ($uid,$size)=(stat($_))[4,7]; $x{$uid}+=$size;
+END { map { printf qq[%-10s: %7.1fTB\n], (getpwuid($_))[0], $x{$_}/2**40 }
+sort { $x{$b} &lt;=&gt; $x{$a} } keys %x }'</code></pre>
+</section>
+<section id="how-to-automatically-delete-old-checkpoints" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-automatically-delete-old-checkpoints">How to automatically delete old checkpoints</h3>
+<p>Continuing the item from above, if you want to automatically delete old checkpoints instead (e.g.&nbsp;those older than 30 days).</p>
+<p>First try to ensure the candidates are indeed good to delete:</p>
+<pre><code>find /mypath/ -regextype posix-egrep -regex ".*\.(pt|pth|ckpt|safetensors)$" -mtime +30</code></pre>
+<p>and when you feel it’s safe to delete, only then add <code>rm</code></p>
+<pre><code>find /mypath/ -regextype posix-egrep -regex ".*\.(pt|pth|ckpt|safetensors)$" -mtime +30 -exec rm {} +</code></pre>
+</section>
+</section>
+<section id="contributors" class="level2">
+<h2 class="anchored" data-anchor-id="contributors">Contributors</h2>
+<p>Ross Wightman</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bekman2024,
+  author = {Bekman, Stas and Foreman, Sam},
+  title = {ML {Engineering}},
+  date = {2024-02-20},
+  url = {https://saforem2.github.io/ml-engineering},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bekman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bekman, Stas, and Sam Foreman. 2024. <span>“ML Engineering.”</span>
+February 20, 2024. <a href="https://saforem2.github.io/ml-engineering">https://saforem2.github.io/ml-engineering</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://saforem2.github.io/ml-engineering">ML-Engineering</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>2024</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/storage/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd-old/storage/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

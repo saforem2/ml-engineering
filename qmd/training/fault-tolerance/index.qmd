@@ -445,6 +445,7 @@ Now that you understand how this machinery works, instead of immediate `exit(0)`
 Now what if your main program isn't the one launched with `srun` - if you were to use an intermediate launcher like `torchrun` or `accelerate` the above recipe won't work, because most likely `SIGUSR1` won't be propagated from the launcher to its children. In this case we need a slightly more complicated slurm script than
 
 We have to replace:
+<<<<<<< HEAD
 
 ```bash
 #SBATCH --signal=USR1@600
@@ -453,6 +454,13 @@ We have to replace:
 with:
 
 ```bash
+=======
+```
+#SBATCH --signal=USR1@600
+```
+with:
+```
+>>>>>>> stas00-master
 #SBATCH --signal=B:USR1@600
 ```
 
@@ -460,6 +468,7 @@ The added `B:` tells SLURM not to send the signal to the `srun` process (launche
 
 And now we have to change the end of the SLURM script from a typical launcher-based code like:
 
+<<<<<<< HEAD
 ```bash
 CMD="python -u -m torch.distributed.run ... train.py ..." # real command here
 LOG_FILE=/path/to/logs/main_log.txt
@@ -469,6 +478,16 @@ srun --jobid $SLURM_JOBID bash -c "$CMD" 2>&1 | tee -a $LOG_FILE
 to this:
 
 ```bash
+=======
+```
+CMD="python -u -m torch.distributed.run ... train.py ..." # real command here
+LOG_FILE=/path/to/logs/main_log.txt
+srun --jobid $SLURM_JOBID bash -c "$CMD" 2>&1 | tee -a $LOG_FILE
+
+```
+to this:
+```
+>>>>>>> stas00-master
 trap 'echo "SIGUSR1 received!"; \
 pid=$(pgrep -f "^python.*(accelerate|deepspeed|torchrun|distributed.run)"); \
 pgrep -P $pid | xargs -r kill -USR1; \
@@ -491,7 +510,11 @@ Your python code that catches the signal handler remains the same as in Approach
 
 Here are the important parts of the SLURM script together:
 
+<<<<<<< HEAD
 ```bash
+=======
+```
+>>>>>>> stas00-master
 $ cat launch.slurm
 #!/bin/bash
 [...]
@@ -511,8 +534,12 @@ wait
 ```
 
 And your training loop that may have originally looked like this:
+<<<<<<< HEAD
 
 ```bash
+=======
+```
+>>>>>>> stas00-master
 $ cat train.py
 
 for batch in dl:
@@ -520,8 +547,12 @@ for batch in dl:
 ```
 
 Now it'll become:
+<<<<<<< HEAD
 
 ```bash
+=======
+```
+>>>>>>> stas00-master
 $ cat train.py
 
 import signal
@@ -547,7 +578,11 @@ Of course, you will probably set a flag in the trainer object in the real softwa
 
 If you want to test this solution, simply change your SLURM script header to:
 
+<<<<<<< HEAD
 ```bash
+=======
+```
+>>>>>>> stas00-master
 #SBATCH --time=0:05:00
 #SBATCH --signal=B:USR1@60
 ```
@@ -562,7 +597,11 @@ We haven't discussed so far what happens when Quality of Service (QoS) is used, 
 
 Consider a SLURM setup where you have `--qos=high` which can pre-empt `--qos=low` jobs and the low priority job has grace time of 10 minutes to shut down:
 
+<<<<<<< HEAD
 ```bash
+=======
+```
+>>>>>>> stas00-master
 $ sacctmgr show qos format=name,priority,preempt,MaxTRESPerUser,GraceTime,Preempt,Flags
       Name   Priority     MaxTRESPU  GraceTime    Preempt                Flags
 ---------- ---------- ------------- ---------- ---------- --------------------
