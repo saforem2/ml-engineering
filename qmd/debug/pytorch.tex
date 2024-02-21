@@ -50,6 +50,46 @@
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -133,7 +173,7 @@
   pdfcreator={LaTeX via pandoc}}
 
 \author{}
-\date{2024-02-13}
+\date{2024-02-20}
 
 \begin{document}
 
@@ -184,37 +224,43 @@ to open a given port.
 Here are multiple ways that you could use to test whether port 6000 is
 already open.
 
-\begin{verbatim}
-telnet localhost:6000
-nmap -p 6000 localhost
-nc -zv localhost 6000
-curl -v telnet://localhost:6000
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{telnet}\NormalTok{ localhost:6000}
+\FunctionTok{nmap} \AttributeTok{{-}p}\NormalTok{ 6000 localhost}
+\ExtensionTok{nc} \AttributeTok{{-}zv}\NormalTok{ localhost 6000}
+\ExtensionTok{curl} \AttributeTok{{-}v}\NormalTok{ telnet://localhost:6000}
+\end{Highlighting}
+\end{Shaded}
 
 Most of these should be available via \texttt{apt\ install} or whatever
 your package manager uses.
 
 Let's use \texttt{nmap} in this example. If I run:
 
-\begin{verbatim}
-$ nmap -p 22 localhost
-[...]
-PORT   STATE SERVICE
-22/tcp open  ssh
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ nmap }\AttributeTok{{-}p}\NormalTok{ 22 localhost}
+\ExtensionTok{[...]}
+\ExtensionTok{PORT}\NormalTok{   STATE SERVICE}
+\ExtensionTok{22/tcp}\NormalTok{ open  ssh}
+\end{Highlighting}
+\end{Shaded}
 
 We can see the port is open and it tells us which protocol and service
 is allocated as a bonus.
 
 Now let's run:
 
-\begin{verbatim}
-$ nmap -p 6000 localhost
-[...]
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ nmap }\AttributeTok{{-}p}\NormalTok{ 6000 localhost}
+\ExtensionTok{[...]}
 
-PORT     STATE  SERVICE
-6000/tcp closed X11
-\end{verbatim}
+\ExtensionTok{PORT}\NormalTok{     STATE  SERVICE}
+\ExtensionTok{6000/tcp}\NormalTok{ closed X11}
+\end{Highlighting}
+\end{Shaded}
 
 Here you can see port 6000 is closed.
 
@@ -224,18 +270,22 @@ Now that you understand how to test, you can proceed to test the
 First ssh to the first node in terminal A and test if port 6000 is
 opened on the second node:
 
-\begin{verbatim}
-ssh 10.0.0.1
-nmap -p 6000 10.0.0.2
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ssh}\NormalTok{ 10.0.0.1}
+\FunctionTok{nmap} \AttributeTok{{-}p}\NormalTok{ 6000 10.0.0.2}
+\end{Highlighting}
+\end{Shaded}
 
 if all is good, then in terminal B ssh to the second node and do the
 same check in reverse:
 
-\begin{verbatim}
-ssh 10.0.0.2
-nmap -p 6000 10.0.0.1
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ssh}\NormalTok{ 10.0.0.2}
+\FunctionTok{nmap} \AttributeTok{{-}p}\NormalTok{ 6000 10.0.0.1}
+\end{Highlighting}
+\end{Shaded}
 
 If both ports are open you can now use this port. If either or both are
 closed you have to open these ports. Since most clouds use a proprietary
@@ -246,9 +296,11 @@ The next important thing to understand is that compute nodes will
 typically have multiple network interface cards (NICs). You discover
 those interfaces by running:
 
-\begin{verbatim}
-$ sudo ifconfig
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ sudo ifconfig}
+\end{Highlighting}
+\end{Shaded}
 
 One interface is typically used by users to connecting to nodes via ssh
 or for various other non-compute related services - e.g., sending an
@@ -262,12 +314,14 @@ information}). There could be one or dozens of those interfaces.
 
 Here are some examples of \texttt{ifconfig}'s output:
 
-\begin{verbatim}
-$ sudo ifconfig
-enp5s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 10.0.0.23  netmask 255.255.255.0  broadcast 10.0.0.255
-        [...]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ sudo ifconfig}
+\ExtensionTok{enp5s0:}\NormalTok{ flags=4163}\OperatorTok{\textless{}}\NormalTok{UP,BROADCAST,RUNNING,MULTICAST}\OperatorTok{\textgreater{}}\NormalTok{  mtu 1500}
+        \ExtensionTok{inet}\NormalTok{ 10.0.0.23  netmask 255.255.255.0  broadcast 10.0.0.255}
+        \ExtensionTok{[...]}
+\end{Highlighting}
+\end{Shaded}
 
 I removed most of the output showing only some of the info. Here the key
 information is the IP address that is listed after \texttt{inet}. In the
@@ -280,12 +334,14 @@ one with a different number.
 
 Let's look at another example:
 
-\begin{verbatim}
-$ sudo ifconfig
-ib0     Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
-        inet addr:172.0.0.50  Bcast: 172.0.0.255  Mask:255.255.255.0
-        [...]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ sudo ifconfig}
+\ExtensionTok{ib0}\NormalTok{     Link encap:UNSPEC  HWaddr 00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00{-}00}
+        \ExtensionTok{inet}\NormalTok{ addr:172.0.0.50  Bcast: 172.0.0.255  Mask:255.255.255.0}
+        \ExtensionTok{[...]}
+\end{Highlighting}
+\end{Shaded}
 
 Here \texttt{ib} typically tells us it's an InfiniBand card, but really
 it can be any other vendor. I have seen
@@ -305,19 +361,23 @@ program
 
 In terminal A:
 
-\begin{verbatim}
-$ ssh 10.0.0.1
-$ python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 2 --nproc_per_node 8 \
- --master_addr 10.0.0.1 --master_port 6000 torch-distributed-gpu-test.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ ssh 10.0.0.1}
+\ExtensionTok{$}\NormalTok{ python }\AttributeTok{{-}m}\NormalTok{ torch.distributed.run }\AttributeTok{{-}{-}role} \VariableTok{$(}\FunctionTok{hostname} \AttributeTok{{-}s}\VariableTok{)}\NormalTok{: }\AttributeTok{{-}{-}tee}\NormalTok{ 3 }\AttributeTok{{-}{-}nnodes}\NormalTok{ 2 }\AttributeTok{{-}{-}nproc\_per\_node}\NormalTok{ 8 }\DataTypeTok{\textbackslash{}}
+ \AttributeTok{{-}{-}master\_addr}\NormalTok{ 10.0.0.1 }\AttributeTok{{-}{-}master\_port}\NormalTok{ 6000 torch{-}distributed{-}gpu{-}test.py}
+\end{Highlighting}
+\end{Shaded}
 
 In terminal B:
 
-\begin{verbatim}
-$ ssh 10.0.0.2
-$ python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 2 --nproc_per_node 8 \
- --master_addr 10.0.0.1 --master_port 6000 torch-distributed-gpu-test.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ ssh 10.0.0.2}
+\ExtensionTok{$}\NormalTok{ python }\AttributeTok{{-}m}\NormalTok{ torch.distributed.run }\AttributeTok{{-}{-}role} \VariableTok{$(}\FunctionTok{hostname} \AttributeTok{{-}s}\VariableTok{)}\NormalTok{: }\AttributeTok{{-}{-}tee}\NormalTok{ 3 }\AttributeTok{{-}{-}nnodes}\NormalTok{ 2 }\AttributeTok{{-}{-}nproc\_per\_node}\NormalTok{ 8 }\DataTypeTok{\textbackslash{}}
+ \AttributeTok{{-}{-}master\_addr}\NormalTok{ 10.0.0.1 }\AttributeTok{{-}{-}master\_port}\NormalTok{ 6000 torch{-}distributed{-}gpu{-}test.py}
+\end{Highlighting}
+\end{Shaded}
 
 Note that I'm using the same
 \texttt{-\/-master\_addr\ 10.0.0.1\ -\/-master\_port\ 6000} in both
@@ -333,11 +393,13 @@ multiple nodes
 \texttt{pdsh} is one such solution - which is like \texttt{ssh} but will
 automatically run the same command on multiple nodes:
 
-\begin{verbatim}
-PDSH_RCMD_TYPE=ssh pdsh -w 10.0.0.1,10.0.0.2 \
-"python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 2 --nproc_per_node 8 \
- --master_addr 10.0.0.1 --master_port 6000 torch-distributed-gpu-test.py"
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{PDSH\_RCMD\_TYPE}\OperatorTok{=}\NormalTok{ssh }\ExtensionTok{pdsh} \AttributeTok{{-}w}\NormalTok{ 10.0.0.1,10.0.0.2 }\DataTypeTok{\textbackslash{}}
+\StringTok{"python {-}m torch.distributed.run {-}{-}role }\VariableTok{$(}\FunctionTok{hostname} \AttributeTok{{-}s}\VariableTok{)}\StringTok{: {-}{-}tee 3 {-}{-}nnodes 2 {-}{-}nproc\_per\_node 8 }\DataTypeTok{\textbackslash{}}
+\StringTok{ {-}{-}master\_addr 10.0.0.1 {-}{-}master\_port 6000 torch{-}distributed{-}gpu{-}test.py"}
+\end{Highlighting}
+\end{Shaded}
 
 You can see how I folded the 2 sets of commands into 1. If you have more
 nodes, just add more nodes as \texttt{-w} argument.
@@ -350,25 +412,27 @@ doesn't the information in this section should help debug things.
 
 Here is how you'd use this with SLURM.
 
-\begin{verbatim}
-#!/bin/bash
-#SBATCH --job-name=test-nodes        # name
-#SBATCH --nodes=2                    # nodes
-#SBATCH --ntasks-per-node=1          # crucial - only 1 task per dist per node!
-#SBATCH --cpus-per-task=10           # number of cores per tasks
-#SBATCH --gres=gpu:8                 # number of gpus
-#SBATCH --time 0:05:00               # maximum execution time (HH:MM:SS)
-#SBATCH --output=%x-%j.out           # output file name
-#
-export GPUS_PER_NODE=8
-export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
-export MASTER_PORT=6000
-#
-srun --jobid $SLURM_JOBID bash -c 'python -m torch.distributed.run \
---nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT \
-torch-distributed-gpu-test.py'
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\CommentTok{\#SBATCH {-}{-}job{-}name=test{-}nodes        \# name}
+\CommentTok{\#SBATCH {-}{-}nodes=2                    \# nodes}
+\CommentTok{\#SBATCH {-}{-}ntasks{-}per{-}node=1          \# crucial {-} only 1 task per dist per node!}
+\CommentTok{\#SBATCH {-}{-}cpus{-}per{-}task=10           \# number of cores per tasks}
+\CommentTok{\#SBATCH {-}{-}gres=gpu:8                 \# number of gpus}
+\CommentTok{\#SBATCH {-}{-}time 0:05:00               \# maximum execution time (HH:MM:SS)}
+\CommentTok{\#SBATCH {-}{-}output=\%x{-}\%j.out           \# output file name}
+\CommentTok{\#}
+\BuiltInTok{export} \VariableTok{GPUS\_PER\_NODE}\OperatorTok{=}\NormalTok{8}
+\BuiltInTok{export} \VariableTok{MASTER\_ADDR}\OperatorTok{=}\VariableTok{$(}\ExtensionTok{scontrol}\NormalTok{ show hostnames }\VariableTok{$SLURM\_JOB\_NODELIST} \KeywordTok{|} \FunctionTok{head} \AttributeTok{{-}n}\NormalTok{ 1}\VariableTok{)}
+\BuiltInTok{export} \VariableTok{MASTER\_PORT}\OperatorTok{=}\NormalTok{6000}
+\CommentTok{\#}
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid} \VariableTok{$SLURM\_JOBID}\NormalTok{ bash }\AttributeTok{{-}c} \StringTok{\textquotesingle{}python {-}m torch.distributed.run \textbackslash{}}
+\StringTok{{-}{-}nproc\_per\_node $GPUS\_PER\_NODE {-}{-}nnodes $SLURM\_NNODES {-}{-}node\_rank $SLURM\_PROCID \textbackslash{}}
+\StringTok{{-}{-}master\_addr $MASTER\_ADDR {-}{-}master\_port $MASTER\_PORT \textbackslash{}}
+\StringTok{torch{-}distributed{-}gpu{-}test.py\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 If you have more than 2 nodes you just need to change the number of
 nodes and the above script will automatically work for any number of
@@ -386,17 +450,21 @@ target nodes and the number of processes that should be run on each
 host. In the example of this section, with 2 nodes and 8 gpus each it'd
 be:
 
-\begin{verbatim}
-$ cat hostfile
-10.0.0.1:8
-10.0.0.2:8
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ cat hostfile}
+\ExtensionTok{10.0.0.1:8}
+\ExtensionTok{10.0.0.2:8}
+\end{Highlighting}
+\end{Shaded}
 
 and to run, it's just:
 
-\begin{verbatim}
-$ mpirun --hostfile  -np 16 -map-by ppr:8:node python my-program.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ mpirun }\AttributeTok{{-}{-}hostfile}  \AttributeTok{{-}np}\NormalTok{ 16 }\AttributeTok{{-}map{-}by}\NormalTok{ ppr:8:node python my{-}program.py}
+\end{Highlighting}
+\end{Shaded}
 
 Note that I used \texttt{my-program.py} here because
 \href{./torch-distributed-gpu-test.py}{torch-distributed-gpu-test.py}
@@ -425,25 +493,31 @@ nodes}\label{solving-the-infiniband-connection-between-multiple-nodes}
 In one situation on Azure I got 2 nodes on a shared subnet and when I
 tried to run the 2 node NCCL test:
 
-\begin{verbatim}
-NCCL_DEBUG=INFO python -u -m torch.distributed.run --nproc_per_node=1 --nnodes 2 --rdzv_endpoint 10.2.0.4:6000  --rdzv_backend c10d torch-distributed-gpu-test.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{NCCL\_DEBUG}\OperatorTok{=}\NormalTok{INFO }\ExtensionTok{python} \AttributeTok{{-}u} \AttributeTok{{-}m}\NormalTok{ torch.distributed.run }\AttributeTok{{-}{-}nproc\_per\_node}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}nnodes}\NormalTok{ 2 }\AttributeTok{{-}{-}rdzv\_endpoint}\NormalTok{ 10.2.0.4:6000  }\AttributeTok{{-}{-}rdzv\_backend}\NormalTok{ c10d torch{-}distributed{-}gpu{-}test.py}
+\end{Highlighting}
+\end{Shaded}
 
 I saw in the debug messages that Infiniband interfaces got detected:
 
-\begin{verbatim}
-node-2:5776:5898 [0] NCCL INFO NET/IB : Using [0]ibP111p0s0:1/IB [1]rdmaP1111p0s2:1/RoCE [RO]; OOB eth0:10.2.0.4<0>
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{node{-}2:5776:5898} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ NCCL INFO NET/IB : Using }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ibP111p0s0:1/IB }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\NormalTok{rdmaP1111p0s2:1/RoCE }\PreprocessorTok{[}\SpecialStringTok{RO}\PreprocessorTok{]}\KeywordTok{;} \ExtensionTok{OOB}\NormalTok{ eth0:10.2.0.4}\OperatorTok{\textless{}}\NormalTok{0}\OperatorTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
 
 But the connection would then time out with the message:
 
-\begin{verbatim}
-node-2:5776:5902 [0] transport/net_ib.cc:1296 NCCL WARN NET/IB : Got completion from peer 10.2.0.5<33092> with error 12, opcode 0, len
-0, vendor err 129 (Recv)
-node-2:5776:5902 [0] NCCL INFO transport/net.cc:1134 -> 6
-node-2:5776:5902 [0] NCCL INFO proxy.cc:679 -> 6
-node-2:5776:5902 [0] NCCL INFO proxy.cc:858 -> 6 [Proxy Thread]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{node{-}2:5776:5902} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ transport/net\_ib.cc:1296 NCCL WARN NET/IB : Got completion from peer 10.2.0.5}\OperatorTok{\textless{}}\NormalTok{33092}\OperatorTok{\textgreater{}}\NormalTok{ with error 12, opcode 0, len}
+\ExtensionTok{0,}\NormalTok{ vendor err 129 }\ErrorTok{(}\ExtensionTok{Recv}\KeywordTok{)}
+\ExtensionTok{node{-}2:5776:5902} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ NCCL INFO transport/net.cc:1134 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ 6}
+\ExtensionTok{node{-}2:5776:5902} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ NCCL INFO proxy.cc:679 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ 6}
+\ExtensionTok{node{-}2:5776:5902} \PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{ NCCL INFO proxy.cc:858 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ 6 [Proxy Thread]}
+\end{Highlighting}
+\end{Shaded}
 
 and nothing works. So here the Ethernet connectivity between 2 nodes
 works but not the IB interface.
@@ -478,10 +552,12 @@ to prefix each log line with its \texttt{hostname:rank} prefix, which is
 done by adding \texttt{-\/-role\ \$(hostname\ -s):\ -\/-tee\ 3} to
 \texttt{torchrun}:
 
-\begin{verbatim}
-python -m torch.distributed.run --role $(hostname -s): --tee 3 --nnodes 1 --nproc_per_node 2 \
-torch-distributed-gpu-test.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python} \AttributeTok{{-}m}\NormalTok{ torch.distributed.run }\AttributeTok{{-}{-}role} \VariableTok{$(}\FunctionTok{hostname} \AttributeTok{{-}s}\VariableTok{)}\NormalTok{: }\AttributeTok{{-}{-}tee}\NormalTok{ 3 }\AttributeTok{{-}{-}nnodes}\NormalTok{ 1 }\AttributeTok{{-}{-}nproc\_per\_node}\NormalTok{ 2 }\DataTypeTok{\textbackslash{}}
+\NormalTok{torch{-}distributed{-}gpu{-}test.py}
+\end{Highlighting}
+\end{Shaded}
 
 Now each log line will be prefixed with \texttt{{[}hostname:rank{]}}
 
@@ -489,13 +565,15 @@ Note that the colon is important.
 
 If you're in a SLURM environment the above command line becomes:
 
-\begin{verbatim}
-srun --jobid $SLURM_JOBID bash -c 'python -m torch.distributed.run \
---nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank $SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT \
---role $(hostname -s): --tee 3 \
-torch-distributed-gpu-test.py'
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid} \VariableTok{$SLURM\_JOBID}\NormalTok{ bash }\AttributeTok{{-}c} \StringTok{\textquotesingle{}python {-}m torch.distributed.run \textbackslash{}}
+\StringTok{{-}{-}nproc\_per\_node $GPUS\_PER\_NODE {-}{-}nnodes $SLURM\_NNODES {-}{-}node\_rank $SLURM\_PROCID \textbackslash{}}
+\StringTok{{-}{-}master\_addr $MASTER\_ADDR {-}{-}master\_port $MASTER\_PORT \textbackslash{}}
+\StringTok{{-}{-}role $(hostname {-}s): {-}{-}tee 3 \textbackslash{}}
+\StringTok{torch{-}distributed{-}gpu{-}test.py\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 Of course adjust your environment variables to match, this was just an
 example.
@@ -508,13 +586,15 @@ then all nodes will get the same hostname as the prefix, which defeats
 the purpose of using these flags. So if you use double quotes you need
 to rewrite the above like so:
 
-\begin{verbatim}
-srun --jobid $SLURM_JOBID bash -c "python -m torch.distributed.run \
---nproc_per_node $GPUS_PER_NODE --nnodes $SLURM_NNODES --node_rank \$SLURM_PROCID \
---master_addr $MASTER_ADDR --master_port $MASTER_PORT \
---role \$(hostname -s): --tee 3 \
-torch-distributed-gpu-test.py"
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{srun} \AttributeTok{{-}{-}jobid} \VariableTok{$SLURM\_JOBID}\NormalTok{ bash }\AttributeTok{{-}c} \StringTok{"python {-}m torch.distributed.run }\DataTypeTok{\textbackslash{}}
+\StringTok{{-}{-}nproc\_per\_node }\VariableTok{$GPUS\_PER\_NODE}\StringTok{ {-}{-}nnodes }\VariableTok{$SLURM\_NNODES}\StringTok{ {-}{-}node\_rank }\DataTypeTok{\textbackslash{}$}\StringTok{SLURM\_PROCID }\DataTypeTok{\textbackslash{}}
+\StringTok{{-}{-}master\_addr }\VariableTok{$MASTER\_ADDR}\StringTok{ {-}{-}master\_port }\VariableTok{$MASTER\_PORT}\StringTok{ }\DataTypeTok{\textbackslash{}}
+\StringTok{{-}{-}role }\DataTypeTok{\textbackslash{}$}\StringTok{(hostname {-}s): {-}{-}tee 3 }\DataTypeTok{\textbackslash{}}
+\StringTok{torch{-}distributed{-}gpu{-}test.py"}
+\end{Highlighting}
+\end{Shaded}
 
 \texttt{\$SLURM\_PROCID} is escaped too as it needs to be specific to
 each node and it's unknown during the launch of the slurm job on the
@@ -529,48 +609,54 @@ reconstruct the real error message.
 
 For example, if you get a traceback that looks like:
 
-\begin{verbatim}
-  File "/path/to/training/dataset.py", line 785, in __init__
-  File "/path/to/training/dataset.py", line 785, in __init__
-    if self.dataset_proba.sum() != 1:
-AttributeError: 'list' object has no attribute 'sum'
-    if self.dataset_proba.sum() != 1:
-  File "/path/to/training/dataset.py", line 785, in __init__
-  File "/path/to/training/dataset.py", line 785, in __init__
-    if self.dataset_proba.sum() != 1:
-    if self.dataset_proba.sum() != 1:
-AttributeError: 'list' object has no attribute 'sum'
-AttributeError: 'list' object has no attribute 'sum'
-AttributeError: 'list' object has no attribute 'sum'
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+  \ExtensionTok{File} \StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+  \ExtensionTok{File} \StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+    \ControlFlowTok{if} \FunctionTok{self.dataset\_proba.sum()} \ExtensionTok{!=}\NormalTok{ 1:}
+\ExtensionTok{AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+    \ControlFlowTok{if} \FunctionTok{self.dataset\_proba.sum()} \ExtensionTok{!=}\NormalTok{ 1:}
+  \ExtensionTok{File} \StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+  \ExtensionTok{File} \StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+    \ControlFlowTok{if} \FunctionTok{self.dataset\_proba.sum()} \ExtensionTok{!=}\NormalTok{ 1:}
+    \ControlFlowTok{if} \FunctionTok{self.dataset\_proba.sum()} \ExtensionTok{!=}\NormalTok{ 1:}
+\ExtensionTok{AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\ExtensionTok{AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\ExtensionTok{AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 and when it's dozens of frames over 8 nodes it can't be made sense of,
 but the above \texttt{-tee} + \texttt{-\/-role} addition will generate:
 
-\begin{verbatim}
-[host1:0]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:1]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:0]    if self.dataset_proba.sum() != 1:
-[host1:0]AttributeError: 'list' object has no attribute 'sum'
-[host1:1]    if self.dataset_proba.sum() != 1:
-[host1:2]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:3]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:3]    if self.dataset_proba.sum() != 1:
-[host1:2]    if self.dataset_proba.sum() != 1:
-[host1:1]AttributeError: 'list' object has no attribute 'sum'
-[host1:2]AttributeError: 'list' object has no attribute 'sum'
-[host1:3]AttributeError: 'list' object has no attribute 'sum'
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{[host1:0]}\NormalTok{  File }\StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+\ExtensionTok{[host1:1]}\NormalTok{  File }\StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+\ExtensionTok{[host1:0]}\NormalTok{    if self.dataset\_proba.sum}\ErrorTok{(}\KeywordTok{)} \ExtensionTok{!=}\NormalTok{ 1:}
+\ExtensionTok{[host1:0]AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\ExtensionTok{[host1:1]}\NormalTok{    if self.dataset\_proba.sum}\ErrorTok{(}\KeywordTok{)} \ExtensionTok{!=}\NormalTok{ 1:}
+\ExtensionTok{[host1:2]}\NormalTok{  File }\StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+\ExtensionTok{[host1:3]}\NormalTok{  File }\StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+\ExtensionTok{[host1:3]}\NormalTok{    if self.dataset\_proba.sum}\ErrorTok{(}\KeywordTok{)} \ExtensionTok{!=}\NormalTok{ 1:}
+\ExtensionTok{[host1:2]}\NormalTok{    if self.dataset\_proba.sum}\ErrorTok{(}\KeywordTok{)} \ExtensionTok{!=}\NormalTok{ 1:}
+\ExtensionTok{[host1:1]AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\ExtensionTok{[host1:2]AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\ExtensionTok{[host1:3]AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 and you can \texttt{grep} this output for just one \texttt{host:rank}
 prefix, which gives us:
 
-\begin{verbatim}
-$ grep "[host1:0]" log.txt
-[host1:0]  File "/path/to/training/dataset.py", line 785, in __init__
-[host1:0]    if self.dataset_proba.sum() != 1:
-[host1:0]AttributeError: 'list' object has no attribute 'sum'
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{$}\NormalTok{ grep }\StringTok{"[host1:0]"}\NormalTok{ log.txt}
+\ExtensionTok{[host1:0]}\NormalTok{  File }\StringTok{"/path/to/training/dataset.py"}\NormalTok{, line 785, in \_\_init\_\_}
+\ExtensionTok{[host1:0]}\NormalTok{    if self.dataset\_proba.sum}\ErrorTok{(}\KeywordTok{)} \ExtensionTok{!=}\NormalTok{ 1:}
+\ExtensionTok{[host1:0]AttributeError:} \StringTok{\textquotesingle{}list\textquotesingle{}}\NormalTok{ object has no attribute }\StringTok{\textquotesingle{}sum\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
 
 and voila, you can now tell what really happened. And as I mentioned
 earlier there can be easily a hundred to thousands of interleaved
@@ -582,22 +668,26 @@ there is no need to pass \texttt{-\/-role}.
 If \texttt{hostname\ -s} is too long, but you have each host with its
 own sequence number like:
 
-\begin{verbatim}
-[really-really-really-long-hostname-5:0]
-[really-really-really-long-hostname-5:1]
-[really-really-really-long-hostname-5:2]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{[really{-}really{-}really{-}long{-}hostname{-}5:0]}
+\ExtensionTok{[really{-}really{-}really{-}long{-}hostname{-}5:1]}
+\ExtensionTok{[really{-}really{-}really{-}long{-}hostname{-}5:2]}
+\end{Highlighting}
+\end{Shaded}
 
 you can of course make it shorter by replacing \texttt{hostname\ -s}
 with
 \texttt{hostname\ -s\ \textbar{}\ tr\ -dc\ \textquotesingle{}0-9\textquotesingle{}},
 which would lead to much shorter prefixes:
 
-\begin{verbatim}
-[5:0]
-[5:1]
-[5:2]
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{[5:0]}
+\ExtensionTok{[5:1]}
+\ExtensionTok{[5:2]}
+\end{Highlighting}
+\end{Shaded}
 
 And, of course, if you're doing debug prints, then to solve this exact
 issue you can use
@@ -630,11 +720,13 @@ program on CPU could already start doing something else.
 At other times some parts of the system will actually tell you that they
 couldn't generate the correct traceback, as in this error:
 
-\begin{verbatim}
-[E ProcessGroupNCCL.cpp:414] Some NCCL operations have failed or timed out. Due to the
-asynchronous nature of CUDA kernels, subsequent GPU operations might run on corrupted/
-incomplete data. To avoid this inconsistency, we are taking the entire process down.
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{[E}\NormalTok{ ProcessGroupNCCL.cpp:414] Some NCCL operations have failed or timed out. Due to the}
+\ExtensionTok{asynchronous}\NormalTok{ nature of CUDA kernels, subsequent GPU operations might run on corrupted/}
+\ExtensionTok{incomplete}\NormalTok{ data. To avoid this inconsistency, we are taking the entire process down.}
+\end{Highlighting}
+\end{Shaded}
 
 There are a few solutions.
 
@@ -642,19 +734,23 @@ If the failure is instant and can be reproduced on CPU (not all programs
 work on CPU), simply re-rerun it after hiding your GPUs. This is how you
 do it:
 
-\begin{verbatim}
-CUDA_VISIBLE_DEVICES="" python my-pytorch-program.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{CUDA\_VISIBLE\_DEVICES}\OperatorTok{=}\StringTok{""} \ExtensionTok{python}\NormalTok{ my{-}pytorch{-}program.py}
+\end{Highlighting}
+\end{Shaded}
 
 The env var \texttt{CUDA\_VISIBLE\_DEVICES} is used to manually limit
 the visibility of GPUs to the executed program. So for example if you
 have 8 gpus and you want to run program1.py with first 4 gpus and
 program2.py with the remaining 2 gpus you can do:
 
-\begin{verbatim}
-CUDA_VISIBLE_DEVICES="0,1,2,3" python my-pytorch-program1.py
-CUDA_VISIBLE_DEVICES="4,5,6,7" python my-pytorch-program2.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{CUDA\_VISIBLE\_DEVICES}\OperatorTok{=}\StringTok{"0,1,2,3"} \ExtensionTok{python}\NormalTok{ my{-}pytorch{-}program1.py}
+\VariableTok{CUDA\_VISIBLE\_DEVICES}\OperatorTok{=}\StringTok{"4,5,6,7"} \ExtensionTok{python}\NormalTok{ my{-}pytorch{-}program2.py}
+\end{Highlighting}
+\end{Shaded}
 
 and the second program won't be the wiser that it's not using GPUs 0-3.
 
@@ -669,9 +765,11 @@ work. And so here is another solution.
 
 Rerun your program after setting this environment variable:
 
-\begin{verbatim}
-CUDA_LAUNCH_BLOCKING=1 python my-pytorch-program.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{CUDA\_LAUNCH\_BLOCKING}\OperatorTok{=}\NormalTok{1 }\ExtensionTok{python}\NormalTok{ my{-}pytorch{-}program.py}
+\end{Highlighting}
+\end{Shaded}
 
 This variable tells pytorch (or any other CUDA-based program) to turn
 its async nature off everywhere and now all operations will be
@@ -725,9 +823,11 @@ something like: \texttt{core-python-3097667-6}
 
 Before we continue make sure you have \texttt{gdb} installed:
 
-\begin{verbatim}
-sudo apt-get install gdb
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt{-}get install gdb}
+\end{Highlighting}
+\end{Shaded}
 
 Now make sure you know the path to the python executable that was used
 to run the program that crashed. If you have multiple python environment
@@ -736,10 +836,12 @@ you have to activate the right environment first. If you don't
 
 So typically I'd go:
 
-\begin{verbatim}
-conda activate my-env
-gdb python core-python-3097667-6
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{conda}\NormalTok{ activate my{-}env}
+\FunctionTok{gdb}\NormalTok{ python core{-}python{-}3097667{-}6}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{itemize}
 \tightlist
@@ -756,22 +858,24 @@ gdb python core-python-3097667-6
 Now \texttt{gdb} will churn for a bit and will give you a prompt where
 you type: \texttt{bt}. We will use an actual core file here:
 
-\begin{verbatim}
-(gdb) bt
-#0  0x0000147539887a9f in raise () from /lib64/libc.so.6
-#1  0x000014753985ae05 in abort () from /lib64/libc.so.6
-#2  0x000014751b85a09b in __gnu_cxx::__verbose_terminate_handler() [clone .cold.1] () from /lib64/libstdc++.so.6
-#3  0x000014751b86053c in __cxxabiv1::__terminate(void (*)()) () from /lib64/libstdc++.so.6
-#4  0x000014751b860597 in std::terminate() () from /lib64/libstdc++.so.6
-#5  0x000014751b86052e in std::rethrow_exception(std::__exception_ptr::exception_ptr) () from /lib64/libstdc++.so.6
-#6  0x000014750bb007ef in c10d::ProcessGroupNCCL::WorkNCCL::handleNCCLGuard() ()
-   from .../python3.8/site-packages/torch/lib/libtorch_cuda_cpp.so
-#7  0x000014750bb04c69 in c10d::ProcessGroupNCCL::workCleanupLoop() ()
-   from.../python3.8/site-packages/torch/lib/libtorch_cuda_cpp.so
-#8  0x000014751b88cba3 in execute_native_thread_routine () from /lib64/libstdc++.so.6
-#9  0x000014753a3901cf in start_thread () from /lib64/libpthread.so.0
-#10 0x0000147539872dd3 in clone () from /lib64/libc.so.6
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{(}\FunctionTok{gdb}\KeywordTok{)} \ExtensionTok{bt}
+\CommentTok{\#0  0x0000147539887a9f in raise () from /lib64/libc.so.6}
+\CommentTok{\#1  0x000014753985ae05 in abort () from /lib64/libc.so.6}
+\CommentTok{\#2  0x000014751b85a09b in \_\_gnu\_cxx::\_\_verbose\_terminate\_handler() [clone .cold.1] () from /lib64/libstdc++.so.6}
+\CommentTok{\#3  0x000014751b86053c in \_\_cxxabiv1::\_\_terminate(void (*)()) () from /lib64/libstdc++.so.6}
+\CommentTok{\#4  0x000014751b860597 in std::terminate() () from /lib64/libstdc++.so.6}
+\CommentTok{\#5  0x000014751b86052e in std::rethrow\_exception(std::\_\_exception\_ptr::exception\_ptr) () from /lib64/libstdc++.so.6}
+\CommentTok{\#6  0x000014750bb007ef in c10d::ProcessGroupNCCL::WorkNCCL::handleNCCLGuard() ()}
+   \ExtensionTok{from}\NormalTok{ .../python3.8/site{-}packages/torch/lib/libtorch\_cuda\_cpp.so}
+\CommentTok{\#7  0x000014750bb04c69 in c10d::ProcessGroupNCCL::workCleanupLoop() ()}
+   \ExtensionTok{from.../python3.8/site{-}packages/torch/lib/libtorch\_cuda\_cpp.so}
+\CommentTok{\#8  0x000014751b88cba3 in execute\_native\_thread\_routine () from /lib64/libstdc++.so.6}
+\CommentTok{\#9  0x000014753a3901cf in start\_thread () from /lib64/libpthread.so.0}
+\CommentTok{\#10 0x0000147539872dd3 in clone () from /lib64/libc.so.6}
+\end{Highlighting}
+\end{Shaded}
 
 and there you go. How do you make sense of it?
 
@@ -823,10 +927,12 @@ often, it can be helpful to see where other threads in the process were
 when segfault has happened. For that you simply type 2 commands at the
 \texttt{(gdb)} prompt:
 
-\begin{verbatim}
-(gdb) thread apply all bt
-(gdb) bt
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{(}\FunctionTok{gdb}\KeywordTok{)} \ExtensionTok{thread}\NormalTok{ apply all bt}
+\KeywordTok{(}\FunctionTok{gdb}\KeywordTok{)} \ExtensionTok{bt}
+\end{Highlighting}
+\end{Shaded}
 
 and this time around you typically will get a massive report, one
 backtrace per thread.
@@ -850,9 +956,11 @@ alike.
 
 For example, run:
 
-\begin{verbatim}
-strace python -c "print('strace')"
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{strace}\NormalTok{ python }\AttributeTok{{-}c} \StringTok{"print(\textquotesingle{}strace\textquotesingle{})"}
+\end{Highlighting}
+\end{Shaded}
 
 and you will see everything that is done at the system call level as the
 above program runs.
@@ -862,9 +970,11 @@ all CPU cores at 100\% but nothing happens and you want to see what's it
 doing. In this situation you simply attached to the running program like
 so:
 
-\begin{verbatim}
-strace --pid PID
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{strace} \AttributeTok{{-}{-}pid}\NormalTok{ PID}
+\end{Highlighting}
+\end{Shaded}
 
 where you get the PID for example from the output of \texttt{top} or
 \texttt{ps}. Typically I just copy-n-paste the PID of the program that
@@ -879,10 +989,12 @@ the original example.
 Let's look at a small sub-snippet of the output of
 \texttt{strace\ python\ -c\ "print(\textquotesingle{}strace\textquotesingle{})"}
 
-\begin{verbatim}
-write(1, "strace\n", 7strace
-)                 = 7
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write}\ErrorTok{(}\ExtensionTok{1,} \StringTok{"strace\textbackslash{}n"}\NormalTok{, 7strace}
+\KeywordTok{)}                 \ExtensionTok{=}\NormalTok{ 7}
+\end{Highlighting}
+\end{Shaded}
 
 Here we can see that a write call was executed on filedescriptor
 \texttt{1}, which almost always is \texttt{stdout} (\texttt{stdin} being
@@ -891,9 +1003,11 @@ Here we can see that a write call was executed on filedescriptor
 If you're not sure what a filedescriptor is pointing to, normally you
 can tell from \texttt{strace}'s output itself. But you can also do:
 
-\begin{verbatim}
-ls -l /proc/PID/fd
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls} \AttributeTok{{-}l}\NormalTok{ /proc/PID/fd}
+\end{Highlighting}
+\end{Shaded}
 
 where PID is the pid of the currently running program you're trying to
 investigate.
@@ -901,22 +1015,26 @@ investigate.
 For example, when I run the above while running a pytest test with gpus,
 I got (partial output):
 
-\begin{verbatim}
-l-wx------ 1 stas stas 64 Mar  1 17:22 5 -> /dev/null
-lr-x------ 1 stas stas 64 Mar  1 17:22 6 -> /dev/urandom
-lrwx------ 1 stas stas 64 Mar  1 17:22 7 -> /dev/nvidiactl
-lrwx------ 1 stas stas 64 Mar  1 17:22 8 -> /dev/nvidia0
-lr-x------ 1 stas stas 64 Mar  1 17:22 9 -> /dev/nvidia-caps/nvidia-cap2
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{l{-}wx{-}{-}{-}{-}{-}{-}}\NormalTok{ 1 stas stas 64 Mar  1 17:22 5 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ /dev/null}
+\ExtensionTok{lr{-}x{-}{-}{-}{-}{-}{-}}\NormalTok{ 1 stas stas 64 Mar  1 17:22 6 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ /dev/urandom}
+\ExtensionTok{lrwx{-}{-}{-}{-}{-}{-}}\NormalTok{ 1 stas stas 64 Mar  1 17:22 7 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ /dev/nvidiactl}
+\ExtensionTok{lrwx{-}{-}{-}{-}{-}{-}}\NormalTok{ 1 stas stas 64 Mar  1 17:22 8 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ /dev/nvidia0}
+\ExtensionTok{lr{-}x{-}{-}{-}{-}{-}{-}}\NormalTok{ 1 stas stas 64 Mar  1 17:22 9 }\AttributeTok{{-}}\OperatorTok{\textgreater{}}\NormalTok{ /dev/nvidia{-}caps/nvidia{-}cap2}
+\end{Highlighting}
+\end{Shaded}
 
 so you can see that a device \texttt{/dev/null} is open as FD (file
 descriptor) 5, \texttt{/dev/urandom} as FD 6, etc.
 
 Now let's go look at another snippet from our \texttt{strace} run.
 
-\begin{verbatim}
-access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{access}\ErrorTok{(}\StringTok{"/etc/ld.so.preload"}\ExtensionTok{,}\NormalTok{ R\_OK}\KeywordTok{)}      \ExtensionTok{=} \AttributeTok{{-}1}\NormalTok{ ENOENT }\ErrorTok{(}\ExtensionTok{No}\NormalTok{ such file or directory}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 Here it tried to see if file \texttt{/etc/ld.so.preload} exists, but as
 we can see it doesn't - this can be useful if some shared library is
@@ -924,16 +1042,18 @@ missing - you can see where it's trying to load it from.
 
 Let's try another one:
 
-\begin{verbatim}
-openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
-read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
-newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=21448, ...}, AT_EMPTY_PATH) = 0
-mmap(NULL, 16424, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f8028807000
-mmap(0x7f8028808000, 4096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7f8028808000
-mmap(0x7f8028809000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f8028809000
-mmap(0x7f802880a000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f802880a000
-close(3)
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{openat}\ErrorTok{(}\ExtensionTok{AT\_FDCWD,} \StringTok{"/lib/x86\_64{-}linux{-}gnu/libpthread.so.0"}\NormalTok{, O\_RDONLY}\KeywordTok{|}\ExtensionTok{O\_CLOEXEC}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 3}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,} \StringTok{"\textbackslash{}177ELF\textbackslash{}2\textbackslash{}1\textbackslash{}1\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}3\textbackslash{}0\textgreater{}\textbackslash{}0\textbackslash{}1\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0"}\NormalTok{..., 832}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 832}
+\ExtensionTok{newfstatat}\ErrorTok{(}\ExtensionTok{3,} \StringTok{""}\NormalTok{, \{st\_mode=S\_IFREG}\KeywordTok{|}\ExtensionTok{0644,}\NormalTok{ st\_size=21448, ...\}, AT\_EMPTY\_PATH}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{mmap}\ErrorTok{(}\ExtensionTok{NULL,}\NormalTok{ 16424, PROT\_READ, MAP\_PRIVATE}\KeywordTok{|}\ExtensionTok{MAP\_DENYWRITE,}\NormalTok{ 3, 0}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0x7f8028807000}
+\ExtensionTok{mmap}\ErrorTok{(}\ExtensionTok{0x7f8028808000,}\NormalTok{ 4096, PROT\_READ}\KeywordTok{|}\ExtensionTok{PROT\_EXEC,}\NormalTok{ MAP\_PRIVATE}\KeywordTok{|}\ExtensionTok{MAP\_FIXED}\KeywordTok{|}\ExtensionTok{MAP\_DENYWRITE,}\NormalTok{ 3, 0x1000}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0x7f8028808000}
+\ExtensionTok{mmap}\ErrorTok{(}\ExtensionTok{0x7f8028809000,}\NormalTok{ 4096, PROT\_READ, MAP\_PRIVATE}\KeywordTok{|}\ExtensionTok{MAP\_FIXED}\KeywordTok{|}\ExtensionTok{MAP\_DENYWRITE,}\NormalTok{ 3, 0x2000}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0x7f8028809000}
+\ExtensionTok{mmap}\ErrorTok{(}\ExtensionTok{0x7f802880a000,}\NormalTok{ 8192, PROT\_READ}\KeywordTok{|}\ExtensionTok{PROT\_WRITE,}\NormalTok{ MAP\_PRIVATE}\KeywordTok{|}\ExtensionTok{MAP\_FIXED}\KeywordTok{|}\ExtensionTok{MAP\_DENYWRITE,}\NormalTok{ 3, 0x2000}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0x7f802880a000}
+\ExtensionTok{close}\ErrorTok{(}\ExtensionTok{3}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 here we can see that it opens
 \texttt{/lib/x86\_64-linux-gnu/libpthread.so.0} and assigns it FD 3, it
@@ -944,17 +1064,19 @@ and closes that file.
 In this following example, we see a python cached file is opened, its
 filepointer is moved to 0, and then it's read and closed.
 
-\begin{verbatim}
-openat(AT_FDCWD, "/home/stas/anaconda3/envs/py38-pt113/lib/python3.8/__pycache__/abc.cpython-38.pyc", O_RDONLY|O_CLOEXEC) = 3
-fstat(3, {st_mode=S_IFREG|0664, st_size=5329, ...}) = 0
-lseek(3, 0, SEEK_CUR)                   = 0
-lseek(3, 0, SEEK_CUR)                   = 0
-fstat(3, {st_mode=S_IFREG|0664, st_size=5329, ...}) = 0
-brk(0x23bf000)                          = 0x23bf000
-read(3, "U\r\r\n\0\0\0\0\24\216\177c\211\21\0\0\343\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 5330) = 5329
-read(3, "", 1)                          = 0
-close(3)
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{openat}\ErrorTok{(}\ExtensionTok{AT\_FDCWD,} \StringTok{"/home/stas/anaconda3/envs/py38{-}pt113/lib/python3.8/\_\_pycache\_\_/abc.cpython{-}38.pyc"}\NormalTok{, O\_RDONLY}\KeywordTok{|}\ExtensionTok{O\_CLOEXEC}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 3}
+\ExtensionTok{fstat}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ \{st\_mode=S\_IFREG}\KeywordTok{|}\ExtensionTok{0664,}\NormalTok{ st\_size=5329, ...\}}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{lseek}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ 0, SEEK\_CUR}\KeywordTok{)}                   \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{lseek}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ 0, SEEK\_CUR}\KeywordTok{)}                   \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{fstat}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ \{st\_mode=S\_IFREG}\KeywordTok{|}\ExtensionTok{0664,}\NormalTok{ st\_size=5329, ...\}}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{brk}\ErrorTok{(}\ExtensionTok{0x23bf000}\KeywordTok{)}                          \ExtensionTok{=}\NormalTok{ 0x23bf000}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,} \StringTok{"U\textbackslash{}r\textbackslash{}r\textbackslash{}n\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}24\textbackslash{}216\textbackslash{}177c\textbackslash{}211\textbackslash{}21\textbackslash{}0\textbackslash{}0\textbackslash{}343\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0"}\NormalTok{..., 5330}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 5329}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,} \StringTok{""}\NormalTok{, 1}\KeywordTok{)}                          \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{close}\ErrorTok{(}\ExtensionTok{3}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 It's important to notice that file descriptors are re-used, so we have
 seen the same FD 3 twice, but each time it was open to a different file.
@@ -966,35 +1088,39 @@ reading from a socket file descriptor.
 So let's run an example on a program that downloads files from the HF
 hub:
 
-\begin{verbatim}
-strace python -c 'import sys; from transformers import AutoConfig; AutoConfig.from_pretrained(sys.argv[1])' t5-small
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{strace}\NormalTok{ python }\AttributeTok{{-}c} \StringTok{\textquotesingle{}import sys; from transformers import AutoConfig; AutoConfig.from\_pretrained(sys.argv[1])\textquotesingle{}}\NormalTok{ t5{-}small}
+\end{Highlighting}
+\end{Shaded}
 
 here is some relevant to this discussion snippet:
 
-\begin{verbatim}
-socket(AF_INET6, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_TCP) = 3
-setsockopt(3, SOL_TCP, TCP_NODELAY, [1], 4) = 0
-ioctl(3, FIONBIO, [1])                  = 0
-connect(3, {sa_family=AF_INET6, sin6_port=htons(443), sin6_flowinfo=htonl(0), inet_pton(AF_INET6, "2600:1f18:147f:e850:e203:c458:10cd:fc3c
-", &sin6_addr), sin6_scope_id=0}, 28) = -1 EINPROGRESS (Operation now in progress)
-poll([{fd=3, events=POLLOUT|POLLERR}], 1, 10000) = 1 ([{fd=3, revents=POLLOUT}])
-getsockopt(3, SOL_SOCKET, SO_ERROR, [0], [4]) = 0
-[...]
-write(3, "\26\3\3\0F\20\0\0BA\4\373m\244\16\354/\334\205\361j\225\356\202m*\305\332\275\251\17J"..., 126) = 126
-read(3, 0x2f05c13, 5)                   = -1 EAGAIN (Resource temporarily unavailable)
-poll([{fd=3, events=POLLIN}], 1, 9903)  = 1 ([{fd=3, revents=POLLIN}])
-read(3, "\24\3\3\0\1", 5)               = 5
-read(3, "\1", 1)                        = 1
-read(3, "\26\3\3\0(", 5)                = 5
-read(3, "\0\0\0\0\0\0\0\0\344\v\273\225`\4\24m\234~\371\332%l\364\254\34\3472<\0356s\313"..., 40) = 40
-ioctl(3, FIONBIO, [1])                  = 0
-poll([{fd=3, events=POLLOUT}], 1, 10000) = 1 ([{fd=3, revents=POLLOUT}])
-write(3, "\27\3\3\1.\0\374$\361\217\337\377\264g\215\364\345\256\260\211$\326pkR\345\276,\321\221`-"..., 307) = 307
-ioctl(3, FIONBIO, [1])                  = 0
-read(3, 0x2ef7283, 5)                   = -1 EAGAIN (Resource temporarily unavailable)
-poll([{fd=3, events=POLLIN}], 1, 10000) = 1 ([{fd=3, revents=POLLIN}])
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{socket}\ErrorTok{(}\ExtensionTok{AF\_INET6,}\NormalTok{ SOCK\_STREAM}\KeywordTok{|}\ExtensionTok{SOCK\_CLOEXEC,}\NormalTok{ IPPROTO\_TCP}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 3}
+\ExtensionTok{setsockopt}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ SOL\_TCP, TCP\_NODELAY, }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\NormalTok{, 4}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{ioctl}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ FIONBIO, }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\KeywordTok{)}                  \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{connect}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ \{sa\_family=AF\_INET6, sin6\_port=htons}\ErrorTok{(}\ExtensionTok{443}\KeywordTok{)}\ExtensionTok{,}\NormalTok{ sin6\_flowinfo=htonl}\ErrorTok{(}\ExtensionTok{0}\KeywordTok{)}\ExtensionTok{,}\NormalTok{ inet\_pton}\ErrorTok{(}\ExtensionTok{AF\_INET6,} \StringTok{"2600:1f18:147f:e850:e203:c458:10cd:fc3c}
+\StringTok{"}\NormalTok{, }\KeywordTok{\&}\ExtensionTok{sin6\_addr}\KeywordTok{)}\ExtensionTok{,}\NormalTok{ sin6\_scope\_id=0\}, 28}\KeywordTok{)} \ExtensionTok{=} \AttributeTok{{-}1}\NormalTok{ EINPROGRESS }\ErrorTok{(}\ExtensionTok{Operation}\NormalTok{ now in progress}\KeywordTok{)}
+\ExtensionTok{poll}\ErrorTok{(}\ExtensionTok{[\{fd=3,}\NormalTok{ events=POLLOUT}\KeywordTok{|}\ExtensionTok{POLLERR\}],}\NormalTok{ 1, 10000}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 1 }\ErrorTok{(}\ExtensionTok{[\{fd=3,}\NormalTok{ revents=POLLOUT\}]}\KeywordTok{)}
+\ExtensionTok{getsockopt}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ SOL\_SOCKET, SO\_ERROR, }\PreprocessorTok{[}\SpecialStringTok{0}\PreprocessorTok{]}\NormalTok{, }\PreprocessorTok{[}\SpecialStringTok{4}\PreprocessorTok{]}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 0}
+\ExtensionTok{[...]}
+\FunctionTok{write}\ErrorTok{(}\ExtensionTok{3,} \StringTok{"\textbackslash{}26\textbackslash{}3\textbackslash{}3\textbackslash{}0F\textbackslash{}20\textbackslash{}0\textbackslash{}0BA\textbackslash{}4\textbackslash{}373m\textbackslash{}244\textbackslash{}16\textbackslash{}354/\textbackslash{}334\textbackslash{}205\textbackslash{}361j\textbackslash{}225\textbackslash{}356\textbackslash{}202m*\textbackslash{}305\textbackslash{}332\textbackslash{}275\textbackslash{}251\textbackslash{}17J"}\NormalTok{..., 126}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 126}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ 0x2f05c13, 5}\KeywordTok{)}                   \ExtensionTok{=} \AttributeTok{{-}1}\NormalTok{ EAGAIN }\ErrorTok{(}\ExtensionTok{Resource}\NormalTok{ temporarily unavailable}\KeywordTok{)}
+\ExtensionTok{poll}\ErrorTok{(}\ExtensionTok{[\{fd=3,}\NormalTok{ events=POLLIN\}], 1, 9903}\KeywordTok{)}  \ExtensionTok{=}\NormalTok{ 1 }\ErrorTok{(}\ExtensionTok{[\{fd=3,}\NormalTok{ revents=POLLIN\}]}\KeywordTok{)}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,} \StringTok{"\textbackslash{}24\textbackslash{}3\textbackslash{}3\textbackslash{}0\textbackslash{}1"}\NormalTok{, 5}\KeywordTok{)}               \ExtensionTok{=}\NormalTok{ 5}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,} \StringTok{"\textbackslash{}1"}\NormalTok{, 1}\KeywordTok{)}                        \ExtensionTok{=}\NormalTok{ 1}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,} \StringTok{"\textbackslash{}26\textbackslash{}3\textbackslash{}3\textbackslash{}0("}\NormalTok{, 5}\KeywordTok{)}                \ExtensionTok{=}\NormalTok{ 5}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,} \StringTok{"\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}0\textbackslash{}344\textbackslash{}v\textbackslash{}273\textbackslash{}225}\KeywordTok{\textasciigrave{}}\ExtensionTok{\textbackslash{}4\textbackslash{}24m\textbackslash{}234\textasciitilde{}\textbackslash{}371\textbackslash{}332\%l\textbackslash{}364\textbackslash{}254\textbackslash{}34\textbackslash{}3472}\OperatorTok{\textless{}}\DataTypeTok{\textbackslash{}0}\NormalTok{356s\textbackslash{}313}\StringTok{"..., 40) = 40}
+\StringTok{ioctl(3, FIONBIO, [1])                  = 0}
+\StringTok{poll([\{fd=3, events=POLLOUT\}], 1, 10000) = 1 ([\{fd=3, revents=POLLOUT\}])}
+\StringTok{write(3, "}\DataTypeTok{\textbackslash{}2}\NormalTok{7\textbackslash{}3\textbackslash{}3\textbackslash{}1.\textbackslash{}0\textbackslash{}374$}\DataTypeTok{\textbackslash{}3}\NormalTok{61\textbackslash{}217\textbackslash{}337\textbackslash{}377\textbackslash{}264g\textbackslash{}215\textbackslash{}364\textbackslash{}345\textbackslash{}256\textbackslash{}260\textbackslash{}211$}\DataTypeTok{\textbackslash{}3}\NormalTok{26pkR\textbackslash{}345\textbackslash{}276,\textbackslash{}321\textbackslash{}221}\KeywordTok{\textasciigrave{}}\StringTok{{-}"}\NormalTok{..., 307}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 307}
+\ExtensionTok{ioctl}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ FIONBIO, }\PreprocessorTok{[}\SpecialStringTok{1}\PreprocessorTok{]}\KeywordTok{)}                  \ExtensionTok{=}\NormalTok{ 0}
+\BuiltInTok{read}\ErrorTok{(}\ExtensionTok{3,}\NormalTok{ 0x2ef7283, 5}\KeywordTok{)}                   \ExtensionTok{=} \AttributeTok{{-}1}\NormalTok{ EAGAIN }\ErrorTok{(}\ExtensionTok{Resource}\NormalTok{ temporarily unavailable}\KeywordTok{)}
+\ExtensionTok{poll}\ErrorTok{(}\ExtensionTok{[\{fd=3,}\NormalTok{ events=POLLIN\}], 1, 10000}\KeywordTok{)} \ExtensionTok{=}\NormalTok{ 1 }\ErrorTok{(}\ExtensionTok{[\{fd=3,}\NormalTok{ revents=POLLIN\}]}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 You can see where that again it uses FD 3 but this time it opens a INET6
 socket instead of a file. You can see that it then connects to that
@@ -1006,18 +1132,22 @@ using this tool.
 BTW, if you don't want to scroll up-down, you can also save the output
 to a file:
 
-\begin{verbatim}
-strace -o strace.txt python -c "print('strace')"
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{strace} \AttributeTok{{-}o}\NormalTok{ strace.txt python }\AttributeTok{{-}c} \StringTok{"print(\textquotesingle{}strace\textquotesingle{})"}
+\end{Highlighting}
+\end{Shaded}
 
 Now, since you're might want to strace the program from the very
 beginning, for example to sort out some race condition on a distributed
 filesystem, you will want to tell it to follow any forked processes.
 This what the \texttt{-f} flag is for:
 
-\begin{verbatim}
-strace -o log.txt -f python -m torch.distributed.run --nproc_per_node=4 --nnodes=1 --tee 3 test.py
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{strace} \AttributeTok{{-}o}\NormalTok{ log.txt }\AttributeTok{{-}f}\NormalTok{ python }\AttributeTok{{-}m}\NormalTok{ torch.distributed.run }\AttributeTok{{-}{-}nproc\_per\_node}\OperatorTok{=}\NormalTok{4 }\AttributeTok{{-}{-}nnodes}\OperatorTok{=}\NormalTok{1 }\AttributeTok{{-}{-}tee}\NormalTok{ 3 test.py}
+\end{Highlighting}
+\end{Shaded}
 
 So here we launch 4 processes and will end up running \texttt{strace} on
 at least 5 of them - the launcher plus 4 processes (each of which may
@@ -1036,14 +1166,16 @@ training}\label{invoke-pdb-on-a-specific-rank-in-multi-node-training}
 
 Once pytorch 2.2 is released you will have a new handy debug feature:
 
-\begin{verbatim}
-import torch.distributed as dist
-[...]
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ torch.distributed }\ImportTok{as}\NormalTok{ dist}
+\NormalTok{[...]}
 
-def mycode(...):
+\KeywordTok{def}\NormalTok{ mycode(...):}
 
-   dist.breakpoint(0)
-\end{verbatim}
+\NormalTok{   dist.}\BuiltInTok{breakpoint}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 This is the same as \texttt{ForkedPdb} (below) but will automatically
 break for you on the rank of your choice - rank0 in the example above.
@@ -1052,30 +1184,32 @@ hits to get into your normal code.
 
 Here is what it does underneath:
 
-\begin{verbatim}
-import sys
-import pdb
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ sys}
+\ImportTok{import}\NormalTok{ pdb}
 
-class ForkedPdb(pdb.Pdb):
-    """
-    PDB Subclass for debugging multi-processed code
-    Suggested in: https://stackoverflow.com/questions/4716533/how-to-attach-debugger-to-a-python-subproccess
-    """
-    def interaction(self, *args, **kwargs):
-        _stdin = sys.stdin
-        try:
-            sys.stdin = open('/dev/stdin')
-            pdb.Pdb.interaction(self, *args, **kwargs)
-        finally:
-            sys.stdin = _stdin
+\KeywordTok{class}\NormalTok{ ForkedPdb(pdb.Pdb):}
+    \CommentTok{"""}
+\CommentTok{    PDB Subclass for debugging multi{-}processed code}
+\CommentTok{    Suggested in: https://stackoverflow.com/questions/4716533/how{-}to{-}attach{-}debugger{-}to{-}a{-}python{-}subproccess}
+\CommentTok{    """}
+    \KeywordTok{def}\NormalTok{ interaction(}\VariableTok{self}\NormalTok{, }\OperatorTok{*}\NormalTok{args, }\OperatorTok{**}\NormalTok{kwargs):}
+\NormalTok{        \_stdin }\OperatorTok{=}\NormalTok{ sys.stdin}
+        \ControlFlowTok{try}\NormalTok{:}
+\NormalTok{            sys.stdin }\OperatorTok{=} \BuiltInTok{open}\NormalTok{(}\StringTok{\textquotesingle{}/dev/stdin\textquotesingle{}}\NormalTok{)}
+\NormalTok{            pdb.Pdb.interaction(}\VariableTok{self}\NormalTok{, }\OperatorTok{*}\NormalTok{args, }\OperatorTok{**}\NormalTok{kwargs)}
+        \ControlFlowTok{finally}\NormalTok{:}
+\NormalTok{            sys.stdin }\OperatorTok{=}\NormalTok{ \_stdin}
 
 
-def mycode():
+\KeywordTok{def}\NormalTok{ mycode():}
 
-    if dist.get_rank() == 0:
-        ForkedPdb().set_trace()
-    dist.barrier()
-\end{verbatim}
+    \ControlFlowTok{if}\NormalTok{ dist.get\_rank() }\OperatorTok{==} \DecValTok{0}\NormalTok{:}
+\NormalTok{        ForkedPdb().set\_trace()}
+\NormalTok{    dist.barrier()}
+\end{Highlighting}
+\end{Shaded}
 
 so you can code it yourself as well.
 
@@ -1096,32 +1230,36 @@ Here is an example of discrepancies I was able to get doing the same
 simple floating point math on an 11 Gen Intel i7 CPU and an NVIDIA A100
 80GB (PCIe) GPU:
 
-\begin{verbatim}
-import torch
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ torch}
 
-def do_math(device):
-    inv_freq = (10 ** (torch.arange(0, 10, device=device) / 10))
-    print(f"{inv_freq[9]:.20f}")
-    return inv_freq.cpu()
+\KeywordTok{def}\NormalTok{ do\_math(device):}
+\NormalTok{    inv\_freq }\OperatorTok{=}\NormalTok{ (}\DecValTok{10} \OperatorTok{**}\NormalTok{ (torch.arange(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, device}\OperatorTok{=}\NormalTok{device) }\OperatorTok{/} \DecValTok{10}\NormalTok{))}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\SpecialCharTok{\{}\NormalTok{inv\_freq[}\DecValTok{9}\NormalTok{]}\SpecialCharTok{:.20f\}}\SpecialStringTok{"}\NormalTok{)}
+    \ControlFlowTok{return}\NormalTok{ inv\_freq.cpu()}
 
-a = do_math(torch.device("cpu"))
-b = do_math(torch.device("cuda"))
+\NormalTok{a }\OperatorTok{=}\NormalTok{ do\_math(torch.device(}\StringTok{"cpu"}\NormalTok{))}
+\NormalTok{b }\OperatorTok{=}\NormalTok{ do\_math(torch.device(}\StringTok{"cuda"}\NormalTok{))}
 
-torch.testing.assert_close(a, b, rtol=0.0, atol=0.0)
-\end{verbatim}
+\NormalTok{torch.testing.assert\_close(a, b, rtol}\OperatorTok{=}\FloatTok{0.0}\NormalTok{, atol}\OperatorTok{=}\FloatTok{0.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 when we run it we get 2 out of 10 elements mismatch:
 
-\begin{verbatim}
-7.94328212738037109375
-7.94328308105468750000
-[...]
-AssertionError: Tensor-likes are not equal!
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{7.94328212738037109375}
+\ExtensionTok{7.94328308105468750000}
+\ExtensionTok{[...]}
+\ExtensionTok{AssertionError:}\NormalTok{ Tensor{-}likes are not equal!}
 
-Mismatched elements: 2 / 10 (20.0%)
-Greatest absolute difference: 9.5367431640625e-07 at index (9,)
-Greatest relative difference: 1.200604771156577e-07 at index (9,)
-\end{verbatim}
+\ExtensionTok{Mismatched}\NormalTok{ elements: 2 / 10 }\ErrorTok{(}\ExtensionTok{20.0\%}\KeywordTok{)}
+\ExtensionTok{Greatest}\NormalTok{ absolute difference: 9.5367431640625e{-}07 at index }\ErrorTok{(}\ExtensionTok{9,}\KeywordTok{)}
+\ExtensionTok{Greatest}\NormalTok{ relative difference: 1.200604771156577e{-}07 at index }\ErrorTok{(}\ExtensionTok{9,}\KeywordTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 This was a simple low-dimensional example, but in reality the tensors
 are much bigger and will typically end up having more mismatches.
@@ -1158,17 +1296,20 @@ If you're curious where I pulled this code from - this is a simplified
 reduction of this original code in
 \href{https://github.com/huggingface/transformers/blob/3f69f415adcbdaedec154ba8eac220ef3276975d/src/transformers/models/llama/modeling_llama.py\#L130}{modeling\_llama.py}:
 
-\begin{verbatim}
-class LlamaRotaryEmbedding(nn.Module):
-    def __init__(self, dim, max_position_embeddings=2048, base=10000, device=None):
-        super().__init__()
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{ LlamaRotaryEmbedding(nn.Module):}
+    \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{, dim, max\_position\_embeddings}\OperatorTok{=}\DecValTok{2048}\NormalTok{, base}\OperatorTok{=}\DecValTok{10000}\NormalTok{, device}\OperatorTok{=}\VariableTok{None}\NormalTok{):}
+        \BuiltInTok{super}\NormalTok{().}\FunctionTok{\_\_init\_\_}\NormalTok{()}
 
-        self.dim = dim
-        self.max_position_embeddings = max_position_embeddings
-        self.base = base
-        inv_freq = 1.0 / (self.base ** (torch.arange(0, self.dim, 2).float().to(device) / self.dim))
-        self.register_buffer("inv_freq", inv_freq, persistent=False)
-\end{verbatim}
+        \VariableTok{self}\NormalTok{.dim }\OperatorTok{=}\NormalTok{ dim}
+        \VariableTok{self}\NormalTok{.max\_position\_embeddings }\OperatorTok{=}\NormalTok{ max\_position\_embeddings}
+        \VariableTok{self}\NormalTok{.base }\OperatorTok{=}\NormalTok{ base}
+\NormalTok{        inv\_freq }\OperatorTok{=} \FloatTok{1.0} \OperatorTok{/}\NormalTok{ (}\VariableTok{self}\NormalTok{.base }\OperatorTok{**}\NormalTok{ (torch.arange(}\DecValTok{0}\NormalTok{, }\VariableTok{self}\NormalTok{.dim, }\DecValTok{2}\NormalTok{).}\BuiltInTok{float}\NormalTok{().to(device) }\OperatorTok{/} \VariableTok{self}\NormalTok{.dim))}
+        \VariableTok{self}\NormalTok{.register\_buffer(}\StringTok{"inv\_freq"}\NormalTok{, inv\_freq, persistent}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 
 
 
