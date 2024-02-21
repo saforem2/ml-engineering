@@ -22,7 +22,7 @@ editor:
     render-on-save: true
 execute:
     freeze: true
-author: 
+author:
     - name: "Stas Bekman"
       url: "https://stasosphere.com/machine-learning/"
 ---

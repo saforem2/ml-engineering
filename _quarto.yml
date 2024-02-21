@@ -11,7 +11,9 @@ site-url: "https://saforem2.github.io/ml-engineering"
 google-scholar: true
 citeproc: true
 project:
-  # render: "auto"
+  render:
+    - "index.qmd"
+    - "qmd/**/*.qmd"
   type: website
   output-dir: "docs"
   preview:
@@ -24,7 +26,7 @@ citation:
    title: "ML Engineering"
    url: "https://saforem2.github.io/ml-engineering"
 execute:
-  keep-ipynb: true
+  keep-ipynb: false
   # keep-md: true
   freeze: auto
 

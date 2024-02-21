@@ -1,8 +1,10 @@
 format:
-  pdf:
-    documentclass: report
-    keep-tex: true
+  # pdf:
+  #   documentclass: report
+  #   keep-tex: true
+  gfm: default
   html:
+    page-layout: full
     callout-appearance: simple
     code-link: true
     code-line-numbers: false
@@ -26,18 +28,15 @@ format:
     css:
       - css/default.css
       - css/callouts.css
-      # - css/profile.css
     theme:
       dark:
         - css/common.scss
         - css/dark.scss
         - css/syntax-dark.scss
-        # - css/callout-cards.scss
       light:
         - css/common.scss
         - css/light.scss
         - css/syntax-light.scss
-        # - css/callout-cards.scss
     smooth-scroll: false
     citations-hover: true
     footnotes-hover: true
