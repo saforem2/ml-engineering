@@ -655,7 +655,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </ul>
 <section id="introduction" class="level3">
 <h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
-<p>It’s not enough to buy/rent expensive accelerators to train and infer models fast. You need to ensure that your <a href="../storage">storage IO</a>, <a href="../compute/cpu">CPU</a> and network are fast enough to “feed the accelerator furnace”. If this is not ensured then the expensive accelerators will be underutilized leading to lost $$, slower training time and inference throughput. While it can be any other of the mentioned components, the network is often the bottleneck during the training (assume your DataLoader is fast).</p>
+<p>It’s not enough to buy/rent expensive accelerators to train and infer models fast. You need to ensure that your <a href="../storage">storage IO</a>, <a href="../compute/cpu">CPU</a> and network are fast enough to “feed the accelerator furnace”. If this is not ensured then the expensive accelerators will be underutilized leading to lost $, slower training time and inference throughput. While it can be any other of the mentioned components, the network is often the bottleneck during the training (assume your DataLoader is fast).</p>
 <p>If your model fits on a single accelerator, you have little to worry about. But nowadays most models require several accelerators to load and LLM/VLM models require multiple compute nodes for training and some even for inference.</p>
 <p>Most compute nodes contain 8 accelerators, some 4, others 16, and even more accelerators and recently there are some that have one super-accelerator per node.</p>
 <p>When the model spans several accelerators and doesn’t leave a single node all you need to worry about is fast <a href="#intra-node-networking">Intra-node networking</a>. As soon as the model requires several nodes, which is often the case for training as one can use multiple replicas to parallelize and speed up the training, then fast <a href="#inter-node-networking">Inter-node networking</a> becomes the key.</p>
@@ -697,7 +697,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </ol>
 <p>footnote: In the following sections pay close attention that 1 GBps = 8 Gbps.</p>
 <p>footnote: also pay close attention to when the spec says unidirectional vs bidirectional (duplex) speeds - if you read an online spec and it doesn’t explicitly declare the directionality - look for an answer. I had to research many docs to figure it out in some of the tables below as some vendors conveniently omit this crucial information. I even had to edit a few wiki pages to add the missing information. Remember that for the vendors the bigger the better so almost always they will use the duplex number, which is 2x larger than unidirectional one.</p>
-<p>Here is intra-node theoretical peak bandwidth cross-comparison for current technologies (unidirectional bandwidth) sorted by bandwidth:</p>
+<p>Here is intra-node unidirectional theoretical peak bandwidth cross-comparison for current technologies sorted by bandwidth:</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -711,7 +711,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <td style="text-align: right;">450.0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MI300X</td>
+<td style="text-align: left;">XGMI MI300X</td>
 <td style="text-align: right;">448.0</td>
 </tr>
 <tr class="odd">
@@ -719,7 +719,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <td style="text-align: right;">300.0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MI250X</td>
+<td style="text-align: left;">XGMI MI250X</td>
 <td style="text-align: right;">350.0</td>
 </tr>
 <tr class="odd">
@@ -736,6 +736,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
+<p>footnote: NVSwitch operates at the same speed as NVLink of that generation - it’s unclear whether it belongs to intra- or inter-node group as it creates a super-node of up to 256 GPUs.</p>
 <p>You will find the details analyses of each in the following sections.</p>
 <section id="pcie" class="level4">
 <h4 class="anchored" data-anchor-id="pcie">PCIe</h4>
@@ -963,7 +964,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="inter-node-networking">Inter-node networking</h3>
 <p>As inter-node hardware is about of an order of magnitude slower than intra-node hardware in this universe Gbps are used instead of GBps. (1 GBps = 8 Gbps)</p>
 <p>When it comes to inter-node networking hardware, there are the well established InfiniBand from NVIDIA and a few other players and there are many new comers that mainly are coming from compute cloud providers who can’t compete on the slim margin renting out someone else’s hardware so they build their own (EFA, and others not yet disclosed).</p>
-<p>Here is inter-node theoretical peak bandwidth cross-comparison for current technologies (unidirectional bandwidth) sorted by bandwidth:</p>
+<p>Here is inter-node unidirectional theoretical peak bandwidth cross-comparison for current technologies sorted by bandwidth:</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1097,10 +1098,10 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </section>
 <section id="efa" class="level4">
 <h4 class="anchored" data-anchor-id="efa">EFA</h4>
-<p><a href="https://aws.amazon.com/hpc/efa/">Elastic Fabric Adapter (EFA)</a> is a recent technology created by AWS.</p>
+<p><a href="https://aws.amazon.com/hpc/efa/">Elastic Fabric Adapter (EFA)</a> is a recent inter-node networking technology created by AWS.</p>
 <ul>
 <li>EFA v1 0.4 Tbps (effective 340 Gbps for all_reduce tests) (P4 AWS instances)</li>
-<li>EFA v2 3.2 Tbps (since Q3-2023, P5 AWS instances)</li>
+<li>EFA v2 3.2 Tbps (since Q3-2023, P5 AWS instances - 32 NICs!)</li>
 </ul>
 </section>
 <section id="gaudi2-inter-node" class="level4">
@@ -1145,7 +1146,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <h4 class="anchored" data-anchor-id="single-node-training">Single node training</h4>
 <p>The previous situation was fantastic due to the close to perfect MFU, but you realize that the training on a single GPU is going to take quite some time, since we are in AI race you’d probably want to finish the training sooner than later. So you’d ask - can I train the model on 8 GPUs instead, and the answer would be - yes, of course. With one caveat - at the end of each iteration you’d need to sync the gradients between the 8 processes (each process for a single GPU), so that each participating process of the training can benefit from what the other 7 have learned during the last iteration.</p>
 <p>footnote: You could, of course, use less than 8 GPUs, it is just that most NVIDIA GPU-based compute nodes these days have 8 GPUs so why not get the best return on investment.</p>
-<p>footnote: in the ideal world the training on 1 gpu for 8 durations of time, should cost the same as training on 8 gpus for 1 duration of time. That’s one would expect to spend the same $$ and to finish 8 times faster. But because of data synchronization requirements.</p>
+<p>footnote: in the ideal world the training on 1 gpu for 8 durations of time, should cost the same as training on 8 gpus for 1 duration of time. That’s one would expect to spend the same $ and to finish 8 times faster. But because of data synchronization requirements.</p>
 <p>If the experimental model still contains 2B params like in the previous section and grads are in fp32 then the training program needs to send 8GB (<code>2G * 4B</code>) of data on every iteration. Moreover, since syncing the gradients requires an <a href="https://pytorch.org/tutorials/intermediate/dist_tuto.html#collective-communication"><code>all_reduce</code> collective</a> collective - it needs to transmit the data twice - the first time sending the gradient data by each gpu, computing the sum of gradients and send this value back to each participating gpu so that each training process will benefit from the learning advancements each of its peers made in the last iteration.</p>
 <p>Here is the all-reduce collective visualized:</p>
 <div class="quarto-figure quarto-figure-center">
