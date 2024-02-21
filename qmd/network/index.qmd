@@ -10,7 +10,7 @@ title: "🛜 Networking"
 
 ### Introduction
 
-It's not enough to buy/rent expensive accelerators to train and infer models fast. You need to ensure that your [storage IO](../storage), [CPU](../compute/cpu) and network are fast enough to "feed the accelerator furnace". If this is not ensured then the expensive accelerators will be underutilized leading to lost $$, slower training time and inference throughput. While it can be any other of the mentioned components, the network is often the bottleneck during the training (assume your DataLoader is fast).
+It's not enough to buy/rent expensive accelerators to train and infer models fast. You need to ensure that your [storage IO](../storage), [CPU](../compute/cpu) and network are fast enough to "feed the accelerator furnace". If this is not ensured then the expensive accelerators will be underutilized leading to lost \$, slower training time and inference throughput. While it can be any other of the mentioned components, the network is often the bottleneck during the training (assume your DataLoader is fast).
 
 If your model fits on a single accelerator, you have little to worry about. But nowadays most models require several accelerators to load and LLM/VLM models require multiple compute nodes for training and some even for inference.
 
@@ -67,17 +67,19 @@ footnote: In the following sections pay close attention that 1 GBps = 8 Gbps.
 
 footnote: also pay close attention to when the spec says unidirectional vs bidirectional (duplex) speeds - if you read an online spec and it doesn't explicitly declare the directionality - look for an answer. I had to research many docs to figure it out in some of the tables below as some vendors conveniently omit this crucial information. I even had to edit a few wiki pages to add the missing information. Remember that for the vendors the bigger the better so almost always they will use the duplex number, which is 2x larger than unidirectional one.
 
-Here is intra-node theoretical peak bandwidth cross-comparison for current technologies (unidirectional bandwidth) sorted by bandwidth:
+Here is intra-node unidirectional theoretical peak bandwidth cross-comparison for current technologies sorted by bandwidth:
 
 | Interconnect |  GBps |
 | :----------- | ----: |
 | NVlink 4     | 450.0 |
-| MI300X       | 448.0 |
+| XGMI MI300X  | 448.0 |
 | NVlink 3     | 300.0 |
-| MI250X       | 350.0 |
+| XGMI MI250X  | 350.0 |
 | Gaudi2       | 262.5 |
 | PCIe 5       | 126.0 |
 | PCIe 4       |  62.0 |
+
+footnote: NVSwitch operates at the same speed as NVLink of that generation - it's unclear whether it belongs to intra- or inter-node group as it creates a super-node of up to 256 GPUs.
 
 You will find the details analyses of each in the following sections.
 
@@ -255,7 +257,7 @@ As inter-node hardware is about of an order of magnitude slower than intra-node 
 
 When it comes to inter-node networking hardware, there are the well established InfiniBand from NVIDIA and a few other players and there are many new comers that mainly are coming from compute cloud providers who can't compete on the slim margin renting out someone else's hardware so they build their own (EFA, and others not yet disclosed).
 
-Here is inter-node theoretical peak bandwidth cross-comparison for current technologies (unidirectional bandwidth) sorted by bandwidth:
+Here is inter-node unidirectional theoretical peak bandwidth cross-comparison for current technologies sorted by bandwidth:
 
 | Interconnect         |  Gbps |
 | :----------------    | ----: |
@@ -307,10 +309,10 @@ Here are some examples of NVIDIA devices with the fastest IB:
 
 #### EFA
 
-[Elastic Fabric Adapter (EFA)](https://aws.amazon.com/hpc/efa/) is a recent technology created by AWS.
+[Elastic Fabric Adapter (EFA)](https://aws.amazon.com/hpc/efa/) is a recent inter-node networking technology created by AWS.
 
 - EFA v1 0.4 Tbps (effective 340 Gbps for all_reduce tests) (P4 AWS instances)
-- EFA v2 3.2 Tbps (since Q3-2023, P5 AWS instances)
+- EFA v2 3.2 Tbps (since Q3-2023, P5 AWS instances - 32 NICs!)
 
 
 
@@ -345,15 +347,6 @@ Cornelis networks promised to launch 400Gbps NICs in Q3-2024.
 
 Omni-Path provides [RDMA](https://en.wikipedia.org/wiki/Remote_direct_memory_access).
 
-
-
-
-
-
-
-
-
-
 ### Understanding why inter-node network speed is of a huge importance
 
 This is probably one of the most important multi-segment section that you really want to understand well. While it seeks out to show how important the inter-node speed is, to build up the case it'll teach on the way many important training-related concepts.
@@ -384,7 +377,7 @@ The previous situation was fantastic due to the close to perfect MFU, but you re
 
 footnote: You could, of course, use less than 8 GPUs, it is just that most NVIDIA GPU-based compute nodes these days have 8 GPUs so why not get the best return on investment.
 
-footnote: in the ideal world the training on 1 gpu for 8 durations of time, should cost the same as training on 8 gpus for 1 duration of time. That's one would expect to spend the same $$ and to finish 8 times faster. But because of data synchronization requirements.
+footnote: in the ideal world the training on 1 gpu for 8 durations of time, should cost the same as training on 8 gpus for 1 duration of time. That's one would expect to spend the same \$ and to finish 8 times faster. But because of data synchronization requirements.
 
 If the experimental model still contains 2B params like in the previous section and grads are in fp32 then the training program needs to send 8GB (`2G * 4B`) of data on every iteration. Moreover, since syncing the gradients requires an [`all_reduce` collective](https://pytorch.org/tutorials/intermediate/dist_tuto.html#collective-communication) collective - it needs to transmit the data twice - the first time sending the gradient data by each gpu, computing the sum of gradients and send this value back to each participating gpu so that each training process will benefit from the learning advancements each of its peers made in the last iteration.
 
