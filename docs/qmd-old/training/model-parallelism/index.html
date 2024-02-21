@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-02-20">
+
+<title>ML Engineering</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../.././favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-XVM2Y822Y1"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
+</script>
+<link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../../css/default.css">
+<link rel="stylesheet" href="../../../css/callouts.css">
+<meta property="og:title" content="Sam Foreman">
+<meta property="og:description" content="Machine Learning Engineering Open Book">
+<meta property="og:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
+<meta property="og:site_name" content="ML Engineering">
+<meta name="twitter:title" content="Sam Foreman">
+<meta name="twitter:description" content="Machine Learning Engineering Open Book">
+<meta name="twitter:image" content="https://github.com/saforem2/ml-engineering/blob/main/assets/thumbnail.png?raw=true">
+<meta name="twitter:creator" content="@saforem2">
+<meta name="twitter:site" content="@saforem2">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="ML Engineering">
+<meta name="citation_author" content="Stas Bekman">
+<meta name="citation_author" content="Sam Foreman">
+<meta name="citation_publication_date" content="2024-02-20">
+<meta name="citation_cover_date" content="2024-02-20">
+<meta name="citation_year" content="2024">
+<meta name="citation_online_date" content="2024-02-20">
+<meta name="citation_fulltext_html_url" content="https://saforem2.github.io/ml-engineering">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=The climate risk &amp;amp;amp; resilience portal (ClimRR) metadata and data dictionary;,citation_author=C. Burdi;,citation_author=Wall. T Branham;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://dub.sh/ClimRR-Metadata;">
+<meta name="citation_reference" content="citation_title=Progress on (g-2)_\mu from lattice QCD;,citation_author=Hartmut Wittig;,citation_publication_date=2023;,citation_cover_date=2023;,citation_year=2023;,citation_fulltext_html_url=https://arxiv.org/abs/2306.04165;">
+<meta name="citation_reference" content="citation_title=Hybrid Monte Carlo;,citation_author=S. Duane;,citation_author=A. D. Kennedy;,citation_author=B. J. Pendleton;,citation_author=D. Roweth;,citation_publication_date=1987;,citation_cover_date=1987;,citation_year=1987;,citation_doi=10.1016/0370-2693(87)91197-X;,citation_volume=195;,citation_journal_title=Phys. Lett. B;">
+<meta name="citation_reference" content="citation_title=Snowmass 2021 Computational Frontier CompF03 Topical Group Report: Machine Learning;,citation_author=Phiala Shanahan;,citation_author=others;,citation_publication_date=2022-09;,citation_cover_date=2022-09;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2209.07559;">
+<meta name="citation_reference" content="citation_title=Applications of Machine Learning to Lattice Quantum Field Theory;,citation_author=Denis Boyda;,citation_author=others;,citation_publication_date=2022-02;,citation_cover_date=2022-02;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2202.05838;,citation_conference_title=Snowmass 2021;">
+<meta name="citation_reference" content="citation_title=HMC with Normalizing Flows;,citation_author=Sam Foreman;,citation_author=Taku Izubuchi;,citation_author=Luchang Jin;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_author=Akio Tomiya;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01586;,citation_doi=10.22323/1.396.0073;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=LeapfrogLayers: A Trainable Framework for Effective Topological Sampling;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_fulltext_html_url=https://arxiv.org/abs/2112.01582;,citation_doi=10.22323/1.396.0508;,citation_volume=LATTICE2021;,citation_journal_title=PoS;">
+<meta name="citation_reference" content="citation_title=Deep Learning Hamiltonian Monte Carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021-05;,citation_cover_date=2021-05;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;,citation_conference_title=9th International Conference on Learning Representations;">
+<meta name="citation_reference" content="citation_title=Energy Justice Analysis of Climate Data with ClimRR;,citation_author=Sam Foreman;,citation_publication_date=2023-08-07;,citation_cover_date=2023-08-07;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/climate-analysis;,citation_language=en;">
+<meta name="citation_reference" content="citation_author=Sam Foreman;,citation_publication_date=2023-08-19;,citation_cover_date=2023-08-19;,citation_year=2023;,citation_fulltext_html_url=https://saforem2.github.io/l2hmc-qcd;,citation_language=en;">
+<meta name="citation_reference" content="citation_title=Deep learning hamiltonian monte carlo;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James C. Osborn;,citation_publication_date=2021;,citation_cover_date=2021;,citation_year=2021;,citation_fulltext_html_url=https://arxiv.org/abs/2105.03418;">
+<meta name="citation_reference" content="citation_title=MLMC: Machine learning monte carlo for lattice gauge theory;,citation_author=Sam Foreman;,citation_author=Xiao-Yong Jin;,citation_author=James Osborn;,citation_publication_date=00;,citation_cover_date=00;,citation_year=0;,citation_conference_title=40th international symposium on lattice field theory (lattice 2023) (batavia, IL, united states, 07/31/2023 - 08/04/2023);">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">ML Engineering</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://twitter.com/saforem2"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/saforem2/ml-engineering"> 
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-gear"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/blob/main/index.qmd">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/saforem2/ml-engineering/issues/new/choose">
+            New Issue
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏎️ Performance</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📓 Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/testing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">✏️ Testing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/transformers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🤗 Transformers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠  Insights</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🪖 The AI Battlefield</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏋️  Training</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/model-parallelism/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Parallelism</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/checkpoints/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checkpoints</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/performance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Tune Up For The Best Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Training Loss Patterns</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/fault-tolerance/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🛜 Network</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Networking Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Benchmarks Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Disabling NVLink Benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦  Storage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">💻 Compute</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/cpu/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/cpu-memory/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU memory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/compute/accelerator/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/accelerator/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
+ <span class="menu-text">Nvidia</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/accelerator/nvidia/debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Troubleshooting NVIDIA GPUs</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🎻  Orchestration</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in SLURM Environment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Administration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Launchers with SLURM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM for users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🐛  Debugging</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/tiny-scripts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A Back up of scripts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/make-tiny-models-tokenizers-datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Faster debug and development with tiny models, tokenizers and datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/nccl-performance-debug.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NCCL: Debug and Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/pytorch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debugging PyTorch programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Debug Tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/torch-distributed-hanging-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diagnosing Hangings and Deadlocks in Multi-Node Multi-GPU Python Programs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/debug/underflow_overflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Underflow and Overflow Detection</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#model-parallelism" id="toc-model-parallelism" class="nav-link active" data-scroll-target="#model-parallelism">Model Parallelism</a>
+  <ul class="collapse">
+  <li><a href="#parallelism-overview" id="toc-parallelism-overview" class="nav-link" data-scroll-target="#parallelism-overview">Parallelism overview</a></li>
+  <li><a href="#scalability-concepts" id="toc-scalability-concepts" class="nav-link" data-scroll-target="#scalability-concepts">Scalability concepts</a></li>
+  <li><a href="#data-parallelism" id="toc-data-parallelism" class="nav-link" data-scroll-target="#data-parallelism">Data Parallelism</a>
+  <ul class="collapse">
+  <li><a href="#ddp" id="toc-ddp" class="nav-link" data-scroll-target="#ddp">DDP</a></li>
+  <li><a href="#zero-data-parallelism" id="toc-zero-data-parallelism" class="nav-link" data-scroll-target="#zero-data-parallelism">ZeRO Data Parallelism</a></li>
+  </ul></li>
+  <li><a href="#pipeline-parallelism-methods" id="toc-pipeline-parallelism-methods" class="nav-link" data-scroll-target="#pipeline-parallelism-methods">Pipeline Parallelism methods</a>
+  <ul class="collapse">
+  <li><a href="#naive-model-parallelism-vertical" id="toc-naive-model-parallelism-vertical" class="nav-link" data-scroll-target="#naive-model-parallelism-vertical">Naive Model Parallelism (Vertical)</a></li>
+  <li><a href="#pipeline-parallelism" id="toc-pipeline-parallelism" class="nav-link" data-scroll-target="#pipeline-parallelism">Pipeline Parallelism</a></li>
+  </ul></li>
+  <li><a href="#tensor-parallelism" id="toc-tensor-parallelism" class="nav-link" data-scroll-target="#tensor-parallelism">Tensor Parallelism</a></li>
+  <li><a href="#dppp" id="toc-dppp" class="nav-link" data-scroll-target="#dppp">DP+PP</a></li>
+  <li><a href="#dppptp" id="toc-dppptp" class="nav-link" data-scroll-target="#dppptp">DP+PP+TP</a></li>
+  <li><a href="#zero-dppptp" id="toc-zero-dppptp" class="nav-link" data-scroll-target="#zero-dppptp">ZeRO DP+PP+TP</a></li>
+  <li><a href="#sequence-parallelism" id="toc-sequence-parallelism" class="nav-link" data-scroll-target="#sequence-parallelism">Sequence Parallelism</a>
+  <ul class="collapse">
+  <li><a href="#deepspeed-ulysses-sp" id="toc-deepspeed-ulysses-sp" class="nav-link" data-scroll-target="#deepspeed-ulysses-sp">Deepspeed-Ulysses SP</a></li>
+  <li><a href="#colossal-ais-sp" id="toc-colossal-ais-sp" class="nav-link" data-scroll-target="#colossal-ais-sp">Colossal-AI’s SP</a></li>
+  <li><a href="#megatron-lms-sp" id="toc-megatron-lms-sp" class="nav-link" data-scroll-target="#megatron-lms-sp">Megatron-LM’s SP</a></li>
+  </ul></li>
+  <li><a href="#flexflow" id="toc-flexflow" class="nav-link" data-scroll-target="#flexflow">FlexFlow</a></li>
+  <li><a href="#inter-node-speed-requirements-to-use-zero" id="toc-inter-node-speed-requirements-to-use-zero" class="nav-link" data-scroll-target="#inter-node-speed-requirements-to-use-zero">Inter-node speed requirements to use ZeRO</a></li>
+  <li><a href="#which-strategy-to-use-when" id="toc-which-strategy-to-use-when" class="nav-link" data-scroll-target="#which-strategy-to-use-when">Which Strategy To Use When</a></li>
+  <li><a href="#contributors" id="toc-contributors" class="nav-link" data-scroll-target="#contributors">Contributors</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/training/model-parallelism/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd-old/training/model-parallelism/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/training/model-parallelism/index.qmd"><i class="bi"></i></button></div></div>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading"></div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 20, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="model-parallelism" class="level1">
+<h1>Model Parallelism</h1>
+<section id="parallelism-overview" class="level2">
+<h2 class="anchored" data-anchor-id="parallelism-overview">Parallelism overview</h2>
+<p>In the modern machine learning the various approaches to parallelism are used to:</p>
+<ol type="1">
+<li>Overcome GPU memory limitations. Examples:
+<ul>
+<li>fit very large models - e.g., t5-11b is 45GB in just model params</li>
+<li>fit very long sequences - e.g.,</li>
+</ul></li>
+<li>significantly speed up training - finish training that would take a year in hours</li>
+</ol>
+<p>We will first discuss in depth various 1D parallelism techniques and their pros and cons and then look at how they can be combined into 2D and 3D parallelism to enable an even faster training and to support even bigger models. Various other powerful alternative approaches will be presented.</p>
+<p>While the main concepts most likely will apply to any other framework, this article is focused on PyTorch-based implementations.</p>
+<p>Two main approaches are used to enable training and inferring models that are bigger than the accelerator’s memory: 1. 3D parallelism - very network efficient, but can be very invasive into the modeling code and require a lot more work to make it work correctly 2. ZeRO parallelism - not very network efficient, but requires close to zero changes to the modeling code and very easy to make to work.</p>
+</section>
+<section id="scalability-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="scalability-concepts">Scalability concepts</h2>
+<p>The following is the brief description of the main concepts that will be described later in depth in this document.</p>
+<ol type="1">
+<li><a href="#data-parallelism">Data Parallelism</a> (DP) - the same setup is replicated multiple times, and each being fed a slice of the data. The processing is done in parallel and all setups are synchronized at the end of each training step.</li>
+<li><a href="#tensor-parallelism">TensorParallelism</a> (TP) - each tensor is split up into multiple chunks, so instead of having the whole tensor reside on a single gpu, each shard of the tensor resides on its designated gpu. During processing each shard gets processed separately and in parallel on different GPUs and the results are synced at the end of the step. This is what one may call horizontal parallelism, as the splitting happens on horizontal level.</li>
+<li><a href="#pipeline-parallelism">PipelineParallelism</a> (PP) - the model is split up vertically (layer-level) across multiple GPUs, so that only one or several layers of the model are places on a single gpu. Each gpu processes in parallel different stages of the pipeline and working on a small chunk of the batch.</li>
+<li><a href="#zero-data-parallelism">Zero Redundancy Optimizer</a> (ZeRO) - Also performs sharding of the tensors somewhat similar to TP, except the whole tensor gets reconstructed in time for a forward or backward computation, therefore the model doesn’t need to be modified. It also supports various offloading techniques to compensate for limited GPU memory. Sharded DDP is another name for the foundational ZeRO concept as used by various other implementations of ZeRO.</li>
+<li><a href="#sequence-parallelism">Sequence Parallelism</a> - training on long input sequences requires huge amounts of GPU memory. This technique splits the processing of a single sequence across multiple GPUs.</li>
+</ol>
+<p>The introduction sections of this paper is probably one of the best explanations I have found on most common parallelism techniques <a href="https://arxiv.org/abs/2211.05953">Breadth-First Pipeline Parallelism</a>.</p>
+</section>
+<section id="data-parallelism" class="level2">
+<h2 class="anchored" data-anchor-id="data-parallelism">Data Parallelism</h2>
+<section id="ddp" class="level3">
+<h3 class="anchored" data-anchor-id="ddp">DDP</h3>
+<p>Most users with just 2 GPUs already enjoy the increased training speed up thanks to <code>DataParallel</code> (DP) and <code>DistributedDataParallel</code> (DDP) that are almost trivial to use. This is a built-in feature of Pytorch.</p>
+<p>For details see <a href="https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html">DistributedDataParallel</a></p>
+</section>
+<section id="zero-data-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="zero-data-parallelism">ZeRO Data Parallelism</h3>
+<p>ZeRO-powered data parallelism (ZeRO-DP) is described on the following diagram from this <a href="https://www.microsoft.com/en-us/research/blog/zero-deepspeed-new-system-optimizations-enable-training-models-with-over-100-billion-parameters/">blog post</a> <img src="images/parallelism-zero.png" class="img-fluid" alt="DeepSpeed-Image-1"></p>
+<p>It can be difficult to wrap one’s head around it, but in reality the concept is quite simple. This is just the usual <code>DataParallel</code> (DP), except, instead of replicating the full model params, gradients and optimizer states, each GPU stores only a slice of it. And then at run-time when the full layer params are needed just for the given layer, all GPUs synchronize to give each other parts that they miss - this is it.</p>
+<p>Consider this simple model with 3 layers, where each layer has 3 params:</p>
+<pre><code>La | Lb | Lc
+---|----|---
+a0 | b0 | c0
+a1 | b1 | c1
+a2 | b2 | c2</code></pre>
+<p>Layer La has weights a0, a1 and a2.</p>
+<p>If we have 3 GPUs, the Sharded DDP (= Zero-DP) splits the model onto 3 GPUs like so:</p>
+<pre><code>GPU0:
+La | Lb | Lc
+---|----|---
+a0 | b0 | c0
+
+GPU1:
+La | Lb | Lc
+---|----|---
+a1 | b1 | c1
+
+GPU2:
+La | Lb | Lc
+---|----|---
+a2 | b2 | c2</code></pre>
+<p>In a way this is the same horizontal slicing, as tensor parallelism, if you imagine the typical DNN diagram. Vertical slicing is where one puts whole layer-groups on different GPUs. But it’s just the starting point.</p>
+<p>Now each of these GPUs will get the usual mini-batch as it works in DP:</p>
+<pre><code>x0 =&gt; GPU0
+x1 =&gt; GPU1
+x2 =&gt; GPU2</code></pre>
+<p>The inputs are unmodified - they think they are going to be processed by the normal model.</p>
+<p>First, the inputs hit the layer La.</p>
+<p>Let’s focus just on GPU0: x0 needs a0, a1, a2 params to do its forward path, but GPU0 has only a0 - it gets sent a1 from GPU1 and a2 from GPU2, bringing all pieces of the model together.</p>
+<p>In parallel, GPU1 gets mini-batch x1 and it only has a1, but needs a0 and a2 params, so it gets those from GPU0 and GPU2.</p>
+<p>Same happens to GPU2 that gets input x2. It gets a0 and a1 from GPU0 and GPU1, and with its a2 it reconstructs the full tensor.</p>
+<p>All 3 GPUs get the full tensors reconstructed and a forward happens.</p>
+<p>As soon as the calculation is done, the data that is no longer needed gets dropped - it’s only used during the calculation. The reconstruction is done efficiently via a pre-fetch.</p>
+<p>And the whole process is repeated for layer Lb, then Lc forward-wise, and then backward Lc -&gt; Lb -&gt; La.</p>
+<p>To me this sounds like an efficient group backpacking weight distribution strategy:</p>
+<ol type="1">
+<li>person A carries the tent</li>
+<li>person B carries the stove</li>
+<li>person C carries the axe</li>
+</ol>
+<p>Now each night they all share what they have with others and get from others what they don’t have, and in the morning they pack up their allocated type of gear and continue on their way. This is Sharded DDP / Zero DP.</p>
+<p>Compare this strategy to the simple one where each person has to carry their own tent, stove and axe, which would be far more inefficient. This is DataParallel (DP and DDP) in Pytorch.</p>
+<p>While reading the literature on this topic you may encounter the following synonyms: Sharded, Partitioned.</p>
+<p>If you pay close attention the way ZeRO partitions the model’s weights - it looks very similar to tensor parallelism which will be discussed later. This is because it partitions/shards each layer’s weights, unlike vertical model parallelism which is discussed next.</p>
+<p>Implementations of ZeRO-DP stages 1+2+3: - <a href="https://www.deepspeed.ai/tutorials/zero/">DeepSpeed</a> - <a href="https://pytorch.org/docs/stable/fsdp.html">PyTorch</a> (originally it was implemented in <a href="https://github.com/facebookresearch/fairscale/">FairScale</a> and later it was upstreamed into the PyTorch core)</p>
+<p>Deepspeed ZeRO Integration: - <a href="https://huggingface.co/docs/transformers/main_classes/deepspeed">HF Trainer integration</a> - <a href="https://huggingface.co/docs/accelerate/usage_guides/deepspeed">Accelerate</a> - <a href="https://lightning.ai/docs/pytorch/stable/advanced/model_parallel/deepspeed.html">PyTorch Lightning</a> - <a href="https://docs.determined.ai/latest/model-dev-guide/api-guides/apis-howto/deepspeed/_index.html">Determined.AI</a></p>
+<p>FSDP Integration: - <a href="https://huggingface.co/docs/transformers/main/en/fsdp">HF Trainer integration</a> - <a href="https://huggingface.co/docs/accelerate/main/en/usage_guides/fsdp">Accelerate</a> - <a href="https://lightning.ai/docs/pytorch/stable/advanced/model_parallel/fsdp.html">PyTorch Lightning</a></p>
+<p>Important papers:</p>
+<p>Deepspeed: - <a href="https://arxiv.org/abs/1910.02054">ZeRO: Memory Optimizations Toward Training Trillion Parameter Models</a> - <a href="https://arxiv.org/abs/2101.06840">ZeRO-Offload: Democratizing Billion-Scale Model Training</a> - <a href="https://arxiv.org/abs/2104.07857">ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning</a> - <a href="https://arxiv.org/abs/2306.10209">ZeRO++: Extremely Efficient Collective Communication for Giant Model Training</a> - <a href="https://arxiv.org/abs/2309.14509">DeepSpeed Ulysses: System Optimizations for Enabling Training of Extreme Long Sequence Transformer Models</a></p>
+<p>PyTorch: - <a href="https://arxiv.org/abs/2304.11277">PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel</a></p>
+<p>Main DeepSpeed ZeRO Resources: - <a href="https://github.com/microsoft/deepspeed">Project’s github</a> - <a href="https://www.deepspeed.ai/getting-started/">Usage docs</a> - <a href="https://deepspeed.readthedocs.io/en/latest/index.html">API docs</a> - <a href="https://www.microsoft.com/en-us/research/search/?q=deepspeed">Blog posts</a></p>
+<section id="zero-with-multiple-replicas" class="level4">
+<h4 class="anchored" data-anchor-id="zero-with-multiple-replicas">ZeRO with multiple replicas</h4>
+<p>By default ZeRO uses all GPUs to create a single model replica - that’s the model is spread out across all gpus. Which leads to various limitations such as:</p>
+<ol type="1">
+<li>the global batch size is inflexible - it’s always a function of <code>total_gpus*micro_batch_size</code> - which on large clusters could lead to a huge global batch size which might be detrimental for efficient convergence. Granted one could use a tiny micro batch size to keep the global batch size in check, but this leads to smaller matrices on each GPU which results in less efficient compute</li>
+<li>the much faster intra-node networking is not being benefited from since the slower inter-node network defines the overall speed of communications.</li>
+</ol>
+<p><a href="https://arxiv.org/abs/2306.10209">ZeRO++</a> solves the 2nd limitation by introducing Hierarchical Weight Partition for ZeRO (hpZ). In this approach instead of spreading whole model weights across all the gpus, each model replica is restricted to a single node. This increases the memory usage by the total number of nodes, but now the 2x <code>all_gather</code> calls to gather the sharded components are performed over a much faster intra-node connection. Only the <code>reduce_scatter</code> to aggregate and redistribute gradients is performed over the slower inter-node network.</p>
+<p>The first limitation doesn’t exactly get fixed since the overall global batch size remains the same, but since each replica is more efficient and because the additional memory pressure is likely to limit the possible micro batch size on each gpu, this overall should improve the throughput of the system.</p>
+<p>PyTorch FSDP has this feature implemented in <a href="https://pytorch.org/docs/stable/fsdp.html">shardingStrategy.HYBRID_SHARD</a></p>
+<p>Papers:</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2306.10209">ZeRO++: Extremely Efficient Collective Communication for Giant Model Training</a></li>
+<li><a href="https://arxiv.org/abs/2304.11277">PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel</a></li>
+</ul>
+</section>
+<section id="zero-variations" class="level4">
+<h4 class="anchored" data-anchor-id="zero-variations">ZeRO variations</h4>
+<p>Published papers that propose modifications to the ZeRO protocol:</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2205.00119">MiCS: Near-linear Scaling for Training Gigantic Model on Public Cloud</a> (2022)</li>
+<li><a href="https://arxiv.org/abs/2311.00257">AMSP: Super-Scaling LLM Training via Advanced Model States Partitioning</a> (2023)</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="pipeline-parallelism-methods" class="level2">
+<h2 class="anchored" data-anchor-id="pipeline-parallelism-methods">Pipeline Parallelism methods</h2>
+<section id="naive-model-parallelism-vertical" class="level3">
+<h3 class="anchored" data-anchor-id="naive-model-parallelism-vertical">Naive Model Parallelism (Vertical)</h3>
+<p>Naive Model Parallelism (MP) is where one spreads groups of model layers across multiple GPUs. The mechanism is relatively simple - switch the desired layers <code>.to()</code> the desired devices and now whenever the data goes in and out those layers switch the data to the same device as the layer and leave the rest unmodified.</p>
+<p>We refer to it as Vertical MP, because if you remember how most models are drawn, we slice the layers vertically. For example, if the following diagram shows an 8-layer model:</p>
+<pre><code>===================  ===================
+|  0 | 1 | 2 | 3  |  |  4 | 5 | 6 | 7  |
+===================  ===================
+        gpu0                 gpu1</code></pre>
+<p>we just sliced it in 2 vertically, placing layers 0-3 onto GPU0 and 4-7 to GPU1.</p>
+<p>Now while data travels from layer 0 to 1, 1 to 2 and 2 to 3 this is just the normal model. But when data needs to pass from layer 3 to layer 4 it needs to travel from GPU0 to GPU1 which introduces a communication overhead. If the participating GPUs are on the same compute node (e.g.&nbsp;same physical machine) this copying is pretty fast, but if the GPUs are located on different compute nodes (e.g.&nbsp;multiple machines) the communication overhead could be significantly larger.</p>
+<p>Then layers 4 to 5 to 6 to 7 are as a normal model would have and when the 7th layer completes we often need to send the data back to layer 0 where the labels are (or alternatively send the labels to the last layer). Now the loss can be computed and the optimizer can do its work.</p>
+<p>Problems: - the main deficiency and why this one is called “naive” MP, is that all but one GPU is idle at any given moment. So if 4 GPUs are used, it’s almost identical to quadrupling the amount of memory of a single GPU, and ignoring the rest of the hardware. Plus there is the overhead of copying the data between devices. So 4x 6GB cards will be able to accommodate the same size as 1x 24GB card using naive MP, except the latter will complete the training faster, since it doesn’t have the data copying overhead. But, say, if you have 40GB cards and need to fit a 45GB model you can with 4x 40GB cards (but barely because of the gradient and optimizer states) - shared embeddings may need to get copied back and forth between GPUs.</p>
+</section>
+<section id="pipeline-parallelism" class="level3">
+<h3 class="anchored" data-anchor-id="pipeline-parallelism">Pipeline Parallelism</h3>
+<p>Pipeline Parallelism (PP) is almost identical to a naive MP, but it solves the GPU idling problem, by chunking the incoming batch into micro-batches and artificially creating a pipeline, which allows different GPUs to concurrently participate in the computation process.</p>
+<p>The following illustration from the <a href="https://ai.googleblog.com/2019/03/introducing-gpipe-open-source-library.html">GPipe paper</a> shows the naive MP on the top, and PP on the bottom:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/parallelism-gpipe-bubble.png" class="img-fluid figure-img"></p>
+<figcaption>mp-pp</figcaption>
+</figure>
+</div>
+<p>It’s easy to see from the bottom diagram how PP has less dead zones, where GPUs are idle. The idle parts are referred to as the “bubble”.</p>
+<p>Both parts of the diagram show a parallelism that is of degree 4. That is 4 GPUs are participating in the pipeline. So there is the forward path of 4 pipe stages F0, F1, F2 and F3 and then the return reverse order backward path of B3, B2, B1 and B0.</p>
+<p>PP introduces a new hyper-parameter to tune and it’s <code>chunks</code> which defines how many chunks of data are sent in a sequence through the same pipe stage. For example, in the bottom diagram you can see that <code>chunks=4</code>. GPU0 performs the same forward path on chunk 0, 1, 2 and 3 (F0,0, F0,1, F0,2, F0,3) and then it waits for other GPUs to do their work and only when their work is starting to be complete, GPU0 starts to work again doing the backward path for chunks 3, 2, 1 and 0 (B0,3, B0,2, B0,1, B0,0).</p>
+<p>Note that conceptually this is the same concept as gradient accumulation steps (GAS). Pytorch uses <code>chunks</code>, whereas DeepSpeed refers to the same hyper-parameter as GAS.</p>
+<p>Because of the chunks, PP introduces the concept of micro-batches (MBS). DP splits the global data batch size into mini-batches, so if you have a DP degree of 4, a global batch size of 1024 gets split up into 4 mini-batches of 256 each (1024/4). And if the number of <code>chunks</code> (or GAS) is 32 we end up with a micro-batch size of 8 (256/32). Each Pipeline stage works with a single micro-batch at a time.</p>
+<p>To calculate the global batch size of the DP + PP setup we then do: <code>mbs*chunks*dp_degree</code> (<code>8*32*4=1024</code>).</p>
+<p>Let’s go back to the diagram.</p>
+<p>With <code>chunks=1</code> you end up with the naive MP, which is very inefficient. With a very large <code>chunks</code> value you end up with tiny micro-batch sizes which could be not every efficient either. So one has to experiment to find the value that leads to the highest efficient utilization of the gpus.</p>
+<p>While the diagram shows that there is a bubble of “dead” time that can’t be parallelized because the last <code>forward</code> stage has to wait for <code>backward</code> to complete the pipeline, the purpose of finding the best value for <code>chunks</code> is to enable a high concurrent GPU utilization across all participating GPUs which translates to minimizing the size of the bubble.</p>
+<p>The choice of the schedule is critical to the efficient performance, with the most common schedules being in the order of invention:</p>
+<ul>
+<li>sequential <a href="https://arxiv.org/abs/1811.06965">Gpipe: Efficient training of giant neural networks using pipeline parallelism</a></li>
+<li>interleaved 1F1B <a href="https://arxiv.org/abs/1806.03377">Pipedream: Fast and efficient pipeline parallel dnn training</a></li>
+<li>looped, depth-first <a href="https://arxiv.org/abs/2104.04473">Efficient large-scale language model training on gpu clusters using Megatron-LM</a></li>
+<li>breadth-first <a href="https://arxiv.org/abs/2211.05953">Breadth-First Pipeline Parallelism</a></li>
+</ul>
+<p>Here is for example an interleaved pipeline:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/parallelism-sagemaker-interleaved-pipeline.png" class="img-fluid figure-img"></p>
+<figcaption>interleaved-pipeline-execution</figcaption>
+</figure>
+</div>
+<p>Here the bubble (idle time) is further minimized by prioritizing backward passes.</p>
+<p>It’s used by DeepSpeed, Varuna and SageMaker to name a few.</p>
+<p>Varuna further tries to improve the schedule by using simulations to discover the most efficient scheduling.</p>
+<p>There are 2 groups of PP solutions - the traditional Pipeline API and the more modern solutions that make things much easier for the end user by helping to partially or fully automate the process:</p>
+<ol type="1">
+<li>Traditional Pipeline API solutions:</li>
+</ol>
+<ul>
+<li>Megatron-LM</li>
+<li>DeepSpeed</li>
+<li>PyTorch</li>
+</ul>
+<ol start="2" type="1">
+<li>Modern solutions:</li>
+</ol>
+<ul>
+<li>PiPPy</li>
+<li>Varuna</li>
+<li>Sagemaker</li>
+</ul>
+<p>Problems with traditional Pipeline API solutions: - have to modify the model quite heavily, because Pipeline requires one to rewrite the normal flow of modules into a <code>nn.Sequential</code> sequence of the same, which may require changes to the design of the model. - currently the Pipeline API is very restricted. If you had a bunch of python variables being passed in the very first stage of the Pipeline, you will have to find a way around it. Currently, the pipeline interface requires either a single Tensor or a tuple of Tensors as the only input and output. These tensors must have a batch size as the very first dimension, since pipeline is going to chunk the mini batch into micro-batches. Possible improvements are being discussed here https://github.com/pytorch/pytorch/pull/50693 - conditional control flow at the level of pipe stages is not possible - e.g., Encoder-Decoder models like T5 require special workarounds to handle a conditional encoder stage. - have to arrange each layer so that the output of one model becomes an input to the other model.</p>
+<p>I’m yet to try to experiment with Varuna and SageMaker but their papers report that they have overcome the list of problems mentioned above and that they require much smaller changes to the user’s model.</p>
+<p>Implementations: - <a href="https://pytorch.org/docs/stable/pipeline.html">Pytorch</a> (initial support in pytorch-1.8, and progressively getting improved in 1.9 and more so in 1.10). Some <a href="https://github.com/pytorch/pytorch/blob/master/benchmarks/distributed/pipeline/pipe.py">examples</a> - <a href="https://fairscale.readthedocs.io/en/latest/tutorials/pipe.html">FairScale</a> - <a href="https://www.deepspeed.ai/tutorials/pipeline/">DeepSpeed</a> - <a href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM</a> has an internal implementation - no API. - <a href="https://github.com/microsoft/varuna">Varuna</a> - <a href="https://arxiv.org/abs/2111.05972">SageMaker</a> - this is a proprietary solution that can only be used on AWS. - <a href="https://github.com/eleutherAI/Oslo">OSLO</a> - this is implemented based on the Hugging Face Transformers. - <a href="https://github.com/pytorch/pippy">PiPPy: Pipeline Parallelism for PyTorch</a> - automatic PP via <code>torch.fx</code> - <a href="https://github.com/huggingface/nanotron">nanotron</a></p>
+</section>
+</section>
+<section id="tensor-parallelism" class="level2">
+<h2 class="anchored" data-anchor-id="tensor-parallelism">Tensor Parallelism</h2>
+<p>In Tensor Parallelism each GPU processes only a slice of a tensor and only aggregates the full tensor for operations that require the whole thing.</p>
+<p>In this section we use concepts and diagrams from the <a href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM</a> paper: <a href="https://arxiv.org/abs/2104.04473">Efficient Large-Scale Language Model Training on GPU Clusters</a>.</p>
+<p>The main building block of any transformer is a fully connected <code>nn.Linear</code> followed by a nonlinear activation <code>GeLU</code>.</p>
+<p>Following the Megatron’s paper notation, we can write the dot-product part of it as <code>Y = GeLU(XA)</code>, where <code>X</code> and <code>Y</code> are the input and output vectors, and <code>A</code> is the weight matrix.</p>
+<p>If we look at the computation in matrix form, it’s easy to see how the matrix multiplication can be split between multiple GPUs: <img src="images/parallelism-tp-parallel_gemm.png" class="img-fluid" alt="Parallel GEMM"></p>
+<p>If we split the weight matrix <code>A</code> column-wise across <code>N</code> GPUs and perform matrix multiplications <code>XA_1</code> through <code>XA_n</code> in parallel, then we will end up with <code>N</code> output vectors <code>Y_1, Y_2, ..., Y_n</code> which can be fed into <code>GeLU</code> independently: <img src="images/parallelism-tp-independent-gelu.png" class="img-fluid" alt="independent GeLU"></p>
+<p>Using this principle, we can update an MLP of arbitrary depth, without the need for any synchronization between GPUs until the very end, where we need to reconstruct the output vector from shards. The Megatron-LM paper authors provide a helpful illustration for that: <img src="images/parallelism-tp-parallel_shard_processing.png" class="img-fluid" alt="parallel shard processing"></p>
+<p>Parallelizing the multi-headed attention layers is even simpler, since they are already inherently parallel, due to having multiple independent heads! <img src="images/parallelism-tp-parallel_self_attention.png" class="img-fluid" alt="parallel self-attention"></p>
+<p>Important: TP requires very fast network, and therefore since typically intra-node networks are much faster than inter-node networks it’s not advisable to do TP across nodes. Practically, if a node has 4 GPUs, the highest TP degree is therefore 4. If you need a TP degree of 8, you need to use nodes that have at least 8 GPUs.</p>
+<p>Important: TP degree shouldn’t span across nodes. For example if the node has 8 gpus, TP degree should be no more than 8.</p>
+<p>TP can combined with other parallelization methods.</p>
+<p>Alternative names: - DeepSpeed calls it <a href="https://www.deepspeed.ai/tutorials/large-models-w-deepspeed/">tensor slicing</a></p>
+<p>Implementations: - <a href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM</a> has an internal implementation, as it’s very model-specific - <a href="https://pytorch.org/docs/stable/distributed.tensor.parallel.html">PyTorch</a> - <a href="https://arxiv.org/abs/2111.05972">SageMaker</a> - this is a proprietary solution that can only be used on AWS. - <a href="https://github.com/eleutherAI/Oslo">OSLO</a> has the tensor parallelism implementation based on the Transformers. - <a href="https://github.com/huggingface/nanotron">nanotron</a> - <a href="https://github.com/tunib-ai/parallelformers">parallelformers</a> (only inference at the moment)</p>
+</section>
+<section id="dppp" class="level2">
+<h2 class="anchored" data-anchor-id="dppp">DP+PP</h2>
+<p>The following diagram from the DeepSpeed <a href="https://www.deepspeed.ai/tutorials/pipeline/">pipeline tutorial</a> demonstrates how one combines DP with PP.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/parallelism-zero-dp-pp.png" class="img-fluid figure-img"></p>
+<figcaption>dp-pp-2d</figcaption>
+</figure>
+</div>
+<p>Here it’s important to see how DP rank 0 doesn’t see GPU2 and DP rank 1 doesn’t see GPU3. To DP there is just GPUs 0 and 1 where it feeds data as if there were just 2 GPUs. GPU0 “secretly” offloads some of its load to GPU2 using PP. And GPU1 does the same by enlisting GPU3 to its aid.</p>
+<p>Since each dimension requires at least 2 GPUs, here you’d need at least 4 GPUs.</p>
+<p>Implementations: - <a href="https://github.com/microsoft/DeepSpeed">DeepSpeed</a> - <a href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM</a> - <a href="https://github.com/microsoft/varuna">Varuna</a> - <a href="https://arxiv.org/abs/2111.05972">SageMaker</a> - <a href="https://github.com/eleutherAI/Oslo">OSLO</a> - <a href="https://github.com/huggingface/nanotron">nanotron</a></p>
+</section>
+<section id="dppptp" class="level2">
+<h2 class="anchored" data-anchor-id="dppptp">DP+PP+TP</h2>
+<p>To get an even more efficient training a 3D parallelism is used where PP is combined with TP and DP. This can be seen in the following diagram.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/parallelism-deepspeed-3d.png" class="img-fluid figure-img"></p>
+<figcaption>dp-pp-tp-3d</figcaption>
+</figure>
+</div>
+<p>This diagram is from a blog post <a href="https://www.microsoft.com/en-us/research/blog/deepspeed-extreme-scale-model-training-for-everyone/">3D parallelism: Scaling to trillion-parameter models</a>, which is a good read as well.</p>
+<p>Since each dimension requires at least 2 GPUs, here you’d need at least 8 GPUs.</p>
+<p>Implementations: - <a href="https://github.com/microsoft/DeepSpeed">DeepSpeed</a> - DeepSpeed also includes an even more efficient DP, which they call ZeRO-DP. - <a href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM</a> - <a href="https://github.com/microsoft/varuna">Varuna</a> - <a href="https://arxiv.org/abs/2111.05972">SageMaker</a> - <a href="https://github.com/eleutherAI/Oslo">OSLO</a> - <a href="https://github.com/huggingface/nanotron">nanotron</a></p>
+</section>
+<section id="zero-dppptp" class="level2">
+<h2 class="anchored" data-anchor-id="zero-dppptp">ZeRO DP+PP+TP</h2>
+<p>One of the main features of DeepSpeed is ZeRO, which is a super-scalable extension of DP. It has already been discussed in <a href="#zero-data-parallelism">ZeRO Data Parallelism</a>. Normally it’s a standalone feature that doesn’t require PP or TP. But it can be combined with PP and TP.</p>
+<p>When ZeRO-DP is combined with PP (and optionally TP) it typically enables only ZeRO stage 1 (optimizer sharding).</p>
+<p>While it’s theoretically possible to use ZeRO stage 2 (gradient sharding) with Pipeline Parallelism, it will have bad performance impacts. There would need to be an additional reduce-scatter collective for every micro-batch to aggregate the gradients before sharding, which adds a potentially significant communication overhead. By nature of Pipeline Parallelism, small micro-batches are used and instead the focus is on trying to balance arithmetic intensity (micro-batch size) with minimizing the Pipeline bubble (number of micro-batches). Therefore those communication costs are going to hurt.</p>
+<p>In addition, there are already fewer layers than normal due to PP and so the memory savings won’t be huge. PP already reduces gradient size by <code>1/PP</code>, and so gradient sharding savings on top of that are less significant than pure DP.</p>
+<p>ZeRO stage 3 is not a good choice either for the same reason - more inter-node communications required.</p>
+<p>And since we have ZeRO, the other benefit is ZeRO-Offload. Since this is stage 1 optimizer states can be offloaded to CPU.</p>
+<p>Implementations: - <a href="https://github.com/microsoft/Megatron-DeepSpeed">Megatron-DeepSpeed</a> and <a href="https://github.com/bigscience-workshop/Megatron-DeepSpeed">Megatron-Deepspeed from BigScience</a>, which is the fork of the former repo. - <a href="https://github.com/eleutherAI/Oslo">OSLO</a></p>
+<p>Important papers:</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2201.11990">Using DeepSpeed and Megatron to Train Megatron-Turing NLG 530B, A Large-Scale Generative Language Model</a></li>
+</ul>
+</section>
+<section id="sequence-parallelism" class="level2">
+<h2 class="anchored" data-anchor-id="sequence-parallelism">Sequence Parallelism</h2>
+<p>ML tasks, such as DNA sequencing, may require training with very long sequence lengths (e.g.&nbsp;256K), and even normal LLMs could be trained on sequences of 10k and longer.</p>
+<p>Self-Attention, which is the key component of Transformers, suffers from quadratic memory requirements with respect to the sequence length, therefore when sequence length gets to a certain length, even a batch size of 1 might not be able to fit onto a single GPU and require additional partitioning along the sequence dimension. And once this is done, the sequence can be of any length.</p>
+<p>As this type of parallelism is orthogonal to the other parallelization types described in this document, it can be combined with any of them, leading to 4D, ZeRO-DP+SP and other combinations.</p>
+<section id="deepspeed-ulysses-sp" class="level3">
+<h3 class="anchored" data-anchor-id="deepspeed-ulysses-sp">Deepspeed-Ulysses SP</h3>
+<p>Paper: <a href="https://arxiv.org/abs/2309.14509">DeepSpeed Ulysses: System Optimizations for Enabling Training of Extreme Long Sequence Transformer Models</a></p>
+<p>In this implementation 2 elements are sharded: 1. The multiple-head attention weights are split across the participating GPUs so that each GPU has a few sub-heads only. This is done when the model is created/loaded. This is somewhat similar to <a href="#tensor-parallelism">Tensor Parallelism</a>. 2. During training each input sequence is partitioned into chunks and each chunk is sent to one of the GPUs, which reminds us of ZeRO-3 sharding, except instead of weights the inputs are sharded.</p>
+<p>During compute each sequence chunk is projected onto QKV and then gathered to the full sequence QKV on each device, computed on each device only for the subheads it owns and then gathered again into the full attention output for the MLP block.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/deepspeed-ulysses.png" class="img-fluid figure-img"></p>
+<figcaption>deepspeed-ulysses sp</figcaption>
+</figure>
+</div>
+<p><a href="https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-ulysses">source</a></p>
+<p>On the diagram: 1. Input sequences N are partitioned across P available devices. 2. Each local N/P partition of the input sequence is projected into queries (Q), keys (K) and values (V) embeddings. 3. Next, local QKV embeddings are gathered into global QKV through highly optimized all-to-all collectives between participating compute devices. 4. Then the attention computation per head is performed:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/deepspeed-ulysses-math.png" class="img-fluid figure-img"></p>
+<figcaption>math</figcaption>
+</figure>
+</div>
+<ol start="5" type="1">
+<li>At the end another all-to-all collective transforms output context tensor of attention computation to sequence (N/P) parallel for subsequent operators (MLP MatMul, layer norm, etc.) in the remaining modules of transformer layer block.</li>
+</ol>
+<p>Example: Let’s consider seqlen=8K, num_heads=128 and a single node of num_gpus=8</p>
+<ol type="1">
+<li>each GPU gets a 1K-long chunk of the original sequence (<code>8K/8</code>)</li>
+<li>each GPU gets assigned 16 sub-heads (<code>128/8</code>)</li>
+<li><ol type="a">
+<li>on gpu0 before <code>forward</code> the original sequence is gathered back into 8K tokens</li>
+<li>the attention computation is done on the first 16 sub-heads the same logic is performed on the remaining 7 GPUs, each computing 8k attention over its 16 sub-heads</li>
+</ol></li>
+</ol>
+<p>You can read the specifics of the very efficient comms <a href="https://github.com/microsoft/DeepSpeed/tree/master/blogs/deepspeed-ulysses#significant-communication-volume-reduction">here</a>.</p>
+<p>DeepSpeed-Ulysses keeps communication volume consistent by increasing GPUs proportional to message size or sequence length.</p>
+</section>
+<section id="colossal-ais-sp" class="level3">
+<h3 class="anchored" data-anchor-id="colossal-ais-sp">Colossal-AI’s SP</h3>
+<p>Paper: <a href="https://arxiv.org/abs/2105.13120">Sequence parallelism: Long sequence training from system perspective</a></p>
+<p>Colossal-AI’s SP implementation uses ring self-attention, a ring-like communication collective in which query projections are local whereas key and values projections are transmitted in a ring-style to compute global attention, resulting in communication complexity linear in message size, M.</p>
+</section>
+<section id="megatron-lms-sp" class="level3">
+<h3 class="anchored" data-anchor-id="megatron-lms-sp">Megatron-LM’s SP</h3>
+<p>Paper: <a href="https://arxiv.org/abs/2205.05198">Reducing Activation Recomputation in Large Transformer Models</a></p>
+<p>Megatron-LM’s SP is tightly integrated with its TP. Megatron-LM partitions sequence along sequence dimensions and applies allgather and reduce scatter collective to aggregate QKV projections for attention computation. Its communication volume increases linearly with message size (M) regardless of number of compute devices.</p>
+<p>Implementations: - <a href="https://github.com/NVIDIA/Megatron-LM">Megatron-LM</a> - <a href="https://github.com/microsoft/DeepSpeed">Deepspeed</a> - <a href="https://colossalai.org/">Colossal-AI</a></p>
+</section>
+</section>
+<section id="flexflow" class="level2">
+<h2 class="anchored" data-anchor-id="flexflow">FlexFlow</h2>
+<p><a href="https://github.com/flexflow/FlexFlow">FlexFlow</a> also solves the parallelization problem in a slightly different approach.</p>
+<p>Paper: <a href="https://arxiv.org/abs/1807.05358">“Beyond Data and Model Parallelism for Deep Neural Networks” by Zhihao Jia, Matei Zaharia, Alex Aiken</a></p>
+<p>It performs a sort of 4D Parallelism over Sample-Operator-Attribute-Parameter.</p>
+<ol type="1">
+<li>Sample = Data Parallelism (sample-wise parallel)</li>
+<li>Operator = Parallelize a single operation into several sub-operations</li>
+<li>Attribute = Data Parallelism (length-wise parallel)</li>
+<li>Parameter = Model Parallelism (regardless of dimension - horizontal or vertical)</li>
+</ol>
+<p>Examples: * Sample</p>
+<p>Let’s take 10 batches of sequence length 512. If we parallelize them by sample dimension into 2 devices, we get 10 x 512 which becomes be 5 x 2 x 512.</p>
+<ul>
+<li>Operator</li>
+</ul>
+<p>If we perform layer normalization, we compute std first and mean second, and then we can normalize data. Operator parallelism allows computing std and mean in parallel. So if we parallelize them by operator dimension into 2 devices (cuda:0, cuda:1), first we copy input data into both devices, and cuda:0 computes std, cuda:1 computes mean at the same time.</p>
+<ul>
+<li>Attribute</li>
+</ul>
+<p>We have 10 batches of 512 length. If we parallelize them by attribute dimension into 2 devices, 10 x 512 will be 10 x 2 x 256.</p>
+<ul>
+<li>Parameter</li>
+</ul>
+<p>It is similar with tensor model parallelism or naive layer-wise model parallelism.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/parallelism-flexflow.jpeg" class="img-fluid figure-img"></p>
+<figcaption>flex-flow-soap</figcaption>
+</figure>
+</div>
+<p>The significance of this framework is that it takes resources like (1) GPU/TPU/CPU vs.&nbsp;(2) RAM/DRAM vs.&nbsp;(3) fast-intra-connect/slow-inter-connect and it automatically optimizes all these algorithmically deciding which parallelisation to use where.</p>
+<p>One very important aspect is that FlexFlow is designed for optimizing DNN parallelizations for models with static and fixed workloads, since models with dynamic behavior may prefer different parallelization strategies across iterations.</p>
+<p>So the promise is very attractive - it runs a 30min simulation on the cluster of choice and it comes up with the best strategy to utilise this specific environment. If you add/remove/replace any parts it’ll run and re-optimize the plan for that. And then you can train. A different setup will have its own custom optimization.</p>
+</section>
+<section id="inter-node-speed-requirements-to-use-zero" class="level2">
+<h2 class="anchored" data-anchor-id="inter-node-speed-requirements-to-use-zero">Inter-node speed requirements to use ZeRO</h2>
+<p>The ZeRO scalability protocol, be it Deepspeed ZeRO or PyTorch FSDP, requires a lot more inter-node traffic than TP+PP+DP solutions, and sometimes it can’t take advantage of the faster intra-node connectivity, and therefore if your inter-node network is slow your expensive GPUs might be massively bottlenecked by the comms.</p>
+<p>The ZeRO protocol partially overlaps comms with compute, so ideally you want to get close to <code>comms_time &lt;= compute_time</code>. The overlap is not perfect, so there will be always some network bottleneck, but we want to make sure that <code>comms_time</code> is not much larger than <code>compute_time</code>.</p>
+<p>In ZeRO-3, we have <code>all_gather</code> on weights in <code>forward</code>, then <code>all_gather</code> on weights in <code>backward</code>, last is <code>reduce_scatter</code> on gradients in backward. In total there are 3 global collective calls each sending a model size multiplied by how many bytes per parameter are used. e.g.&nbsp;a 10B param model in bf16 under ZeRO-3 will need to send 10<em>2</em>3=60GB of data.</p>
+<p>In comparison <a href="https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html">DistributedDataParallel</a> (DDP) uses a single <code>all_reduce</code> call, but which requires 2x data transmission, and so a 10B param model in bf16 under DDP will need to send 10<em>2</em>2=40GB of data.</p>
+<p>ZeRO-1 which only shards the optimiser states, like DDP, will too need to transmit 40GB of data (one <code>all_gather</code> and one <code>reduce_scatter</code>.)</p>
+<p>Here is how to calculate time in seconds for communication and compute:</p>
+<ul>
+<li><code>comms_time = n_transmissions * n_bytes * model_size_in_B / inter-node-throughput_in_GBps</code></li>
+<li><code>compute_time = n_passes * n_bytes * model_size_in_B * seqlen * global_batch_size / (total_gpus * 1e3 * tflops_wo_comms)</code></li>
+</ul>
+<p>The compute time formula is a rough estimate which works for any Transformer-block based model. It ignores any small computations and includes only the massive <code>matmul</code>s.</p>
+<p>As an experiment let’s use the data points from <a href="https://huggingface.co/HuggingFaceM4/idefics-80b/">IDEFICS-80B</a> training.</p>
+<p>When we trained IDEFICS-80B with a 340GBs EFA we were getting only 90TFLOPs w/ Deepspeed ZeRO-3 on A100s as compared to 150+TFLOPs one was getting with Megatron’s TP+PP+DP. and moreover a big chunk of the model was frozen as were building a new models based on one language and one vision model. So our multiplier was less than 3. On the other hand we were using activation recomputation to save memory, so this is an additional transmission of all model weights and to top it all off since nccl wasn’t supporting proper half-precision reduction we used fp32 for gradient reductions, so really our multiplier wasn’t 3 but more like 4.5.</p>
+<p>Values used for IDEFICS-80B training: - <code>model_size_in_B</code> = <code>80</code> - <code>n_bytes</code> = <code>2</code> in case of bf16 which is 2 bytes - <code>n_transmissions</code> = <code>3</code> in the case of ZeRO-3/FSDP (1x reduce_scatter + 2x all_gather (fwd + bwd)) and 2 in case of ZeRO-1 (1x reduce_scatter + 1x all_gather), - additionally, in the case of IDEFICS-80B we decided to reduce grads in fp32 to minimize NCCL accumulation loss, so we actually had <code>n_transmissions*n_bytes=3*2+2=4*2</code> for the additional 2 bytes but since half the model was frozen only about half of gradients were sent, so we still have the multiplier of 3. - <code>n_passes</code> = <code>4</code> with activation recomputation, or <code>3</code> w/o it. The model has to do only 1x compute per <code>forward</code> and 2x per <code>backward</code> (since the grads are calculated twice - once wrt inputs and once wrt weights). And with activation recomputation one more <code>forward</code> is done. - <code>total_gpus</code> = <code>512</code> - <code>global_batch_size</code> = <code>3584</code> - <code>seqlen</code> = <code>1024</code> - <code>inter-node-throughput_in_GBps</code> = 42.5 (340Gbps) (AWS EFA v1) -<code>tflops_wo_comms</code> is the tflops w/o the communication overhead. Not theoretical peak as that is unachievable, but perhaps 75% in the case of A100@BF16 - so <code>312*0.75=234</code> TFLOPS</p>
+<p>We derived 340Gbps inter-node network throughput using <a href="../../network/benchmarks/all_reduce_bench.py">all_reduce_bench.py</a> which by default uses a payload of 4GB. In the case of IDEFICS-80B we had 80 layers, so approximately each layer was 1B params large. Which means that each layer was sending 2GB of data for bf16 tensors and 4GB of data with fp32 tensors, which matches the network benchmark. If you were to have a much smaller layer size, I’d recommend adapting the benchmark to that size. For example, if your layer size was only 100M param large, then your payload would be 0.2GB for bf16 tensors. As this is an order of magnitude smaller, the network is likely to give you a lower bandwidth, and you should use that in your calculations.</p>
+<p>footnote: if parts of your model are frozen, then there will be less data sent in syncing the gradients. in IDEFICS we had more than half of the model frozen, so when grads were reduced we only had about half the traffic.</p>
+<p>Which gives us:</p>
+<ul>
+<li>comms = <code>3 * 2 * 80 / 42.5</code> = 11 sec</li>
+<li>compute = <code>4 * 2 * 80 * 1024 * 3584 / (512 * 1e3 * 250)</code> = 18 sec</li>
+</ul>
+<p>If we check against our IDEFICS-80B logs, which had each iteration at about 49 seconds.</p>
+<p>So the good news is that the math checks out as comms + compute are in the ballpark of the measured time, except</p>
+<p>We can do another sanity check by feeding the compute formulae 90 TFLOPS that we logged, in which case:</p>
+<ul>
+<li>compute = <code>4 * 2 * 80 * 1024 * 3584 / (512 * 1e3 * 90)</code> = 51 sec</li>
+</ul>
+<p>and so 49 and 51 secs are pretty close. Except this tells us nothing since the logged TFLOPS were calculated using this formula, so, of course, it should match.</p>
+<p>What I’d expect in the best case is where I have used close to theoretical peak TFLOPS in the formula and received the compute estimate to be about the same as the actual compute time measured on the system. Remember that since comms are interleaved with compute, when we measure <code>forward</code>+<code>backward</code> wallclock time it includes comms in it.</p>
+<p>What’s the conclusion? I’d say more investigation is needed as clearly there are additional hidden bottlenecks here. I no longer have access to this setup to investigate, so I will repeat this exercise afresh when I train another largish model and share the updated math with you. But this workout should give you a feeling for what’s going on behind the scenes and how all these numbers work together.</p>
+<p>Also this discussion didn’t include into the math gradient accumulation steps (GAS). In the case of IDEFICS-80B it wasn’t used. If GAS&gt;1 the theoretical compute time doesn’t change, but comms time instead of <code>3*2*M/GBps</code> would become <code>GAS*3*2*M/GBps</code>. The weights gathering via <code>all_gather</code> for <code>forward</code> and <code>backward</code> would transpire as many times as there are gradient accumulation steps. In theory for grads it’d need to happen only once, but since there is no place to store intermediary grads of the gathered weight on each GPU it’ll have to be reduced GAS times as well. This is for ZeRO-2 and ZeRO-3. For ZeRO-1 GAS&gt;1 requires no additional comms.</p>
+<p>We also didn’t discuss the <code>DataLoader</code> as a potential bottleneck here, but we tested that it was under 1 sec, i.e.&nbsp;a very small overhead.</p>
+<p>Going back to comms math, we also didn’t take into an account various hardware latencies, but when dealing with a large payloads they shouldn’t add up a significant additional overhead.</p>
+<p>And now you know how long it’ll take to transmit that many GBs over the network of your system. For example, if the network were to be 5x slower than the one we used for IDEFICS-80B training, that is 8.5GBps (68Gbps) then:</p>
+<ul>
+<li>comms = <code>3 * 2 * 80 / 8.5</code> = 56 sec</li>
+</ul>
+<p>which would definitely be a huge bottleneck compared to the faster compute.</p>
+<p>If the network were to be 5x faster, that is 212GBs (1700Gbps) then:</p>
+<ul>
+<li>comms = <code>3 * 2 * 80 / 212</code> = 2 sec</li>
+</ul>
+<p>which would be insignificant comparatively to the compute time, especially if some of it is successfully overlapped with the commute.</p>
+<p>Also the Deepspeed team empirically <a href="https://github.com/microsoft/DeepSpeed/issues/2928#issuecomment-1463041491">benchmarked a 176B model</a> on 384 V100 GPUs (24 DGX-2 nodes) and found that:</p>
+<ol type="1">
+<li>With 100 Gbps IB, we only have &lt;20 TFLOPs per GPU (bad)</li>
+<li>With 200-400 Gbps IB, we achieve reasonable TFLOPs around 30-40 per GPU (ok)</li>
+<li>For 800 Gbps IB, we reach 40+ TFLOPs per GPU (excellent)</li>
+</ol>
+<p>To remind the peak TFLOPS for NVIDIA V100 at fp16 is <a href="https://www.nvidia.com/en-us/data-center/v100/">125 TFLOPS</a>.</p>
+<p>But be careful here - this benchmark is for V100s! Which is about 2-3x slower than A100, and 4-8x slower than H100 for half-precision. So the comms have to be at least 4-8x faster for H100 nodes to match the above table at half precision. We need more benchmarks with more recent hardware.</p>
+<p>footnote: the 2-3x range is because the official specs claim 3x TFLOPS increase for V100-&gt;A100, and A100-&gt;H100 each, but users benchmarking the difference report at most 2.5x improvements.</p>
+<p>They also noticed that when training at scale, the communication overhead is more pronounced with small micro-batch size per GPU. And we may not be able to increase micro-batch size since global-batch size is often fixed to achieve good model convergence rate. This is solved by the recently introduced <a href="#zero-with-multiple-replicas">ZeRO++</a>.</p>
+<p>Finally, when doing the math above you need to know the actual bandwidth you get on your setup - which changes with payload size - the larger the payload the better the bandwidth. To get this information you need to look at your <code>reduce_bucket_size</code> and <code>prefetch_bucket_size</code> settings in the Deepspeed configuration file for reduction and prefetch correspondingly. The default is 0.5B params, which is 1GB in half-precision (0.5B x 2 bytes), or 2GB (0.5B x 4 bytes) if you use fp32 precision. So in order to measure the actual throughput you need to run an <code>all_reduce</code> benchmark with that payload and see what bandwidth gets reported. Then you can feed it to the calculations above.</p>
+</section>
+<section id="which-strategy-to-use-when" class="level2">
+<h2 class="anchored" data-anchor-id="which-strategy-to-use-when">Which Strategy To Use When</h2>
+<p>Here is a very rough outline at which parallelism strategy to use when. The first on each list is typically faster.</p>
+<p><strong>⇨ Single GPU</strong></p>
+<ul>
+<li><p>Model fits onto a single GPU:</p>
+<ol type="1">
+<li>Normal use</li>
+</ol></li>
+<li><p>Model doesn’t fit onto a single GPU:</p>
+<ol type="1">
+<li>ZeRO + Offload CPU and optionally NVMe</li>
+<li>as above plus Memory Centric Tiling (see below for details) if the largest layer can’t fit into a single GPU</li>
+</ol></li>
+<li><p>Largest Layer not fitting into a single GPU:</p></li>
+</ul>
+<ol type="1">
+<li>ZeRO - Enable <a href="https://deepspeed.readthedocs.io/en/latest/zero3.html#memory-centric-tiling">Memory Centric Tiling</a> (MCT). It allows you to run arbitrarily large layers by automatically splitting them and executing them sequentially. MCT reduces the number of parameters that are live on a GPU, but it does not affect the activation memory. As this need is very rare as of this writing a manual override of <code>torch.nn.Linear</code> needs to be done by the user.</li>
+</ol>
+<p><strong>⇨ Single Node / Multi-GPU</strong></p>
+<ul>
+<li><p>Model fits onto a single GPU:</p>
+<ol type="1">
+<li>DDP - Distributed DP</li>
+<li>ZeRO - may or may not be faster depending on the situation and configuration used</li>
+</ol></li>
+<li><p>Model doesn’t fit onto a single GPU:</p>
+<ol type="1">
+<li>PP</li>
+<li>ZeRO</li>
+<li>TP</li>
+</ol>
+<p>With very fast intra-node connectivity of NVLINK or NVSwitch all three should be mostly on par, without these PP will be faster than TP or ZeRO. The degree of TP may also make a difference. Best to experiment to find the winner on your particular setup.</p>
+<p>TP is almost always used within a single node. That is TP size &lt;= gpus per node.</p></li>
+<li><p>Largest Layer not fitting into a single GPU:</p>
+<ol type="1">
+<li>If not using ZeRO - must use TP, as PP alone won’t be able to fit.</li>
+<li>With ZeRO see the same entry for “Single GPU” above</li>
+</ol></li>
+</ul>
+<p><strong>⇨ Multi-Node / Multi-GPU</strong></p>
+<ul>
+<li><p>If the model fits into a single node first try <a href="#zero-with-multiple-replicas">ZeRO with multiple replicas</a>, because then you will be doing ZeRO over the faster intra-node connectivity, and DDP over slower inter-node</p></li>
+<li><p>When you have fast inter-node connectivity:</p>
+<ol type="1">
+<li>ZeRO - as it requires close to no modifications to the model</li>
+<li>PP+TP+DP - less communications, but requires massive changes to the model</li>
+</ol></li>
+<li><p>when you have slow inter-node connectivity and still low on GPU memory:</p>
+<ol type="1">
+<li>DP+PP+TP+ZeRO-1</li>
+</ol></li>
+</ul>
+</section>
+<section id="contributors" class="level2">
+<h2 class="anchored" data-anchor-id="contributors">Contributors</h2>
+<p><a href="https://github.com/samyam">Samyam Rajbhandari</a>, <a href="https://github.com/Chillee">Horace He</a>, <a href="https://github.com/siddharth9820">Siddharth Singh</a>, <a href="https://github.com/tjruwase">Olatunji Ruwase</a>,</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bekman2024,
+  author = {Bekman, Stas and Foreman, Sam},
+  title = {ML {Engineering}},
+  date = {2024-02-20},
+  url = {https://saforem2.github.io/ml-engineering},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bekman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bekman, Stas, and Sam Foreman. 2024. <span>“ML Engineering.”</span>
+February 20, 2024. <a href="https://saforem2.github.io/ml-engineering">https://saforem2.github.io/ml-engineering</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://saforem2.github.io/ml-engineering">ML-Engineering</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>2024</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd-old/training/model-parallelism/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd-old/training/model-parallelism/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

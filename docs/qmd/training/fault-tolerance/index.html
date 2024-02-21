@@ -120,6 +120,49 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </script>
 <link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet">
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../../css/default.css">
 <link rel="stylesheet" href="../../../css/callouts.css">
@@ -371,12 +414,18 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🛜 Network</span></a>
+ <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🛜 Network</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
@@ -476,6 +525,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
           </a> 
       </div>
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/accelerator/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
@@ -627,7 +682,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process" id="toc-approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process" class="nav-link" data-scroll-target="#approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process">Approach A. Tell the program at launch time when it should start the exiting process:</a></li>
   <li><a href="#approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end" id="toc-approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end" class="nav-link" data-scroll-target="#approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end">Approach B.1. Sending a custom signal X minutes before the end</a></li>
   <li><a href="#approach-b.2.-choosing-which-process-to-send-the-signal-to" id="toc-approach-b.2.-choosing-which-process-to-send-the-signal-to" class="nav-link" data-scroll-target="#approach-b.2.-choosing-which-process-to-send-the-signal-to">Approach B.2. Choosing which process to send the signal to</a></li>
-  <li><a href="#qos-based-slurm-preemption" id="toc-qos-based-slurm-preemption" class="nav-link" data-scroll-target="#qos-based-slurm-preemption">QoS-based SLURM preemption</a></li>
   </ul></li>
   <li><a href="#contributors" id="toc-contributors" class="nav-link" data-scroll-target="#contributors">Contributors</a></li>
   </ul></li>
@@ -931,87 +985,197 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <section id="approach-b.2.-choosing-which-process-to-send-the-signal-to" class="level3">
 <h3 class="anchored" data-anchor-id="approach-b.2.-choosing-which-process-to-send-the-signal-to">Approach B.2. Choosing which process to send the signal to</h3>
 <p>Now what if your main program isn’t the one launched with <code>srun</code> - if you were to use an intermediate launcher like <code>torchrun</code> or <code>accelerate</code> the above recipe won’t work, because most likely <code>SIGUSR1</code> won’t be propagated from the launcher to its children. In this case we need a slightly more complicated slurm script than</p>
-<p>We have to replace:</p>
+<p>We have to replace: &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=USR1@600</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>with:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=B:USR1@600</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The added <code>B:</code> tells SLURM not to send the signal to the <code>srun</code> process (launcher) but to the <code>sbatch</code> shell.</p>
-<p>And now we have to change the end of the SLURM script from a typical launcher-based code like:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="va">CMD</span><span class="op">=</span><span class="st">"python -u -m torch.distributed.run ... train.py ..."</span> <span class="co"># real command here</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span>/path/to/logs/main_log.txt</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">"</span><span class="va">$CMD</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">$LOG_FILE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">=======</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>#SBATCH –signal=USR1@600</p>
+<pre><code>with:</code></pre>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>stas00-master #SBATCH –signal=B:USR1@600</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>
+The added `B:` tells SLURM not to send the signal to the `srun` process (launcher) but to the `sbatch` shell.
+
+And now we have to change the end of the SLURM script from a typical launcher-based code like:
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+```bash
+CMD="python -u -m torch.distributed.run ... train.py ..." # real command here
+LOG_FILE=/path/to/logs/main_log.txt
+srun --jobid $SLURM_JOBID bash -c "$CMD" 2&gt;&amp;1 | tee -a $LOG_FILE</code></pre>
 <p>to this:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">trap</span> <span class="st">'echo "SIGUSR1 received!"; \</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="st">pid=$(pgrep -f "^python.*(accelerate|deepspeed|torchrun|distributed.run)"); \</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="st">pgrep -P $pid | xargs -r kill -USR1; \</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="st">wait;'</span> SIGUSR1</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="va">CMD</span><span class="op">=</span><span class="st">"python -u -m torch.distributed.run ... train.py ..."</span> <span class="co"># real command here</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span>/path/to/logs/main_log.txt</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">"</span><span class="va">$CMD</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">$LOG_FILE</span> <span class="kw">&amp;</span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="bu">wait</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Since <code>--signal=B:USR1@600</code> earlier will now send the signal to the <code>sbatch</code> shell we can trap it and do something about it, and that’s what the <code>trap</code> line does.</p>
-<p>The magical code inside the signal handler passed to <code>trap</code> finds all processes that are immediate children of any of the launchers like <code>accelerate</code>, <code>deepspeed</code>, <code>torchrun</code> or <code>torch.distributed.run</code> and sends the <code>SIGUSR1</code> signal to them.</p>
-<p>Finally the last change is that in order for <code>trap</code> to work we need to run <code>srun</code> in the background - so we added <code>&amp;</code> at the end of the <code>srun</code> command and we needed to add <code>wait</code> so that the <code>sbatch</code> shell won’t exit until <code>srun</code> finishes.</p>
-<p>Your python code that catches the signal handler remains the same as in Approach B.1.</p>
-<p>Here are the important parts of the SLURM script together:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat launch.slurm</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=dev</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=B:USR1 # Custom preemption signal</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="bu">trap</span> <span class="st">'echo "SIGUSR1 received!"; \</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="st">pid=$(pgrep -f "^python.*(accelerate|torchrun|deepspeed|distributed.run)"); \</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="st">pgrep -P $pid | xargs -r kill -USR1; wait;'</span> SIGUSR1</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="va">CMD</span><span class="op">=</span><span class="st">"python -u -m torch.distributed.run ... train.py ..."</span> <span class="co"># real command here</span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span>/path/to/logs/main_log.txt</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">"</span><span class="va">$CMD</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">$LOG_FILE</span> <span class="kw">&amp;</span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="bu">wait</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And your training loop that may have originally looked like this:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat train.py</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> dl:</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">train_iteration</span><span class="er">(</span><span class="ex">batch</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now it’ll become:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat train.py</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> signal</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> sys</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pre_emption_activated</span> = False</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> activate_pre_emption<span class="er">(</span><span class="ex">sig,</span> frame<span class="kw">)</span><span class="bu">:</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">global</span> pre_emption_activated</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">print</span><span class="er">(</span><span class="st">"SIGUSR1 received, saving checkpoint"</span><span class="kw">)</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">pre_emption_activated</span> = True</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="ex">signal.signal</span><span class="er">(</span><span class="ex">signal.SIGUSR1,</span> activate_pre_emption<span class="kw">)</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> dl:</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">train_iteration</span><span class="er">(</span><span class="ex">batch</span><span class="kw">)</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="ex">pre_emption_activated:</span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">save_checkpoint()</span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sys.exit()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Of course, you will probably set a flag in the trainer object in the real software and not use a <code>global</code>, but for the sake of the short demo that’s good enough.</p>
-<p>If you want to test this solution, simply change your SLURM script header to:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=0:05:00</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=B:USR1@60</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here we tell SLURM to run the job for 5 minutes only (<code>--time=0:05:00</code>) and we ask it to send <code>SIGUSR1</code> to our <code>sbatch</code> script <code>60</code> seconds before 5 minutes expires, i.e.&nbsp;4 minutes after the job started.</p>
-</section>
-<section id="qos-based-slurm-preemption" class="level3">
-<h3 class="anchored" data-anchor-id="qos-based-slurm-preemption">QoS-based SLURM preemption</h3>
-<p>We haven’t discussed so far what happens when Quality of Service (QoS) is used, which may also forcefully pre-empt an existing job. The functionality is the same as job’s-allocated-time-is-about-to-end sort of pre-emption, except it can happen any time and not X seconds before the end of the job.</p>
-<p>Consider a SLURM setup where you have <code>--qos=high</code> which can pre-empt <code>--qos=low</code> jobs and the low priority job has grace time of 10 minutes to shut down:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sacctmgr show qos format=name,priority,preempt,MaxTRESPerUser,GraceTime,Preempt,Flags</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>      <span class="ex">Name</span>   Priority     MaxTRESPU  GraceTime    Preempt                Flags</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="ex">----------</span> <span class="at">----------</span> <span class="at">-------------</span> <span class="at">----------</span> <span class="at">----------</span> <span class="at">--------------------</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>       <span class="ex">low</span>          0                 00:10:00</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>      <span class="ex">high</span>          0                 00:00:00        low</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">=======</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>CMD=“python -u -m torch.distributed.run … train.py …” # real command here LOG_FILE=/path/to/logs/main_log.txt srun –jobid <span class="math inline">SLURM_JOBID bash -c "</span>CMD” 2&gt;&amp;1 | tee -a $LOG_FILE</p>
+<pre><code>to this:</code></pre>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>stas00-master trap ’echo “SIGUSR1 received!”;<br>
+pid=$(pgrep -f “^python.*(accelerate|deepspeed|torchrun|distributed.run)“);<br>
+pgrep -P $pid | xargs -r kill -USR1;<br>
+wait;’ SIGUSR1</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>CMD=“python -u -m torch.distributed.run … train.py …” # real command here LOG_FILE=/path/to/logs/main_log.txt srun –jobid <span class="math inline">SLURM_JOBID bash -c "</span>CMD” 2&gt;&amp;1 | tee -a $LOG_FILE &amp;</p>
+<p>wait</p>
+<pre><code>
+Since `--signal=B:USR1@600` earlier will now send the signal to the `sbatch` shell we can trap it and do something about it, and that's what the `trap` line does.
+
+The magical code inside the signal handler passed to `trap` finds all processes that are immediate children of any of the launchers like `accelerate`, `deepspeed`, `torchrun` or `torch.distributed.run` and sends the `SIGUSR1` signal to them.
+
+Finally the last change is that in order for `trap` to work we need to run `srun` in the background - so we added `&amp;`  at the end of the `srun` command and we needed to add `wait` so that the `sbatch` shell won't exit until `srun` finishes.
+
+Your python code that catches the signal handler remains the same as in Approach B.1.
+
+Here are the important parts of the SLURM script together:
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+```bash
+=======</code></pre>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>stas00-master $ cat launch.slurm #!/bin/bash […] #SBATCH –partition=dev #SBATCH –signal=B:USR1 # Custom preemption signal […]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>trap ’echo “SIGUSR1 received!”;<br>
+pid=$(pgrep -f “^python.*(accelerate|torchrun|deepspeed|distributed.run)“);<br>
+pgrep -P $pid | xargs -r kill -USR1; wait;’ SIGUSR1</p>
+<p>CMD=“python -u -m torch.distributed.run … train.py …” # real command here LOG_FILE=/path/to/logs/main_log.txt srun –jobid <span class="math inline">SLURM_JOBID bash -c "</span>CMD” 2&gt;&amp;1 | tee -a $LOG_FILE &amp;</p>
+<p>wait</p>
+<pre><code>
+And your training loop that may have originally looked like this:
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+
+```bash
+=======</code></pre>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>stas00-master $ cat train.py</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>for batch in dl: train_iteration(batch)</p>
+<pre><code>
+Now it'll become:
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+
+```bash
+=======</code></pre>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>stas00-master $ cat train.py</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>import signal import sys</p>
+<p>pre_emption_activated = False def activate_pre_emption(sig, frame): global pre_emption_activated print(“SIGUSR1 received, saving checkpoint”) pre_emption_activated = True</p>
+<p>signal.signal(signal.SIGUSR1, activate_pre_emption)</p>
+<p>for batch in dl: train_iteration(batch)</p>
+<pre><code>if pre_emption_activated:
+    save_checkpoint()
+    sys.exit()</code></pre>
+<pre><code>
+Of course, you will probably set a flag in the trainer object in the real software and not use a `global`, but for the sake of the short demo that's good enough.
+
+If you want to test this solution, simply change your SLURM script header to:
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+```bash
+=======</code></pre>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>stas00-master #SBATCH –time=0:05:00 #SBATCH –signal=B:USR1@60</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre><code>
+Here we tell SLURM to run the job for 5 minutes only (`--time=0:05:00`) and we ask it to send `SIGUSR1` to our `sbatch` script `60` seconds before 5 minutes expires, i.e. 4 minutes after the job started.
+
+
+
+### QoS-based SLURM preemption
+
+We haven't discussed so far what happens when Quality of Service (QoS) is used, which may also forcefully pre-empt an existing job. The functionality is the same as job's-allocated-time-is-about-to-end sort of pre-emption, except it can happen any time and not X seconds before the end of the job.
+
+Consider a SLURM setup where you have `--qos=high` which can pre-empt `--qos=low` jobs and the low priority job has grace time of 10 minutes to shut down:
+
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+```bash
+=======</code></pre>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>stas00-master $ sacctmgr show qos format=name,priority,preempt,MaxTRESPerUser,GraceTime,Preempt,Flags Name Priority MaxTRESPU GraceTime Preempt Flags ———- ———- ————- ———- ———- ——————– low 0 00:10:00 high 0 00:00:00 low ```</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <p>This is very similar to the time-based pre-emption except here the grace time is hardcoded and can’t be modified by the user.</p>
 <p>If a job is launched with <code>--qos=high</code> and there aren’t enough nodes, SLURM will kick out a few low priority jobs to make the nodes available for the high priority job.</p>
 <p>By default <code>GraceTime</code> could be very short an insufficient for your program to wind down safely if it gets pre-empted - in which case ask your sysadmin to raise its duration to what will work for your needs.</p>

@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../qmd/training/reproducibility/index.html" rel="next">
-<link href="../../../qmd/training/model-parallelism/index.html" rel="prev">
+<link href="../../../qmd/training/re-train-hub-models.html" rel="next">
+<link href="../../../qmd/training/reproducibility/index.html" rel="prev">
 <link href="../../.././favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -45,6 +45,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,11 +141,11 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="https://twitter.com/saforem2"> 
-<span class="menu-text"><span style="font-size: 1.15em;">{{&lt; iconify line-md twitter &gt;}}</span></span></a>
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://github.com/saforem2/ml-engineering"> 
-<span class="menu-text"><span style="font-size: 1.15em;">{{&lt; iconify line-md github-loop &gt;}}</span></span></a>
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -193,7 +196,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../qmd/performance/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">🏎️ Performance</span></a>
   </div>
 </li>
@@ -217,8 +220,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">💻 Compute</span></a>
+            <a href="../../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠  Insights</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -226,34 +229,240 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../qmd/compute/cpu-memory/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CPU memory</span></a>
+  <a href="../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🪖 The AI Battlefield</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏋️  Training</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/model-parallelism/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Parallelism</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/checkpoints/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checkpoints</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/performance/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Software Tune Up For The Best Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Training Loss Patterns</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/fault-tolerance/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🛜 Network</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Networking Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Benchmarks Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Disabling NVLink Benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦  Storage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">💻 Compute</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/compute/cpu/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">CPU</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/cpu-memory/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU memory</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/compute/accelerator/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Accelerators</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/accelerator/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accelerators</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
  <span class="menu-text">Nvidia</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/compute/accelerator/nvidia/debug.html" class="sidebar-item-text sidebar-link">
@@ -268,13 +477,59 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🐛  Debugging</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <a href="../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🎻  Orchestration</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in SLURM Environment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Administration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Launchers with SLURM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM for users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🐛  Debugging</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/debug/tiny-scripts/index.html" class="sidebar-item-text sidebar-link">
@@ -317,229 +572,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
  <span class="menu-text">Underflow and Overflow Detection</span></a>
   </div>
 </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🧠  Insights</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🪖 The AI Battlefield</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🛜 Network</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Networking Benchmarks</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Network Benchmarks Results</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Disabling NVLink Benchmark</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🎻  Orchestration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working in SLURM Environment</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM Administration</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Launchers with SLURM</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM Performance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM for users</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">📦  Storage</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
- <span class="menu-text">Benchmarks</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
- <span class="menu-text">Results</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🏋️  Training</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tensor precision / Data types</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/checkpoints/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checkpoints</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Fault Tolerance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/model-parallelism/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Model Parallelism</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/performance/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Software Tune Up For The Best Performance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reproducibility</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
-  </div>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Understanding Training Loss Patterns</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
       </ul>
   </li>
     </ul>
@@ -1567,13 +1599,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../qmd/training/model-parallelism/index.html" class="pagination-link  aria-label=" model="" parallelism"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Model Parallelism</span>
+      <a href="../../../qmd/training/reproducibility/index.html" class="pagination-link  aria-label=" reproducibility"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reproducibility</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../qmd/training/reproducibility/index.html" class="pagination-link" aria-label="Reproducibility">
-        <span class="nav-page-text">Reproducibility</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../qmd/training/re-train-hub-models.html" class="pagination-link" aria-label="Re-train HF Hub Models From Scratch Using Finetuning Examples">
+        <span class="nav-page-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1587,7 +1619,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>2024</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/training/performance/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/training/performance/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p><a href="https://github.com/saforem2/ml-engineering">{{&lt; fa brands github &gt;}}</a></p>
+<p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
 </div>
   </div>
 </footer>
