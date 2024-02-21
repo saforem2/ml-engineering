@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-02-20">
 
-<title>ML Engineering</title>
+<title>ML Engineering - 🏎️ Performance</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../qmd/training/dtype-old.html" rel="next">
-<link href="../../qmd/training/index.html" rel="prev">
+<link href="../../qmd/resources/index.html" rel="next">
 <link href="../.././favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -174,7 +173,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/training/index.html">🏋️ Training</a></li><li class="breadcrumb-item"><a href="../../qmd/training/dtype.html">Tensor precision / Data types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/performance-old/index.html">🏎️ Performance</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -196,7 +195,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">🏎️ Performance</span></a>
   </div>
 </li>
@@ -239,14 +238,14 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">🏋️  Training</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tensor precision / Data types</span></a>
   </div>
 </li>
@@ -561,21 +560,16 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tensor-precision-data-types" id="toc-tensor-precision-data-types" class="nav-link active" data-scroll-target="#tensor-precision-data-types">Tensor precision / Data types</a>
-  <ul class="collapse">
-  <li><a href="#ml-dtype-progression" id="toc-ml-dtype-progression" class="nav-link" data-scroll-target="#ml-dtype-progression">ML dtype progression</a></li>
-  <li><a href="#tf32" id="toc-tf32" class="nav-link" data-scroll-target="#tf32">TF32</a></li>
-  <li><a href="#when-to-use-fp32-accumulators" id="toc-when-to-use-fp32-accumulators" class="nav-link" data-scroll-target="#when-to-use-fp32-accumulators">When to use <code>fp32</code> accumulators</a></li>
-  <li><a href="#changing-precision-post-training" id="toc-changing-precision-post-training" class="nav-link" data-scroll-target="#changing-precision-post-training">Changing precision post training</a></li>
-  </ul></li>
+  <li><a href="#performance-and-acceleration" id="toc-performance-and-acceleration" class="nav-link active" data-scroll-target="#performance-and-acceleration">Performance and Acceleration</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/training/dtype.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/training/dtype.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="dtype.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/performance-old/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/performance-old/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><div class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/training/index.html">🏋️ Training</a></li><li class="breadcrumb-item"><a href="../../qmd/training/dtype.html">Tensor precision / Data types</a></li></ol></nav><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/training/dtype.qmd"><i class="bi"></i></button></div></div>
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">🏎️ Performance</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/performance-old/index.qmd"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -598,149 +592,14 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </header>
 
 
-<section id="tensor-precision-data-types" class="level1">
-<h1>Tensor precision / Data types</h1>
-<p>These are the common datatypes that are used as of this writing in ML (usually referred to as <code>dtype</code>):</p>
-<p>Floating point formats: - <code>fp32</code> - 32 bits - <code>tf32</code> - 19 bits (NVIDIA Ampere+) - <code>fp16</code> - 16 bits - <code>bf16</code> - 16 bits - <code>fp8</code> - 8 bits (E4M3 and E5M2 formats)</p>
-<p>For visual comparison refer to this representations:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./images/fp32-tf32-fp16-bf16.png" class="img-fluid figure-img"></p>
-<figcaption>fp32-tf32-fp16-bf16</figcaption>
-</figure>
-</div>
-<p>(<a href="https://developer.nvidia.com/blog/accelerating-ai-training-with-tf32-tensor-cores/">source</a>)</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/fp16-bf16-fp8.png" class="img-fluid figure-img"></p>
-<figcaption>fp16-bf16-fp8</figcaption>
-</figure>
-</div>
-<p>(<a href="https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/examples/fp8_primer.html">source</a>)</p>
-<p>Integer formats used in quantization:</p>
+<section id="performance-and-acceleration" class="level1">
+<h1>Performance and Acceleration</h1>
 <ul>
-<li><code>int8</code> - 8 bits</li>
-<li><code>int4</code> - 4 bits</li>
-<li><code>int1</code> - 1 bits</li>
-</ul>
-<section id="ml-dtype-progression" class="level2">
-<h2 class="anchored" data-anchor-id="ml-dtype-progression">ML dtype progression</h2>
-<p>Originally ML was using <code>fp32</code>, but it was very slow.</p>
-<p>Next <a href="https://developer.nvidia.com/blog/video-mixed-precision-techniques-tensor-cores-deep-learning/">mixed-precision was invented using a combination of <code>fp16</code> and <code>fp32</code></a> was invented which tremendously sped up the training speed.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/mixed-precision-fp16.png" class="img-fluid figure-img"></p>
-<figcaption>fp32/fp16 mixed precision</figcaption>
-</figure>
-</div>
-<p>(<a href="https://developer.nvidia.com/blog/video-mixed-precision-techniques-tensor-cores-deep-learning/">source</a>)</p>
-<p>But <code>fp16</code> proved to be not very stable and training LLM was extremely difficult.</p>
-<p>Luckily bf16 came out and replaced <code>fp16</code> using the same mixed precision protocol. This made the LLM training much more stable.</p>
-<p>Then fp8 came and mixed precision has switched to <a href="https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/examples/fp8_primer.html">that</a> and which makes the training even faster. See the paper: <a href="https://arxiv.org/abs/2209.05433">FP8 Formats for Deep Learning</a>.</p>
-<p>To appreciate the speed ups between the different formats have a look at this table for NVIDIA A100 TFLOPS spec (w/o sparsity):</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Data type</th>
-<th style="text-align: right;">TFLOPS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>fp32</code></td>
-<td style="text-align: right;">19.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Tensor Float 32 (TF32)</td>
-<td style="text-align: right;">156</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">BFLOAT16 Tensor Core</td>
-<td style="text-align: right;">312</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">FP16 Tensor Core</td>
-<td style="text-align: right;">312</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">FP8 Tensor Core</td>
-<td style="text-align: right;">624</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">INT8 Tensor Core</td>
-<td style="text-align: right;">624</td>
-</tr>
-</tbody>
-</table>
-<p>Each next dtype is about 2x faster than the previous one (except <code>fp32</code> which is much slower than the rest).</p>
-<p>In parallel with the mixed training regime the ML community starting coming up with various quantization approaches. Probably one of the best examples is Tim Dettmers’ <a href="https://github.com/TimDettmers/bitsandbytes">bitsandbytes</a> which provides many 4 and 8-bit quantization solutions. The Deepspeed team also has some <a href="https://www.deepspeed.ai/tutorials/model-compression/">interesting quantization solutions</a>.</p>
-</section>
-<section id="tf32" class="level2">
-<h2 class="anchored" data-anchor-id="tf32">TF32</h2>
-<p>TF32 is a magical datatype that is available on NVIDIA GPUs since Ampere, and which allows <code>fp32</code> <code>matmul</code>s performed at a much faster speed than normal <code>fp32</code> <code>matmul</code>s with a small precision loss.</p>
-<p>Here is an example of A100 TFLOPS (w/o sparsity):</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Data type</th>
-<th style="text-align: right;">TFLOPS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>fp32</code></td>
-<td style="text-align: right;">19.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Tensor Float 32 (TF32)</td>
-<td style="text-align: right;">156</td>
-</tr>
-</tbody>
-</table>
-<p>As you can see TF32 is 8x faster than <code>fp32</code>!</p>
-<p>It’s disabled by default. To enable it add at the beginning of your program:</p>
-<pre><code>torch.backends.cuda.matmul.allow_tf32 = True
-torch.backends.cudnn.allow_tf32 = True</code></pre>
-<p>For more information about the actual precision loss please see <a href="https://pytorch.org/docs/stable/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices">this</a>.</p>
-</section>
-<section id="when-to-use-fp32-accumulators" class="level2">
-<h2 class="anchored" data-anchor-id="when-to-use-fp32-accumulators">When to use <code>fp32</code> accumulators</h2>
-<p>Whenever a low-precision dtype is used one has to be careful not to accumulate intermediary results in that dtype.</p>
-<p><code>LayerNorm</code>-like operations must not do their work in half-precision, or they may lose a lot of data. Therefore when these operations are implemented correctly they do efficient internal work in the dtype of the inputs, but using the <code>fp32</code> accumulation registers and then their outputs are downcast to the precision of the inputs.</p>
-<p>Generally it’s just the accumulation that is done in <code>fp32</code>, since adding up many low-precision numbers is very lossy otherwise.</p>
-<p>Here are some examples:</p>
-<ol type="1">
-<li>Reduction collectives</li>
-</ol>
-<ul>
-<li><p><code>fp16</code>: ok to do in <code>fp16</code> if loss scaling is in place</p></li>
-<li><p>bf16: only ok in <code>fp32</code></p></li>
-</ul>
-<ol start="2" type="1">
-<li>Gradient accumulation</li>
-</ol>
-<ul>
-<li>best done in <code>fp32</code> for <code>fp16</code> and bf16, but definitely is a must for bf16</li>
-</ul>
-<ol start="3" type="1">
-<li>Optimizer step / Vanishing gradients</li>
-</ol>
-<ul>
-<li><p>when adding a tiny gradient to a large number, that addition is often nullified therefore typically <code>fp32</code> master weights and <code>fp32</code> optim states are used.</p></li>
-<li><p><code>fp16</code> master weights and optim states can be used when using <a href="https://en.wikipedia.org/wiki/Kahan_summation_algorithm">Kahan Summation</a> or <a href="https://en.wikipedia.org/wiki/Rounding">Stochastic rounding</a> (introduced in <a href="https://arxiv.org/abs/2010.06192">Revisiting BFloat16 Training</a>).</p></li>
-</ul>
-<p>For an example of the latter see: <a href="https://github.com/pytorch/torchdistx/pull/52">AnyPrecision optimizer</a> with the latest version found <a href="https://github.com/facebookresearch/multimodal/blob/6bf3779a064dc72cde48793521a5be151695fc62/torchmultimodal/modules/optimizers/anyprecision.py#L17">here</a>.</p>
-</section>
-<section id="changing-precision-post-training" class="level2">
-<h2 class="anchored" data-anchor-id="changing-precision-post-training">Changing precision post training</h2>
-<p>Sometimes it’s OK to change precision after the model was trained.</p>
-<ul>
-<li><p>Using <code>fp16</code>-pretrained model in bf16 regime usually fails - due to overflows (the biggest number that can be represented in <code>fp16</code> is 64k) for an indepth discussion and possible workaround see this <a href="https://github.com/huggingface/transformers/pull/10956">PR</a>.</p></li>
-<li><p>Using bf16-pretrained model in <code>fp16</code> regime usually works - it will lose some performance on conversion, but should work - best to finetune a bit before using it.</p></li>
+<li><p><a href="./software.md">Tuning ML software for best performance</a> - tweaking software for the best performance.</p></li>
+<li><p><a href="./hardware.md">Tuning ML hardware for best performance</a> - choosing and configuring machine learning hardware for best performance.</p></li>
 </ul>
 
 
-</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bekman2024,
@@ -1338,13 +1197,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../qmd/training/index.html" class="pagination-link  aria-label=" 🏋️="" training"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">🏋️ Training</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../qmd/training/dtype-old.html" class="pagination-link" aria-label="Tensor precision / Data types">
-        <span class="nav-page-text">Tensor precision / Data types</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../qmd/resources/index.html" class="pagination-link" aria-label="📓  Resources">
+        <span class="nav-page-text">📓 Resources</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1356,7 +1212,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p>2024</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/training/dtype.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/training/dtype.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/performance-old/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/performance-old/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
 </div>

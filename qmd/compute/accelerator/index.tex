@@ -125,7 +125,6 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Accelerators},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -133,14 +132,12 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{Accelerators}
 \author{}
-\date{2024-02-13}
+\date{2024-02-20}
 
 \begin{document}
-\maketitle
 
-XXX: This chapter is a super-early WIP
+\chapter{Accelerators}\label{accelerators}
 
 Compute accelerators are the workhorses of the ML training. At the
 beginning there were just GPUs. But now there are also TPUs, IPUs,
@@ -190,17 +187,18 @@ reality}\label{birds-eye-view-on-the-high-end-accelerator-reality}
 While this might be changing in the future, unlike the consumer GPU
 market, as of this writing there aren't that many high end accelerators,
 and if you rent on the cloud, most providers will have more or less the
-same few GPUs to offer.
+same few accelerators to offer.
 
 GPUs: - As of today, ML clouds/HPCs started transitioning from NVIDIA
 A100s to H100s and this is going to take some months due to the usual
 shortage of NVIDIA GPUs. - AMD's MI250 started popping up here and
-there, but it's unclear when it'll be easy to access those. From a
-recent discussion with an AMD representative MI300 is not planned to be
-in general availability until some time in 2025, though some HPCs
-already plan to get them some time in 2024.
+there, but it's unclear when it'll be easy to access those. MI300X is
+promised to start being available already in March 2024 at some Tier 2
+cloud providers.
 
-HPU: - Intel's Gaudi2 are starting to slowly emerge on Intel's cloud
+HPU: - Intel's Gaudi2 are starting to slowly emerge on Intel's cloud -
+there is a huge lineup. It's also available on-premise simplementations
+via Supermicro, WiWynn, and soon others.
 
 IPU: - And there is Graphcore with their IPU offering. You can try these
 out in \href{https://www.paperspace.com/graphcore}{Paperspace} through
@@ -212,11 +210,11 @@ isn't quite easily convertible between GPUs and TPUs, and so many
 (most?) developers remain in the GPU land, since they don't want to be
 locked into a hardware which is a Google monopoly.
 
-Pods and racks: - Cerebras' WaferScale Engine (WSE) - SambaNova's
+On Pods and racks: - Cerebras' WaferScale Engine (WSE) - SambaNova's
 DataScale - dozens of different pod and rack configs that compose the
 aforementioned GPUs with super-fast interconnects.
 
-That's about it as Q4-2023.
+That's about it as Q1-2024.
 
 \section{Glossary}\label{glossary}
 
@@ -319,7 +317,7 @@ example, here are a few entries for A100:
 
 \begin{longtable}[]{@{}lrr@{}}
 \toprule\noalign{}
-Data type & TFLOPS & w/ Sparsity \\
+Data type ~TFLOPS & w/o Sparsity & w/ Sparsity \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
@@ -328,6 +326,7 @@ FP32 & 19.5 & n/a \\
 Tensor Float 32 (TF32) & 156 & 312 \\
 BFLOAT16 Tensor Core & 312 & 624 \\
 FP16 Tensor Core & 312 & 624 \\
+FP8 Tensor Core & 624 & 1248 \\
 INT8 Tensor Core & 624 & 1248 \\
 \end{longtable}
 
@@ -361,41 +360,71 @@ this table:
 \href{https://developer.nvidia.com/blog/cuda-11-features-revealed/}{source}
 
 As you can see the difference in performance is non-linear due to
-\href{https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html\#dim-quantization}{the
-tile and wave quantization effects}.
+\href{../../training/performance\#tile-and-wave-quantization}{the tile
+and wave quantization effects}.
 
-Let's look at the TFLOPS specs across the high end accelerators:
+Let's look at the supported \href{../../training/dtype.md}{dtypes} and
+the corresponding theoretical peak TFLOPS specs across the high end
+accelerators (w/o sparsity):
 
-\begin{longtable}[]{@{}lrrrr@{}}
+\begin{longtable}[]{@{}lrrrrr@{}}
 \toprule\noalign{}
-Accelerator / TFLOPS & fp32 & fp16 & fp8 & int8 \\
+Accelerator ~TFLOPS & fp32 & tf32 & fp16/bf16 & fp8 & int8 \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-NVIDIA A100 SXM & 19.5 & 312 & 624 & 624 \\
-AMD MI250 & 45.3 & 362 & X & 362 \\
-AMD MI250X & 47.9 & 383 & X & 383 \\
-& & & & \\
-NVIDIA H100 SXM & 67.0 & 989 & 1979 & 1979 \\
-NVIDIA H100 PCIe & 51.0 & 756 & 1513 & 1513 \\
-NVIDIA H100 dual NVL & 134.0 & 989 & 3958 & 3958 \\
-AMD MI300 & ? & ? & ? & ? \\
-& & & & \\
+NVIDIA A100 SXM & 19.5 & 156.0 & 312 & 624 & 624 \\
+AMD MI250 & 45.3 & X & 362 & X & 362 \\
+AMD MI250X & 47.9 & X & 383 & X & 383 \\
+& & & & & \\
+NVIDIA H100 SXM & 67.0 & 494.5 & 989 & 1979 & 1979 \\
+NVIDIA H200 SXM & 67.0 & 494.5 & 989 & 1979 & 1979 \\
+NVIDIA H100 PCIe & 51.0 & 378.0 & 756 & 1513 & 1513 \\
+NVIDIA H100 dual NVL & 134.0 & 989.5 & 989 & 3958 & 3958 \\
+AMD MI300X & 163.4 & 653.7 & 1300 & 5220 & 2600 \\
+Intel Gaudi2 & V & V & V & V & V \\
 \end{longtable}
 
-\begin{itemize}
-\tightlist
-\item
-  Intel Gaudi2 doesn't plan to publish TFLOPS specs as of this writing
-\end{itemize}
+footnote: Intel Gaudi2 doesn't plan to publish TFLOPS specs as of this
+writing, but it does support FP32, TF32, BF16, FP16 \& FP8, INT8 and
+INT16. This
+\href{https://www.databricks.com/blog/llm-training-and-inference-intel-gaudi2-ai-accelerators}{blog
+posts} reports measuring \textasciitilde400TFLOPS for fp16/bf16.
 
-\subsubsection{Achievable peak TFLOPS}\label{achievable-peak-tflops}
+footnote: when looking at specs be very careful at which numbers you're
+reading - many vendors often publish TFLOPS with sparsity, as they are
+\textasciitilde2x bigger, but if they even indicate this they often do
+it in small print. I had to ask NVIDIA to add a note to their H100 spec
+that those numbers were w/ sparsity as they originally didn't mention
+this important technical fact. And 99\% of the time as of this writing
+you will be not using sparsity and thus the actual theoretical TFLOPs
+that you care for most of the time are w/o sparsity (i.e.~the table
+above).
 
-The problem with the advertised peak TFLOPS is that they are
+footnote: also beware that if accelerator A publishes a higher TFLOPS
+than accelerator B, it doesn't mean A is faster. These are theoretical
+numbers which not only can never be achieved in practice - the actual
+TFLOPS efficiency (HFU) can vary a lot from vendor to vendor or even for
+the same vendor's different accelerator architectures.
+
+\subsubsection{Maximum Achievable FLOPS}\label{maximum-achievable-flops}
+
+Theoretical peak FLOPS is what gets published on the accelerator's spec.
+And it's calculated as:
+
+\texttt{Theoretical\ FLOPS\ =\ compute\_unit\_clock\_speed\ *\ flops\_per\_clock\_cycle\_per\_compute\_unit\ *\ num\_compute\_units}
+
+where: - \texttt{compute\_unit\_clock\_speed} - how many times the
+compute unit clock ticks per second in Hz -
+\texttt{flops\_per\_clock\_cycle\_per\_compute\_unit} - the number of
+operations the compute unit can execute per clock cycle. -
+\texttt{num\_compute\_units} - how many units there is in the device
+
+The problem with the advertised theoretical peak FLOPS is that they are
 \textbf{very} theoretical and can't be achieved in practice even if all
 the perfect conditions have been provided. Each accelerator has its own
-realistic TFLOPS which is not advertised and there are anecdotal
+realistic FLOPS which is not advertised and there are anecdotal
 community reports that do their best to find the actual best value, but
 I'm yet to find any official reports.
 
@@ -408,11 +437,11 @@ information with.
 To provide a numerical sense to what I'm talking about is let's take
 A100 with its 312 TFLOPS bf16 peak performance in the specs of this
 card. Until the invent of FlashAttention it was known that 150TFLOPS was
-close to the highest one could get for half precision mixed precision,
-with FlashAttention, it's around 180TFLOPS. This is, of course, measured
-for training LLMs where the network and IO are involved which create
-additional overheads. So here the peak performance probably lays
-somewhere between 200 and 300 TFLOPS.
+close to the highest one could get for fp16/bf16 mixed precision regime.
+And with FlashAttention it's around 180TFLOPS. This is, of course,
+measured for training LLMs where the network and IO are involved which
+create additional overheads. So here the maximum achievable peak
+performance probably lays somewhere between 200 and 300 TFLOPS.
 
 It should be possible to calculate the actual peak TFLOPS by doing a
 perfectly aligned max-size matrices \texttt{matmul} measured on a single
@@ -427,48 +456,96 @@ benchmark isn't hardcoded to a particular accelerator.
 \subsection{Accelerator memory size and
 speed}\label{accelerator-memory-size-and-speed}
 
-Typically the more on-chip memory the accelerator has the better. At any
-given time usually most of the model weights aren't being used as they
-wait for their turn to be processed and thus large memory allows more of
-the model to be on the accelerator memory and immediately available for
-access and update. When there is not enough memory, sometimes the model
-has to be split across multiple accelerators, or offloaded to CPU and/or
-disk.
+The accelerators use
+\href{https://en.wikipedia.org/wiki/High_Bandwidth_Memory}{High
+Bandwidth Memory} (HBM) which is a 3D version of SDRAM memory. For
+example, A100-SXM comes with HBM2 at 1.6TBps, and H100-SXM comes with
+HBM3 at 3.35TBps.
 
-Current high end accelerators (some aren't GA yet):
+Here are the specs:
 
-\begin{longtable}[]{@{}lrlr@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2353}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1765}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2353}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1176}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1176}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1176}}@{}}
 \toprule\noalign{}
-Accelerator & Memory in GBs & Type & Speed in TB/s \\
+\begin{minipage}[b]{\linewidth}\raggedright
+Gen
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Data Rate (Gbps)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Bandwidth per Device (GBps)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Stack Height
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Max. DRAM Capacity (GB)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Max. Device Capacity (GB)
+\end{minipage} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-NVIDIA A100 SXM & 80 & HBM2e & 2 \\
+HBM & 1.0 & 128 & 8 & 2 & 16 \\
+HBM2 & 2.0 & 256 & 8 & 2 & 16 \\
+HBM2e & 3.6 & 461 & 12 & 3 & 36 \\
+HBM3 & 6.4 & 819 & 16 & 4 & 64 \\
+HBM3e & 9.6 & 1229 & 16 & 4 & 64 \\
+\end{longtable}
+
+Since HBM is a stack of multiple DRAM chips, the \emph{Stack Height}
+specifies how many chips are per device.
+
+Typically the more on-device memory the accelerator has the better. At
+any given time usually most of the model weights aren't being used as
+they wait for their turn to be processed and thus large memory allows
+more of the model to be on the accelerator memory and immediately
+available for access and update. When there is not enough memory,
+sometimes the model has to be split across multiple accelerators, or
+offloaded to CPU and/or disk.
+
+Here are the memory specs for the recent high end accelerators (some
+aren't GA yet):
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3226}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2742}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0806}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3226}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Accelerator
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Memory (GBs)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Type
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Bandwidth (TBps)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+NVIDIA A100 SXM & 80 & HBM2e & 2.00 \\
 NVIDIA H100 SXM & 80 & HBM3 & 3.35 \\
-NVIDIA H100 PCIe & 80 & HBM3 & 2 \\
-NVIDIA H100 dual NVL & 188 & HBM3 & 7.8 \\
+NVIDIA H100 PCIe & 80 & HBM3 & 2.00 \\
+NVIDIA H100 dual NVL & 188 & HBM3 & 7.80 \\
+NVIDIA GH200 SXM (1) & 96 & HBM3 & 4.00 \\
+NVIDIA GH200 SXM (2) & 141 & HBM3e & 4.80 \\
+NVIDIA H200 SXM & 141 & HBM3e & 4.80 \\
 AMD MI250 & 128 & HBM2e & 3.28 \\
 AMD MI250X & 128 & HBM2e & 3.28 \\
-AMD MI300 & 192 & HBM3 & \\
+AMD MI300X & 192 & HBM3 & 5.30 \\
+Intel Gaudi2 & 96 & HBM2e & 2.45 \\
 & & & \\
 \end{longtable}
 
-\begin{itemize}
-\tightlist
-\item
-  XXX: add other accelerators
-\end{itemize}
-
-Memory speed is, of course, very important since if it's not fast enough
-than the compute ends up idling waiting for the data to be moved to and
-from the memory.
-
-The GPUs use
-\href{https://en.wikipedia.org/wiki/High_Bandwidth_Memory}{High
-Bandwidth Memory} (HBM) which is a 3D version of SDRAM memory. For
-example, A100-SXM comes with HBM2 at 1.6TB/sec, and H100-SXM comes with
-HBM3 at 3.35TB/s.
+Memory speed (bandwidth) is, of course, very important since if it's not
+fast enough than the compute ends up idling waiting for the data to be
+moved to and from the memory.
 
 \subsection{Heat}\label{heat}
 
@@ -493,24 +570,26 @@ NVIDIA: -
 \href{https://www.nvidia.com/en-us/data-center/a100/\#specifications}{A100}
 - huge availability but already getting outdated. -
 \href{https://www.nvidia.com/en-us/data-center/h100}{H100} - 2-3x faster
-than A100 (half precision), 6x faster for fp8, slowly emerging on all
-major clouds. -
+than A100 (half precision), 6x faster for fp8, becoming available on all
+Tier-1 compute clouds. -
 \href{https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/}{GH200}
 - 2 chips on one card - (1) H100 w/ 96GB HBM3 or 144GB HBM3e + (2) Grace
-CPU w/ 624GB RAM - availability is unknown.
+CPU w/ 624GB RAM - first units have been reported to become available.
 
 AMD: -
 \href{https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html}{MI250}
-\textasciitilde= A100 - very few clouds have them - MI300
-\textasciitilde= H100 - don't expect until late-2024 or even 2025 to be
-GA
+\textasciitilde= A100 - very few clouds have them -
+\href{https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html}{MI300}
+\textasciitilde= H100 - just starting to emerge - and mainly on Tier-2
+clouds (lots of new startups).
 
 Intel: - \href{https://habana.ai/products/gaudi2/}{Gaudi2}
-\textasciitilde= H100 - Currently there is a very low availability on
-\href{https://cloud.google.com}{cloud.google.com} with a long waiting
-list which supposedly should be reduced in Q1-2024. AWS has the older
-Gaudi1 via \href{https://aws.amazon.com/ec2/instance-types/dl1/}{DL1
-instances}.
+\textasciitilde= H100 -
+\href{https://docs.habana.ai/en/latest/Gaudi_Overview/Gaudi_Architecture.html}{spec}
+- \href{https://cloud.google.com}{Currently there is a very low
+availability on cloud.google.com} with a long waiting list which
+supposedly should be reduced in Q1-2024. AWS has the older Gaudi1 via
+\href{https://aws.amazon.com/ec2/instance-types/dl1/}{DL1 instances}.
 
 Graphcore: - \href{https://www.graphcore.ai/products/ipu}{IPU} -
 available via \href{https://www.paperspace.com/graphcore}{Paperspace}
@@ -534,23 +613,38 @@ switch to another vendor like NVIDIA -\textgreater{} AMD
 
 Cerebras: - \href{https://www.cerebras.net/product-cloud/}{Cloud}
 
-\subsection{Prices}\label{prices}
+\subsection{How to get the best price}\label{how-to-get-the-best-price}
 
 Remember that the advertised prices are almost always open to
-negotiations as long as you're willing to buy/rent in bulk and if
-renting then for a long time (i.e.~years!). When do you will discover
-that the actual price that you end up paying could be many times less
-than the original public price. Some cloud providers already include the
-discount as you choose a longer commitment on their website, but it's
-always the best to negotiate directly with their sales team. In addition
-or instead of a \$\$-discount you could be offered some useful
-features/upgrades for free.
+negotiations as long as you're willing to buy/rent in bulk or if renting
+for a 1-3 years. What you will discover is that the actual price that
+you end up paying could be many times less than the advertised
+``public'' price. Some cloud providers already include the discount as
+you choose a longer commitment on their website, but it's always the
+best to negotiate directly with their sales team. In addition or instead
+of a \$\$-discount you could be offered some useful features/upgrades
+for free.
+
+If your company has venture capital investors - it could help a lot to
+mention that, as then the cloud provider knows you are likely to buy
+more compute down the road and more likely to discount more.
+
+Tier 2 clouds are likely to give better prices than Tier 1. Tier 1 as of
+this writing is AWS, OCI, Azure and GCP.
 
 For the baseline prices it should be easy to find a few good sites that
 provide an up-to-date public price comparisons across clouds - just
 search for something like
 \href{https://www.google.com/search?q=cloud+gpu+pricing+comparison}{cloud
 gpu pricing comparison}.
+
+When shopping for a solution please remember that it's not enough to
+rent the most powerful accelerator. You also need fast
+\href{../../network\#intra-node-networking}{intra-node} and
+\href{../../network\#inter-node-networking}{inter-node} connectivity and
+sufficiently fast \href{../../storage}{storage} - without which the
+expensive accelerators will idle waiting for data to arrive and you
+could be wasting a lot money and losing time.
 
 \section{Accelerators in detail}\label{accelerators-in-detail}
 
@@ -631,13 +725,20 @@ Comparison: supposedly Gaudi2 competes with NVIDIA H100
 
 \section{API}\label{api}
 
+Which software is needed to deploy the high end GPUs?
+
 \subsection{NVIDIA}\label{nvidia-1}
 
-uses CUDA
+NVIDIA GPUs run on
+\href{https://developer.nvidia.com/cuda-toolkit}{CUDA}
 
 \subsection{AMD}\label{amd-1}
 
-uses ROCm
+AMD GPUs run on
+\href{https://www.amd.com/en/products/software/rocm.html}{ROCm} - note
+that PyTorch you can use CUDA-based software on ROCm-based GPUs! So it
+should be trivial to switch to the recent AMD MI250, MI300X, and other
+emerging ones.
 
 \subsection{Intel Gaudi}\label{intel-gaudi}
 

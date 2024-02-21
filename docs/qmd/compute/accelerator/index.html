@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-02-20">
 
-<title>ML Engineering - Accelerators</title>
+<title>ML Engineering</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../qmd/compute/accelerator/nvidia/debug.html" rel="next">
-<link href="../../../qmd/compute/cpu/index.html" rel="prev">
+<link href="../../../qmd/compute/cpu-memory/index.html" rel="prev">
 <link href="../../.././favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -45,6 +45,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-contrib/iconify-1.0.8/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,11 +141,11 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="https://twitter.com/saforem2"> 
-<span class="menu-text"><span style="font-size: 1.15em;">{{&lt; iconify line-md twitter &gt;}}</span></span></a>
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:twitter"></iconify-icon></span></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://github.com/saforem2/ml-engineering"> 
-<span class="menu-text"><span style="font-size: 1.15em;">{{&lt; iconify line-md github-loop &gt;}}</span></span></a>
+<span class="menu-text"><span style="font-size: 1.15em;"><iconify-icon inline="" icon="line-md:github-loop"></iconify-icon></span></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -193,7 +196,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../qmd/performance/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">🏎️ Performance</span></a>
   </div>
 </li>
@@ -217,43 +220,226 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">💻 Compute</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <a href="../../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠  Insights</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../qmd/compute/cpu-memory/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CPU memory</span></a>
+  <a href="../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🪖 The AI Battlefield</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏋️  Training</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/model-parallelism/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Model Parallelism</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/checkpoints/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checkpoints</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/performance/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Tune Up For The Best Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding Training Loss Patterns</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Networking Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Benchmarks Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Disabling NVLink Benchmark</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦  Storage</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Benchmarks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">💻 Compute</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/compute/cpu/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">CPU</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/compute/cpu-memory/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CPU memory</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/compute/accelerator/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Accelerators</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
  <span class="menu-text">Nvidia</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/compute/accelerator/nvidia/debug.html" class="sidebar-item-text sidebar-link">
@@ -268,13 +454,59 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🐛  Debugging</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <a href="../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🎻  Orchestration</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in SLURM Environment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Administration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Launchers with SLURM</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SLURM for users</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🐛  Debugging</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/debug/tiny-scripts/index.html" class="sidebar-item-text sidebar-link">
@@ -319,229 +551,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </li>
       </ul>
   </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/insights/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🧠  Insights</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/insights/ai-battlefield.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🪖 The AI Battlefield</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🛜 Network</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Networking Benchmarks</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Network Benchmarks Results</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Disabling NVLink Benchmark</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🎻  Orchestration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working in SLURM Environment</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM Administration</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/launchers/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Launchers with SLURM</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/performance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM Performance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/orchestration/slurm/users.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SLURM for users</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">📦  Storage</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
- <span class="menu-text">Benchmarks</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
- <span class="menu-text">Results</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">fio benchmark results for hope on 2023-12-20-14:37:02</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/training/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🏋️  Training</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/dtype.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tensor precision / Data types</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/hparams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Selecting Training Hyper-Parameters And Model Initializations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/checkpoints/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checkpoints</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Fault Tolerance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/model-parallelism/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Model Parallelism</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/performance/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Software Tune Up For The Best Performance</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reproducibility</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/re-train-hub-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Re-train HF Hub Models From Scratch Using Finetuning Examples</span></a>
-  </div>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/training/instabilities/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Avoiding, Recovering From and Understanding Instabilities</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Understanding Training Loss Patterns</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -552,7 +561,9 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#subsections" id="toc-subsections" class="nav-link active" data-scroll-target="#subsections">Subsections</a></li>
+  <li><a href="#accelerators" id="toc-accelerators" class="nav-link active" data-scroll-target="#accelerators">Accelerators</a>
+  <ul class="collapse">
+  <li><a href="#subsections" id="toc-subsections" class="nav-link" data-scroll-target="#subsections">Subsections</a></li>
   <li><a href="#birds-eye-view-on-the-high-end-accelerator-reality" id="toc-birds-eye-view-on-the-high-end-accelerator-reality" class="nav-link" data-scroll-target="#birds-eye-view-on-the-high-end-accelerator-reality">Bird’s eye view on the high end accelerator reality</a></li>
   <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary">Glossary</a></li>
   <li><a href="#the-most-important-thing-to-understand" id="toc-the-most-important-thing-to-understand" class="nav-link" data-scroll-target="#the-most-important-thing-to-understand">The most important thing to understand</a></li>
@@ -567,7 +578,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#cloud-and-in-house-accelerators" id="toc-cloud-and-in-house-accelerators" class="nav-link" data-scroll-target="#cloud-and-in-house-accelerators">Cloud and in-house accelerators</a></li>
   <li><a href="#in-house-accelerator-clusters" id="toc-in-house-accelerator-clusters" class="nav-link" data-scroll-target="#in-house-accelerator-clusters">In-house accelerator clusters</a></li>
   <li><a href="#cloud-only-solutions" id="toc-cloud-only-solutions" class="nav-link" data-scroll-target="#cloud-only-solutions">Cloud-only solutions</a></li>
-  <li><a href="#prices" id="toc-prices" class="nav-link" data-scroll-target="#prices">Prices</a></li>
+  <li><a href="#how-to-get-the-best-price" id="toc-how-to-get-the-best-price" class="nav-link" data-scroll-target="#how-to-get-the-best-price">How to get the best price</a></li>
   </ul></li>
   <li><a href="#accelerators-in-detail" id="toc-accelerators-in-detail" class="nav-link" data-scroll-target="#accelerators-in-detail">Accelerators in detail</a>
   <ul class="collapse">
@@ -587,15 +598,15 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
   <li><a href="#cooling" id="toc-cooling" class="nav-link" data-scroll-target="#cooling">Cooling</a></li>
   </ul></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/compute/accelerator/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../qmd/compute/index.html">💻 Compute</a></li><li class="breadcrumb-item"><a href="../../../qmd/compute/accelerator/index.html">Accelerators</a></li></ol></nav><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/index.qmd"><i class="bi"></i></button></div></div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../qmd/compute/index.html">💻 Compute</a></li><li class="breadcrumb-item"><a href="../../../qmd/compute/accelerator/index.html">Accelerators</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Accelerators</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/index.qmd"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -618,7 +629,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </header>
 
 
-<p>XXX: This chapter is a super-early WIP</p>
+<section id="accelerators" class="level1">
+<h1>Accelerators</h1>
 <p>Compute accelerators are the workhorses of the ML training. At the beginning there were just GPUs. But now there are also TPUs, IPUs, FPGAs, HPUs, QPUs, RDUs and more are being invented.</p>
 <p>There exist two main ML workloads - training and inference. There is also the finetuning workload which is usually the same as training, unless a much lighter <a href="https://arxiv.org/abs/2106.09685">LORA-style</a> finetuning is performed. The latter requires significantly fewer resources and time than normal finetuning.</p>
 <p>In language models during inference the generation is performed in a sequence - one token at a time. So it has to repeat the same <code>forward</code> call thousands of times one smallish <code>matmul</code> (matrix multiplication or GEMM) at a time. And this can be done on either an accelerator, like GPU, or some of the most recent CPUs, that can handle inference quite efficiently.</p>
@@ -632,13 +644,13 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </section>
 <section id="birds-eye-view-on-the-high-end-accelerator-reality" class="level2">
 <h2 class="anchored" data-anchor-id="birds-eye-view-on-the-high-end-accelerator-reality">Bird’s eye view on the high end accelerator reality</h2>
-<p>While this might be changing in the future, unlike the consumer GPU market, as of this writing there aren’t that many high end accelerators, and if you rent on the cloud, most providers will have more or less the same few GPUs to offer.</p>
-<p>GPUs: - As of today, ML clouds/HPCs started transitioning from NVIDIA A100s to H100s and this is going to take some months due to the usual shortage of NVIDIA GPUs. - AMD’s MI250 started popping up here and there, but it’s unclear when it’ll be easy to access those. From a recent discussion with an AMD representative MI300 is not planned to be in general availability until some time in 2025, though some HPCs already plan to get them some time in 2024.</p>
-<p>HPU: - Intel’s Gaudi2 are starting to slowly emerge on Intel’s cloud</p>
+<p>While this might be changing in the future, unlike the consumer GPU market, as of this writing there aren’t that many high end accelerators, and if you rent on the cloud, most providers will have more or less the same few accelerators to offer.</p>
+<p>GPUs: - As of today, ML clouds/HPCs started transitioning from NVIDIA A100s to H100s and this is going to take some months due to the usual shortage of NVIDIA GPUs. - AMD’s MI250 started popping up here and there, but it’s unclear when it’ll be easy to access those. MI300X is promised to start being available already in March 2024 at some Tier 2 cloud providers.</p>
+<p>HPU: - Intel’s Gaudi2 are starting to slowly emerge on Intel’s cloud - there is a huge lineup. It’s also available on-premise simplementations via Supermicro, WiWynn, and soon others.</p>
 <p>IPU: - And there is Graphcore with their IPU offering. You can try these out in <a href="https://www.paperspace.com/graphcore">Paperspace</a> through their cloud notebooks.</p>
 <p>TPU: - Google’s TPUs are, of course, available but they aren’t the most desirable accelerators because you can only rent them, and the software isn’t quite easily convertible between GPUs and TPUs, and so many (most?) developers remain in the GPU land, since they don’t want to be locked into a hardware which is a Google monopoly.</p>
-<p>Pods and racks: - Cerebras’ WaferScale Engine (WSE) - SambaNova’s DataScale - dozens of different pod and rack configs that compose the aforementioned GPUs with super-fast interconnects.</p>
-<p>That’s about it as Q4-2023.</p>
+<p>On Pods and racks: - Cerebras’ WaferScale Engine (WSE) - SambaNova’s DataScale - dozens of different pod and rack configs that compose the aforementioned GPUs with super-fast interconnects.</p>
+<p>That’s about it as Q1-2024.</p>
 </section>
 <section id="glossary" class="level2">
 <h2 class="anchored" data-anchor-id="glossary">Glossary</h2>
@@ -683,8 +695,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <table class="table">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Data type</th>
-<th style="text-align: right;">TFLOPS</th>
+<th style="text-align: left;">Data type &nbsp;TFLOPS</th>
+<th style="text-align: right;">w/o Sparsity</th>
 <th style="text-align: right;">w/ Sparsity</th>
 </tr>
 </thead>
@@ -710,6 +722,11 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <td style="text-align: right;">624</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">FP8 Tensor Core</td>
+<td style="text-align: right;">624</td>
+<td style="text-align: right;">1248</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">INT8 Tensor Core</td>
 <td style="text-align: right;">624</td>
 <td style="text-align: right;">1248</td>
@@ -727,14 +744,15 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </figure>
 </div>
 <p><a href="https://developer.nvidia.com/blog/cuda-11-features-revealed/">source</a></p>
-<p>As you can see the difference in performance is non-linear due to <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#dim-quantization">the tile and wave quantization effects</a>.</p>
-<p>Let’s look at the TFLOPS specs across the high end accelerators:</p>
+<p>As you can see the difference in performance is non-linear due to <a href="../../training/performance#tile-and-wave-quantization">the tile and wave quantization effects</a>.</p>
+<p>Let’s look at the supported <a href="../../training/dtype.md">dtypes</a> and the corresponding theoretical peak TFLOPS specs across the high end accelerators (w/o sparsity):</p>
 <table class="table">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Accelerator / TFLOPS</th>
+<th style="text-align: left;">Accelerator &nbsp;TFLOPS</th>
 <th style="text-align: right;">fp32</th>
-<th style="text-align: right;">fp16</th>
+<th style="text-align: right;">tf32</th>
+<th style="text-align: right;">fp16/bf16</th>
 <th style="text-align: right;">fp8</th>
 <th style="text-align: right;">int8</th>
 </tr>
@@ -743,6 +761,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <tr class="odd">
 <td style="text-align: left;">NVIDIA A100 SXM</td>
 <td style="text-align: right;">19.5</td>
+<td style="text-align: right;">156.0</td>
 <td style="text-align: right;">312</td>
 <td style="text-align: right;">624</td>
 <td style="text-align: right;">624</td>
@@ -750,6 +769,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <tr class="even">
 <td style="text-align: left;">AMD MI250</td>
 <td style="text-align: right;">45.3</td>
+<td style="text-align: right;">X</td>
 <td style="text-align: right;">362</td>
 <td style="text-align: right;">X</td>
 <td style="text-align: right;">362</td>
@@ -757,12 +777,14 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <tr class="odd">
 <td style="text-align: left;">AMD MI250X</td>
 <td style="text-align: right;">47.9</td>
+<td style="text-align: right;">X</td>
 <td style="text-align: right;">383</td>
 <td style="text-align: right;">X</td>
 <td style="text-align: right;">383</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
 <td style="text-align: right;"></td>
@@ -771,63 +793,150 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <tr class="odd">
 <td style="text-align: left;">NVIDIA H100 SXM</td>
 <td style="text-align: right;">67.0</td>
+<td style="text-align: right;">494.5</td>
 <td style="text-align: right;">989</td>
 <td style="text-align: right;">1979</td>
 <td style="text-align: right;">1979</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">NVIDIA H200 SXM</td>
+<td style="text-align: right;">67.0</td>
+<td style="text-align: right;">494.5</td>
+<td style="text-align: right;">989</td>
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">1979</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">NVIDIA H100 PCIe</td>
 <td style="text-align: right;">51.0</td>
+<td style="text-align: right;">378.0</td>
 <td style="text-align: right;">756</td>
 <td style="text-align: right;">1513</td>
 <td style="text-align: right;">1513</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NVIDIA H100 dual NVL</td>
 <td style="text-align: right;">134.0</td>
+<td style="text-align: right;">989.5</td>
 <td style="text-align: right;">989</td>
 <td style="text-align: right;">3958</td>
 <td style="text-align: right;">3958</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">AMD MI300</td>
-<td style="text-align: right;">?</td>
-<td style="text-align: right;">?</td>
-<td style="text-align: right;">?</td>
-<td style="text-align: right;">?</td>
-</tr>
 <tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
+<td style="text-align: left;">AMD MI300X</td>
+<td style="text-align: right;">163.4</td>
+<td style="text-align: right;">653.7</td>
+<td style="text-align: right;">1300</td>
+<td style="text-align: right;">5220</td>
+<td style="text-align: right;">2600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Intel Gaudi2</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
+<td style="text-align: right;">V</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>Intel Gaudi2 doesn’t plan to publish TFLOPS specs as of this writing</li>
-</ul>
-<section id="achievable-peak-tflops" class="level4">
-<h4 class="anchored" data-anchor-id="achievable-peak-tflops">Achievable peak TFLOPS</h4>
-<p>The problem with the advertised peak TFLOPS is that they are <strong>very</strong> theoretical and can’t be achieved in practice even if all the perfect conditions have been provided. Each accelerator has its own realistic TFLOPS which is not advertised and there are anecdotal community reports that do their best to find the actual best value, but I’m yet to find any official reports.</p>
+<p>footnote: Intel Gaudi2 doesn’t plan to publish TFLOPS specs as of this writing, but it does support FP32, TF32, BF16, FP16 &amp; FP8, INT8 and INT16. This <a href="https://www.databricks.com/blog/llm-training-and-inference-intel-gaudi2-ai-accelerators">blog posts</a> reports measuring ~400TFLOPS for fp16/bf16.</p>
+<p>footnote: when looking at specs be very careful at which numbers you’re reading - many vendors often publish TFLOPS with sparsity, as they are ~2x bigger, but if they even indicate this they often do it in small print. I had to ask NVIDIA to add a note to their H100 spec that those numbers were w/ sparsity as they originally didn’t mention this important technical fact. And 99% of the time as of this writing you will be not using sparsity and thus the actual theoretical TFLOPs that you care for most of the time are w/o sparsity (i.e.&nbsp;the table above).</p>
+<p>footnote: also beware that if accelerator A publishes a higher TFLOPS than accelerator B, it doesn’t mean A is faster. These are theoretical numbers which not only can never be achieved in practice - the actual TFLOPS efficiency (HFU) can vary a lot from vendor to vendor or even for the same vendor’s different accelerator architectures.</p>
+<section id="maximum-achievable-flops" class="level4">
+<h4 class="anchored" data-anchor-id="maximum-achievable-flops">Maximum Achievable FLOPS</h4>
+<p>Theoretical peak FLOPS is what gets published on the accelerator’s spec. And it’s calculated as:</p>
+<p><code>Theoretical FLOPS = compute_unit_clock_speed * flops_per_clock_cycle_per_compute_unit * num_compute_units</code></p>
+<p>where: - <code>compute_unit_clock_speed</code> - how many times the compute unit clock ticks per second in Hz - <code>flops_per_clock_cycle_per_compute_unit</code> - the number of operations the compute unit can execute per clock cycle. - <code>num_compute_units</code> - how many units there is in the device</p>
+<p>The problem with the advertised theoretical peak FLOPS is that they are <strong>very</strong> theoretical and can’t be achieved in practice even if all the perfect conditions have been provided. Each accelerator has its own realistic FLOPS which is not advertised and there are anecdotal community reports that do their best to find the actual best value, but I’m yet to find any official reports.</p>
 <p>If you find solid reports (papers?) showing the actual TFLOPS one can expect from one or more of the high end accelerators discussed in this chapter please kindly submit a PR with this information. The key is to have a reference to a source that the reader can validate the proposed information with.</p>
-<p>To provide a numerical sense to what I’m talking about is let’s take A100 with its 312 TFLOPS bf16 peak performance in the specs of this card. Until the invent of FlashAttention it was known that 150TFLOPS was close to the highest one could get for half precision mixed precision, with FlashAttention, it’s around 180TFLOPS. This is, of course, measured for training LLMs where the network and IO are involved which create additional overheads. So here the peak performance probably lays somewhere between 200 and 300 TFLOPS.</p>
+<p>To provide a numerical sense to what I’m talking about is let’s take A100 with its 312 TFLOPS bf16 peak performance in the specs of this card. Until the invent of FlashAttention it was known that 150TFLOPS was close to the highest one could get for fp16/bf16 mixed precision regime. And with FlashAttention it’s around 180TFLOPS. This is, of course, measured for training LLMs where the network and IO are involved which create additional overheads. So here the maximum achievable peak performance probably lays somewhere between 200 and 300 TFLOPS.</p>
 <p>It should be possible to calculate the actual peak TFLOPS by doing a perfectly aligned max-size matrices <code>matmul</code> measured on a single accelerator.</p>
 <p>XXX: write a small program to do exactly dynamically figuring out the perfect shapes based on <a href="https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#dim-quantization">the tile and wave quantization effects</a> and max sizes (how?) so that the benchmark isn’t hardcoded to a particular accelerator.</p>
 </section>
 </section>
 <section id="accelerator-memory-size-and-speed" class="level3">
 <h3 class="anchored" data-anchor-id="accelerator-memory-size-and-speed">Accelerator memory size and speed</h3>
-<p>Typically the more on-chip memory the accelerator has the better. At any given time usually most of the model weights aren’t being used as they wait for their turn to be processed and thus large memory allows more of the model to be on the accelerator memory and immediately available for access and update. When there is not enough memory, sometimes the model has to be split across multiple accelerators, or offloaded to CPU and/or disk.</p>
-<p>Current high end accelerators (some aren’t GA yet):</p>
+<p>The accelerators use <a href="https://en.wikipedia.org/wiki/High_Bandwidth_Memory">High Bandwidth Memory</a> (HBM) which is a 3D version of SDRAM memory. For example, A100-SXM comes with HBM2 at 1.6TBps, and H100-SXM comes with HBM3 at 3.35TBps.</p>
+<p>Here are the specs:</p>
 <table class="table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 17%">
+<col style="width: 23%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Gen</th>
+<th style="text-align: right;">Data Rate<br> (Gbps)</th>
+<th style="text-align: right;">Bandwidth per<br> Device (GBps)</th>
+<th style="text-align: right;">Stack<br> Height</th>
+<th style="text-align: right;">Max. DRAM<br> Capacity (GB)</th>
+<th style="text-align: right;">Max. Device<br> Capacity (GB)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">HBM</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HBM2</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">256</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HBM2e</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">461</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">6.4</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HBM3e</td>
+<td style="text-align: right;">9.6</td>
+<td style="text-align: right;">1229</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">64</td>
+</tr>
+</tbody>
+</table>
+<p>Since HBM is a stack of multiple DRAM chips, the <em>Stack Height</em> specifies how many chips are per device.</p>
+<p>Typically the more on-device memory the accelerator has the better. At any given time usually most of the model weights aren’t being used as they wait for their turn to be processed and thus large memory allows more of the model to be on the accelerator memory and immediately available for access and update. When there is not enough memory, sometimes the model has to be split across multiple accelerators, or offloaded to CPU and/or disk.</p>
+<p>Here are the memory specs for the recent high end accelerators (some aren’t GA yet):</p>
+<table class="table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 27%">
+<col style="width: 8%">
+<col style="width: 32%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Accelerator</th>
-<th style="text-align: right;">Memory<br> in GBs</th>
+<th style="text-align: right;">Memory<br> (GBs)</th>
 <th style="text-align: left;">Type</th>
-<th style="text-align: right;">Speed<b> in TB/s</b></th>
+<th style="text-align: right;">Bandwidth<br> (TBps)</th>
 </tr>
 </thead>
 <tbody>
@@ -835,7 +944,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <td style="text-align: left;">NVIDIA A100 SXM</td>
 <td style="text-align: right;">80</td>
 <td style="text-align: left;">HBM2e</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.00</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NVIDIA H100 SXM</td>
@@ -847,31 +956,55 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <td style="text-align: left;">NVIDIA H100 PCIe</td>
 <td style="text-align: right;">80</td>
 <td style="text-align: left;">HBM3</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.00</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NVIDIA H100 dual NVL</td>
 <td style="text-align: right;">188</td>
 <td style="text-align: left;">HBM3</td>
-<td style="text-align: right;">7.8</td>
+<td style="text-align: right;">7.80</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">NVIDIA GH200 SXM (1)</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: left;">HBM3</td>
+<td style="text-align: right;">4.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NVIDIA GH200 SXM (2)</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: left;">HBM3e</td>
+<td style="text-align: right;">4.80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NVIDIA H200 SXM</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: left;">HBM3e</td>
+<td style="text-align: right;">4.80</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">AMD MI250</td>
 <td style="text-align: right;">128</td>
 <td style="text-align: left;">HBM2e</td>
 <td style="text-align: right;">3.28</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">AMD MI250X</td>
 <td style="text-align: right;">128</td>
 <td style="text-align: left;">HBM2e</td>
 <td style="text-align: right;">3.28</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">AMD MI300</td>
+<tr class="even">
+<td style="text-align: left;">AMD MI300X</td>
 <td style="text-align: right;">192</td>
 <td style="text-align: left;">HBM3</td>
-<td style="text-align: right;"></td>
+<td style="text-align: right;">5.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Intel Gaudi2</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: left;">HBM2e</td>
+<td style="text-align: right;">2.45</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"></td>
@@ -881,11 +1014,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
-<ul>
-<li>XXX: add other accelerators</li>
-</ul>
-<p>Memory speed is, of course, very important since if it’s not fast enough than the compute ends up idling waiting for the data to be moved to and from the memory.</p>
-<p>The GPUs use <a href="https://en.wikipedia.org/wiki/High_Bandwidth_Memory">High Bandwidth Memory</a> (HBM) which is a 3D version of SDRAM memory. For example, A100-SXM comes with HBM2 at 1.6TB/sec, and H100-SXM comes with HBM3 at 3.35TB/s.</p>
+<p>Memory speed (bandwidth) is, of course, very important since if it’s not fast enough than the compute ends up idling waiting for the data to be moved to and from the memory.</p>
 </section>
 <section id="heat" class="level3">
 <h3 class="anchored" data-anchor-id="heat">Heat</h3>
@@ -898,9 +1027,9 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <section id="cloud-and-in-house-accelerators" class="level3">
 <h3 class="anchored" data-anchor-id="cloud-and-in-house-accelerators">Cloud and in-house accelerators</h3>
 <p>Most common accelerators that can be either rented on compute clouds or purchased:</p>
-<p>NVIDIA: - <a href="https://www.nvidia.com/en-us/data-center/a100/#specifications">A100</a> - huge availability but already getting outdated. - <a href="https://www.nvidia.com/en-us/data-center/h100">H100</a> - 2-3x faster than A100 (half precision), 6x faster for fp8, slowly emerging on all major clouds. - <a href="https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/">GH200</a> - 2 chips on one card - (1) H100 w/ 96GB HBM3 or 144GB HBM3e + (2) Grace CPU w/ 624GB RAM - availability is unknown.</p>
-<p>AMD: - <a href="https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html">MI250</a> ~= A100 - very few clouds have them - MI300 ~= H100 - don’t expect until late-2024 or even 2025 to be GA</p>
-<p>Intel: - <a href="https://habana.ai/products/gaudi2/">Gaudi2</a> ~= H100 - Currently there is a very low availability on <a href="https://cloud.google.com">cloud.google.com</a> with a long waiting list which supposedly should be reduced in Q1-2024. AWS has the older Gaudi1 via <a href="https://aws.amazon.com/ec2/instance-types/dl1/">DL1 instances</a>.</p>
+<p>NVIDIA: - <a href="https://www.nvidia.com/en-us/data-center/a100/#specifications">A100</a> - huge availability but already getting outdated. - <a href="https://www.nvidia.com/en-us/data-center/h100">H100</a> - 2-3x faster than A100 (half precision), 6x faster for fp8, becoming available on all Tier-1 compute clouds. - <a href="https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/">GH200</a> - 2 chips on one card - (1) H100 w/ 96GB HBM3 or 144GB HBM3e + (2) Grace CPU w/ 624GB RAM - first units have been reported to become available.</p>
+<p>AMD: - <a href="https://www.amd.com/en/products/accelerators/instinct/mi200/mi250.html">MI250</a> ~= A100 - very few clouds have them - <a href="https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html">MI300</a> ~= H100 - just starting to emerge - and mainly on Tier-2 clouds (lots of new startups).</p>
+<p>Intel: - <a href="https://habana.ai/products/gaudi2/">Gaudi2</a> ~= H100 - <a href="https://docs.habana.ai/en/latest/Gaudi_Overview/Gaudi_Architecture.html">spec</a> - <a href="https://cloud.google.com">Currently there is a very low availability on cloud.google.com</a> with a long waiting list which supposedly should be reduced in Q1-2024. AWS has the older Gaudi1 via <a href="https://aws.amazon.com/ec2/instance-types/dl1/">DL1 instances</a>.</p>
 <p>Graphcore: - <a href="https://www.graphcore.ai/products/ipu">IPU</a> - available via <a href="https://www.paperspace.com/graphcore">Paperspace</a></p>
 <p>SambaNova: - <a href="https://sambanova.ai/products/datascale/">DataScale SN30</a></p>
 </section>
@@ -914,10 +1043,13 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>Google - <a href="https://cloud.google.com/tpu">TPUs</a> - lock-in, can’t switch to another vendor like NVIDIA -&gt; AMD</p>
 <p>Cerebras: - <a href="https://www.cerebras.net/product-cloud/">Cloud</a></p>
 </section>
-<section id="prices" class="level3">
-<h3 class="anchored" data-anchor-id="prices">Prices</h3>
-<p>Remember that the advertised prices are almost always open to negotiations as long as you’re willing to buy/rent in bulk and if renting then for a long time (i.e.&nbsp;years!). When do you will discover that the actual price that you end up paying could be many times less than the original public price. Some cloud providers already include the discount as you choose a longer commitment on their website, but it’s always the best to negotiate directly with their sales team. In addition or instead of a $$-discount you could be offered some useful features/upgrades for free.</p>
+<section id="how-to-get-the-best-price" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-get-the-best-price">How to get the best price</h3>
+<p>Remember that the advertised prices are almost always open to negotiations as long as you’re willing to buy/rent in bulk or if renting for a 1-3 years. What you will discover is that the actual price that you end up paying could be many times less than the advertised “public” price. Some cloud providers already include the discount as you choose a longer commitment on their website, but it’s always the best to negotiate directly with their sales team. In addition or instead of a $$-discount you could be offered some useful features/upgrades for free.</p>
+<p>If your company has venture capital investors - it could help a lot to mention that, as then the cloud provider knows you are likely to buy more compute down the road and more likely to discount more.</p>
+<p>Tier 2 clouds are likely to give better prices than Tier 1. Tier 1 as of this writing is AWS, OCI, Azure and GCP.</p>
 <p>For the baseline prices it should be easy to find a few good sites that provide an up-to-date public price comparisons across clouds - just search for something like <a href="https://www.google.com/search?q=cloud+gpu+pricing+comparison">cloud gpu pricing comparison</a>.</p>
+<p>When shopping for a solution please remember that it’s not enough to rent the most powerful accelerator. You also need fast <a href="../../network#intra-node-networking">intra-node</a> and <a href="../../network#inter-node-networking">inter-node</a> connectivity and sufficiently fast <a href="../../storage">storage</a> - without which the expensive accelerators will idle waiting for data to arrive and you could be wasting a lot money and losing time.</p>
 </section>
 </section>
 <section id="accelerators-in-detail" class="level2">
@@ -955,13 +1087,14 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </section>
 <section id="api" class="level2">
 <h2 class="anchored" data-anchor-id="api">API</h2>
+<p>Which software is needed to deploy the high end GPUs?</p>
 <section id="nvidia-1" class="level3">
 <h3 class="anchored" data-anchor-id="nvidia-1">NVIDIA</h3>
-<p>uses CUDA</p>
+<p>NVIDIA GPUs run on <a href="https://developer.nvidia.com/cuda-toolkit">CUDA</a></p>
 </section>
 <section id="amd-1" class="level3">
 <h3 class="anchored" data-anchor-id="amd-1">AMD</h3>
-<p>uses ROCm</p>
+<p>AMD GPUs run on <a href="https://www.amd.com/en/products/software/rocm.html">ROCm</a> - note that PyTorch you can use CUDA-based software on ROCm-based GPUs! So it should be trivial to switch to the recent AMD MI250, MI300X, and other emerging ones.</p>
 </section>
 <section id="intel-gaudi" class="level3">
 <h3 class="anchored" data-anchor-id="intel-gaudi">Intel Gaudi</h3>
@@ -995,6 +1128,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>It’s hard to tell the exact best temperature to strive for when a GPU is heavily loaded, but probably anything under +80C is good, but lower is better - perhaps 70-75C is an excellent range to be in. The throttling down is likely to start at around 84-90C. But other than throttling performance a prolonged very high temperature is likely to reduce the lifespan of a GPU.</p>
 
 
+</section>
 </section>
 </section>
 
@@ -1593,8 +1727,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../qmd/compute/cpu/index.html" class="pagination-link  aria-label=" cpu"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">CPU</span>
+      <a href="../../../qmd/compute/cpu-memory/index.html" class="pagination-link  aria-label=" cpu="" memory"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">CPU memory</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1613,7 +1747,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>2024</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/compute/accelerator/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
-<p><a href="https://github.com/saforem2/ml-engineering">{{&lt; fa brands github &gt;}}</a></p>
+<p><a href="https://github.com/saforem2/ml-engineering"><i class="fa-brands fa-github" aria-label="github"></i></a></p>
 </div>
   </div>
 </footer>

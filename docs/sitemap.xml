@@ -22,11 +22,11 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/training/fault-tolerance/index.html</loc>
-    <lastmod>2024-02-20T23:14:48.622Z</lastmod>
+    <lastmod>2024-02-20T23:55:24.038Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/training/dtype.html</loc>
-    <lastmod>2024-02-20T23:14:48.621Z</lastmod>
+    <lastmod>2024-02-20T23:52:25.281Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/testing/index.html</loc>
@@ -62,7 +62,7 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/insights/ai-battlefield.html</loc>
-    <lastmod>2024-02-20T23:14:48.613Z</lastmod>
+    <lastmod>2024-02-20T23:55:31.550Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/torch-distributed-hanging-solutions.html</loc>
@@ -94,7 +94,7 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/compute/accelerator/index.html</loc>
-    <lastmod>2024-02-20T23:14:48.607Z</lastmod>
+    <lastmod>2024-02-20T23:59:06.619Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/compute/cpu-memory/index.html</loc>
@@ -130,7 +130,7 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/network/index.html</loc>
-    <lastmod>2024-02-20T23:14:48.617Z</lastmod>
+    <lastmod>2024-02-20T23:57:08.819Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/orchestration/slurm/admin.html</loc>
@@ -142,7 +142,7 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/orchestration/slurm/users.html</loc>
-    <lastmod>2024-02-20T23:14:48.619Z</lastmod>
+    <lastmod>2024-02-20T23:44:19.909Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/resources/index.html</loc>
@@ -183,5 +183,13 @@
   <url>
     <loc>https://samforeman.me/incoming.html</loc>
     <lastmod>2024-02-20T23:14:48.606Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samforeman.me/qmd/training/dtype-old.html</loc>
+    <lastmod>2024-02-20T23:14:48.621Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samforeman.me/qmd/performance-old/index.html</loc>
+    <lastmod>2024-02-20T23:14:48.619Z</lastmod>
   </url>
 </urlset>

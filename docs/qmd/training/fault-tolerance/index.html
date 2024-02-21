@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../qmd/training/performance/index.html" rel="next">
-<link href="../../../qmd/training/reproducibility/index.html" rel="prev">
+<link href="../../../qmd/training/fault-tolerance/index-old.html" rel="next">
+<link href="../../../qmd/training/instabilities/training-loss-patterns.html" rel="prev">
 <link href="../../.././favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../../site_libs/quarto-html/popper.min.js"></script>
@@ -196,6 +230,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏎️ Performance</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../qmd/resources/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">📓 Resources</span></a>
   </div>
@@ -210,12 +250,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/transformers/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">🤗 Transformers</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/performance/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🏎️ Performance</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -252,6 +286,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/dtype-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tensor precision / Data types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../qmd/training/emulate-multi-node.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Emulate a multi-node setup using just a single node</span></a>
   </div>
@@ -278,12 +318,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/training/reproducibility/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Reproducibility</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Fault Tolerance</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -315,35 +349,52 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/training/fault-tolerance/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Fault Tolerance</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../qmd/training/fault-tolerance/index-old.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fault Tolerance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">🛜 Network</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Networking Benchmarks</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Network Benchmarks Results</span></a>
+            <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Networking Benchmarks</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/network/benchmarks/results/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Network Benchmarks Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/network/benchmarks/results/disable-nvlink.html" class="sidebar-item-text sidebar-link">
@@ -360,29 +411,29 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/storage/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">📦  Storage</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
- <span class="menu-text">Benchmarks</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
- <span class="menu-text">Results</span></a>
+ <span class="menu-text">Benchmarks</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/storage/benchmarks/results/hope-2023-12-20-14-37-02-331702-summary.html" class="sidebar-item-text sidebar-link">
@@ -399,11 +450,11 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/compute/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">💻 Compute</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/compute/cpu/index.html" class="sidebar-item-text sidebar-link">
@@ -420,20 +471,20 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/compute/accelerator/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Accelerators</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
- <span class="menu-text">Nvidia</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth3 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false">
+ <span class="menu-text">Nvidia</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/compute/accelerator/nvidia/debug.html" class="sidebar-item-text sidebar-link">
@@ -450,20 +501,20 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/orchestration/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">🎻  Orchestration</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working in SLURM Environment</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../qmd/orchestration/slurm/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working in SLURM Environment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/orchestration/slurm/admin.html" class="sidebar-item-text sidebar-link">
@@ -496,11 +547,11 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/debug/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">🐛  Debugging</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../qmd/debug/tiny-scripts/index.html" class="sidebar-item-text sidebar-link">
@@ -571,7 +622,13 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#low-disk-space-alerts" id="toc-low-disk-space-alerts" class="nav-link" data-scroll-target="#low-disk-space-alerts">Low disk space alerts</a></li>
   <li><a href="#dealing-with-slow-memory-leaks" id="toc-dealing-with-slow-memory-leaks" class="nav-link" data-scroll-target="#dealing-with-slow-memory-leaks">Dealing with slow memory leaks</a></li>
   </ul></li>
-  <li><a href="#dealing-with-forced-resource-preemption" id="toc-dealing-with-forced-resource-preemption" class="nav-link" data-scroll-target="#dealing-with-forced-resource-preemption">Dealing with forced resource preemption</a></li>
+  <li><a href="#dealing-with-forced-job-preemption" id="toc-dealing-with-forced-job-preemption" class="nav-link" data-scroll-target="#dealing-with-forced-job-preemption">Dealing with forced job preemption</a>
+  <ul class="collapse">
+  <li><a href="#approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process" id="toc-approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process" class="nav-link" data-scroll-target="#approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process">Approach A. Tell the program at launch time when it should start the exiting process:</a></li>
+  <li><a href="#approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end" id="toc-approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end" class="nav-link" data-scroll-target="#approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end">Approach B.1. Sending a custom signal X minutes before the end</a></li>
+  <li><a href="#approach-b.2.-choosing-which-process-to-send-the-signal-to" id="toc-approach-b.2.-choosing-which-process-to-send-the-signal-to" class="nav-link" data-scroll-target="#approach-b.2.-choosing-which-process-to-send-the-signal-to">Approach B.2. Choosing which process to send the signal to</a></li>
+  <li><a href="#qos-based-slurm-preemption" id="toc-qos-based-slurm-preemption" class="nav-link" data-scroll-target="#qos-based-slurm-preemption">QoS-based SLURM preemption</a></li>
+  </ul></li>
   <li><a href="#contributors" id="toc-contributors" class="nav-link" data-scroll-target="#contributors">Contributors</a></li>
   </ul></li>
   </ul>
@@ -623,33 +680,33 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="queue-up-multiple-training-jobs">Queue up multiple training jobs</h2>
 <p>The next crucial step is to ensure that if the training crashed, there is a new job lined up to take place of the previous one.</p>
 <p>Therefore, when a training is started, instead of using:</p>
-<pre><code>sbatch train.slurm</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> train.slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You’d want to replace that with:</p>
-<pre><code>sbatch --array=1-10%1 train.slurm</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--array</span><span class="op">=</span>1-10%1 train.slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This tells SLURM to book a job array of 10 jobs, and if one of the job completes normally or it crashes, it’ll immediately schedule the next one.</p>
 <p>footnote: <code>%1</code> in <code>--array=1-10%1</code> tells SLURM to launch the job array serially - one job at a time.</p>
 <p>If you have already started a training without this provision, it’s easy to fix without aborting the current job by using the <code>--dependency</code> argument:</p>
-<pre><code>sbatch --array=1-10%1 --dependency=CURRENTLY_RUNNING_JOB_ID train.slurm</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--array</span><span class="op">=</span>1-10%1 <span class="at">--dependency</span><span class="op">=</span>CURRENTLY_RUNNING_JOB_ID train.slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So if your launched job looked like this:</p>
-<pre><code>$ squeue -u `whoami` -o "%.10i %9P %20j %.8T %.10M %.8l %.6D %.20S %R"
-     JOBID PARTITION NAME             STATE       TIME   TIME_LIM    NODES  START_TIME     NODELIST(REASON)
-       87    prod    my-training-10b  RUNNING 2-15:52:19 1-16:00:00   64    2023-10-07T01:26:28 node-[1-63]</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> squeue <span class="at">-u</span> <span class="kw">`</span><span class="fu">whoami</span><span class="kw">`</span> <span class="at">-o</span> <span class="st">"%.10i %9P %20j %.8T %.10M %.8l %.6D %.20S %R"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="ex">JOBID</span> PARTITION NAME             STATE       TIME   TIME_LIM    NODES  START_TIME     NODELIST<span class="er">(</span><span class="ex">REASON</span><span class="kw">)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="ex">87</span>    prod    my-training-10b  RUNNING 2-15:52:19 1-16:00:00   64    2023-10-07T01:26:28 node-<span class="pp">[</span><span class="ss">1</span><span class="pp">-</span><span class="ss">63</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You will not that the current’s <code>JOBID=87</code> and now you can use it in:</p>
-<pre><code>sbatch --array=1-10%1 --dependency=87 train.slurm</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--array</span><span class="op">=</span>1-10%1 <span class="at">--dependency</span><span class="op">=</span>87 train.slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and then the new status will appear as:</p>
-<pre><code>$ squeue -u `whoami` -o "%.10i %9P %20j %.8T %.10M %.8l %.6D %.20S %R"
-     JOBID PARTITION NAME             STATE       TIME   TIME_LIM    NODES  START_TIME     NODELIST(REASON)
-       87    prod    my-training-10b  RUNNING 2-15:52:19 1-16:00:00   64    2023-10-07T01:26:28 node-[1-63]
- 88_[10%1]   prod    my-training-10b  PENDING       0:00 1-16:00:00   64                    N/A (Dependency)</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> squeue <span class="at">-u</span> <span class="kw">`</span><span class="fu">whoami</span><span class="kw">`</span> <span class="at">-o</span> <span class="st">"%.10i %9P %20j %.8T %.10M %.8l %.6D %.20S %R"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     <span class="ex">JOBID</span> PARTITION NAME             STATE       TIME   TIME_LIM    NODES  START_TIME     NODELIST<span class="er">(</span><span class="ex">REASON</span><span class="kw">)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="ex">87</span>    prod    my-training-10b  RUNNING 2-15:52:19 1-16:00:00   64    2023-10-07T01:26:28 node-<span class="pp">[</span><span class="ss">1</span><span class="pp">-</span><span class="ss">63</span><span class="pp">]</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="ex">88_[10%1]</span>   prod    my-training-10b  PENDING       0:00 1-16:00:00   64                    N/A <span class="er">(</span><span class="ex">Dependency</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So you can see that an array of 10 jobs (<code>88_[10%1]</code>) was appended to be started immediately after the current job (<code>87</code>) completes or fails.</p>
 <p>Granted that if the condition that lead to the crash is still there the subsequent job will fail as well. For example, if the storage device is full, no amount of restarts will allow the training to proceed. And we will discuss shortly how to avoid this situation.</p>
 <p>But since the main reason for training crashes is failing GPUs, ensuring that faulty nodes are automatically removed and the new job starts with a new set of nodes makes for a smooth recovery from the crash.</p>
 <p>In the SLURM lingo, the removed nodes are given a new status called <code>drained</code>. Here is an example of a hypothetical SLURM cluster:</p>
-<pre><code>$ sinfo
-PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-prod*       up   infinite       4  drain node-[0-3]
-prod*       up   infinite      47  alloc node-[4-51]
-prod*       up   infinite      23   idle node-[52-73]</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sinfo</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">PARTITION</span> AVAIL  TIMELIMIT  NODES  STATE NODELIST</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">prod*</span>       up   infinite       4  drain node-<span class="pp">[</span><span class="ss">0</span><span class="pp">-</span><span class="ss">3</span><span class="pp">]</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">prod*</span>       up   infinite      47  alloc node-<span class="pp">[</span><span class="ss">4</span><span class="pp">-</span><span class="ss">51</span><span class="pp">]</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">prod*</span>       up   infinite      23   idle node-<span class="pp">[</span><span class="ss">52</span><span class="pp">-</span><span class="ss">73</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here we have 47 nodes being used (<code>alloc</code>), 23 available (<code>idle</code>) and 4 unavailable (<code>drained</code>).</p>
 <p>The sysadmin is expected to periodically check the drained nodes, fix or replace them and then make them again available to be used by changing their state to <code>idle</code>.</p>
 <p>The other approach is to daisy-chain jobs via <code>--dependency</code> as explained <a href="../../orchestration/slurm/users.md#request-allocation-via-dependency">here</a>. Both of these approaches could also be combined.</p>
@@ -685,7 +742,7 @@ prod*       up   infinite      23   idle node-[52-73]</code></pre>
 <h3 class="anchored" data-anchor-id="scheduled-watchdogs">Scheduled Watchdogs</h3>
 <p>Before we discuss the various watchdogs it’s critical that you have a mechanism that allows you to run scheduled jobs. In the Unix world this is implemented by the <a href="https://en.wikipedia.org/wiki/Cron"><code>crontab</code> facility</a>.</p>
 <p>Here is an example of how <code>~/bin/watch-fs.sh</code> can be launched every hour:</p>
-<pre><code>0 * * * * ~/bin/watch-fs.sh</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">0</span> <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span> <span class="pp">*</span> ~/bin/watch-fs.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The link above explains how to configure a crontab job to run at various other frequencies.</p>
 <p>To setup a crontab, execute <code>crontab -e</code> and check which jobs are scheduled <code>crontab -l</code>.</p>
 <p>The reason I don’t go into many details is because many SLURM environments don’t provide access to the <code>crontab</code> facility. And therefore one needs to use other approaches to scheduling jobs.</p>
@@ -703,14 +760,14 @@ prod*       up   infinite      23   idle node-[52-73]</code></pre>
 <p>The most obvious watchdog is one which checks that there is a training SLURM job running or more are scheduled to run.</p>
 <p>Here is an example <a href="slurm-status.py">slurm-status.py</a> that was used during BLOOM-176B training. This watchdog was sending an email if a job was detected to be neither running nor scheduled and it was also piping its check results into the main training’s log file. As we used <a href="../../orchestration/slurm/users.md#crontab-emulation">Crontab Emulation</a>, we simply needed to drop <a href="slurm-status.slurm">slurm-status.slurm</a> into the <code>cron/cron.hourly/</code> folder and the previously launched SLURM crontab emulating scheduler would launch this check approximately once an hour.</p>
 <p>The key part of the SLURM job is:</p>
-<pre><code>tools/slurm-status.py --job-name $WATCH_SLURM_NAME 2&gt;&amp;1 | tee -a $MAIN_LOG_FILE</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tools/slurm-status.py</span> <span class="at">--job-name</span> <span class="va">$WATCH_SLURM_NAME</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">$MAIN_LOG_FILE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which tells the script which job name to watch for, and you can also see that it logs into a log file.</p>
 <p>For example, if you launched the script with:</p>
-<pre><code>tools/slurm-status.py --job-name my-training-10b</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tools/slurm-status.py</span> <span class="at">--job-name</span> my-training-10b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and the current status report shows:</p>
-<pre><code>$ squeue -u `whoami` -o "%.10i %9P %20j %.8T %.10M %.8l %.6D %.20S %R"
-  JOBID    PARTITION NAME             STATE       TIME   TIME_LIM    NODES  START_TIME     NODELIST(REASON)
-    87     prod      my-training-10b  RUNNING 2-15:52:19 1-16:00:00  64    2023-10-07T01:26:28 node-[1-63]</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> squeue <span class="at">-u</span> <span class="kw">`</span><span class="fu">whoami</span><span class="kw">`</span> <span class="at">-o</span> <span class="st">"%.10i %9P %20j %.8T %.10M %.8l %.6D %.20S %R"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">JOBID</span>    PARTITION NAME             STATE       TIME   TIME_LIM    NODES  START_TIME     NODELIST<span class="er">(</span><span class="ex">REASON</span><span class="kw">)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">87</span>     prod      my-training-10b  RUNNING 2-15:52:19 1-16:00:00  64    2023-10-07T01:26:28 node-<span class="pp">[</span><span class="ss">1</span><span class="pp">-</span><span class="ss">63</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>then all is good. But if <code>my-training-10b</code> job doesn’t show the alert will be sent.</p>
 <p>You can now adapt these scripts to your needs with minimal changes of editing the path and email addresses. And if it wasn’t you who launched the job then replace <code>whoami</code> with the name of the user who launched it. <code>whoami</code> only works if it was you who launched it.</p>
 </section>
@@ -739,43 +796,43 @@ prod*       up   infinite      23   idle node-[52-73]</code></pre>
 <p>Some programs develop tiny memory leaks which can be very difficult to debug. Do not confuse those with the usage of MMAP where the program uses the CPU memory to read quickly read data from and where the memory usage could appear to grow over time, but this is not real as this memory gets freed when needed. You can read <a href="https://stasosphere.com/entrepreneur-being/301-mmap-memory-leak-investigation/">A Deep Investigation into MMAP Not Leaking Memory</a> to understand why.</p>
 <p>Of course, ideally one would analyze their software and fix the leak, but at times the leak could be coming from a 3rd party package or can be very difficult to diagnose and there isn’t often the time to do that.</p>
 <p>When it comes to GPU memory, there is the possible issue of memory fragmentation, where over time more and more tiny unused memory segments add up and make the GPU appear to have a good amount of free memory, but when the program tries to allocate a large tensor from this memory it fails with the OOM error like:</p>
-<pre><code>RuntimeError: CUDA out of memory. Tried to allocate 304.00 MiB (GPU 0; 8.00 GiB total capacity;
-142.76 MiB already allocated; 6.32 GiB free; 158.00 MiB reserved in total by PyTorch)</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">RuntimeError:</span> CUDA out of memory. Tried to allocate 304.00 MiB <span class="er">(</span><span class="ex">GPU</span> 0<span class="kw">;</span> <span class="ex">8.00</span> GiB total capacity<span class="kw">;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">142.76</span> MiB already allocated<span class="kw">;</span> <span class="ex">6.32</span> GiB free<span class="kw">;</span> <span class="ex">158.00</span> MiB reserved in total by PyTorch<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In this example if there are 6.32GB free, how comes that 304MB couldn’t be allocated.</p>
 <p>One of the approaches my team developed during IDEFICS-80B training where there was some tiny CPU memory leak that would often take multiple days to lead to running out of CPU memory was to install a watchdog inside the training loop that would check the memory usage and if a threshold was reached it’d voluntarily exit the training loop. The next training job would then resume with all the CPU memory reclaimed.</p>
 <p>footnote: The reality of machine learning trainings is that not all problems can be fixed with limited resources and often times a solid workaround provides for a quicker finish line, as compared to “stopping the presses” and potentially delaying the training for weeks, while trying to figure out where the problem is. For example we trained BLOOM-176B with <code>CUDA_LAUNCH_BLOCKING=1</code> because the training would hang without it and after multiple failed attempts to diagnose that we couldn’t afford any more waiting and had to proceed as is. Luckily this environment variable that normally is used for debug purposes and which in theory should make some CUDA operations slower didn’t actually make any difference to our throughput. But we have never figured out what the problem was and today it doesn’t matter at all that we haven’t, as we moved on with other projects which aren’t impacted by that issue.</p>
 <p>The idea is similar to the kill and save switches discussed earlier, but here instead of polling for a specific file appearance we simply watch how much resident memory is used. For example here is how you’d auto-exit if the OS shows only 5% of the virtual cpu memory remain:</p>
-<pre><code>import psutil
-for batch in iterator:
-    total_used_percent = psutil.virtual_memory().percent
-    if total_used_percent &gt; 0.95:
-        print(f"Exiting early since the cpu memory is almost full: ({total_used_percent}%)")
-        save_checkpoint()
-        sys.exit()
-
-    train_step(batch)</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> psutil</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> iterator:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    total_used_percent <span class="op">=</span> psutil.virtual_memory().percent</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> total_used_percent <span class="op">&gt;</span> <span class="fl">0.95</span>:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Exiting early since the cpu memory is almost full: (</span><span class="sc">{</span>total_used_percent<span class="sc">}</span><span class="ss">%)"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        save_checkpoint()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        sys.exit()</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    train_step(batch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Similar heuristics could be used for setting a threshold for GPU memory usage, except one needs to be aware of cuda tensor caching and python garbage collection scheduling, so to get the actual memory usage you’d need to do first run the garbage collector then empty the cuda cache and only then you will get real memory usage stats and then gracefully exit the training if the GPU is too close to being full.</p>
-<pre><code>import gc
-import torch
-
-for batch in iterator:
-    gc.collect()
-    torch.cuda.empty_cache()
-
-    # get mem usage in GBs and exit if less than 2GB of free GPU memory remain
-    free, total = map(lambda x: x/2**30, torch.cuda.mem_get_info());
-    if free &lt; 2:
-        print(f"Exiting early since the GPU memory is almost full: ({free}GB remain)")
-        save_checkpoint()
-        sys.exit()
-
-    train_step(batch)</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gc</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> iterator:</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    gc.collect()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    torch.cuda.empty_cache()</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get mem usage in GBs and exit if less than 2GB of free GPU memory remain</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    free, total <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">/</span><span class="dv">2</span><span class="op">**</span><span class="dv">30</span>, torch.cuda.mem_get_info())<span class="op">;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> free <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Exiting early since the GPU memory is almost full: (</span><span class="sc">{</span>free<span class="sc">}</span><span class="ss">GB remain)"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        save_checkpoint()</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        sys.exit()</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    train_step(batch)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>footnote: don’t do this unless you really have to, since caching makes things faster. Ideally figure out the fragmentation issue instead. For example, look up <code>max_split_size_mb</code> in the doc for <a href="https://pytorch.org/docs/stable/notes/cuda.html#environment-variables"><code>PYTORCH_CUDA_ALLOC_CONF</code></a> as it controls how memory is allocated. Some frameworks like <a href="https://github.com/microsoft/DeepSpeed">Deepspeed</a> solve this by pre-allocating tensors at start time and then reuse them again and again preventing the issue of fragmentation altogether.</p>
 <p>footnote: this simplified example would work for a single node. For multiple nodes you’d need to gather the stats from all participating nodes and find the one that has the least amount of memory left and act upon that.</p>
 </section>
 </section>
-<section id="dealing-with-forced-resource-preemption" class="level2">
-<h2 class="anchored" data-anchor-id="dealing-with-forced-resource-preemption">Dealing with forced resource preemption</h2>
+<section id="dealing-with-forced-job-preemption" class="level2">
+<h2 class="anchored" data-anchor-id="dealing-with-forced-job-preemption">Dealing with forced job preemption</h2>
 <p>Earlier you have seen how the training can be gracefully stopped with a <a href="#kill-switch">kill switch solution</a> and it’s useful when you need to stop or pause the training on demand.</p>
 <p>On HPC clusters SLURM jobs have a maximum runtime. A typical one is 20 hours. This is because on HPCs resources are shared between multiple users/groups and so each is given a time slice to do compute and then the job is forcefully stopped, so that other jobs could use the shared resources.</p>
 <p>footnote: this also means that you can’t plan how long the training will take unless your jobs run with the highest priority on the cluster. If your priority is not the highest it’s not uncommon to have to wait for hours and sometimes days before your job resumes.</p>
@@ -788,89 +845,182 @@ for batch in iterator:
 </ol>
 <p>If, for example, the iteration takes 2 minutes at most and the checkpoint saving another 2 minutes, then you need at least 4 minutes of that grace time. To be safe I’d at least double it. There is no harm at exiting a bit earlier, as no resources are wasted.</p>
 <p>So, for example, let’s say your HPC allows 100 hour jobs, and then your slurm script will say:</p>
-<pre><code>#SBATCH --time=100:00:00</code></pre>
-<p><strong>Approach A</strong>. Tell the program at launch time when it should start the exiting process:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=100:00:00</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process" class="level3">
+<h3 class="anchored" data-anchor-id="approach-a.-tell-the-program-at-launch-time-when-it-should-start-the-exiting-process">Approach A. Tell the program at launch time when it should start the exiting process:</h3>
 <pre><code>srun ... torchrun ... --exit-duration-in-mins 5990</code></pre>
 <p>100h is 6000 minutes and so here we give the program 10 mins to gracefully exit.</p>
 <p>And when you start the program you create a timer and then before every new iteration starts you check if the time limit is reached. If it is you save the checkpoint and exit.</p>
 <p>case study: you can see how this was set <a href="https://github.com/bigscience-workshop/bigscience/blob/58d99c67f643d27b5765a73a2ee2d1ce0a4b2c6b/train/tr11-176B-ml/tr11-176B-ml.slurm#L97-L100">in the BLOOM training job</a> and then acted upon <a href="https://github.com/bigscience-workshop/Megatron-DeepSpeed/blob/e52bdabbde3c6895aceb76c1bced295c2646121f/megatron/training.py#L985-L998">here</a>:</p>
-<pre><code>        # Exiting based on duration
-        if args.exit_duration_in_mins:
-            train_time = (time.time() - _TRAIN_START_TIME) / 60.0
-            done_cuda = torch.cuda.IntTensor(
-                [train_time &gt; args.exit_duration_in_mins])
-            torch.distributed.all_reduce(
-                done_cuda, op=torch.distributed.ReduceOp.MAX)
-            done = done_cuda.item()
-            if done:
-                if not saved_checkpoint:
-                    save_checkpoint_and_time(iteration, model, optimizer,
-                                             lr_scheduler)
-                print_datetime('exiting program after {} minutes'.format(train_time))
-                sys.exit()</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Exiting based on duration</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> args.exit_duration_in_mins:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            train_time <span class="op">=</span> (time.time() <span class="op">-</span> _TRAIN_START_TIME) <span class="op">/</span> <span class="fl">60.0</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            done_cuda <span class="op">=</span> torch.cuda.IntTensor(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                [train_time <span class="op">&gt;</span> args.exit_duration_in_mins])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>            torch.distributed.all_reduce(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                done_cuda, op<span class="op">=</span>torch.distributed.ReduceOp.MAX)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            done <span class="op">=</span> done_cuda.item()</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> done:</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> saved_checkpoint:</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    save_checkpoint_and_time(iteration, model, optimizer,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                                             lr_scheduler)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                print_datetime(<span class="st">'exiting program after </span><span class="sc">{}</span><span class="st"> minutes'</span>.<span class="bu">format</span>(train_time))</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                sys.exit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As you can see since the training is distributed we have to synchronize the exiting event across all ranks</p>
 <p>You could also automate the derivation, by retrieving the <code>EndTime</code> for the running job:</p>
-<pre><code>$ scontrol show -d job $SLURM_JOB_ID | grep Time
-   RunTime=00:00:42 TimeLimit=00:11:00 TimeMin=N/A
-   SubmitTime=2023-10-26T15:18:01 EligibleTime=2023-10-26T15:18:01
-   AccrueTime=2023-10-26T15:18:01
-   StartTime=2023-10-26T15:18:01 EndTime=2023-10-26T15:18:43 Deadline=N/A</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> scontrol show <span class="at">-d</span> job <span class="va">$SLURM_JOB_ID</span> <span class="kw">|</span> <span class="fu">grep</span> Time</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>   <span class="va">RunTime</span><span class="op">=</span>00:00:42 <span class="va">TimeLimit</span><span class="op">=</span>00:11:00 <span class="va">TimeMin</span><span class="op">=</span>N/A</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>   <span class="va">SubmitTime</span><span class="op">=</span>2023-10-26T15:18:01 <span class="va">EligibleTime</span><span class="op">=</span>2023-10-26T15:18:01</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>   <span class="va">AccrueTime</span><span class="op">=</span>2023-10-26T15:18:01</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>   <span class="va">StartTime</span><span class="op">=</span>2023-10-26T15:18:01 <span class="va">EndTime</span><span class="op">=</span>2023-10-26T15:18:43 <span class="va">Deadline</span><span class="op">=</span>N/A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and then comparing with the current time in the program and instead setting the graceful exit period. There are other timestamps and durations that can be retrieved as it can be seen from the output.</p>
-<p><strong>Approach B</strong>. Sending a signal X minutes before the end</p>
-<p>In your sbatch script you could set</p>
-<pre><code>#SBATCH --signal=USR1@600</code></pre>
+</section>
+<section id="approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end" class="level3">
+<h3 class="anchored" data-anchor-id="approach-b.1.-sending-a-custom-signal-x-minutes-before-the-end">Approach B.1. Sending a custom signal X minutes before the end</h3>
+<p>In your sbatch script you could set:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=USR1@600</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>and then SLURM will send a <code>SIGUSR1</code> signal to your program 10min before job’s end time.</p>
-<p>footnote: normally SLURM schedulers send a <code>SIGTERM</code> signal about 30-60 seconds before the job’s time is up, and just as the time is up it will send a <code>SIGKILL</code> signal if the job is still running. <code>SIGTERM</code> can be caught and acted upon but 30 seconds is not enough time to gracefully exit a large model training program.</p>
+<p>footnote: normally SLURM schedulers send a <code>SIGCONT</code>+<code>SIGTERM</code> signal about 30-60 seconds before the job’s time is up, and just as the time is up it will send a <code>SIGCONT</code>+<code>SIGTERM</code>+<code>SIGKILL</code> signal if the job is still running. <code>SIGTERM</code> can be caught and acted upon but 30 seconds is not enough time to gracefully exit a large model training program.</p>
 <p>Let’s demonstrate how the signal sending and trapping works. In terminal A, run:</p>
-<pre><code>python -c "
-import time, os, signal
-
-def sighandler(signum, frame):
-    print('Signal handler called with signal', signum)
-    exit(0)
-
-signal.signal(signal.SIGUSR1, sighandler)
-print(os.getpid())
-time.sleep(1000)
-"</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="st">import time, os, signal</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="st">def sighandler(signum, frame):</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st">    print('Signal handler called with signal', signum)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">    exit(0)</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">signal.signal(signal.SIGUSR1, sighandler)</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">print(os.getpid())</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">time.sleep(1000)</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>it will print the pid of the process, e.g., <code>4034989</code> and will go to sleep (emulating real work). In terminal B now send <code>SIGUSR1</code> signal to the python program in terminal A with:</p>
-<pre><code>kill -s USR1 4034989</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-s</span> USR1 4034989</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The program will trap this signal, call the <code>sighandler</code> which will now print that it was called and exit.</p>
-<pre><code>Signal handler called with signal 10</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Signal</span> handler called with signal 10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>10</code> is the numerical value of <code>SIGUSR1</code>.</p>
 <p>So here is the same thing with the SLURM setup:</p>
-<pre><code>$ cat sigusr1.slurm
-#SBATCH --job-name=sigusr1
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --time=0:03:00
-#SBATCH --partition=mypartition
-#SBATCH --output=%x-%j.out
-#SBATCH --signal=USR1@170
-
-srun python -c "
-import time, os, signal
-
-def sighandler(signum, frame):
-    print('Signal handler called with signal', signum)
-    exit(0)
-
-signal.signal(signal.SIGUSR1, sighandler)
-print(os.getpid())
-time.sleep(1000)
-"</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat sigusr1.slurm</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=sigusr1</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks-per-node=1</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=0:03:00</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=mypartition</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=%x-%j.out</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=USR1@170</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> python <span class="at">-c</span> <span class="st">"</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="st">import time, os, signal</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="st">def sighandler(signum, frame):</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="st">    print('Signal handler called with signal', signum)</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="st">    exit(0)</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="st">signal.signal(signal.SIGUSR1, sighandler)</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="st">print(os.getpid())</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="st">time.sleep(1000)</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the SLURM script we told SLURM to send the program a signal 170 seconds before its end and the job itself was set to run for 180 secs (3 mins).</p>
 <p>When this job has been scheduled:</p>
-<pre><code>sbatch sigusr1.slurm</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> sigusr1.slurm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>10 seconds (<code>180-170</code>) after the job started, it will exit with the log:</p>
-<pre><code>58307
-Signal handler called with signal 10</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">58307</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Signal</span> handler called with signal 10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which means the job had a pid <code>58307</code> and it caught <code>SIGUSR1</code> (<code>10</code>) and it exited.</p>
 <p>Now that you understand how this machinery works, instead of immediate <code>exit(0)</code> you can set exit-asap flag, finish the currently run iteration, check that the flag is up, save the checkpoint and exit. This is very similar to the code shown in Approach A above.</p>
 </section>
+<section id="approach-b.2.-choosing-which-process-to-send-the-signal-to" class="level3">
+<h3 class="anchored" data-anchor-id="approach-b.2.-choosing-which-process-to-send-the-signal-to">Approach B.2. Choosing which process to send the signal to</h3>
+<p>Now what if your main program isn’t the one launched with <code>srun</code> - if you were to use an intermediate launcher like <code>torchrun</code> or <code>accelerate</code> the above recipe won’t work, because most likely <code>SIGUSR1</code> won’t be propagated from the launcher to its children. In this case we need a slightly more complicated slurm script than</p>
+<p>We have to replace:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=USR1@600</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>with:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=B:USR1@600</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The added <code>B:</code> tells SLURM not to send the signal to the <code>srun</code> process (launcher) but to the <code>sbatch</code> shell.</p>
+<p>And now we have to change the end of the SLURM script from a typical launcher-based code like:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="va">CMD</span><span class="op">=</span><span class="st">"python -u -m torch.distributed.run ... train.py ..."</span> <span class="co"># real command here</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span>/path/to/logs/main_log.txt</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">"</span><span class="va">$CMD</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">$LOG_FILE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to this:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">trap</span> <span class="st">'echo "SIGUSR1 received!"; \</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="st">pid=$(pgrep -f "^python.*(accelerate|deepspeed|torchrun|distributed.run)"); \</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="st">pgrep -P $pid | xargs -r kill -USR1; \</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="st">wait;'</span> SIGUSR1</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="va">CMD</span><span class="op">=</span><span class="st">"python -u -m torch.distributed.run ... train.py ..."</span> <span class="co"># real command here</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span>/path/to/logs/main_log.txt</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">"</span><span class="va">$CMD</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">$LOG_FILE</span> <span class="kw">&amp;</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="bu">wait</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Since <code>--signal=B:USR1@600</code> earlier will now send the signal to the <code>sbatch</code> shell we can trap it and do something about it, and that’s what the <code>trap</code> line does.</p>
+<p>The magical code inside the signal handler passed to <code>trap</code> finds all processes that are immediate children of any of the launchers like <code>accelerate</code>, <code>deepspeed</code>, <code>torchrun</code> or <code>torch.distributed.run</code> and sends the <code>SIGUSR1</code> signal to them.</p>
+<p>Finally the last change is that in order for <code>trap</code> to work we need to run <code>srun</code> in the background - so we added <code>&amp;</code> at the end of the <code>srun</code> command and we needed to add <code>wait</code> so that the <code>sbatch</code> shell won’t exit until <code>srun</code> finishes.</p>
+<p>Your python code that catches the signal handler remains the same as in Approach B.1.</p>
+<p>Here are the important parts of the SLURM script together:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat launch.slurm</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --partition=dev</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=B:USR1 # Custom preemption signal</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[...]</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="bu">trap</span> <span class="st">'echo "SIGUSR1 received!"; \</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="st">pid=$(pgrep -f "^python.*(accelerate|torchrun|deepspeed|distributed.run)"); \</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="st">pgrep -P $pid | xargs -r kill -USR1; wait;'</span> SIGUSR1</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="va">CMD</span><span class="op">=</span><span class="st">"python -u -m torch.distributed.run ... train.py ..."</span> <span class="co"># real command here</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="va">LOG_FILE</span><span class="op">=</span>/path/to/logs/main_log.txt</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="ex">srun</span> <span class="at">--jobid</span> <span class="va">$SLURM_JOBID</span> bash <span class="at">-c</span> <span class="st">"</span><span class="va">$CMD</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> <span class="va">$LOG_FILE</span> <span class="kw">&amp;</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="bu">wait</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And your training loop that may have originally looked like this:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat train.py</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> dl:</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">train_iteration</span><span class="er">(</span><span class="ex">batch</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now it’ll become:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cat train.py</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> signal</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="ex">import</span> sys</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pre_emption_activated</span> = False</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="ex">def</span> activate_pre_emption<span class="er">(</span><span class="ex">sig,</span> frame<span class="kw">)</span><span class="bu">:</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">global</span> pre_emption_activated</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">print</span><span class="er">(</span><span class="st">"SIGUSR1 received, saving checkpoint"</span><span class="kw">)</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">pre_emption_activated</span> = True</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="ex">signal.signal</span><span class="er">(</span><span class="ex">signal.SIGUSR1,</span> activate_pre_emption<span class="kw">)</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> batch <span class="kw">in</span> dl:</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="ex">train_iteration</span><span class="er">(</span><span class="ex">batch</span><span class="kw">)</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="ex">pre_emption_activated:</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">save_checkpoint()</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sys.exit()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Of course, you will probably set a flag in the trainer object in the real software and not use a <code>global</code>, but for the sake of the short demo that’s good enough.</p>
+<p>If you want to test this solution, simply change your SLURM script header to:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=0:05:00</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --signal=B:USR1@60</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here we tell SLURM to run the job for 5 minutes only (<code>--time=0:05:00</code>) and we ask it to send <code>SIGUSR1</code> to our <code>sbatch</code> script <code>60</code> seconds before 5 minutes expires, i.e.&nbsp;4 minutes after the job started.</p>
+</section>
+<section id="qos-based-slurm-preemption" class="level3">
+<h3 class="anchored" data-anchor-id="qos-based-slurm-preemption">QoS-based SLURM preemption</h3>
+<p>We haven’t discussed so far what happens when Quality of Service (QoS) is used, which may also forcefully pre-empt an existing job. The functionality is the same as job’s-allocated-time-is-about-to-end sort of pre-emption, except it can happen any time and not X seconds before the end of the job.</p>
+<p>Consider a SLURM setup where you have <code>--qos=high</code> which can pre-empt <code>--qos=low</code> jobs and the low priority job has grace time of 10 minutes to shut down:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> sacctmgr show qos format=name,priority,preempt,MaxTRESPerUser,GraceTime,Preempt,Flags</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>      <span class="ex">Name</span>   Priority     MaxTRESPU  GraceTime    Preempt                Flags</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="ex">----------</span> <span class="at">----------</span> <span class="at">-------------</span> <span class="at">----------</span> <span class="at">----------</span> <span class="at">--------------------</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>       <span class="ex">low</span>          0                 00:10:00</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>      <span class="ex">high</span>          0                 00:00:00        low</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is very similar to the time-based pre-emption except here the grace time is hardcoded and can’t be modified by the user.</p>
+<p>If a job is launched with <code>--qos=high</code> and there aren’t enough nodes, SLURM will kick out a few low priority jobs to make the nodes available for the high priority job.</p>
+<p>By default <code>GraceTime</code> could be very short an insufficient for your program to wind down safely if it gets pre-empted - in which case ask your sysadmin to raise its duration to what will work for your needs.</p>
+<p>Otherwise the same solutions described in Approaches B.1 and B.2 will work for this type of forced pre-emption.</p>
+</section>
+</section>
 <section id="contributors" class="level2">
 <h2 class="anchored" data-anchor-id="contributors">Contributors</h2>
-<p><a href="https://github.com/adammoody">Adam Moody</a>,</p>
+<p><a href="https://github.com/adammoody">Adam Moody</a>, <a href="https://github.com/Shikib">Shikib Mehri</a>,</p>
 
 
 </section>
@@ -1471,13 +1621,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../qmd/training/reproducibility/index.html" class="pagination-link  aria-label=" reproducibility"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reproducibility</span>
+      <a href="../../../qmd/training/instabilities/training-loss-patterns.html" class="pagination-link  aria-label=" understanding="" training="" loss="" patterns"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Understanding Training Loss Patterns</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../qmd/training/performance/index.html" class="pagination-link" aria-label="Software Tune Up For The Best Performance">
-        <span class="nav-page-text">Software Tune Up For The Best Performance</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../qmd/training/fault-tolerance/index-old.html" class="pagination-link" aria-label="Fault Tolerance">
+        <span class="nav-page-text">Fault Tolerance</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
