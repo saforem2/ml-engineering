@@ -178,7 +178,7 @@ used. Therefore the training process requires at 3-4x more
 \begin{itemize}
 \tightlist
 \item
-  \href{nvidia/debug.md}{Troubleshooting NVIDIA GPUs}
+  \href{./nvidia/debug.qmd}{Troubleshooting NVIDIA GPUs}
 \end{itemize}
 
 \section{Bird's eye view on the high end accelerator
@@ -390,7 +390,10 @@ footnote: Intel Gaudi2 doesn't plan to publish TFLOPS specs as of this
 writing, but it does support FP32, TF32, BF16, FP16 \& FP8, INT8 and
 INT16. This
 \href{https://www.databricks.com/blog/llm-training-and-inference-intel-gaudi2-ai-accelerators}{blog
-posts} reports measuring \textasciitilde400TFLOPS for fp16/bf16.
+posts} reports measuring \textasciitilde400TFLOPS for fp16/bf16 - but,
+of course, this number can't be compared to theoretical peak so it
+doesn't belong to this table - guessing, it's probably in the
+600-1000TFLOPS range.
 
 footnote: when looking at specs be very careful at which numbers you're
 reading - many vendors often publish TFLOPS with sparsity, as they are

@@ -583,7 +583,8 @@ pre>code.sourceCode {
     background-color: none;
     border-radius: 2px;
     overflow: auto;
-    border: 1px solid $code-color;
+    // border: 1px solid $code-color;
+    box-shadow: 0px 5px 15px 0px $shadow-color;
 }
 
 // div.output_scroll {
@@ -854,18 +855,16 @@ code span.kw {
 .sourceCode {
     // margin-top: 1rem;
     // margin-bottom: 0.1rem;
+    padding: inherit;
     border: 1px solid rgba(0, 0, 0, 0.0);
     border-radius: 0.25rem;
     box-shadow: RGBA(0, 0, 0, 0.15) 0px 2px 5px;
 }
 
 .sourceCode:hover {
-    // margin-top: 1rem;
-    // margin-bottom: 0.1rem;
+    border: 1px solid rgba(0, 0, 0, 0.0);
     border-radius: 0.25rem;
-    // box-shadow: RGBA(255, 255, 255, 0.15) 0px 2px 5px;
-    border: 1px solid $dim-text;
-    box-shadow: RGBA(0, 0, 0, 0.15) 0px 2px 5px;
+    box-shadow: RGBA(0, 0, 0, 0.35) 0px 2px 5px;
 }
 
 .myCard {

@@ -1,10 +1,14 @@
-# Inter-node and Intra-Node Networking Hardware
+---
+title: "🛜 Networking"
+---
+
+## Inter-node and Intra-Node Networking Hardware
 
 **Subsections**:
 
 - [Benchmarks](benchmarks)
 
-## Introduction
+### Introduction
 
 It's not enough to buy/rent expensive accelerators to train and infer models fast. You need to ensure that your [storage IO](../storage), [CPU](../compute/cpu) and network are fast enough to "feed the accelerator furnace". If this is not ensured then the expensive accelerators will be underutilized leading to lost $$, slower training time and inference throughput. While it can be any other of the mentioned components, the network is often the bottleneck during the training (assume your DataLoader is fast).
 
@@ -16,7 +20,7 @@ When the model spans several accelerators and doesn't leave a single node all yo
 
 This article covers both types of networking hardware, reports their theoretical and effective bandwidths and explains how they inter-play with each other.
 
-## Glossary and concepts
+### Glossary and concepts
 
 - DMA: Direct Memory Access
 - EFA: Elastic Fabric Adapter
@@ -40,7 +44,7 @@ Speed-related:
 - Unidirectional: a transmission from one point to another in one direction A -> B
 
 
-### Unidirectional vs Bidirectional (Duplex)
+#### Unidirectional vs Bidirectional (Duplex)
 
 Most benchmarking / bandwidth measurement tools will report a unidirectional bandwidth. So be careful when you look at unidirectional vs. bidirectional (duplex) speeds. Typically the latter is ~2x faster.
 
@@ -50,7 +54,7 @@ case study: for a while I couldn't understand why when I run the nccl-tests all_
 
 
 
-## Intra-node networking
+### Intra-node networking
 
 There are multiple platforms/solutions out there that provide intra-node networking:
 
@@ -78,7 +82,7 @@ Here is intra-node theoretical peak bandwidth cross-comparison for current techn
 You will find the details analyses of each in the following sections.
 
 
-### PCIe
+#### PCIe
 
 [PCIe](https://en.wikipedia.org/wiki/PCI_Express) is a high-speed serial computer expansion bus standard that can be found even on the cheapest computer desktop.
 
@@ -93,7 +97,7 @@ If one compares the latest generations of different intra-node technologies (see
 
 
 
-### NVLink
+#### NVLink
 
 - [NVLink](https://en.wikipedia.org/wiki/NVLink) is a wire-based serial multi-lane near-range communications link developed by Nvidia. Here is the [What Is NVLink](https://blogs.nvidia.com/blog/2023/03/06/what-is-nvidia-nvlink/) blog post with more background on it.
 
@@ -202,7 +206,7 @@ Of course, other A100 and H100s node reports may vary, e.g. different number of 
 
 
 
-### NVSwitch
+#### NVSwitch
 
 [NVSwitch](https://www.nvidia.com/en-us/data-center/nvlink/) can connect more than 8 GPUs at the speed of [NVLink](#nvlink). It's advertised to connect up to 256 GPUs in the future generations of the switch.
 
@@ -219,7 +223,7 @@ NVIDIA DGX A100 has 6 switches of 12 NVlinks for a total of 72.
 Additionally, NVSwitch comes with NVIDIA Scalable Hierarchical Aggregation Reduction Protocol (SHARP) which can boost both the intra- and inter-node speeds. For example, NCCL is working on `NCCL_ALGO=NVLS` which already boosts the intra-node bandwidth above the normal spec and work is being done to boost inter-node as well.
 
 
-### Infinity Fabric / xGMI
+#### Infinity Fabric / xGMI
 
 AMD MI* Accelerators Intra-node communication is performed by AMD Infinity Fabric, which is also known as xGMI (Socket to Socket Global Memory Interface).
 
@@ -239,13 +243,13 @@ Platform specs:
 
 
 
-### Gaudi2
+#### Gaudi2
 
 According to [Gaudi2 spec](https://habana.ai/wp-content/uploads/2023/10/HLS-Gaudi2_Datasheet_10_23.pdf), these nodes provide 8x 21 NICs of 100GbE RoCE v2 RDMA for a total of 2.1Tbps intra-node connectivity and each card connected with the other 7 cards at 262.5 GBps.
 
 
 
-## Inter-node networking
+### Inter-node networking
 
 As inter-node hardware is about of an order of magnitude slower than intra-node hardware in this universe Gbps are used instead of GBps. (1 GBps = 8 Gbps)
 
@@ -263,18 +267,19 @@ Here is inter-node theoretical peak bandwidth cross-comparison for current techn
 | GPUDirect-TCPX       |   800 |
 | HPE Slingshot        |   800 |
 | EFA v1               |   400 |
-|                      |       |
+| -                    |     - |
 | OPA (MI300X Q3-2024) |  3200 |
 
 You will find the details analyses of each in the following sections.
 
-### InfiniBand
+#### InfiniBand
 
 Now [InfiniBand](https://en.wikipedia.org/wiki/InfiniBand) (IB) has been around for a few decades so there are many available configurations that can be found out there. So that if someone says they have InfiniBand that is insufficient information. What you need to know is the signaling rate and the number of IB links.
 
 Here are the most recent signaling rates which you are likely to see in the current hardware offerings:
 
 Signaling rate of uni-directional links in Gbps:
+
 | Links | EDR | HDR |  NDR |  XDR |  GDR |
 | ----: | --: | --: |  --: |  --: |  --: |
 |     1 |  25 |  50 |  100 |  200 |  400 |
@@ -283,6 +288,7 @@ Signaling rate of uni-directional links in Gbps:
 |    12 | 300 | 600 | 1200 | 2400 | 4800 |
 
 Latency in usecs:
+
 | EDR | HDR | NDR | XDR | GDR |
 | --: | --: | --: | --: | --: |
 | 0.5 | 0.6 | ??  | ??  | ??  |
@@ -299,7 +305,7 @@ Here are some examples of NVIDIA devices with the fastest IB:
 
 
 
-### EFA
+#### EFA
 
 [Elastic Fabric Adapter (EFA)](https://aws.amazon.com/hpc/efa/) is a recent technology created by AWS.
 
@@ -308,25 +314,25 @@ Here are some examples of NVIDIA devices with the fastest IB:
 
 
 
-### Gaudi2 (inter-node)
+#### Gaudi2 (inter-node)
 
 According to [Gaudi2 spec](https://habana.ai/wp-content/uploads/2023/10/HLS-Gaudi2_Datasheet_10_23.pdf), these nodes provide `3*8=24` NICs of 100GbE RoCE v2 RDMA for a total of 2.4Tbps of inter-node connectivity with other Gaudi2 nodes.
 
 
 
-### HPE Slingshot interconnect
+#### HPE Slingshot interconnect
 
 [HPE Slingshot interconnect](https://www.hpe.com/ca/en/compute/hpc/slingshot-interconnect.html) seems to be used by HPCs. As of this writing it provides 200Gbps per link. Some HPCs use 4 of those links to build 800Gbps interconnects, and, of course, with more links will deliver a higher overall bandwidth.
 
 
 
-### GPUDirect-TCPX
+#### GPUDirect-TCPX
 
 GPUDirect-TCPX is a new hardware/software networking stack introduced in A3 instances of GCP. The docs are scarce, but here is [some information](https://cloud.google.com/compute/docs/gpus/gpudirect)
 
 
 
-### OmniPath
+#### OmniPath
 
 [OmniPath Architecture](https://en.wikipedia.org/wiki/Omni-Path) (OPA). Originally by Intel, the technology got sold to Cornelis Networks.
 
@@ -348,23 +354,23 @@ Omni-Path provides [RDMA](https://en.wikipedia.org/wiki/Remote_direct_memory_acc
 
 
 
-## Understanding why inter-node network speed is of a huge importance
+### Understanding why inter-node network speed is of a huge importance
 
 This is probably one of the most important multi-segment section that you really want to understand well. While it seeks out to show how important the inter-node speed is, to build up the case it'll teach on the way many important training-related concepts.
 
-### The basics
+#### The basics
 
 First, let's get a bit of a feeling what all those Gbps/GBps practically mean.
 
 If your model is 80B parameter large, and you need to transmit every parameter or a gradient on the network even once in float32 (fp32) format, which requires 4 bytes per parameter, so you need to send `80*4` 320GB of data, or 2560Gb (`*8`). If your network's bandwidth is 200Gbps it will take 12.8 seconds (`2560/200`) to transmit. And if you had 1600Gbps network then it'd take only 1.6 seconds. Why does it matter?
 
-### 1-GPU training
+#### 1-GPU training
 
 Let's start with a much smaller model of say 2B params, to train it you'd need at least [18 bytes per parameter](../training/performance/README.md#anatomy-of-models-memory-usage) in mixed half precision. So `18*2` 36GB of memory just for model weights, optimizer states and gradients. Plus you need additional memory for activations and it'll depend on the batch size and sequence length. But with 80GB A100 GPU we can definitely train this model on a single GPU.
 
 We then assume for the moment that the DataLoader is fast enough to be negligible in duration compared to the compute time. And thus we get a close to a perfect MFU (Model FLOPs Utilization):
 
-```bash
+```
 [DL][  compute  ][DL][  compute  ][DL][  compute  ]
 ---------------------------------------------------> time
 |<--iteration-->||<--iteration-->||<--iteration-->|
@@ -372,7 +378,7 @@ We then assume for the moment that the DataLoader is fast enough to be negligibl
 
 which means that the GPU just needs to do many matmuls and it'd do it amazing fast. In this situation you get the highest ROI (Return on Investment).
 
-### Single node training
+#### Single node training
 
 The previous situation was fantastic due to the close to perfect MFU, but you realize that the training on a single GPU is going to take quite some time, since we are in AI race you'd probably want to finish the training sooner than later. So you'd ask - can I train the model on 8 GPUs instead, and the answer would be - yes, of course. With one caveat - at the end of each iteration you'd need to sync the gradients between the 8 processes (each process for a single GPU), so that each participating process of the training can benefit from what the other 7 have learned during the last iteration.
 
@@ -403,7 +409,7 @@ which is incredibly fast!
 
 And here is how our timeline will look like:
 
-```bash
+```
 [DL][  compute ][comms][DL][  compute ][comms][DL][  compute ][comms]|
 -----------------------------------------------------------------------> time
 |<---- iteration ---->||<---- iteration ---->||<---- iteration ----->|
@@ -411,12 +417,12 @@ And here is how our timeline will look like:
 
 oh and this whole synchronization protocol is called DDP ([DistributedDataParallel](https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html)) in the PyTorch lingo.
 
-#### Comms and compute overlap
+##### Comms and compute overlap
 
 Even with this really fast comms the network still creates a bottleneck and leads to a short idling of the gpus. To solve this issue the advanced algorithms implement an overlap of comms and compute. Until now we approached the problem as one single transmission, but in reality each model is made of many layers and each layer can transmit the gradients it has computed, while the next layer is computing its gradients. So if you look at the level of the model, what happens in the `backward` path is:
 
 
-```bash
+```
 [   compute   ][   compute   ][   compute   ]
                [comms]        [comms]        [comms]
 ---------------------------------------------> time
@@ -429,7 +435,7 @@ So now you understand how overlapping works, So we can now update our bigger pic
 
 Now our timing diagram becomes very similar to the diagram we had for a single gpu:
 
-```bash
+```
 [DL][  compute  ][DL][  compute  ][DL][  compute  ]
 [  comms ]       [  comms]        [  comms]
 ---------------------------------------------------> time
@@ -438,14 +444,14 @@ Now our timing diagram becomes very similar to the diagram we had for a single g
 
 and we hope that comms are faster than DL+compute, since if they aren't faster than we have the following gpu idling gaps:
 
-```bash
+```
 [DL][  compute  ][idle][DL][  compute  ][idle][DL][  compute  ][idle]
 [         comms       ][         comms       ][         comms       ]
 ----------------------------------------------------------------------> time
 |<---  iteration  --->||<---  iteration  --->||<---  iteration  --->|
 ```
 
-#### Calculating TFLOPS
+##### Calculating TFLOPS
 
 Calculating TFLOPS answers the question of how long will it take to perform a compute.
 
@@ -479,10 +485,12 @@ tflop = model_size_in_B * 4 * 2 * seqlen * global_batch_size / (total_gpus * 1e3
 ```
 
 So let's say we have:
+
 - `seqlen=2048` (sequence length)
 - `global_batch_size=16`
 
 and we already defined:
+
 - `total_gpus=8`
 - `model_size_in_B=2`
 
@@ -511,8 +519,7 @@ OK, but hopefully at this point it's quite clear that if you remain at the bound
 But what if you want to speed up the training even more and throw say 4x 8-gpu nodes at it. (and of course you don't have a choice but to use multiple nodes if you have a much larger model). Suddenly, the comms can become an even bigger bottleneck.
 
 
-
-### Multiple node training
+#### Multiple node training
 
 So here we are continuing with the idea of 2B param model and we will now use 32 gpus across 4 nodes to speed up the training even more.
 
@@ -543,7 +550,7 @@ And remember this was all handling a pretty tiny as considered these days 2B par
 
 Now do the same math with 20B and 200B parameter model and you will see that you need to have a much much faster inter-node connectivity to efficiently scale.
 
-### Large model training
+#### Large model training
 
 Of course, when we train large models we don't use DDP, because we simply can't fit the whole model on a single gpu so various other techniques are used. The details are discussed in a dedicated chapter on [Model Parallelism](../training/model-parallelism), but the only important thing to understand immediately is that all scalability techniques incur a much larger comms overhead, because they all need to communicate a lot more than just gradients. and therefore the amount of traffic on the network can easily grow 3x and more as compared to the DDP protocol overhead we have been exploring so far.
 
@@ -551,14 +558,7 @@ It can be difficult to do even approximate math as we did in this chapter, becau
 
 As I have shown in these sections it should be possible to be able to do a back-of-envelope calculations once you understand the specific scalability technique and its networking costs, so that you could know ahead of time which Inter-node network speed you need to require from your acquisition manager. Of course, you also need to understand the particular model architecture and calculate how many TFLOP it will take to do a single iteration.
 
-
-
-
-
-
-
-
-## NUMA Affinity
+### NUMA Affinity
 
 [Non-uniform memory access (NUMA)](https://en.wikipedia.org/wiki/Non-uniform_memory_access) is a computer memory design used in multiprocessing, where the memory access time depends on the memory location relative to the processor.
 As modern servers have more than one CPU to get the best performance GPUs residing in the same block as the corresponding CPU should have the processes bound to that NUMA node.
@@ -572,11 +572,11 @@ As you can see it has 2 CPUs, each defining a NUMA block, and each such block co
 footnote: was generated by `lstopo a100.png`
 
 
-#### Software Tools
+##### Software Tools
 
 note-to-self: probably belongs in its own chapter?
 
-##### hwloc
+###### hwloc
 
 https://github.com/open-mpi/hwloc
 
@@ -600,13 +600,9 @@ Similar software: `numactl`/`libnuma`
 
 Some useful suggestions in [pytorch docs](https://pytorch.org/tutorials/recipes/recipes/tuning_guide.html#utilize-non-uniform-memory-access-numa-controls)
 
+### Important nuances
 
-
-
-
-## Important nuances
-
-### Real network throughput
+#### Real network throughput
 
 The network throughput in the advertised spec and the actual throughput will never be the same. In the best case you can expect about 80-90% of the advertised spec.
 
@@ -716,7 +712,7 @@ This graph is also helpful to demonstrate how the actual bandwidth changes with 
 
 Another tool for bandwidth measurements on NVIDIA GPUs is [NVIDIA/nvbandwidth](https://github.com/NVIDIA/nvbandwidth).
 
-### Latency
+#### Latency
 
 
 ![Low-level Latency Measurements](images/ccgrid11-low-level-latency.png)
@@ -725,7 +721,7 @@ Another tool for bandwidth measurements on NVIDIA GPUs is [NVIDIA/nvbandwidth](h
 XXX: integrate/expand
 
 
-### Proprietary network hardware and NCCL
+#### Proprietary network hardware and NCCL
 
 Proprietary network hardware vendors like AWS (EFA) don't disclose their secrets and therefore the public libraries like [nccl](https://github.com/NVIDIA/nccl) cannot support those out of the box. These vendors have to supply their own versions of the network collective libraries to be used by users of their hardware.
 
@@ -735,7 +731,7 @@ Now, when NCCL is initialized, it will look for a `libnccl-net.so` library and d
 
 For more information about dynamic library loading see [this section](https://github.com/stas00/the-art-of-debugging/tree/master/compiled-programs#shared-libraries-ldsoconf-nm-unresolved-symbols-ldd-ld_library_path-ld_preload).
 
-### Node Proximity
+#### Node Proximity
 
 If you get 2 random nodes from the cloud they may not reside on the same subnet and there will be an additional latency incurred for all transmissions.
 
@@ -750,7 +746,7 @@ Here are the cloud-specific ways of accomplishing node proximity:
 
 Depending on the type of package you have or what type of machines you rent - you may or may not be able to use those.
 
-### Shared internode network
+#### Shared internode network
 
 If you use a shared HPC environment, or even if you have your own cluster but sharing it with your colleagues expect the network bandwidth to be unreliable and fluctuate at different time of the day.
 

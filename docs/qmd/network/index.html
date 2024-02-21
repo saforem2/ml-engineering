@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-02-20">
 
-<title>ML Engineering</title>
+<title>ML Engineering - 🛜 Networking</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../qmd/network/index-old.html" rel="next">
+<link href="../../qmd/network/benchmarks/index.html" rel="next">
 <link href="../../qmd/training/fault-tolerance/index-old.html" rel="prev">
 <link href="../.././favicon.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -208,7 +208,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/network/index.html">Inter-node and Intra-Node Networking Hardware</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../qmd/network/index.html">🛜 Networking</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -228,12 +228,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🏎️ Performance</span></a>
-  </div>
-</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../qmd/resources/index.html" class="sidebar-item-text sidebar-link">
@@ -371,18 +365,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../qmd/network/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
+ <span class="menu-text">🛜 Networking</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../qmd/network/index-old.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🛜 Network</span></a>
-  </div>
-</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
@@ -621,53 +609,22 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#inter-node-and-intra-node-networking-hardware" id="toc-inter-node-and-intra-node-networking-hardware" class="nav-link active" data-scroll-target="#inter-node-and-intra-node-networking-hardware">Inter-node and Intra-Node Networking Hardware</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#glossary-and-concepts" id="toc-glossary-and-concepts" class="nav-link" data-scroll-target="#glossary-and-concepts">Glossary and concepts</a>
-  <ul class="collapse">
-  <li><a href="#unidirectional-vs-bidirectional-duplex" id="toc-unidirectional-vs-bidirectional-duplex" class="nav-link" data-scroll-target="#unidirectional-vs-bidirectional-duplex">Unidirectional vs Bidirectional (Duplex)</a></li>
-  </ul></li>
-  <li><a href="#intra-node-networking" id="toc-intra-node-networking" class="nav-link" data-scroll-target="#intra-node-networking">Intra-node networking</a>
-  <ul class="collapse">
-  <li><a href="#pcie" id="toc-pcie" class="nav-link" data-scroll-target="#pcie">PCIe</a></li>
-  <li><a href="#nvlink" id="toc-nvlink" class="nav-link" data-scroll-target="#nvlink">NVLink</a></li>
-  <li><a href="#nvswitch" id="toc-nvswitch" class="nav-link" data-scroll-target="#nvswitch">NVSwitch</a></li>
-  <li><a href="#infinity-fabric-xgmi" id="toc-infinity-fabric-xgmi" class="nav-link" data-scroll-target="#infinity-fabric-xgmi">Infinity Fabric / xGMI</a></li>
-  <li><a href="#gaudi2" id="toc-gaudi2" class="nav-link" data-scroll-target="#gaudi2">Gaudi2</a></li>
-  </ul></li>
-  <li><a href="#inter-node-networking" id="toc-inter-node-networking" class="nav-link" data-scroll-target="#inter-node-networking">Inter-node networking</a>
-  <ul class="collapse">
-  <li><a href="#infiniband" id="toc-infiniband" class="nav-link" data-scroll-target="#infiniband">InfiniBand</a></li>
-  <li><a href="#efa" id="toc-efa" class="nav-link" data-scroll-target="#efa">EFA</a></li>
-  <li><a href="#gaudi2-inter-node" id="toc-gaudi2-inter-node" class="nav-link" data-scroll-target="#gaudi2-inter-node">Gaudi2 (inter-node)</a></li>
-  <li><a href="#hpe-slingshot-interconnect" id="toc-hpe-slingshot-interconnect" class="nav-link" data-scroll-target="#hpe-slingshot-interconnect">HPE Slingshot interconnect</a></li>
-  <li><a href="#gpudirect-tcpx" id="toc-gpudirect-tcpx" class="nav-link" data-scroll-target="#gpudirect-tcpx">GPUDirect-TCPX</a></li>
-  <li><a href="#omnipath" id="toc-omnipath" class="nav-link" data-scroll-target="#omnipath">OmniPath</a></li>
-  </ul></li>
-  <li><a href="#understanding-why-inter-node-network-speed-is-of-a-huge-importance" id="toc-understanding-why-inter-node-network-speed-is-of-a-huge-importance" class="nav-link" data-scroll-target="#understanding-why-inter-node-network-speed-is-of-a-huge-importance">Understanding why inter-node network speed is of a huge importance</a>
-  <ul class="collapse">
-  <li><a href="#the-basics" id="toc-the-basics" class="nav-link" data-scroll-target="#the-basics">The basics</a></li>
-  <li><a href="#gpu-training" id="toc-gpu-training" class="nav-link" data-scroll-target="#gpu-training">1-GPU training</a></li>
-  <li><a href="#single-node-training" id="toc-single-node-training" class="nav-link" data-scroll-target="#single-node-training">Single node training</a></li>
-  <li><a href="#multiple-node-training" id="toc-multiple-node-training" class="nav-link" data-scroll-target="#multiple-node-training">Multiple node training</a></li>
-  <li><a href="#large-model-training" id="toc-large-model-training" class="nav-link" data-scroll-target="#large-model-training">Large model training</a></li>
-  </ul></li>
+  <li><a href="#glossary-and-concepts" id="toc-glossary-and-concepts" class="nav-link" data-scroll-target="#glossary-and-concepts">Glossary and concepts</a></li>
+  <li><a href="#intra-node-networking" id="toc-intra-node-networking" class="nav-link" data-scroll-target="#intra-node-networking">Intra-node networking</a></li>
+  <li><a href="#inter-node-networking" id="toc-inter-node-networking" class="nav-link" data-scroll-target="#inter-node-networking">Inter-node networking</a></li>
+  <li><a href="#understanding-why-inter-node-network-speed-is-of-a-huge-importance" id="toc-understanding-why-inter-node-network-speed-is-of-a-huge-importance" class="nav-link" data-scroll-target="#understanding-why-inter-node-network-speed-is-of-a-huge-importance">Understanding why inter-node network speed is of a huge importance</a></li>
   <li><a href="#numa-affinity" id="toc-numa-affinity" class="nav-link" data-scroll-target="#numa-affinity">NUMA Affinity</a></li>
-  <li><a href="#important-nuances" id="toc-important-nuances" class="nav-link" data-scroll-target="#important-nuances">Important nuances</a>
-  <ul class="collapse">
-  <li><a href="#real-network-throughput" id="toc-real-network-throughput" class="nav-link" data-scroll-target="#real-network-throughput">Real network throughput</a></li>
-  <li><a href="#latency" id="toc-latency" class="nav-link" data-scroll-target="#latency">Latency</a></li>
-  <li><a href="#proprietary-network-hardware-and-nccl" id="toc-proprietary-network-hardware-and-nccl" class="nav-link" data-scroll-target="#proprietary-network-hardware-and-nccl">Proprietary network hardware and NCCL</a></li>
-  <li><a href="#node-proximity" id="toc-node-proximity" class="nav-link" data-scroll-target="#node-proximity">Node Proximity</a></li>
-  <li><a href="#shared-internode-network" id="toc-shared-internode-network" class="nav-link" data-scroll-target="#shared-internode-network">Shared internode network</a></li>
-  </ul></li>
+  <li><a href="#important-nuances" id="toc-important-nuances" class="nav-link" data-scroll-target="#important-nuances">Important nuances</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/network/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/network/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/network/index.qmd"><i class="bi"></i></button></div></div>
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">🛜 Networking</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/network/index.qmd"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -690,22 +647,22 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </header>
 
 
-<section id="inter-node-and-intra-node-networking-hardware" class="level1">
-<h1>Inter-node and Intra-Node Networking Hardware</h1>
+<section id="inter-node-and-intra-node-networking-hardware" class="level2">
+<h2 class="anchored" data-anchor-id="inter-node-and-intra-node-networking-hardware">Inter-node and Intra-Node Networking Hardware</h2>
 <p><strong>Subsections</strong>:</p>
 <ul>
 <li><a href="benchmarks">Benchmarks</a></li>
 </ul>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
 <p>It’s not enough to buy/rent expensive accelerators to train and infer models fast. You need to ensure that your <a href="../storage">storage IO</a>, <a href="../compute/cpu">CPU</a> and network are fast enough to “feed the accelerator furnace”. If this is not ensured then the expensive accelerators will be underutilized leading to lost $$, slower training time and inference throughput. While it can be any other of the mentioned components, the network is often the bottleneck during the training (assume your DataLoader is fast).</p>
 <p>If your model fits on a single accelerator, you have little to worry about. But nowadays most models require several accelerators to load and LLM/VLM models require multiple compute nodes for training and some even for inference.</p>
 <p>Most compute nodes contain 8 accelerators, some 4, others 16, and even more accelerators and recently there are some that have one super-accelerator per node.</p>
 <p>When the model spans several accelerators and doesn’t leave a single node all you need to worry about is fast <a href="#intra-node-networking">Intra-node networking</a>. As soon as the model requires several nodes, which is often the case for training as one can use multiple replicas to parallelize and speed up the training, then fast <a href="#inter-node-networking">Inter-node networking</a> becomes the key.</p>
 <p>This article covers both types of networking hardware, reports their theoretical and effective bandwidths and explains how they inter-play with each other.</p>
 </section>
-<section id="glossary-and-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="glossary-and-concepts">Glossary and concepts</h2>
+<section id="glossary-and-concepts" class="level3">
+<h3 class="anchored" data-anchor-id="glossary-and-concepts">Glossary and concepts</h3>
 <ul>
 <li>DMA: Direct Memory Access</li>
 <li>EFA: Elastic Fabric Adapter</li>
@@ -722,15 +679,15 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <li>xGMI: Socket to Socket Global Memory Interface</li>
 </ul>
 <p>Speed-related: - Bi-directional, Duplex: a transmission from one point to another in both directions A &lt;-&gt; B, typically 2x speed of unidirectional - GBps, GB/s: Gigabytes per secs (1GBps = 8Gbps) transferred in a channel - GT/s: GigaTransfers per second - the number of operations transferring data that occur in each second. - Gbps, Gb/s: Gigabits per secs (1Gbps = 1/8GBps) transferred in a channel - Unidirectional: a transmission from one point to another in one direction A -&gt; B</p>
-<section id="unidirectional-vs-bidirectional-duplex" class="level3">
-<h3 class="anchored" data-anchor-id="unidirectional-vs-bidirectional-duplex">Unidirectional vs Bidirectional (Duplex)</h3>
+<section id="unidirectional-vs-bidirectional-duplex" class="level4">
+<h4 class="anchored" data-anchor-id="unidirectional-vs-bidirectional-duplex">Unidirectional vs Bidirectional (Duplex)</h4>
 <p>Most benchmarking / bandwidth measurement tools will report a unidirectional bandwidth. So be careful when you look at unidirectional vs.&nbsp;bidirectional (duplex) speeds. Typically the latter is ~2x faster.</p>
 <p>If you measure the bandwidth on your setup and it’s about 40% of the advertised speed, carefully check if the advertised speed said duplex and if so half that and then your measured bandwidth should now be about 80% which is expected.</p>
 <p>case study: for a while I couldn’t understand why when I run the nccl-tests all_reduce benchmark on an A100 node with advertised 600GBps intra-node speed I was getting only 235Gbps (40%) until Horace He kindly pointed out that I should be looking at unidirectional speed which is 300GBps, and then I get 80% of the theoretical spec which checks out.</p>
 </section>
 </section>
-<section id="intra-node-networking" class="level2">
-<h2 class="anchored" data-anchor-id="intra-node-networking">Intra-node networking</h2>
+<section id="intra-node-networking" class="level3">
+<h3 class="anchored" data-anchor-id="intra-node-networking">Intra-node networking</h3>
 <p>There are multiple platforms/solutions out there that provide intra-node networking:</p>
 <ol type="1">
 <li>Generic: <a href="#pcie">PCIe</a></li>
@@ -780,8 +737,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </tbody>
 </table>
 <p>You will find the details analyses of each in the following sections.</p>
-<section id="pcie" class="level3">
-<h3 class="anchored" data-anchor-id="pcie">PCIe</h3>
+<section id="pcie" class="level4">
+<h4 class="anchored" data-anchor-id="pcie">PCIe</h4>
 <p><a href="https://en.wikipedia.org/wiki/PCI_Express">PCIe</a> is a high-speed serial computer expansion bus standard that can be found even on the cheapest computer desktop.</p>
 <table class="table">
 <thead>
@@ -826,8 +783,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </table>
 <p>If one compares the latest generations of different intra-node technologies (see the following sections) PCIe is usually an order of magnitude behind.</p>
 </section>
-<section id="nvlink" class="level3">
-<h3 class="anchored" data-anchor-id="nvlink">NVLink</h3>
+<section id="nvlink" class="level4">
+<h4 class="anchored" data-anchor-id="nvlink">NVLink</h4>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/NVLink">NVLink</a> is a wire-based serial multi-lane near-range communications link developed by Nvidia. Here is the <a href="https://blogs.nvidia.com/blog/2023/03/06/what-is-nvidia-nvlink/">What Is NVLink</a> blog post with more background on it.</li>
 </ul>
@@ -941,8 +898,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>You can see there are 18 NVLinks and 2 NUMA Groups (2 CPUs w/ 52 cores each)</p>
 <p>Of course, other A100 and H100s node reports may vary, e.g.&nbsp;different number of cpu cores.</p>
 </section>
-<section id="nvswitch" class="level3">
-<h3 class="anchored" data-anchor-id="nvswitch">NVSwitch</h3>
+<section id="nvswitch" class="level4">
+<h4 class="anchored" data-anchor-id="nvswitch">NVSwitch</h4>
 <p><a href="https://www.nvidia.com/en-us/data-center/nvlink/">NVSwitch</a> can connect more than 8 GPUs at the speed of <a href="#nvlink">NVLink</a>. It’s advertised to connect up to 256 GPUs in the future generations of the switch.</p>
 <p>The benefit of connecting more than 8 GPUs at the speed of NVLink is that it allows all-to-all GPU communications at a much faster speed than any intra-node hardware can provide. And with ever increasing compute speeds the network is the likely bottleneck leading to underutilized super-expensive GPUs.</p>
 <p>For example, in the universe of Tensor Parallelism (Megatron), one doesn’t use TP degree of more than 8, because TP is only efficient at NVLink speed. ZeRO-DP (Depspeed/FSDP) would also run much faster if the whole cluster uses NVLink speed and involves no slow inter-node connections.</p>
@@ -951,8 +908,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p><a href="https://developer.nvidia.com/blog/upgrading-multi-gpu-interconnectivity-with-the-third-generation-nvidia-nvswitch/">DGX H100 SuperPOD</a> combines 32 DGX H100 servers, for a total of 256 GPUs. It looks like here they use only half the NVLinks they used for a single DGX H100, so only 1.8 GBps per node, for a total of 57.6 GBps in total.</p>
 <p>Additionally, NVSwitch comes with NVIDIA Scalable Hierarchical Aggregation Reduction Protocol (SHARP) which can boost both the intra- and inter-node speeds. For example, NCCL is working on <code>NCCL_ALGO=NVLS</code> which already boosts the intra-node bandwidth above the normal spec and work is being done to boost inter-node as well.</p>
 </section>
-<section id="infinity-fabric-xgmi" class="level3">
-<h3 class="anchored" data-anchor-id="infinity-fabric-xgmi">Infinity Fabric / xGMI</h3>
+<section id="infinity-fabric-xgmi" class="level4">
+<h4 class="anchored" data-anchor-id="infinity-fabric-xgmi">Infinity Fabric / xGMI</h4>
 <p>AMD MI* Accelerators Intra-node communication is performed by AMD Infinity Fabric, which is also known as xGMI (Socket to Socket Global Memory Interface).</p>
 <p>This is AMD’s answer to <a href="#nvlink">NVLink</a>.</p>
 <table class="table">
@@ -997,13 +954,13 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </div>
 <p>Platform specs: - <a href="https://www.amd.com/en/products/accelerators/instinct/mi200/mi250x.html">MI250X</a> - <a href="https://www.amd.com/en/products/accelerators/instinct/mi300/platform.html">MI300x</a></p>
 </section>
-<section id="gaudi2" class="level3">
-<h3 class="anchored" data-anchor-id="gaudi2">Gaudi2</h3>
+<section id="gaudi2" class="level4">
+<h4 class="anchored" data-anchor-id="gaudi2">Gaudi2</h4>
 <p>According to <a href="https://habana.ai/wp-content/uploads/2023/10/HLS-Gaudi2_Datasheet_10_23.pdf">Gaudi2 spec</a>, these nodes provide 8x 21 NICs of 100GbE RoCE v2 RDMA for a total of 2.1Tbps intra-node connectivity and each card connected with the other 7 cards at 262.5 GBps.</p>
 </section>
 </section>
-<section id="inter-node-networking" class="level2">
-<h2 class="anchored" data-anchor-id="inter-node-networking">Inter-node networking</h2>
+<section id="inter-node-networking" class="level3">
+<h3 class="anchored" data-anchor-id="inter-node-networking">Inter-node networking</h3>
 <p>As inter-node hardware is about of an order of magnitude slower than intra-node hardware in this universe Gbps are used instead of GBps. (1 GBps = 8 Gbps)</p>
 <p>When it comes to inter-node networking hardware, there are the well established InfiniBand from NVIDIA and a few other players and there are many new comers that mainly are coming from compute cloud providers who can’t compete on the slim margin renting out someone else’s hardware so they build their own (EFA, and others not yet disclosed).</p>
 <p>Here is inter-node theoretical peak bandwidth cross-comparison for current technologies (unidirectional bandwidth) sorted by bandwidth:</p>
@@ -1048,8 +1005,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <td style="text-align: right;">400</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"></td>
-<td style="text-align: right;"></td>
+<td style="text-align: left;">-</td>
+<td style="text-align: right;">-</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">OPA (MI300X Q3-2024)</td>
@@ -1058,12 +1015,78 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </tbody>
 </table>
 <p>You will find the details analyses of each in the following sections.</p>
-<section id="infiniband" class="level3">
-<h3 class="anchored" data-anchor-id="infiniband">InfiniBand</h3>
+<section id="infiniband" class="level4">
+<h4 class="anchored" data-anchor-id="infiniband">InfiniBand</h4>
 <p>Now <a href="https://en.wikipedia.org/wiki/InfiniBand">InfiniBand</a> (IB) has been around for a few decades so there are many available configurations that can be found out there. So that if someone says they have InfiniBand that is insufficient information. What you need to know is the signaling rate and the number of IB links.</p>
 <p>Here are the most recent signaling rates which you are likely to see in the current hardware offerings:</p>
-<p>Signaling rate of uni-directional links in Gbps: | Links | EDR | HDR | NDR | XDR | GDR | | —-: | –: | –: | –: | –: | –: | | 1 | 25 | 50 | 100 | 200 | 400 | | 4 | 100 | 200 | 400 | 800 | 1600 | | 8 | 200 | 400 | 800 | 1600 | 3200 | | 12 | 300 | 600 | 1200 | 2400 | 4800 |</p>
-<p>Latency in usecs: | EDR | HDR | NDR | XDR | GDR | | –: | –: | –: | –: | –: | | 0.5 | 0.6 | ?? | ?? | ?? |</p>
+<p>Signaling rate of uni-directional links in Gbps:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Links</th>
+<th style="text-align: right;">EDR</th>
+<th style="text-align: right;">HDR</th>
+<th style="text-align: right;">NDR</th>
+<th style="text-align: right;">XDR</th>
+<th style="text-align: right;">GDR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">400</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">1600</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">1600</td>
+<td style="text-align: right;">3200</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">1200</td>
+<td style="text-align: right;">2400</td>
+<td style="text-align: right;">4800</td>
+</tr>
+</tbody>
+</table>
+<p>Latency in usecs:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">EDR</th>
+<th style="text-align: right;">HDR</th>
+<th style="text-align: right;">NDR</th>
+<th style="text-align: right;">XDR</th>
+<th style="text-align: right;">GDR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">??</td>
+<td style="text-align: right;">??</td>
+<td style="text-align: right;">??</td>
+</tr>
+</tbody>
+</table>
 <p><code>??</code> = NDR and later didn’t publish latency data</p>
 <p>InfiniBand provides <a href="https://en.wikipedia.org/wiki/Remote_direct_memory_access">RDMA</a>.</p>
 <p>Here are some examples of NVIDIA devices with the fastest IB:</p>
@@ -1072,28 +1095,28 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <li>For DGX H100 SuperPOD the ConnectX-7s across all 32 DGX servers and associated InfiniBand switches provide 25.6 TBps of full duplex bandwidth for use within the pod or for scaling out the multiple SuperPODs - that is an equivalent of 0.8 TBps per node (6.4Tbps!).</li>
 </ul>
 </section>
-<section id="efa" class="level3">
-<h3 class="anchored" data-anchor-id="efa">EFA</h3>
+<section id="efa" class="level4">
+<h4 class="anchored" data-anchor-id="efa">EFA</h4>
 <p><a href="https://aws.amazon.com/hpc/efa/">Elastic Fabric Adapter (EFA)</a> is a recent technology created by AWS.</p>
 <ul>
 <li>EFA v1 0.4 Tbps (effective 340 Gbps for all_reduce tests) (P4 AWS instances)</li>
 <li>EFA v2 3.2 Tbps (since Q3-2023, P5 AWS instances)</li>
 </ul>
 </section>
-<section id="gaudi2-inter-node" class="level3">
-<h3 class="anchored" data-anchor-id="gaudi2-inter-node">Gaudi2 (inter-node)</h3>
+<section id="gaudi2-inter-node" class="level4">
+<h4 class="anchored" data-anchor-id="gaudi2-inter-node">Gaudi2 (inter-node)</h4>
 <p>According to <a href="https://habana.ai/wp-content/uploads/2023/10/HLS-Gaudi2_Datasheet_10_23.pdf">Gaudi2 spec</a>, these nodes provide <code>3*8=24</code> NICs of 100GbE RoCE v2 RDMA for a total of 2.4Tbps of inter-node connectivity with other Gaudi2 nodes.</p>
 </section>
-<section id="hpe-slingshot-interconnect" class="level3">
-<h3 class="anchored" data-anchor-id="hpe-slingshot-interconnect">HPE Slingshot interconnect</h3>
+<section id="hpe-slingshot-interconnect" class="level4">
+<h4 class="anchored" data-anchor-id="hpe-slingshot-interconnect">HPE Slingshot interconnect</h4>
 <p><a href="https://www.hpe.com/ca/en/compute/hpc/slingshot-interconnect.html">HPE Slingshot interconnect</a> seems to be used by HPCs. As of this writing it provides 200Gbps per link. Some HPCs use 4 of those links to build 800Gbps interconnects, and, of course, with more links will deliver a higher overall bandwidth.</p>
 </section>
-<section id="gpudirect-tcpx" class="level3">
-<h3 class="anchored" data-anchor-id="gpudirect-tcpx">GPUDirect-TCPX</h3>
+<section id="gpudirect-tcpx" class="level4">
+<h4 class="anchored" data-anchor-id="gpudirect-tcpx">GPUDirect-TCPX</h4>
 <p>GPUDirect-TCPX is a new hardware/software networking stack introduced in A3 instances of GCP. The docs are scarce, but here is <a href="https://cloud.google.com/compute/docs/gpus/gpudirect">some information</a></p>
 </section>
-<section id="omnipath" class="level3">
-<h3 class="anchored" data-anchor-id="omnipath">OmniPath</h3>
+<section id="omnipath" class="level4">
+<h4 class="anchored" data-anchor-id="omnipath">OmniPath</h4>
 <p><a href="https://en.wikipedia.org/wiki/Omni-Path">OmniPath Architecture</a> (OPA). Originally by Intel, the technology got sold to Cornelis Networks.</p>
 <p>case study: I used this technology at JeanZay HPC in France in 2022. It was only 135Gbps and while the vendor tried to fix it a year later it was still the same speed. Hopefully the issue has been resolved and the speed is much faster nowadays. Because it was so slow we had to use <a href="https://github.com/bigscience-workshop/Megatron-DeepSpeed">Megatron-Deepspeed</a> for training BLOOM-176B instead of the much easier to use DeepSpeed ZeRO).</p>
 <p>As of this writing I see that the product comes with either 100 or 200Gbps bandwidth. So it’s unlikely you will see anybody offering this solution for ML workloads, unless they manage to install many NICs perhaps?</p>
@@ -1101,25 +1124,25 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>Omni-Path provides <a href="https://en.wikipedia.org/wiki/Remote_direct_memory_access">RDMA</a>.</p>
 </section>
 </section>
-<section id="understanding-why-inter-node-network-speed-is-of-a-huge-importance" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-why-inter-node-network-speed-is-of-a-huge-importance">Understanding why inter-node network speed is of a huge importance</h2>
+<section id="understanding-why-inter-node-network-speed-is-of-a-huge-importance" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-why-inter-node-network-speed-is-of-a-huge-importance">Understanding why inter-node network speed is of a huge importance</h3>
 <p>This is probably one of the most important multi-segment section that you really want to understand well. While it seeks out to show how important the inter-node speed is, to build up the case it’ll teach on the way many important training-related concepts.</p>
-<section id="the-basics" class="level3">
-<h3 class="anchored" data-anchor-id="the-basics">The basics</h3>
+<section id="the-basics" class="level4">
+<h4 class="anchored" data-anchor-id="the-basics">The basics</h4>
 <p>First, let’s get a bit of a feeling what all those Gbps/GBps practically mean.</p>
 <p>If your model is 80B parameter large, and you need to transmit every parameter or a gradient on the network even once in float32 (fp32) format, which requires 4 bytes per parameter, so you need to send <code>80*4</code> 320GB of data, or 2560Gb (<code>*8</code>). If your network’s bandwidth is 200Gbps it will take 12.8 seconds (<code>2560/200</code>) to transmit. And if you had 1600Gbps network then it’d take only 1.6 seconds. Why does it matter?</p>
 </section>
-<section id="gpu-training" class="level3">
-<h3 class="anchored" data-anchor-id="gpu-training">1-GPU training</h3>
+<section id="gpu-training" class="level4">
+<h4 class="anchored" data-anchor-id="gpu-training">1-GPU training</h4>
 <p>Let’s start with a much smaller model of say 2B params, to train it you’d need at least <a href="../training/performance/README.md#anatomy-of-models-memory-usage">18 bytes per parameter</a> in mixed half precision. So <code>18*2</code> 36GB of memory just for model weights, optimizer states and gradients. Plus you need additional memory for activations and it’ll depend on the batch size and sequence length. But with 80GB A100 GPU we can definitely train this model on a single GPU.</p>
 <p>We then assume for the moment that the DataLoader is fast enough to be negligible in duration compared to the compute time. And thus we get a close to a perfect MFU (Model FLOPs Utilization):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[DL][</span>  compute  ]<span class="pp">[</span><span class="ss">DL</span><span class="pp">]</span>[  compute  ]<span class="pp">[</span><span class="ss">DL</span><span class="pp">]</span>[  compute  ]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">---------------------------------------------------</span><span class="op">&gt;</span> time</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="op">&lt;</span>--iteration--<span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>--iteration--<span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>--iteration--<span class="op">&gt;|</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[DL][  compute  ][DL][  compute  ][DL][  compute  ]
+---------------------------------------------------&gt; time
+|&lt;--iteration--&gt;||&lt;--iteration--&gt;||&lt;--iteration--&gt;|</code></pre>
 <p>which means that the GPU just needs to do many matmuls and it’d do it amazing fast. In this situation you get the highest ROI (Return on Investment).</p>
 </section>
-<section id="single-node-training" class="level3">
-<h3 class="anchored" data-anchor-id="single-node-training">Single node training</h3>
+<section id="single-node-training" class="level4">
+<h4 class="anchored" data-anchor-id="single-node-training">Single node training</h4>
 <p>The previous situation was fantastic due to the close to perfect MFU, but you realize that the training on a single GPU is going to take quite some time, since we are in AI race you’d probably want to finish the training sooner than later. So you’d ask - can I train the model on 8 GPUs instead, and the answer would be - yes, of course. With one caveat - at the end of each iteration you’d need to sync the gradients between the 8 processes (each process for a single GPU), so that each participating process of the training can benefit from what the other 7 have learned during the last iteration.</p>
 <p>footnote: You could, of course, use less than 8 GPUs, it is just that most NVIDIA GPU-based compute nodes these days have 8 GPUs so why not get the best return on investment.</p>
 <p>footnote: in the ideal world the training on 1 gpu for 8 durations of time, should cost the same as training on 8 gpus for 1 duration of time. That’s one would expect to spend the same $$ and to finish 8 times faster. But because of data synchronization requirements.</p>
@@ -1142,32 +1165,32 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </ul>
 <p>which is incredibly fast!</p>
 <p>And here is how our timeline will look like:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[DL][</span>  compute ]<span class="pp">[</span><span class="ss">comms</span><span class="pp">][</span><span class="ss">DL</span><span class="pp">]</span>[  compute ]<span class="pp">[</span><span class="ss">comms</span><span class="pp">][</span><span class="ss">DL</span><span class="pp">]</span>[  compute ]<span class="pp">[</span><span class="ss">comms</span><span class="pp">]</span><span class="kw">|</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-----------------------------------------------------------------------</span><span class="op">&gt;</span> time</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="op">&lt;</span>---- <span class="ex">iteration</span> <span class="at">----</span><span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>---- <span class="ex">iteration</span> <span class="at">----</span><span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>---- <span class="ex">iteration</span> <span class="at">-----</span><span class="op">&gt;|</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[DL][  compute ][comms][DL][  compute ][comms][DL][  compute ][comms]|
+-----------------------------------------------------------------------&gt; time
+|&lt;---- iteration ----&gt;||&lt;---- iteration ----&gt;||&lt;---- iteration -----&gt;|</code></pre>
 <p>oh and this whole synchronization protocol is called DDP (<a href="https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html">DistributedDataParallel</a>) in the PyTorch lingo.</p>
-<section id="comms-and-compute-overlap" class="level4">
-<h4 class="anchored" data-anchor-id="comms-and-compute-overlap">Comms and compute overlap</h4>
+<section id="comms-and-compute-overlap" class="level5">
+<h5 class="anchored" data-anchor-id="comms-and-compute-overlap">Comms and compute overlap</h5>
 <p>Even with this really fast comms the network still creates a bottleneck and leads to a short idling of the gpus. To solve this issue the advanced algorithms implement an overlap of comms and compute. Until now we approached the problem as one single transmission, but in reality each model is made of many layers and each layer can transmit the gradients it has computed, while the next layer is computing its gradients. So if you look at the level of the model, what happens in the <code>backward</code> path is:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span>   compute   ][   compute   <span class="er">][</span>   <span class="ex">compute</span>   ]</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>               <span class="ex">[comms]</span>        <span class="pp">[</span><span class="ss">comms</span><span class="pp">]</span>        <span class="pp">[</span><span class="ss">comms</span><span class="pp">]</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">---------------------------------------------</span><span class="op">&gt;</span> time</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>- <span class="ex">layer</span> <span class="at">-1</span> <span class="at">-</span><span class="op">&gt;|&lt;</span>- layer <span class="at">-2</span> <span class="at">-</span><span class="op">&gt;|&lt;</span>- layer <span class="at">-3</span> <span class="at">-</span><span class="op">&gt;|</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[   compute   ][   compute   ][   compute   ]
+               [comms]        [comms]        [comms]
+---------------------------------------------&gt; time
+&lt;- layer -1 -&gt;|&lt;- layer -2 -&gt;|&lt;- layer -3 -&gt;|</code></pre>
 <p>so once the last layer (-1) computed its gradients it all-reduces them while the 2nd to last layer performs its <code>backward</code>, and so on, until the first layer finished with gradients and it finally sends its gradients out.</p>
 <p>So now you understand how overlapping works, So we can now update our bigger picture diagram to be:</p>
 <p>Now our timing diagram becomes very similar to the diagram we had for a single gpu:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[DL][</span>  compute  ]<span class="pp">[</span><span class="ss">DL</span><span class="pp">]</span>[  compute  ]<span class="pp">[</span><span class="ss">DL</span><span class="pp">]</span>[  compute  ]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span>  comms <span class="bu">]</span>       <span class="bu">[</span>  comms]        [  comms]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="er">---------------------------------------------------&gt;</span> <span class="er">time</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="op">&lt;</span>--iteration--<span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>--iteration--<span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>--iteration--<span class="op">&gt;|</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[DL][  compute  ][DL][  compute  ][DL][  compute  ]
+[  comms ]       [  comms]        [  comms]
+---------------------------------------------------&gt; time
+|&lt;--iteration--&gt;||&lt;--iteration--&gt;||&lt;--iteration--&gt;|</code></pre>
 <p>and we hope that comms are faster than DL+compute, since if they aren’t faster than we have the following gpu idling gaps:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[DL][</span>  compute  ]<span class="pp">[</span><span class="ss">idle</span><span class="pp">][</span><span class="ss">DL</span><span class="pp">]</span>[  compute  ]<span class="pp">[</span><span class="ss">idle</span><span class="pp">][</span><span class="ss">DL</span><span class="pp">]</span>[  compute  ]<span class="pp">[</span><span class="ss">idle</span><span class="pp">]</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span>         comms       ][         comms       <span class="er">][</span>         <span class="ex">comms</span>       ]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">----------------------------------------------------------------------</span><span class="op">&gt;</span> time</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span><span class="op">&lt;</span>---  <span class="ex">iteration</span>  <span class="at">---</span><span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>---  <span class="ex">iteration</span>  <span class="at">---</span><span class="op">&gt;|</span><span class="kw">|</span><span class="op">&lt;</span>---  <span class="ex">iteration</span>  <span class="at">---</span><span class="op">&gt;|</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>[DL][  compute  ][idle][DL][  compute  ][idle][DL][  compute  ][idle]
+[         comms       ][         comms       ][         comms       ]
+----------------------------------------------------------------------&gt; time
+|&lt;---  iteration  ---&gt;||&lt;---  iteration  ---&gt;||&lt;---  iteration  ---&gt;|</code></pre>
 </section>
-<section id="calculating-tflops" class="level4">
-<h4 class="anchored" data-anchor-id="calculating-tflops">Calculating TFLOPS</h4>
+<section id="calculating-tflops" class="level5">
+<h5 class="anchored" data-anchor-id="calculating-tflops">Calculating TFLOPS</h5>
 <p>Calculating TFLOPS answers the question of how long will it take to perform a compute.</p>
 <p>There is a bit of nomenclature confusion here as TFLOPS as the final <code>s</code> sometimes means <code>sec</code> and at other times just <code>ops</code>.</p>
 <p>For example, when you read, the <a href="https://www.nvidia.com/en-us/data-center/a100/#specifications">A100 spec</a> the TFLOPS there means TeraFloatingPointOperations per second.</p>
@@ -1184,8 +1207,16 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>footnote: activation recomputation and gradient checkpointing both refer to the same technique.</p>
 <p>so let’s remove the time component, which will give us the total TFLOP</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tflop</span> = model_size_in_B <span class="pp">*</span> 4 <span class="pp">*</span> 2 <span class="pp">*</span> seqlen <span class="pp">*</span> global_batch_size / <span class="er">(</span><span class="ex">total_gpus</span> <span class="pp">*</span> 1e3<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>So let’s say we have: - <code>seqlen=2048</code> (sequence length) - <code>global_batch_size=16</code></p>
-<p>and we already defined: - <code>total_gpus=8</code> - <code>model_size_in_B=2</code></p>
+<p>So let’s say we have:</p>
+<ul>
+<li><code>seqlen=2048</code> (sequence length)</li>
+<li><code>global_batch_size=16</code></li>
+</ul>
+<p>and we already defined:</p>
+<ul>
+<li><code>total_gpus=8</code></li>
+<li><code>model_size_in_B=2</code></li>
+</ul>
 <p>This gives us:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tflops</span> = 2 <span class="pp">*</span> 4 <span class="pp">*</span> 2 <span class="pp">*</span> 2048 <span class="pp">*</span> 16 / <span class="er">(</span><span class="ex">8</span> <span class="pp">*</span> 1e3<span class="kw">)</span> <span class="ex">=</span> 65.536 TFLOP</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So if we do a mixed half-precision training and most of the operations are done in half-precision then we can roughly say that we do <a href="https://www.nvidia.com/en-us/data-center/a100/#specifications">312 TFLOPS on A100</a> and usually a well optimized framework on a well-tuned hardware will do at least 50% MFU - that is it’ll be able to compute at about 1/2 peak performance.</p>
@@ -1199,8 +1230,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>But what if you want to speed up the training even more and throw say 4x 8-gpu nodes at it. (and of course you don’t have a choice but to use multiple nodes if you have a much larger model). Suddenly, the comms can become an even bigger bottleneck.</p>
 </section>
 </section>
-<section id="multiple-node-training" class="level3">
-<h3 class="anchored" data-anchor-id="multiple-node-training">Multiple node training</h3>
+<section id="multiple-node-training" class="level4">
+<h4 class="anchored" data-anchor-id="multiple-node-training">Multiple node training</h4>
 <p>So here we are continuing with the idea of 2B param model and we will now use 32 gpus across 4 nodes to speed up the training even more.</p>
 <p>While each group of 8 gpus is still connected with super-fast NVLink technology, the inter-node connections are usually in an order of magnitude slower.</p>
 <p>Let’s say you have a 200Gbps connection. Let’s repeat the math from the previous section of how long it’ll take to reduce 16GB of gradients.</p>
@@ -1238,15 +1269,15 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>And remember this was all handling a pretty tiny as considered these days 2B param model.</p>
 <p>Now do the same math with 20B and 200B parameter model and you will see that you need to have a much much faster inter-node connectivity to efficiently scale.</p>
 </section>
-<section id="large-model-training" class="level3">
-<h3 class="anchored" data-anchor-id="large-model-training">Large model training</h3>
+<section id="large-model-training" class="level4">
+<h4 class="anchored" data-anchor-id="large-model-training">Large model training</h4>
 <p>Of course, when we train large models we don’t use DDP, because we simply can’t fit the whole model on a single gpu so various other techniques are used. The details are discussed in a dedicated chapter on <a href="../training/model-parallelism">Model Parallelism</a>, but the only important thing to understand immediately is that all scalability techniques incur a much larger comms overhead, because they all need to communicate a lot more than just gradients. and therefore the amount of traffic on the network can easily grow 3x and more as compared to the DDP protocol overhead we have been exploring so far.</p>
 <p>It can be difficult to do even approximate math as we did in this chapter, because the actual compute time depends on the efficiency of the chosen framework, how well it was tuned, how fast the DataLoader can feed the batches and many other things, therefore there is no standard MFU that one can use in the math and you will discover your MFU when you configure and run the first few steps of the large model training. and then you will read the <a href="../training/performance">Performance chapters</a> and improve your MFU even more.</p>
 <p>As I have shown in these sections it should be possible to be able to do a back-of-envelope calculations once you understand the specific scalability technique and its networking costs, so that you could know ahead of time which Inter-node network speed you need to require from your acquisition manager. Of course, you also need to understand the particular model architecture and calculate how many TFLOP it will take to do a single iteration.</p>
 </section>
 </section>
-<section id="numa-affinity" class="level2">
-<h2 class="anchored" data-anchor-id="numa-affinity">NUMA Affinity</h2>
+<section id="numa-affinity" class="level3">
+<h3 class="anchored" data-anchor-id="numa-affinity">NUMA Affinity</h3>
 <p><a href="https://en.wikipedia.org/wiki/Non-uniform_memory_access">Non-uniform memory access (NUMA)</a> is a computer memory design used in multiprocessing, where the memory access time depends on the memory location relative to the processor. As modern servers have more than one CPU to get the best performance GPUs residing in the same block as the corresponding CPU should have the processes bound to that NUMA node.</p>
 <p>Here is a typical A100 8x GPUs server, as visualized by <a href="https://github.com/open-mpi/hwloc">hwloc</a>:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -1257,11 +1288,11 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </div>
 <p>As you can see it has 2 CPUs, each defining a NUMA block, and each such block contains a group of 4 GPUs. The GPUs are the grey blocks that say <code>CoProc</code> with 108 compute units (SMs) and 79GB of memory.</p>
 <p>footnote: was generated by <code>lstopo a100.png</code></p>
-<section id="software-tools" class="level4">
-<h4 class="anchored" data-anchor-id="software-tools">Software Tools</h4>
+<section id="software-tools" class="level5">
+<h5 class="anchored" data-anchor-id="software-tools">Software Tools</h5>
 <p>note-to-self: probably belongs in its own chapter?</p>
-<section id="hwloc" class="level5">
-<h5 class="anchored" data-anchor-id="hwloc">hwloc</h5>
+<section id="hwloc" class="level6">
+<h6 class="anchored" data-anchor-id="hwloc">hwloc</h6>
 <p>https://github.com/open-mpi/hwloc</p>
 <p>The Hardware Locality (hwloc) software project aims at easing the process of discovering hardware resources in parallel architectures. It offers command-line tools and a C API for consulting these resources, their locality, attributes, and interconnection. hwloc primarily aims at helping high-performance computing (HPC) applications, but is also applicable to any project seeking to exploit code and/or data locality on modern computing platforms.</p>
 <p>Diagnostics: to take a snapshot of the server NUMA topology and save it as an image (supports many other formats)</p>
@@ -1274,10 +1305,10 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </section>
 </section>
 </section>
-<section id="important-nuances" class="level2">
-<h2 class="anchored" data-anchor-id="important-nuances">Important nuances</h2>
-<section id="real-network-throughput" class="level3">
-<h3 class="anchored" data-anchor-id="real-network-throughput">Real network throughput</h3>
+<section id="important-nuances" class="level3">
+<h3 class="anchored" data-anchor-id="important-nuances">Important nuances</h3>
+<section id="real-network-throughput" class="level4">
+<h4 class="anchored" data-anchor-id="real-network-throughput">Real network throughput</h4>
 <p>The network throughput in the advertised spec and the actual throughput will never be the same. In the best case you can expect about 80-90% of the advertised spec.</p>
 <p>Then the network throughput will depend on the size of payload being sent during each communication. The higher the payload the higher the throughput will be.</p>
 <p>Let’s demonstrate this using <a href="https://github.com/NVIDIA/nccl-tests">nccl-tests</a> on a single A100 node</p>
@@ -1352,20 +1383,20 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p><img src="images/ccgrid11-uni-direction-bandwidth.png" class="img-fluid" alt="Low-level Uni-directional Bandwidth Measurements"> (<a href="https://ieeexplore.ieee.org/document/5238655">source</a>)</p>
 <p>Another tool for bandwidth measurements on NVIDIA GPUs is <a href="https://github.com/NVIDIA/nvbandwidth">NVIDIA/nvbandwidth</a>.</p>
 </section>
-<section id="latency" class="level3">
-<h3 class="anchored" data-anchor-id="latency">Latency</h3>
+<section id="latency" class="level4">
+<h4 class="anchored" data-anchor-id="latency">Latency</h4>
 <p><img src="images/ccgrid11-low-level-latency.png" class="img-fluid" alt="Low-level Latency Measurements"> (<a href="https://ieeexplore.ieee.org/document/5238655">source</a>)</p>
 <p>XXX: integrate/expand</p>
 </section>
-<section id="proprietary-network-hardware-and-nccl" class="level3">
-<h3 class="anchored" data-anchor-id="proprietary-network-hardware-and-nccl">Proprietary network hardware and NCCL</h3>
+<section id="proprietary-network-hardware-and-nccl" class="level4">
+<h4 class="anchored" data-anchor-id="proprietary-network-hardware-and-nccl">Proprietary network hardware and NCCL</h4>
 <p>Proprietary network hardware vendors like AWS (EFA) don’t disclose their secrets and therefore the public libraries like <a href="https://github.com/NVIDIA/nccl">nccl</a> cannot support those out of the box. These vendors have to supply their own versions of the network collective libraries to be used by users of their hardware.</p>
 <p>Originally proprietary hardware vendors used the trick of telling the users to use <code>LD_LIBRARY_PATH</code> and/or <code>LD_PRELOAD</code> to dynamically overload <code>libnccl.so</code> to get their custom version loaded into PyTorch or another framework. But recently NCCL developed a <a href="https://github.com/NVIDIA/nccl/tree/master/ext-net">NCCL Net Plugin</a> which should be used now instead. This feature was added in NCCL v2.12.</p>
 <p>Now, when NCCL is initialized, it will look for a <code>libnccl-net.so</code> library and dynamically load it, then look for symbols inside the library. That’s where proprietary hardware vendors should now put their custom APIs. This library, of course, should still be either in <code>LD_LIBRARY_PATH</code> or the <code>/etc/ld.so.conf</code> config.</p>
 <p>For more information about dynamic library loading see <a href="https://github.com/stas00/the-art-of-debugging/tree/master/compiled-programs#shared-libraries-ldsoconf-nm-unresolved-symbols-ldd-ld_library_path-ld_preload">this section</a>.</p>
 </section>
-<section id="node-proximity" class="level3">
-<h3 class="anchored" data-anchor-id="node-proximity">Node Proximity</h3>
+<section id="node-proximity" class="level4">
+<h4 class="anchored" data-anchor-id="node-proximity">Node Proximity</h4>
 <p>If you get 2 random nodes from the cloud they may not reside on the same subnet and there will be an additional latency incurred for all transmissions.</p>
 <p>You want to make sure that the nodes used for a single training all reside on the same subnet/spine so they are all one hop away from each other.</p>
 <p>When you plan to eventually have a large cluster but starting small make sure that your provider can expand the cluster while keeping all the nodes close to each other.</p>
@@ -1376,8 +1407,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </ul>
 <p>Depending on the type of package you have or what type of machines you rent - you may or may not be able to use those.</p>
 </section>
-<section id="shared-internode-network" class="level3">
-<h3 class="anchored" data-anchor-id="shared-internode-network">Shared internode network</h3>
+<section id="shared-internode-network" class="level4">
+<h4 class="anchored" data-anchor-id="shared-internode-network">Shared internode network</h4>
 <p>If you use a shared HPC environment, or even if you have your own cluster but sharing it with your colleagues expect the network bandwidth to be unreliable and fluctuate at different time of the day.</p>
 <p>This situation unfortunately makes it extremely difficult to finetune the performance of your training setup. Since every time you run a test the TFLOPs will vary, so how do you do the optimization? Unfortunately I don’t have a magic trick here. If you have a working solution please kindly share.</p>
 <p>case study: we had this issue at JeanZay HPC when we were doing preliminary experiments before we started training BLOOM-176B. As that HPC has many users it was pretty much impossible to do speed optimizations, as even running the exact same setup again and again gave different throughput results. Luckily just before we launched BLOOM-176B training we were given an exclusive access to the new at that time A100 partition so we were the only users and we were able to greatly optimize the throughput.</p>
@@ -1987,8 +2018,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../qmd/network/index-old.html" class="pagination-link" aria-label="🛜 Network">
-        <span class="nav-page-text">🛜 Network</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../qmd/network/benchmarks/index.html" class="pagination-link" aria-label="Networking Benchmarks">
+        <span class="nav-page-text">Networking Benchmarks</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

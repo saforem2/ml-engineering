@@ -1,15 +1,12 @@
 ---
 title: Machine Learning Engineering Open Book
-citation:
- type: webpage
- title: "🧑‍💻 ML Engineering"
- url: https://saforem2.github.io/ml-engineering
- author:
-    - name: Stas Bekman
-    - name: Sam Foreman
-      # url: "https://stasosphere.com/machine-learning/"
-    #   url: "https://samforeman.me"
-    #   email: foremans@anl.gov
+# citation:
+#     type: webpage
+#     title: "🧑‍💻 ML Engineering"
+#     url: https://saforem2.github.io/ml-engineering
+#     author:
+#         - name: Stas Bekman
+#         - name: Sam Foreman
 date: last-modified
 # title: "[Sam Foreman]{.invisible-text style='display: none;'}"
 author-title: ""
@@ -17,24 +14,17 @@ affiliation-title: ""
 published-title: ""
 modified-title: ""
 site-url: https://saforem2.github.io/ml-engineering
-# format:
 format:
-  html: default
-   # include-in-header:
-   #   - text: |
-   #       \usepackage{eplain}
-   #       \usepackage{easy-todo}
-   #   - file: packages.tex
-   #   - macros.tex
-  # pdf:
-  #  - output-file: "ml-engineering-book.pdf"
+    html: default
+    gfm:
+        output-file: index.md
 editor:
-   render-on-save: true
+    render-on-save: true
 execute:
-   freeze: true
+    freeze: true
 author: 
-  - name: "Stas Bekman"
-    url: "https://stasosphere.com/machine-learning/"
+    - name: "Stas Bekman"
+      url: "https://stasosphere.com/machine-learning/"
 ---
 
 This is an open collection of methodologies, tools and step by step instructions to help with successful training of large language models and multi-modal models.

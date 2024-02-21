@@ -13,10 +13,12 @@ This document covers both `pytest` and `unittest` functionalities and shows how 
 
 ### Run all tests
 
-```console
+```bash
 pytest
 ```
+
 I use the following alias:
+
 ```bash
 alias pyt="pytest --disable-warnings --instafail -rA"
 ```
@@ -28,10 +30,10 @@ which tells pytest to:
 - `-rA` generates a short test summary info
 
 it requires you to install:
-```
+
+```bash
 pip install pytest-instafail
 ```
-
 
 ### Getting the list of all tests
 
@@ -48,6 +50,7 @@ pytest tests/test_optimization.py --collect-only -q
 ```
 
 I use the following alias:
+
 ```bash
 alias pytc="pytest --disable-warnings --collect-only -q"
 ```
@@ -342,7 +345,7 @@ Let's depict the GPU requirements in the following table:
 
 For example, here is a test that must be run only when there are 2 or more GPUs available and pytorch is installed:
 
-```python no-style
+```python
 from testing_utils import require_torch_multi_gpu
 
 @require_torch_multi_gpu
@@ -351,7 +354,7 @@ def test_example_with_multi_gpu():
 
 These decorators can be stacked:
 
-```python no-style
+```python
 from testing_utils import require_torch_gpu
 
 @require_torch_gpu
@@ -361,7 +364,7 @@ def test_example_slow_on_gpu():
 
 Some decorators like `@parametrized` rewrite test names, therefore `@require_*` skip decorators have to be listed last for them to work correctly. Here is an example of the correct usage:
 
-```python no-style
+```python
 from testing_utils import require_torch_multi_gpu
 from parameterized import parameterized
 
@@ -376,11 +379,11 @@ Inside tests:
 
 - How many GPUs are available:
 
-```python
-from testing_utils import get_gpu_count
+    ```python
+    from testing_utils import get_gpu_count
 
-n_gpu = get_gpu_count()
-```
+    n_gpu = get_gpu_count()
+    ```
 
 
 ### Distributed training
@@ -688,78 +691,77 @@ code that's buggy causes some bad state that will affect other tests, do not use
 
 - Here is how to skip whole test unconditionally:
 
-```python no-style
-@unittest.skip("this bug needs to be fixed")
-def test_feature_x():
-```
+    ```python
+    @unittest.skip("this bug needs to be fixed")
+    def test_feature_x():
+    ```
 
-or via pytest:
+    or via pytest:
 
-```python no-style
-@pytest.mark.skip(reason="this bug needs to be fixed")
-```
+    ```python
+    @pytest.mark.skip(reason="this bug needs to be fixed")
+    ```
 
-or the `xfail` way:
+    or the `xfail` way:
 
-```python no-style
-@pytest.mark.xfail
-def test_feature_x():
-```
+    ```python
+    @pytest.mark.xfail
+    def test_feature_x():
+    ```
 
-Here's how to skip a test based on internal checks within the test:
+- Here's how to skip a test based on internal checks within the test:
 
-```python
-def test_feature_x():
-    if not has_something():
-        pytest.skip("unsupported configuration")
-```
+    ```python
+    def test_feature_x():
+        if not has_something():
+            pytest.skip("unsupported configuration")
+    ```
 
-or the whole module:
+    or the whole module:
 
-```python
-import pytest
+    ```python
+    import pytest
 
-if not pytest.config.getoption("--custom-flag"):
-    pytest.skip("--custom-flag is missing, skipping tests", allow_module_level=True)
-```
+    if not pytest.config.getoption("--custom-flag"):
+        pytest.skip("--custom-flag is missing, skipping tests", allow_module_level=True)
+    ```
 
-or the `xfail` way:
+    or the `xfail` way:
 
-```python
-def test_feature_x():
-    pytest.xfail("expected to fail until bug XYZ is fixed")
-```
+    ```python
+    def test_feature_x():
+        pytest.xfail("expected to fail until bug XYZ is fixed")
+    ```
 
 - Here is how to skip all tests in a module if some import is missing:
 
-```python
-docutils = pytest.importorskip("docutils", minversion="0.3")
-```
+    ```python
+    docutils = pytest.importorskip("docutils", minversion="0.3")
+    ```
 
 -  Skip a test based on a condition:
 
-```python no-style
-@pytest.mark.skipif(sys.version_info < (3,6), reason="requires python3.6 or higher")
-def test_feature_x():
-```
+    ```python
+    @pytest.mark.skipif(sys.version_info < (3,6), reason="requires python3.6 or higher")
+    def test_feature_x():
+    ```
 
-or:
+    or:
 
-```python no-style
-@unittest.skipIf(torch_device == "cpu", "Can't do half precision")
-def test_feature_x():
-```
+    ```python
+    @unittest.skipIf(torch_device == "cpu", "Can't do half precision")
+    def test_feature_x():
+    ```
 
-or skip the whole module:
+    or skip the whole module:
 
-```python no-style
-@pytest.mark.skipif(sys.platform == 'win32', reason="does not run on windows")
-class TestClass():
-    def test_feature_x(self):
-```
+    ```python
+    @pytest.mark.skipif(sys.platform == 'win32', reason="does not run on windows")
+    class TestClass():
+        def test_feature_x(self):
+    ```
 
 More details, example and ways are [here](https://docs.pytest.org/en/latest/skipping.html).
-
 
 
 ### Capturing outputs
@@ -770,7 +772,6 @@ In order to test functions that write to `stdout` and/or `stderr`, the test can 
 
 ```python
 import sys
-
 
 def print_to_stdout(s):
     print(s)

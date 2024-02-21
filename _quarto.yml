@@ -27,6 +27,7 @@ execute:
   keep-ipynb: true
   # keep-md: true
   freeze: auto
+
 metadata-files:
   - quarto/_website.yml
   - quarto/_format.yml

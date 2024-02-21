@@ -195,7 +195,7 @@ functionalities and shows how both can be used together.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pytest}
+\ExtensionTok{pytest}
 \end{Highlighting}
 \end{Shaded}
 
@@ -222,9 +222,11 @@ which tells pytest to:
 
 it requires you to install:
 
-\begin{verbatim}
-pip install pytest-instafail
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install pytest{-}instafail}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Getting the list of all
 tests}\label{getting-the-list-of-all-tests}
@@ -697,46 +699,60 @@ n gpus & decorator \\
 For example, here is a test that must be run only when there are 2 or
 more GPUs available and pytorch is installed:
 
-```python no-style from testing\_utils import require\_torch\_multi\_gpu
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ require\_torch\_multi\_gpu}
 
-(\textbf{require\_torch\_multi\_gpu?}) def
-test\_example\_with\_multi\_gpu():
-
-\begin{verbatim}
+\AttributeTok{@require\_torch\_multi\_gpu}
+\KeywordTok{def}\NormalTok{ test\_example\_with\_multi\_gpu():}
+\end{Highlighting}
+\end{Shaded}
 
 These decorators can be stacked:
 
-```python no-style
-from testing_utils import require_torch_gpu
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ require\_torch\_gpu}
 
-@require_torch_gpu
-@some_other_decorator
-def test_example_slow_on_gpu():
-\end{verbatim}
+\AttributeTok{@require\_torch\_gpu}
+\AttributeTok{@some\_other\_decorator}
+\KeywordTok{def}\NormalTok{ test\_example\_slow\_on\_gpu():}
+\end{Highlighting}
+\end{Shaded}
 
 Some decorators like \texttt{@parametrized} rewrite test names,
 therefore \texttt{@require\_*} skip decorators have to be listed last
 for them to work correctly. Here is an example of the correct usage:
 
-```python no-style from testing\_utils import require\_torch\_multi\_gpu
-from parameterized import parameterized
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ require\_torch\_multi\_gpu}
+\ImportTok{from}\NormalTok{ parameterized }\ImportTok{import}\NormalTok{ parameterized}
 
-(\textbf{parameterized.expand?})(\ldots)
-(\textbf{require\_torch\_multi\_gpu?}) def test\_integration\_foo():
+\AttributeTok{@parameterized.expand}\NormalTok{(...)}
+\AttributeTok{@require\_torch\_multi\_gpu}
+\KeywordTok{def}\NormalTok{ test\_integration\_foo():}
+\end{Highlighting}
+\end{Shaded}
 
-\begin{verbatim}
-
-This order problem doesn't exist with `@pytest.mark.parametrize`, you can put it first or last and it will still work. But it only works with non-unittests.
+This order problem doesn't exist with \texttt{@pytest.mark.parametrize},
+you can put it first or last and it will still work. But it only works
+with non-unittests.
 
 Inside tests:
 
-- How many GPUs are available:
+\begin{itemize}
+\item
+  How many GPUs are available:
 
-```python
-from testing_utils import get_gpu_count
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ testing\_utils }\ImportTok{import}\NormalTok{ get\_gpu\_count}
 
-n_gpu = get_gpu_count()
-\end{verbatim}
+\NormalTok{n\_gpu }\OperatorTok{=}\NormalTok{ get\_gpu\_count()}
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
 
 \subsection{Distributed training}\label{distributed-training}
 
@@ -1204,22 +1220,34 @@ buggy causes some bad state that will affect other tests, do not use
 \subsubsection{Implementation}\label{implementation}
 
 \begin{itemize}
-\tightlist
 \item
   Here is how to skip whole test unconditionally:
-\end{itemize}
 
-\texttt{python\ no-style\ @unittest.skip("this\ bug\ needs\ to\ be\ fixed")\ def\ test\_feature\_x():}
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@unittest.skip}\NormalTok{(}\StringTok{"this bug needs to be fixed"}\NormalTok{)}
+\KeywordTok{def}\NormalTok{ test\_feature\_x():}
+\end{Highlighting}
+\end{Shaded}
 
-or via pytest:
+  or via pytest:
 
-\texttt{python\ no-style\ @pytest.mark.skip(reason="this\ bug\ needs\ to\ be\ fixed")}
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@pytest.mark.skip}\NormalTok{(reason}\OperatorTok{=}\StringTok{"this bug needs to be fixed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-or the \texttt{xfail} way:
+  or the \texttt{xfail} way:
 
-\texttt{python\ no-style\ @pytest.mark.xfail\ def\ test\_feature\_x():}
-
-Here's how to skip a test based on internal checks within the test:
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@pytest.mark.xfail}
+\KeywordTok{def}\NormalTok{ test\_feature\_x():}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Here's how to skip a test based on internal checks within the test:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1229,7 +1257,7 @@ Here's how to skip a test based on internal checks within the test:
 \end{Highlighting}
 \end{Shaded}
 
-or the whole module:
+  or the whole module:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1240,7 +1268,7 @@ or the whole module:
 \end{Highlighting}
 \end{Shaded}
 
-or the \texttt{xfail} way:
+  or the \texttt{xfail} way:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1248,34 +1276,43 @@ or the \texttt{xfail} way:
 \NormalTok{    pytest.xfail(}\StringTok{"expected to fail until bug XYZ is fixed"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{itemize}
-\tightlist
 \item
   Here is how to skip all tests in a module if some import is missing:
-\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{docutils }\OperatorTok{=}\NormalTok{ pytest.importorskip(}\StringTok{"docutils"}\NormalTok{, minversion}\OperatorTok{=}\StringTok{"0.3"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{itemize}
-\tightlist
 \item
   Skip a test based on a condition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@pytest.mark.skipif}\NormalTok{(sys.version\_info }\OperatorTok{\textless{}}\NormalTok{ (}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{), reason}\OperatorTok{=}\StringTok{"requires python3.6 or higher"}\NormalTok{)}
+\KeywordTok{def}\NormalTok{ test\_feature\_x():}
+\end{Highlighting}
+\end{Shaded}
+
+  or:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@unittest.skipIf}\NormalTok{(torch\_device }\OperatorTok{==} \StringTok{"cpu"}\NormalTok{, }\StringTok{"Can\textquotesingle{}t do half precision"}\NormalTok{)}
+\KeywordTok{def}\NormalTok{ test\_feature\_x():}
+\end{Highlighting}
+\end{Shaded}
+
+  or skip the whole module:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{@pytest.mark.skipif}\NormalTok{(sys.platform }\OperatorTok{==} \StringTok{\textquotesingle{}win32\textquotesingle{}}\NormalTok{, reason}\OperatorTok{=}\StringTok{"does not run on windows"}\NormalTok{)}
+\KeywordTok{class}\NormalTok{ TestClass():}
+    \KeywordTok{def}\NormalTok{ test\_feature\_x(}\VariableTok{self}\NormalTok{):}
+\end{Highlighting}
+\end{Shaded}
 \end{itemize}
-
-\texttt{python\ no-style\ @pytest.mark.skipif(sys.version\_info\ \textless{}\ (3,6),\ reason="requires\ python3.6\ or\ higher")\ def\ test\_feature\_x():}
-
-or:
-
-\texttt{python\ no-style\ @unittest.skipIf(torch\_device\ ==\ "cpu",\ "Can\textquotesingle{}t\ do\ half\ precision")\ def\ test\_feature\_x():}
-
-or skip the whole module:
-
-\texttt{python\ no-style\ @pytest.mark.skipif(sys.platform\ ==\ \textquotesingle{}win32\textquotesingle{},\ reason="does\ not\ run\ on\ windows")\ class\ TestClass():\ \ \ \ \ def\ test\_feature\_x(self):}
 
 More details, example and ways are
 \href{https://docs.pytest.org/en/latest/skipping.html}{here}.
@@ -1294,7 +1331,6 @@ Here is how this is accomplished:
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ sys}
-
 
 \KeywordTok{def}\NormalTok{ print\_to\_stdout(s):}
     \BuiltInTok{print}\NormalTok{(s)}

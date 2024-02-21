@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-02-20">
 
-<title>ML Engineering - Accelerators</title>
+<title>ML Engineering</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -196,12 +196,6 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../qmd/performance-old/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🏎️ Performance</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../../qmd/resources/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">📓 Resources</span></a>
   </div>
@@ -337,18 +331,12 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/network/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inter-node and Intra-Node Networking Hardware</span></a>
+ <span class="menu-text">🛜 Networking</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../qmd/network/index-old.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">🛜 Network</span></a>
-  </div>
-</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../qmd/network/benchmarks/index.html" class="sidebar-item-text sidebar-link">
@@ -584,7 +572,9 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#subsections" id="toc-subsections" class="nav-link active" data-scroll-target="#subsections">Subsections</a></li>
+  <li><a href="#accelerators" id="toc-accelerators" class="nav-link active" data-scroll-target="#accelerators">Accelerators</a>
+  <ul class="collapse">
+  <li><a href="#subsections" id="toc-subsections" class="nav-link" data-scroll-target="#subsections">Subsections</a></li>
   <li><a href="#birds-eye-view-on-the-high-end-accelerator-reality" id="toc-birds-eye-view-on-the-high-end-accelerator-reality" class="nav-link" data-scroll-target="#birds-eye-view-on-the-high-end-accelerator-reality">Bird’s eye view on the high end accelerator reality</a></li>
   <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary">Glossary</a></li>
   <li><a href="#the-most-important-thing-to-understand" id="toc-the-most-important-thing-to-understand" class="nav-link" data-scroll-target="#the-most-important-thing-to-understand">The most important thing to understand</a></li>
@@ -619,15 +609,15 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
   <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
   <li><a href="#cooling" id="toc-cooling" class="nav-link" data-scroll-target="#cooling">Cooling</a></li>
   </ul></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/saforem2/ml-engineering/edit/main/qmd/compute/accelerator/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/saforem2/ml-engineering/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../qmd/compute/index.html">💻 Compute</a></li><li class="breadcrumb-item"><a href="../../../qmd/compute/accelerator/index.html">Accelerators</a></li></ol></nav><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/index.qmd"><i class="bi"></i></button></div></div>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../qmd/compute/index.html">💻 Compute</a></li><li class="breadcrumb-item"><a href="../../../qmd/compute/accelerator/index.html">Accelerators</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Accelerators</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/saforem2/ml-engineering/blob/main/qmd/compute/accelerator/index.qmd"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -650,22 +640,8 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </header>
 
 
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD # Accelerators =======</p>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>stas00-master</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<section id="accelerators" class="level1">
+<h1>Accelerators</h1>
 <p>Compute accelerators are the workhorses of the ML training. At the beginning there were just GPUs. But now there are also TPUs, IPUs, FPGAs, HPUs, QPUs, RDUs and more are being invented.</p>
 <p>There exist two main ML workloads - training and inference. There is also the finetuning workload which is usually the same as training, unless a much lighter <a href="https://arxiv.org/abs/2106.09685">LORA-style</a> finetuning is performed. The latter requires significantly fewer resources and time than normal finetuning.</p>
 <p>In language models during inference the generation is performed in a sequence - one token at a time. So it has to repeat the same <code>forward</code> call thousands of times one smallish <code>matmul</code> (matrix multiplication or GEMM) at a time. And this can be done on either an accelerator, like GPU, or some of the most recent CPUs, that can handle inference quite efficiently.</p>
@@ -674,7 +650,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <section id="subsections" class="level2">
 <h2 class="anchored" data-anchor-id="subsections">Subsections</h2>
 <ul>
-<li><a href="nvidia/debug.md">Troubleshooting NVIDIA GPUs</a></li>
+<li><a href="../../../qmd/compute/accelerator/nvidia/debug.html">Troubleshooting NVIDIA GPUs</a></li>
 </ul>
 </section>
 <section id="birds-eye-view-on-the-high-end-accelerator-reality" class="level2">
@@ -875,7 +851,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 </tr>
 </tbody>
 </table>
-<p>footnote: Intel Gaudi2 doesn’t plan to publish TFLOPS specs as of this writing, but it does support FP32, TF32, BF16, FP16 &amp; FP8, INT8 and INT16. This <a href="https://www.databricks.com/blog/llm-training-and-inference-intel-gaudi2-ai-accelerators">blog posts</a> reports measuring ~400TFLOPS for fp16/bf16.</p>
+<p>footnote: Intel Gaudi2 doesn’t plan to publish TFLOPS specs as of this writing, but it does support FP32, TF32, BF16, FP16 &amp; FP8, INT8 and INT16. This <a href="https://www.databricks.com/blog/llm-training-and-inference-intel-gaudi2-ai-accelerators">blog posts</a> reports measuring ~400TFLOPS for fp16/bf16 - but, of course, this number can’t be compared to theoretical peak so it doesn’t belong to this table - guessing, it’s probably in the 600-1000TFLOPS range.</p>
 <p>footnote: when looking at specs be very careful at which numbers you’re reading - many vendors often publish TFLOPS with sparsity, as they are ~2x bigger, but if they even indicate this they often do it in small print. I had to ask NVIDIA to add a note to their H100 spec that those numbers were w/ sparsity as they originally didn’t mention this important technical fact. And 99% of the time as of this writing you will be not using sparsity and thus the actual theoretical TFLOPs that you care for most of the time are w/o sparsity (i.e.&nbsp;the table above).</p>
 <p>footnote: also beware that if accelerator A publishes a higher TFLOPS than accelerator B, it doesn’t mean A is faster. These are theoretical numbers which not only can never be achieved in practice - the actual TFLOPS efficiency (HFU) can vary a lot from vendor to vendor or even for the same vendor’s different accelerator architectures.</p>
 <section id="maximum-achievable-flops" class="level4">
@@ -1163,6 +1139,7 @@ gtag('config', 'G-XVM2Y822Y1', { 'anonymize_ip': true});
 <p>It’s hard to tell the exact best temperature to strive for when a GPU is heavily loaded, but probably anything under +80C is good, but lower is better - perhaps 70-75C is an excellent range to be in. The throttling down is likely to start at around 84-90C. But other than throttling performance a prolonged very high temperature is likely to reduce the lifespan of a GPU.</p>
 
 
+</section>
 </section>
 </section>
 
