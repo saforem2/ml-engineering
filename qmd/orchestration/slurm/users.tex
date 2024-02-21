@@ -173,7 +173,7 @@
   pdfcreator={LaTeX via pandoc}}
 
 \author{}
-\date{2024-02-13}
+\date{2024-02-20}
 
 \begin{document}
 
@@ -1584,6 +1584,27 @@ to contact the sysadmins to kill the job for you. Sometimes if the
 hanging is a simple case pytorch's distributed setup will typically
 auto-exit after 30min of preset timeout time, but it doesn't always
 work.
+
+\textless\textless\textless\textless\textless\textless\textless{}
+HEAD:qmd/orchestration/slurm/users.qmd \#\# How to gracefully exit on
+SLURM job preemption
+
+\chapter{\texorpdfstring{There are several ways to gracefully handle
+time- and QoS-based SLURM pre-emption which are covered indepth in this
+section:
+\href{https://saforem2.github.io/ml-engineering/qmd/training/fault-tolerance/\#dealing-with-forced-resource-preemption}{Dealing
+with forced job
+preemption}}{There are several ways to gracefully handle time- and QoS-based SLURM pre-emption which are covered indepth in this section: Dealing with forced job preemption}}\label{there-are-several-ways-to-gracefully-handle-time--and-qos-based-slurm-pre-emption-which-are-covered-indepth-in-this-section-dealing-with-forced-job-preemption}
+
+\section{How to gracefully exit on SLURM job
+preemption}\label{how-to-gracefully-exit-on-slurm-job-preemption}
+
+There are several ways to gracefully handle time- and QoS-based SLURM
+pre-emption which are covered indepth in this section:
+\href{../../training/fault-tolerance/\#dealing-with-forced-job-preemption}{Dealing
+with forced job preemption}.
+\textgreater\textgreater\textgreater\textgreater\textgreater\textgreater\textgreater{}
+fa0c7c24bf2e39579cba33ec170ea60ef11f0b93:orchestration/slurm/users.md
 
 
 

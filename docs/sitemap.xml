@@ -270,7 +270,7 @@
   </url>
   <url>
     <loc>https://samforeman.me/qmd/orchestration/slurm/users.html</loc>
-    <lastmod>2024-02-21T00:14:57.078Z</lastmod>
+    <lastmod>2024-02-21T00:19:46.176Z</lastmod>
   </url>
   <url>
     <loc>https://samforeman.me/qmd/debug/tools.html</loc>
@@ -387,5 +387,17 @@
   <url>
     <loc>https://samforeman.me/qmd-old/debug/torch-distributed-hanging-solutions.html</loc>
     <lastmod>2024-02-21T00:08:45.310Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samforeman.me/old/index.bak.html</loc>
+    <lastmod>2024-02-21T00:14:20.013Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samforeman.me/old/index.html</loc>
+    <lastmod>2024-02-21T00:09:01.119Z</lastmod>
+  </url>
+  <url>
+    <loc>https://samforeman.me/old/ai-battlefield-old.html</loc>
+    <lastmod>2024-02-21T00:14:20.013Z</lastmod>
   </url>
 </urlset>
